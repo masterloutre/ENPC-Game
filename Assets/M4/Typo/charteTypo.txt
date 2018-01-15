@@ -1,0 +1,3 @@
+Mohave --> Titre de l'énigme
+KhmerUI --> texte général
+Times New Roman --> indices survol, en italique

@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2017
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Serious Game GMM - Prototype", "Serious Game GMM - Prototype.csproj", "{90A1D1DE-F004-59A4-AD2C-62DC63A824B4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Serious Game GMM - Prototype.Editor", "Serious Game GMM - Prototype.Editor.csproj", "{95F7F918-CFF5-8511-707C-B67694D8C942}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{90A1D1DE-F004-59A4-AD2C-62DC63A824B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90A1D1DE-F004-59A4-AD2C-62DC63A824B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90A1D1DE-F004-59A4-AD2C-62DC63A824B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90A1D1DE-F004-59A4-AD2C-62DC63A824B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{95F7F918-CFF5-8511-707C-B67694D8C942}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{95F7F918-CFF5-8511-707C-B67694D8C942}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{95F7F918-CFF5-8511-707C-B67694D8C942}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{95F7F918-CFF5-8511-707C-B67694D8C942}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

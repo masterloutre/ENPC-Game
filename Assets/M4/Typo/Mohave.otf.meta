@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: 1eb49e9f1b93d6e4e84a2482f68226cd
+timeCreated: 1504105513
+licenseType: Free
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: Mohave
+  fontNames:
+  - Mohave
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
