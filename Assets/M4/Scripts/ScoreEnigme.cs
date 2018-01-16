@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ScoreEnigme{
+public class ScoreEnigme {
 
     public string nom;
     public string []compétences;

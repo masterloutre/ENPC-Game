@@ -10,6 +10,7 @@ public class DataControl : MonoBehaviour {
 
     public int temps;
     public int bonnes_reponses;
+		public string nom;
 
     void Awake () {
         if (control == null)
@@ -31,9 +32,9 @@ public class DataControl : MonoBehaviour {
 
 		public string getJSON()
 		{
-			PlayerData data = new PlayerData();
-			data.temps = temps;
-			data.bonnes_reponses = bonnes_reponses;
+			Save data = new Save();
+			ScoreEnigme score = new ScoreEnigme();
+			score.nom = nom;
 
 			return JsonUtility.ToJson(data);
 		}
