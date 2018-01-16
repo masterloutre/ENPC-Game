@@ -17,7 +17,9 @@ public class QCM_Answer : MonoBehaviour {
 
 
 	public void validation(){
-		if (checkEmptySlots ()) {
+        //mettre à jour le nombre de tentatives
+        DataControl.control.tentatives += 1;
+        if (checkEmptySlots ()) {
 			if (checkAnswers ()) {
 				Debug.Log ("c'est tout bon");
 				victoryTimeline.SetActive (true);

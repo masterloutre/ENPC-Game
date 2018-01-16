@@ -8,10 +8,10 @@ public class ScoreEnigme {
     public string []compétences;
     public string situationPro;
     public int type;
-    public int difficulté;
+    public int difficulte;
     public int points;
     public int tentatives;
-    public int temps;
+    public float temps;
     public bool aideExt;
     public int etudiant;
 

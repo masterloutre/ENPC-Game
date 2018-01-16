@@ -10,7 +10,10 @@ public class DataControl : MonoBehaviour {
 
     public int temps;
     public int bonnes_reponses;
-		public string nom;
+	public string nom;
+    public int tentatives;
+    public int points;
+
 
     void Awake () {
         if (control == null)
@@ -28,6 +31,8 @@ public class DataControl : MonoBehaviour {
     {
         GUI.Label(new Rect(30, 10, 150, 30), "Temps : " + temps);
         GUI.Label(new Rect(30, 25, 150, 30), "Bonnes réponses : " + bonnes_reponses);
+        //afficher le nombre de tentatives
+        GUI.Label(new Rect(30, 40, 150, 30), "tentatives : " + tentatives);
     }
 
 		public string getJSON()
@@ -35,16 +40,17 @@ public class DataControl : MonoBehaviour {
 			Save data = new Save();
 			ScoreEnigme score = new ScoreEnigme();
 			score.nom = nom;
+        score.tentatives = tentatives;
 
-			return JsonUtility.ToJson(data);
-		}
+        //return JsonUtility.ToJson(data);
+        return JsonUtility.ToJson(score);
+    }
 
     public void Save()
     {
         StreamWriter file = new StreamWriter(Application.persistentDataPath + "/playerInfo.dat");
-				//print(Application.persistentDataPath);
-
-				DataUploader.du.Upload();
+				print(Application.persistentDataPath);
+				//DataUploader.du.Upload();
 
 				file.WriteLine(getJSON());
         file.Close();
