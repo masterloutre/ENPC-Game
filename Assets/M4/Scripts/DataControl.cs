@@ -25,8 +25,8 @@ public class DataControl : MonoBehaviour {
 
     void OnGUI()
     {
-        GUI.Label(new Rect(100, 10, 150, 30), "Temps : " + temps);
-        GUI.Label(new Rect(100, 40, 150, 30), "Bonnes réponses : " + bonnes_reponses);
+        GUI.Label(new Rect(30, 10, 150, 30), "Temps : " + temps);
+        GUI.Label(new Rect(30, 25, 150, 30), "Bonnes réponses : " + bonnes_reponses);
     }
 
 		public string getJSON()
