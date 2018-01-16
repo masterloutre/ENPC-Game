@@ -232,6 +232,8 @@
     <Compile Include="Assets\M4\Scripts\Panel.cs" />
     <Compile Include="Assets\M4\Scripts\PopupAnimation.cs" />
     <Compile Include="Assets\M4\Scripts\QCM_Answer.cs" />
+    <Compile Include="Assets\M4\Scripts\Save.cs" />
+    <Compile Include="Assets\M4\Scripts\ScoreEnigme.cs" />
     <Compile Include="Assets\M4\Scripts\Timer.cs" />
     <Compile Include="Assets\MaterialUI\Examples\Scripts\04 - RadioButton\Example04.cs" />
     <Compile Include="Assets\MaterialUI\Examples\Scripts\05 - Sliders\Example05.cs" />
