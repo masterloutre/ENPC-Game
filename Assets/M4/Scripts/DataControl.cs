@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-using System.Runtime.Serialization.Formatters.Binary;
 using System.IO;
 
 public class DataControl : MonoBehaviour {
@@ -30,20 +29,23 @@ public class DataControl : MonoBehaviour {
         GUI.Label(new Rect(100, 40, 150, 30), "Bonnes réponses : " + bonnes_reponses);
     }
 
+		public string getJSON()
+		{
+			PlayerData data = new PlayerData();
+			data.temps = temps;
+			data.bonnes_reponses = bonnes_reponses;
+
+			return JsonUtility.ToJson(data);
+		}
+
     public void Save()
     {
-        //BinaryFormatter bf = new BinaryFormatter();
         StreamWriter file = new StreamWriter(Application.persistentDataPath + "/playerInfo.dat");
-				print(Application.persistentDataPath);
+				//print(Application.persistentDataPath);
 
-        PlayerData data = new PlayerData();
-        data.temps = temps;
-        data.bonnes_reponses = bonnes_reponses;
+				DataUploader.du.Upload();
 
-        string json = JsonUtility.ToJson(data);
-				file.WriteLine(json);
-
-        //bf.Serialize(file, data);
+				file.WriteLine(getJSON());
         file.Close();
     }
 
@@ -51,11 +53,7 @@ public class DataControl : MonoBehaviour {
     {
         if(File.Exists(Application.persistentDataPath + "/playerInfo.dat"))
         {
-            //BinaryFormatter bf = new BinaryFormatter();
-            //FileStream file = File.Open(Application.persistentDataPath + "/playerInfo.dat", FileMode.Open);
-            //PlayerData data = (PlayerData)bf.Deserialize(file);
 						StreamReader file = new StreamReader(Application.persistentDataPath + "/playerInfo.dat");
-						print(Application.persistentDataPath);
             String json = file.ReadToEnd();
             PlayerData data = new PlayerData();
             JsonUtility.FromJsonOverwrite(json, data);
@@ -64,7 +62,6 @@ public class DataControl : MonoBehaviour {
             temps = (int) data.temps;
             bonnes_reponses = (int) data.bonnes_reponses;
         }
-
     }
 }
 
