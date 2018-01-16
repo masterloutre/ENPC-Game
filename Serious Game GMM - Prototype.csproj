@@ -219,6 +219,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\M4\Scripts\DataControl.cs" />
+    <Compile Include="Assets\M4\Scripts\DataTest.cs" />
+    <Compile Include="Assets\M4\Scripts\DataUploader.cs" />
     <Compile Include="Assets\M4\Scripts\Draggable.cs" />
     <Compile Include="Assets\M4\Scripts\Dropzone.cs" />
     <Compile Include="Assets\M4\Scripts\Enigme_Data.cs" />

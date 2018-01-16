@@ -2460,6 +2460,7 @@ GameObject:
   - component: {fileID: 263851086}
   - component: {fileID: 263851085}
   - component: {fileID: 263851084}
+  - component: {fileID: 263851089}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2536,6 +2537,17 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &263851089
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 263851083}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d873d0cc550246c4dbf7b0cf912788fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &269838310
 GameObject:
   m_ObjectHideFlags: 0
@@ -11003,6 +11015,7 @@ GameObject:
   - component: {fileID: 1097101792}
   - component: {fileID: 1097101791}
   - component: {fileID: 1097101793}
+  - component: {fileID: 1097101794}
   m_Layer: 5
   m_Name: Enigme4
   m_TagString: Untagged
@@ -11107,6 +11120,19 @@ MonoBehaviour:
   enigmaDescription: "Rentrez la bonne s\xE9quence d'actions afin de permettre aux
     2 personnes d'atteindre le c\xF4t\xE9 droit de l'\xE9cran."
   enigmaEstimatedTime: 5:00
+--- !u!114 &1097101794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1097101789}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e69284b9213e08429cc55ae0002ef82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  temps: 0
+  bonnes_reponses: 0
 --- !u!1001 &1109808744
 Prefab:
   m_ObjectHideFlags: 0
