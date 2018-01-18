@@ -6,7 +6,6 @@ public class QCM_Answer : MonoBehaviour {
 
 
 	public GameObject[] slotsList;
-	//public GameObject victoryTimeline;
 	public GameObject victoryTimeline;
 	public GameObject errorTimeline;
 

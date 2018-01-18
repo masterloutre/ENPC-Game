@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
+[Serializable]
 public class ScoreEnigme {
 
     public string nom;
@@ -14,18 +16,5 @@ public class ScoreEnigme {
     public float temps;
     public bool aideExt;
     public int etudiant;
-
-    /*public ScoreEnigme()
-    {
-        tentatives = 0;
-        points = 0;
-        temps = 0;
-        aideExt = false;
-    }*/
-    /*
-    public int Tentatives()
-    {
-        return tentatives;
-    }*/
 
 }

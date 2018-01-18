@@ -36,27 +36,27 @@ public class DataControl : MonoBehaviour {
         GUI.Label(new Rect(30, 40, 150, 30), "tentatives : "+ tentatives);
     }
 
-		public string getJSON()
-		{
+	public string getJSON()
+	{
 
         Save data = new Save();
         //Add the updated score to the Save
         ScoreEnigme score = new ScoreEnigme();
 		score.nom = nom;
         score.tentatives = tentatives;
-        List<ScoreEnigme> currentScores = new List<ScoreEnigme>();
-        currentScores = save.Scores();
+        List<ScoreEnigme> currentScores = save.Scores();
         currentScores.Add(score);
         data.setScores(currentScores);
         save = data;
-        return JsonHelperList.ToJson(currentScores); //serializing the list using a custom JsonHelper, adapting JsonUtility for Lists
-        //return JsonUtility.ToJson(score);
+        bool prettyPrint = true;
+        return JsonHelperList.ToJson(currentScores, prettyPrint); //serializing the list using a custom JsonHelper, adapting JsonUtility for Lists
+        
     }
 
     public void Save()
     {
         StreamWriter file = new StreamWriter(Application.persistentDataPath + "/playerInfo.dat");
-				print(Application.persistentDataPath);
+				//print(Application.persistentDataPath);
         //DataUploader.du.Upload();
 				file.WriteLine(getJSON());
         file.Close();
@@ -66,18 +66,16 @@ public class DataControl : MonoBehaviour {
     {
         if(File.Exists(Application.persistentDataPath + "/playerInfo.dat"))
         {
-			StreamReader file = new StreamReader(Application.persistentDataPath + "/playerInfo.dat");
-            String json = file.ReadToEnd();
-            /*PlayerData data = new PlayerData();*/
-            /*Save data = new Save();
-            JsonUtility.FromJsonOverwrite(json, data);*/
+            //get content of json string
+            StreamReader file = new StreamReader(Application.persistentDataPath + "/playerInfo.dat");
+            string json = file.ReadToEnd();
+            //JsonUtility.FromJsonOverwrite(json, data);
+            //deserialize json string and put its content in List of ScoreEnigme
+            List<ScoreEnigme> loadedScores = new List<ScoreEnigme>();
+            loadedScores = JsonHelperList.FromJson<ScoreEnigme>(json);
             file.Close();
-
-            //save = data;
-            //tentatives = data.Scores().tentatives;
-            /*temps = (int) data.temps;
-            bonnes_reponses = (int) data.bonnes_reponses;*/
-
+            //save the loaded data in the DataControl
+            save.scores = loadedScores;
         }
     }
 

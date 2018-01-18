@@ -34,11 +34,12 @@ public static class JsonHelper
     }
 }
 
-public static class JsonHelperList
+public class JsonHelperList : MonoBehaviour
 {
     public static List<T> FromJson<T>(string json)
     {
-        Wrapper<T> wrapper = JsonUtility.FromJson<Wrapper<T>>(json);
+        Wrapper<T> wrapper = new Wrapper<T>();
+        JsonUtility.FromJsonOverwrite(json, wrapper);
         return wrapper.Items;
     }
 
@@ -46,20 +47,13 @@ public static class JsonHelperList
     {
         Wrapper<T> wrapper = new Wrapper<T>();
         wrapper.Items = list;
-        string jsonString = "[";
-        for(int i = 0; i < wrapper.Items.Count; i++)
-        {
-            jsonString += JsonUtility.ToJson(wrapper.Items[i], true) + i.ToString();
-        }
-        jsonString += "]";
-        //return JsonUtility.ToJson(wrapper);
-        return jsonString;
+        return JsonUtility.ToJson(wrapper);
     }
 
-    public static string ToJson<T>(List<T> array, bool prettyPrint)
+    public static string ToJson<T>(List<T> list, bool prettyPrint)
     {
         Wrapper<T> wrapper = new Wrapper<T>();
-        wrapper.Items = array;
+        wrapper.Items = list;
         return JsonUtility.ToJson(wrapper, prettyPrint);
     }
 
