@@ -22,8 +22,10 @@ public class QCM_Answer : MonoBehaviour {
 			if (checkAnswers ()) {
 				Debug.Log ("c'est tout bon");
 				victoryTimeline.SetActive (true);
+                //quitter l'énigme
+                EnigmaManager.enigmaEnd();
 
-			} else {
+            } else {
 				Debug.Log ("ya une erreur");
 				if(errorTimeline != null)
 					errorTimeline.SetActive (true);

@@ -18,6 +18,4 @@ public class Enigme_Data : MonoBehaviour {
 
 	public string enigmaEstimatedTime;
 
-
-
 }
