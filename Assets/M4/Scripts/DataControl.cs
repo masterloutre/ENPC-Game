@@ -8,7 +8,7 @@ public class DataControl : MonoBehaviour {
 
 	public static DataControl control;
 
-    public int temps;
+    public float temps;
     public int bonnes_reponses;
 	public string nom;
     public int tentatives;
@@ -32,7 +32,6 @@ public class DataControl : MonoBehaviour {
     {
         GUI.Label(new Rect(30, 10, 150, 30), "Temps : " + temps);
         GUI.Label(new Rect(30, 25, 150, 30), "Bonnes réponses : " + bonnes_reponses);
-        //afficher le nombre de tentatives
         GUI.Label(new Rect(30, 40, 150, 30), "tentatives : "+ tentatives);
     }
 

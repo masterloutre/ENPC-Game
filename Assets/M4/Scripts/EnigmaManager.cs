@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class EnigmaManager : MonoBehaviour {
 
+    public static EnigmaManager enigmaMgr;
     //int currentEnigmaIndex;
 
     public GameObject enigma;
@@ -43,6 +44,7 @@ public class EnigmaManager : MonoBehaviour {
 
         string title = enigma.GetComponent<Enigme_Data>().enigmaTitle;
         enigmaTitleGO.GetComponent<UnityEngine.UI.Text>().text = title;
+        DataControl.control.nom = title;
 
         string type = enigma.GetComponent<Enigme_Data>().enigmaType.ToString();
         enigmaTypeGO.GetComponent<UnityEngine.UI.Text>().text = type;
@@ -53,6 +55,7 @@ public class EnigmaManager : MonoBehaviour {
 
     public static void enigmaEnd()
     {
+        //DataControl.control.temps = timerGO.GetComponent<Timer>().getTime();
         Save();
         SceneManager.LoadScene("default_scene");
     }

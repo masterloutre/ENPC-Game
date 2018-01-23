@@ -55,7 +55,7 @@ public class SceneLoadEvents : MonoBehaviour {
             {
                 //update information specific to the enigma
                 //print("EnigmaManager exists in" + scene.GetRootGameObjects()[i].name);
-                //GO.GetComponentInChildren<EnigmaManager>().enigmaUpdate();
+                GO.GetComponentInChildren<EnigmaManager>().enigmaUpdate();
             }
             i++;
         }
