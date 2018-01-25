@@ -10,10 +10,13 @@ public class DataControl : MonoBehaviour {
 
     public float temps;
     public int bonnes_reponses;
-	public string nom;
+    public int enigmaId;
+	//public string nom;
     public int tentatives;
     public int points;
     public bool aideExt;
+    public int enigmaMaxAttempts;
+    public bool enigmeReussie;
     public Save save;
 
     void Awake () {
@@ -41,8 +44,11 @@ public class DataControl : MonoBehaviour {
         Save data = new Save();
         //Add the updated score to the Save
         ScoreEnigme score = new ScoreEnigme();
-		score.nom = nom;
+        score.enigmaId = enigmaId;
         score.tentatives = tentatives;
+        score.temps = Math.Round(temps,2);
+        score.aideExt = aideExt;
+        score.enigmeReussie = enigmeReussie;
         List<ScoreEnigme> currentScores = save.Scores();
         currentScores.Add(score);
         data.setScores(currentScores);

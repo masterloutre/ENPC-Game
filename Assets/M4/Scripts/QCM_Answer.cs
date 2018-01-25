@@ -18,13 +18,14 @@ public class QCM_Answer : MonoBehaviour {
 
 	public void validation(){
         //mettre à jour le nombre de tentatives
-        DataControl.control.tentatives += 1;
+        ScoreControl.validationRequest();
+        bool maxAttemptsReached = ScoreControl.maxAttempsReached();
+        bool rightAnswer = false;
         if (checkEmptySlots ()) {
 			if (checkAnswers ()) {
 				Debug.Log ("c'est tout bon");
 				victoryTimeline.SetActive (true);
-                //quitter l'énigme
-                EnigmaManager.enigmaEnd();
+                rightAnswer = true;
 
             } else {
 				Debug.Log ("ya une erreur");
@@ -34,7 +35,14 @@ public class QCM_Answer : MonoBehaviour {
 		}
 		else
 			Debug.Log ("manque un truc");
-	}
+
+        if ( rightAnswer || maxAttemptsReached)
+        {
+            //quitter l'énigme
+            ScoreControl.Success(rightAnswer);
+            EnigmaManager.enigmaEnd();
+        }
+    }
 
 	public bool checkEmptySlots(){
 		bool returnCheck = true;

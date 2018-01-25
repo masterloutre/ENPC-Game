@@ -6,15 +6,12 @@ using System;
 [Serializable]
 public class ScoreEnigme {
 
-    public string nom;
-    /*public string []competences;
-    public string situationPro;
-    public int type;
-    public int difficulte;*/
+    public int enigmaId;
     public int points;
     public int tentatives;
-    public float temps;
+    public double temps;
     public bool aideExt;
     public int etudiant;
+    public bool enigmeReussie;
 
 }

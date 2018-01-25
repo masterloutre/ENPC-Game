@@ -47,17 +47,15 @@ public class SceneLoadEvents : MonoBehaviour {
         print("Active: " + SceneManager.GetActiveScene().name);
         //load the saved information to in the new scene using datacontrol
         DataControl.control.Load();
-        int i = 0;
+
         foreach (GameObject GO in scene.GetRootGameObjects())
         {
             //print("Checking RootGameObjects in Scene " + SceneManager.GetActiveScene().name);
-            if (GO.GetComponentInChildren<EnigmaManager>() != null)
+            if (GO.GetComponentInChildren<Enigma>() != null)
             {
-                //update information specific to the enigma
-                //print("EnigmaManager exists in" + scene.GetRootGameObjects()[i].name);
-                GO.GetComponentInChildren<EnigmaManager>().enigmaUpdate();
+                //get scene's Enigma
+                GO.GetComponentInChildren<Enigma>().enigmaUpdate();
             }
-            i++;
         }
     }
 }
