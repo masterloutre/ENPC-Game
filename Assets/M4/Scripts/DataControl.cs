@@ -9,15 +9,17 @@ public class DataControl : MonoBehaviour {
 	public static DataControl control;
 
     public float temps;
-    public int bonnes_reponses;
     public int enigmaId;
-	//public string nom;
     public int tentatives;
     public int points;
     public bool aideExt;
     public int enigmaMaxAttempts;
     public bool enigmeReussie;
     public Save save;
+    public bool enigmaTimesDone; //relances enigme
+
+    public int sceneToLoad;
+    public List<Enigme_Data> enigmaDatas;
 
     void Awake () {
         if (control == null)
@@ -33,8 +35,6 @@ public class DataControl : MonoBehaviour {
 
     void OnGUI()
     {
-        GUI.Label(new Rect(30, 10, 150, 30), "Temps : " + temps);
-        GUI.Label(new Rect(30, 25, 150, 30), "Bonnes réponses : " + bonnes_reponses);
         GUI.Label(new Rect(30, 40, 150, 30), "tentatives : "+ tentatives);
     }
 
@@ -81,6 +81,22 @@ public class DataControl : MonoBehaviour {
             file.Close();
             //save the loaded data in the DataControl
             save.scores = loadedScores;
+        }
+    }
+
+    public void LoadEnigmaDatas()
+    {
+        if (File.Exists(Application.persistentDataPath + "/enigmaData.dat"))
+        {
+            //get content of json string
+            StreamReader file = new StreamReader(Application.persistentDataPath + "/enigmaData.dat");
+            string json = file.ReadToEnd();
+            //deserialize json string and put its content in List of Enigme_Data
+            List<Enigme_Data> loadedDatas = new List<Enigme_Data>();
+            loadedDatas = JsonHelperList.FromJson<Enigme_Data>(json);
+            file.Close();
+            //save the loaded data in the DataControl
+            enigmaDatas = loadedDatas;
         }
     }
 
