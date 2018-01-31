@@ -8,13 +8,19 @@ public class ConnectionManager : MonoBehaviour {
 
     public void sendPhasePassword()
     {
-        if (phasePasswordGO.GetComponentInChildren<UnityEngine.UI.Text>().text == null) print("no text!");
+        //if (phasePasswordGO.GetComponentInChildren<UnityEngine.UI.Text>().text == null) print("no text!");
         string phasePassword = phasePasswordGO.GetComponentInChildren<UnityEngine.UI.Text>().text;
         ConnectionDataControl.control.phasePassword = phasePassword;
         print(ConnectionDataControl.control.phasePassword);
         bool isPassword = ConnectionDataControl.control.checkPhasePassword();
+        lancement_jeu lancementjeu = new lancement_jeu();
+        lancementjeu.mdp = phasePassword;
+        ConnectionDataControl.control.lancementjeu = lancementjeu;
+        ConnectionDataControl.control.SaveConnection();
+
         if (isPassword)
         {
+            //ConnectionDataControl.control.SaveConnection();
             SceneLoadEvents.sceneOnLoad.UpdateScene("Default_scene");
         }
         else

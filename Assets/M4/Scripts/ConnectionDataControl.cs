@@ -12,6 +12,8 @@ public class ConnectionDataControl : MonoBehaviour
 
     public string phasePassword;
     public string studentToken;
+    public lancement_jeu lancementjeu;
+    public int checkConnectionCode;
 
     void Awake()
     {
@@ -38,13 +40,31 @@ public class ConnectionDataControl : MonoBehaviour
         return placeholder;
     }
 
+    public string getLancementJeuJson()
+    {
+        string json = JsonUtility.ToJson(lancementjeu);
+        print("lancement password json: " + lancementjeu.mdp);
+        //json = "EN45pO";
+        return (json);
+    }
+
     public bool checkPhasePassword()
     {
         bool isPassword = false;
-        if (phasePassword == "test") isPassword = true;
+        DataUploader.du.checkConnectionData();
+        print("response code = " + checkConnectionCode);
+        if (checkConnectionCode == 1) isPassword = true;
         return isPassword;
     }
 
+    public void SaveConnection()
+    {
+        StreamWriter file = new StreamWriter(Application.persistentDataPath + "/connectionInfo.dat");
+        //print(Application.persistentDataPath);
+        //DataUploader.du.Upload();
+        file.WriteLine(getLancementJeuJson());
+        file.Close();
+    }
     public void Save()
     {
         StreamWriter file = new StreamWriter(Application.persistentDataPath + "/connectionInfo.dat");
