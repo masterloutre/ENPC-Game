@@ -108,10 +108,3 @@ public class DataControl : MonoBehaviour {
         aideExt = false;
     }
 }
-
-[Serializable]
-class PlayerData
-{
-    public int temps;
-    public int bonnes_reponses;
-}
