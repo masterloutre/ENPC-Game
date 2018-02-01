@@ -8,7 +8,7 @@ public class DataUploader : MonoBehaviour {
     public static DataUploader du;
 
     public string url= "http://daphne.rose.free.fr/test.php";
-    public string url_password = "test"; //"http://millenaire4.enpc.fr/game/authorization.php";
+    public string url_password = "http://millenaire4.enpc.fr/game/authorization.php";
     void Awake () {
         if (du == null)
         {
@@ -42,8 +42,6 @@ public class DataUploader : MonoBehaviour {
 
     public IEnumerator checkConnectionData()
     {
-
-        print(url_password);
         var request = new UnityWebRequest(url_password, "POST");
         byte[] bodyRaw = Encoding.UTF8.GetBytes(ConnectionDataControl.control.getLancementJeuJson());
         request.uploadHandler = (UploadHandler)new UploadHandlerRaw(bodyRaw);
@@ -51,6 +49,29 @@ public class DataUploader : MonoBehaviour {
         request.SetRequestHeader("Content-Type", "application/json");
 
         yield return request.SendWebRequest();
+        /*
+        WWW download = new WWW(url_password);
+
+        yield return download;*/
+        ConnectionDataControl.control.responseStr = request.downloadHandler.text;
+        ConnectionDataControl.control.checkConnectionCode = (int)request.responseCode;
+        Debug.Log("Status Code: " + request.responseCode);
+    }
+
+    public IEnumerator checkLoginData(string target_url)
+    {
+        var request = new UnityWebRequest(target_url, "POST");
+        byte[] bodyRaw = Encoding.UTF8.GetBytes(ConnectionDataControl.control.getLancementJeuJson());
+        request.uploadHandler = (UploadHandler)new UploadHandlerRaw(bodyRaw);
+        request.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
+        request.SetRequestHeader("Content-Type", "application/json");
+
+        yield return request.SendWebRequest();
+        /*
+        WWW download = new WWW(url_password);
+
+        yield return download;*/
+        ConnectionDataControl.control.responseStr = request.downloadHandler.text;
         ConnectionDataControl.control.checkConnectionCode = (int)request.responseCode;
         Debug.Log("Status Code: " + request.responseCode);
     }

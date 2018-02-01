@@ -4,7 +4,12 @@ using UnityEngine;
 
 public class ConnectionManager : MonoBehaviour {
     public GameObject phasePasswordGO;
-    public GameObject errorMessageGO;
+    public GameObject phaseErrorMessageGO;
+
+    public GameObject playerLoginGO;
+    public GameObject playerPasswordGO;
+    public GameObject loginErrorMessageGO;
+    public GameObject passwordErrorMessageGO;
 
     public void sendPhasePassword()
     {
@@ -17,11 +22,11 @@ public class ConnectionManager : MonoBehaviour {
         lancementjeu.mdp = phasePassword;
         ConnectionDataControl.control.lancementjeu = lancementjeu;
         ConnectionDataControl.control.SaveConnection();
-
+        isPassword = true;
         if (isPassword)
         {
             //ConnectionDataControl.control.SaveConnection();
-            SceneLoadEvents.sceneOnLoad.UpdateScene("Default_scene");
+            SceneLoadEvents.sceneOnLoad.UpdateScene("LogIn");
         }
         else
         {
@@ -33,8 +38,23 @@ public class ConnectionManager : MonoBehaviour {
     public void displayErrorText()
     {
         print("erreur, le mot de passe est erroné");
-        Color color = errorMessageGO.GetComponentInChildren<UnityEngine.UI.Text>().color;
+        Color color = phaseErrorMessageGO.GetComponentInChildren<UnityEngine.UI.Text>().color;
         color.a = 1;
-        errorMessageGO.GetComponentInChildren<UnityEngine.UI.Text>().color = color;
+        phaseErrorMessageGO.GetComponentInChildren<UnityEngine.UI.Text>().color = color;
+    }
+
+    public void sendLoginInfo()
+    {
+        string playerLogin = playerLoginGO.GetComponentInChildren<UnityEngine.UI.Text>().text;
+        string playerPassword = playerPasswordGO.GetComponentInChildren<UnityEngine.UI.Text>().text;
+        bool isPassword = true;
+        if (isPassword)
+        {
+            SceneLoadEvents.sceneOnLoad.UpdateScene("Default_scene");
+        }
+        else
+        {
+            displayErrorText();
+        }
     }
 }

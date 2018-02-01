@@ -14,6 +14,7 @@ public class ConnectionDataControl : MonoBehaviour
     public string studentToken;
     public lancement_jeu lancementjeu;
     public int checkConnectionCode;
+    public string responseStr;
 
     void Awake()
     {
@@ -53,8 +54,19 @@ public class ConnectionDataControl : MonoBehaviour
         bool isPassword = false;
         DataUploader.du.checkConnectionData();
         print("response code = " + checkConnectionCode);
+        print("response string = " + responseStr);
         if (checkConnectionCode == 1) isPassword = true;
         return isPassword;
+    }
+
+    public bool checkLoginInfo()
+    {
+        bool correctInfo = false;
+        DataUploader.du.checkLoginData("test");
+        print("response code = " + checkConnectionCode);
+        print("response string = " + responseStr);
+        if (checkConnectionCode == 1) correctInfo = true;
+        return correctInfo;
     }
 
     public void SaveConnection()

@@ -424,7 +424,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   phasePasswordGO: {fileID: 305644008}
-  errorMessageGO: {fileID: 1251956594}
+  phaseErrorMessageGO: {fileID: 305644008}
+  playerLoginGO: {fileID: 0}
+  playerPasswordGO: {fileID: 0}
+  loginErrorMessageGO: {fileID: 0}
+  passwordErrorMessageGO: {fileID: 0}
 --- !u!4 &423665689
 Transform:
   m_ObjectHideFlags: 0
@@ -1545,6 +1549,7 @@ GameObject:
   - component: {fileID: 2123052914}
   - component: {fileID: 2123052912}
   - component: {fileID: 2123052913}
+  - component: {fileID: 2123052915}
   m_Layer: 0
   m_Name: DataControls
   m_TagString: Untagged
@@ -1567,6 +1572,7 @@ MonoBehaviour:
   studentToken: 
   lancementjeu: {fileID: 0}
   checkConnectionCode: 0
+  responseStr: 
 --- !u!114 &2123052913
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1593,3 +1599,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2123052915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2123052911}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e69284b9213e08429cc55ae0002ef82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  temps: 0
+  enigmaId: 0
+  tentatives: 0
+  points: 0
+  aideExt: 0
+  enigmaMaxAttempts: 0
+  enigmeReussie: 0
+  save:
+    scores: []
+  enigmaTimesDone: 0
+  sceneToLoad: 0
+  enigmaDatas: []
