@@ -17,10 +17,10 @@ public class Enigma : MonoBehaviour {
         print("enigmaUpdate...");
         string description = dataGO.GetComponent<Enigme_Data>().enigmaDescription;
         descriptionGO.GetComponent<UnityEngine.UI.Text>().text = description;
-
+        print("description " + description);
         string title = dataGO.GetComponent<Enigme_Data>().enigmaTitle;
         enigmaTitleGO.GetComponent<UnityEngine.UI.Text>().text = title;
-
+        print("title " + title);
         string type = dataGO.GetComponent<Enigme_Data>().enigmaType.ToString();
         enigmaTypeGO.GetComponent<UnityEngine.UI.Text>().text = type;
 

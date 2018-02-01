@@ -49,10 +49,6 @@ public class DataUploader : MonoBehaviour {
         request.SetRequestHeader("Content-Type", "application/json");
 
         yield return request.SendWebRequest();
-        /*
-        WWW download = new WWW(url_password);
-
-        yield return download;*/
         ConnectionDataControl.control.responseStr = request.downloadHandler.text;
         ConnectionDataControl.control.checkConnectionCode = (int)request.responseCode;
         Debug.Log("Status Code: " + request.responseCode);
@@ -67,10 +63,7 @@ public class DataUploader : MonoBehaviour {
         request.SetRequestHeader("Content-Type", "application/json");
 
         yield return request.SendWebRequest();
-        /*
-        WWW download = new WWW(url_password);
 
-        yield return download;*/
         ConnectionDataControl.control.responseStr = request.downloadHandler.text;
         ConnectionDataControl.control.checkConnectionCode = (int)request.responseCode;
         Debug.Log("Status Code: " + request.responseCode);

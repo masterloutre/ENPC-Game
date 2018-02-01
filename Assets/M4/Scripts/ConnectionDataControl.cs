@@ -9,8 +9,6 @@ public class ConnectionDataControl : MonoBehaviour
 {
 
     public static ConnectionDataControl control;
-
-    public string phasePassword;
     public string studentToken;
     public lancement_jeu lancementjeu;
     public int checkConnectionCode;
@@ -27,18 +25,6 @@ public class ConnectionDataControl : MonoBehaviour
         {
             Destroy(gameObject);
         }
-    }
-
-    void OnGUI()
-    {
-        GUI.Label(new Rect(30, 70, 150, 30), "password" + phasePassword);
-    }
-
-    public string getPasswordJSON()
-    {
-        string placeholder = JsonUtility.ToJson(phasePassword);
-        print("password json: " + placeholder);
-        return placeholder;
     }
 
     public string getLancementJeuJson()
@@ -82,7 +68,7 @@ public class ConnectionDataControl : MonoBehaviour
         StreamWriter file = new StreamWriter(Application.persistentDataPath + "/connectionInfo.dat");
         //print(Application.persistentDataPath);
         //DataUploader.du.Upload();
-        file.WriteLine(getPasswordJSON());
+        file.WriteLine(getLancementJeuJson());
         file.Close();
     }
 

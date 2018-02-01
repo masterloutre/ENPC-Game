@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class SceneLoadEvents : MonoBehaviour {
 
     public static SceneLoadEvents sceneOnLoad;
-    public Scene scene;
+    //public Scene scene;
 
     void Awake()
     {
@@ -21,23 +21,10 @@ public class SceneLoadEvents : MonoBehaviour {
         }
     }
 
-    // Use this for initialization
-    public void Start () {
-
-	}
-
-
-    // Update is called once per frame
-    void Update () {
-
-    }
-
     public void UpdateScene(string sceneName)
     {
         SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
         SceneManager.sceneLoaded += OnSceneLoaded;
-        scene = SceneManager.GetSceneByName(sceneName);
-        print("Loading Scene " + scene.name);
     }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)

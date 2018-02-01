@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ConnectionManager : MonoBehaviour {
     public GameObject phasePasswordGO;
@@ -15,18 +16,18 @@ public class ConnectionManager : MonoBehaviour {
     {
         //if (phasePasswordGO.GetComponentInChildren<UnityEngine.UI.Text>().text == null) print("no text!");
         string phasePassword = phasePasswordGO.GetComponentInChildren<UnityEngine.UI.Text>().text;
-        ConnectionDataControl.control.phasePassword = phasePassword;
-        print(ConnectionDataControl.control.phasePassword);
-        bool isPassword = ConnectionDataControl.control.checkPhasePassword();
-        lancement_jeu lancementjeu = new lancement_jeu();
+        bool isPassword;
+        lancement_jeu lancementjeu = new lancement_jeu(); //gameObject.AddComponent(typeof(lancement_jeu)) as lancement_jeu;
         lancementjeu.mdp = phasePassword;
         ConnectionDataControl.control.lancementjeu = lancementjeu;
+        isPassword = ConnectionDataControl.control.checkPhasePassword();
         ConnectionDataControl.control.SaveConnection();
         isPassword = true;
         if (isPassword)
         {
             //ConnectionDataControl.control.SaveConnection();
-            SceneLoadEvents.sceneOnLoad.UpdateScene("LogIn");
+            //SceneLoadEvents.sceneOnLoad.UpdateScene("Default_Scene");
+            SceneManager.LoadScene("default_scene");
         }
         else
         {
