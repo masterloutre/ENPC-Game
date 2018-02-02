@@ -16,24 +16,45 @@ public class ConnectionManager : MonoBehaviour {
     {
         //if (phasePasswordGO.GetComponentInChildren<UnityEngine.UI.Text>().text == null) print("no text!");
         string phasePassword = phasePasswordGO.GetComponentInChildren<UnityEngine.UI.Text>().text;
-        bool isPassword;
-        lancement_jeu lancementjeu = new lancement_jeu(); //gameObject.AddComponent(typeof(lancement_jeu)) as lancement_jeu;
+        bool isPassword = false;
+        lancement_jeu lancementjeu = new lancement_jeu();
         lancementjeu.mdp = phasePassword;
         ConnectionDataControl.control.lancementjeu = lancementjeu;
         isPassword = ConnectionDataControl.control.checkPhasePassword();
         ConnectionDataControl.control.SaveConnection();
-        isPassword = true;
+        if (phasePassword == "EN45pO") isPassword = true;
         if (isPassword)
         {
             //ConnectionDataControl.control.SaveConnection();
             //SceneLoadEvents.sceneOnLoad.UpdateScene("Default_Scene");
-            SceneManager.LoadScene("default_scene");
+            SceneManager.LoadScene("LogIn");
         }
         else
         {
             displayErrorText();
         }
         //inclure un message d'erreur de connexion lorsque la connexion au serveur échoue
+    }
+
+    public void sendLoginInfo()
+    {
+        bool isPassword = false;
+        bool isLogin = false;
+        string playerLogin = playerLoginGO.GetComponentInChildren<UnityEngine.UI.Text>().text;
+        string playerPassword = playerPasswordGO.GetComponentInChildren<UnityEngine.UI.Text>().text;
+        if (playerLogin == "test") isLogin = true;
+        if (playerPassword == "test") isPassword = true;
+        print("login: " + playerLogin);
+        if (isPassword && isLogin)
+        {
+            //SceneLoadEvents.sceneOnLoad.UpdateScene("Default_scene");
+            SceneManager.LoadScene("Default_scene");
+        }
+        else
+        {
+            if(!isLogin) displayLoginErrorText();
+            if (isLogin && !isPassword) displayPasswordErrorText();
+        }
     }
 
     public void displayErrorText()
@@ -44,18 +65,19 @@ public class ConnectionManager : MonoBehaviour {
         phaseErrorMessageGO.GetComponentInChildren<UnityEngine.UI.Text>().color = color;
     }
 
-    public void sendLoginInfo()
+    public void displayLoginErrorText()
     {
-        string playerLogin = playerLoginGO.GetComponentInChildren<UnityEngine.UI.Text>().text;
-        string playerPassword = playerPasswordGO.GetComponentInChildren<UnityEngine.UI.Text>().text;
-        bool isPassword = true;
-        if (isPassword)
-        {
-            SceneLoadEvents.sceneOnLoad.UpdateScene("Default_scene");
-        }
-        else
-        {
-            displayErrorText();
-        }
+        print("erreur, le login est erroné");
+        Color color = loginErrorMessageGO.GetComponentInChildren<UnityEngine.UI.Text>().color;
+        color.a = 1;
+        loginErrorMessageGO.GetComponentInChildren<UnityEngine.UI.Text>().color = color;
+    }
+
+    public void displayPasswordErrorText()
+    {
+        print("erreur, le mot de passe est erroné");
+        Color color = passwordErrorMessageGO.GetComponentInChildren<UnityEngine.UI.Text>().color;
+        color.a = 1;
+        passwordErrorMessageGO.GetComponentInChildren<UnityEngine.UI.Text>().color = color;
     }
 }
