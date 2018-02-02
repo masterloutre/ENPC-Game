@@ -42,9 +42,8 @@ public class ConnectionManager : MonoBehaviour {
         bool isLogin = false;
         string playerLogin = playerLoginGO.GetComponentInChildren<UnityEngine.UI.Text>().text;
         string playerPassword = playerPasswordGO.GetComponentInChildren<UnityEngine.UI.Text>().text;
-        if (playerLogin == "test") isLogin = true;
-        if (playerPassword == "test") isPassword = true;
-        print("login: " + playerLogin);
+        if (playerLogin == "0123456789") isLogin = true;
+        if (playerPassword == "12345") isPassword = true;
         if (isPassword && isLogin)
         {
             //SceneLoadEvents.sceneOnLoad.UpdateScene("Default_scene");
