@@ -22,7 +22,6 @@ public class InputAnswer : MonoBehaviour {
 		foreach(GameObject go in paramInput){
 			param.Add(double.Parse (go.GetComponent<UnityEngine.UI.Text> ().text));
 		}
-	
 	}
 		
 

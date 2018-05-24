@@ -1,18 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
+[Serializable]
 public class ScoreEnigme {
 
-    public string nom;
-    public string []compétences;
-    public string situationPro;
-    public int type;
-    public int difficulté;
+    public int enigmaId;
     public int points;
     public int tentatives;
-    public int temps;
+    public double temps;
     public bool aideExt;
     public int etudiant;
+    public bool enigmeReussie;
 
 }

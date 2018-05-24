@@ -26,4 +26,9 @@ public class Timer : MonoBehaviour {
 	public void resetTimer(){
 		time = 0;
 	}
+
+    public float getTime()
+    {
+        return time;
+    }
 }

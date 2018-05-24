@@ -4,24 +4,8 @@ using UnityEngine;
 
 public class DataTest : MonoBehaviour {
 
-	void OnGUI()
+	/*void OnGUI()
    {
-       if(GUI.Button(new Rect(100, 100, 150, 30), "Plus de temps"))
-       {
-           DataControl.control.temps += 10;
-       }
-       if(GUI.Button(new Rect(100, 140, 150, 30), "Moins de temps"))
-       {
-           DataControl.control.temps -= 10;
-       }
-       if(GUI.Button(new Rect(100, 180, 150, 30), "Plus de réponses"))
-       {
-           DataControl.control.bonnes_reponses += 10;
-       }
-       if(GUI.Button(new Rect(100, 220, 150, 30), "Moins de réponses"))
-       {
-           DataControl.control.bonnes_reponses -= 10;
-       }
        if(GUI.Button(new Rect(100, 260, 150, 30), "Save"))
        {
            DataControl.control.Save();
@@ -30,5 +14,5 @@ public class DataTest : MonoBehaviour {
        {
            DataControl.control.Load();
        }
-   }
+    }*/
 }

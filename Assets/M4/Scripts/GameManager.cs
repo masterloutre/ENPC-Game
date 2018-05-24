@@ -7,7 +7,6 @@ public class GameManager : MonoBehaviour {
 	public GameObject[] EnigmaList;
 	int currentEnigmaIndex;
 
-
 	public GameObject estimatedTimeGO;
 	public GameObject descriptionGO;
 	public GameObject enigmaTitleGO;
@@ -15,9 +14,9 @@ public class GameManager : MonoBehaviour {
 	public GameObject enigmaDifficultyGO;
 	public GameObject timerGO;
 
-
 	// Use this for initialization
 	void Start () {
+        //DataControl.control.Load();
 		if (EnigmaList.Length > 0) {
 			currentEnigmaIndex = 0;
 			EnigmaList [0].SetActive (true);
@@ -38,7 +37,8 @@ public class GameManager : MonoBehaviour {
 
 
 	public void changeEnigma(){
-		EnigmaList [currentEnigmaIndex].SetActive (false);
+        //DataControl.control.Save();
+        EnigmaList [currentEnigmaIndex].SetActive (false);
 		currentEnigmaIndex++;
 		if (currentEnigmaIndex >= EnigmaList.Length)
 			currentEnigmaIndex = 0;
@@ -46,8 +46,9 @@ public class GameManager : MonoBehaviour {
 		disableDescription ();
 		updateDatas ();
 		resetTimer ();
+        DataControl.control.resetScore();
 
-	}
+    }
 
 	public void resetTimer(){
 		timerGO.GetComponent<Timer> ().resetTimer ();
