@@ -51,7 +51,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\DDOL.cs" />
      <Compile Include="Assets\M4\Scripts\ConnectionDataControl.cs" />
      <Compile Include="Assets\M4\Scripts\ConnectionManager.cs" />
      <Compile Include="Assets\M4\Scripts\DataControl.cs" />
@@ -68,6 +67,10 @@
      <Compile Include="Assets\M4\Scripts\Enigme_Data.cs" />
      <Compile Include="Assets\M4\Scripts\ExpressionParser.cs" />
      <Compile Include="Assets\M4\Scripts\GameManager.cs" />
+     <Compile Include="Assets\M4\Scripts\Global\DDOL.cs" />
+     <Compile Include="Assets\M4\Scripts\Global\GlobalConfig.cs" />
+     <Compile Include="Assets\M4\Scripts\Global\PlayerManager.cs" />
+     <Compile Include="Assets\M4\Scripts\Global\SceneLoader.cs" />
      <Compile Include="Assets\M4\Scripts\InputAnswer.cs" />
      <Compile Include="Assets\M4\Scripts\InteractiveElement\InteractionManager.cs" />
      <Compile Include="Assets\M4\Scripts\InteractiveElement\StateManager.cs" />
@@ -76,6 +79,7 @@
      <Compile Include="Assets\M4\Scripts\JsonHelper.cs" />
      <Compile Include="Assets\M4\Scripts\lancement_jeu.cs" />
      <Compile Include="Assets\M4\Scripts\LoadEnigmaScenes.cs" />
+     <Compile Include="Assets\M4\Scripts\Objects\Player.cs" />
      <Compile Include="Assets\M4\Scripts\Panel.cs" />
      <Compile Include="Assets\M4\Scripts\PopupAnimation.cs" />
      <Compile Include="Assets\M4\Scripts\QCM_Answer.cs" />
@@ -126,7 +130,6 @@
      <Compile Include="Assets\MaterialUI\Scripts\Toaster.cs" />
      <Compile Include="Assets\MaterialUI\Scripts\ToggleConfig.cs" />
      <Compile Include="Assets\MaterialUI\Scripts\ToggleTextChanger.cs" />
-     <Compile Include="Assets\SceneLoader.cs" />
      <None Include="Assets\M4\Typo\charteTypo.txt" />
      <None Include="Assets\MaterialUI\Fonts\NOTICE.txt" />
  <Reference Include="UnityEngine.UIAutomation">
