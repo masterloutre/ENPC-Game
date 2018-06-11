@@ -20,12 +20,12 @@ public class QCM_Answer : MonoBehaviour {
         //mettre à jour le nombre de tentatives
         ScoreControl.validationRequest();
         bool maxAttemptsReached = ScoreControl.maxAttempsReached();
-        bool rightAnswer = false;
+        bool isRightAnswer = false;
         if (checkEmptySlots ()) {
 			if (checkAnswers ()) {
 				Debug.Log ("c'est tout bon");
 				victoryTimeline.SetActive (true);
-                rightAnswer = true;
+                isRightAnswer = true;
 
             } else {
 				Debug.Log ("ya une erreur");
@@ -36,10 +36,10 @@ public class QCM_Answer : MonoBehaviour {
 		else
 			Debug.Log ("manque un truc");
 
-        if ( rightAnswer || maxAttemptsReached)
+        if ( isRightAnswer || maxAttemptsReached)
         {
             //quitter l'énigme
-            ScoreControl.Success(rightAnswer);
+            ScoreControl.Success(isRightAnswer);
             EnigmaManager.enigmaEnd();
         }
     }

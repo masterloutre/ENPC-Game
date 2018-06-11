@@ -6,10 +6,11 @@ using UnityEngine.SceneManagement;
 public class SceneLoadEvents : MonoBehaviour {
 
     public static SceneLoadEvents sceneOnLoad;
-    public Scene scene;
+    //public Scene scene;
 
     void Awake()
     {
+        print("SceneLoadEvents est appelé (Awake)");
         if (sceneOnLoad == null)
         {
             DontDestroyOnLoad(gameObject);
@@ -20,40 +21,41 @@ public class SceneLoadEvents : MonoBehaviour {
             Destroy(gameObject);
         }
     }
-
-    // Use this for initialization
-    public void Start () {
-
-	}
-
-
-    // Update is called once per frame
-    void Update () {
-
+    public void load(string scenename)
+    {
+        SceneManager.LoadScene(scenename);
+        print("SceneLoadEvents est appelé (Load)");
     }
-
     public void UpdateScene(string sceneName)
     {
+        print("SceneLoadEvents est appelé (UpdateScene)");
         SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
+        // ??? c koi OnSceneLoaded ?
         SceneManager.sceneLoaded += OnSceneLoaded;
-        scene = SceneManager.GetSceneByName(sceneName);
-        print("Loading Scene " + scene.name);
     }
-
+    // ???
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        print("SceneLoadEvents est appelé (OnSceneLoaded)");
+        //???
         SceneManager.SetActiveScene(scene);
         print("OnSceneLoaded " + scene.name);
         print("Active: " + SceneManager.GetActiveScene().name);
+
         //load the saved information to in the new scene using datacontrol
         DataControl.control.Load();
 
         foreach (GameObject GO in scene.GetRootGameObjects())
         {
-            //print("Checking RootGameObjects in Scene " + SceneManager.GetActiveScene().name);
+            print("Checking RootGameObjects in Scene " + SceneManager.GetActiveScene().name+": "+GO.name);
+            
+            // check l'existence d'une énigme et si oui l'update
+            // why do that ?
+            // Scénario comprenant un update d'énigme ?
             if (GO.GetComponentInChildren<Enigma>() != null)
             {
                 //get scene's Enigma
+                print("cetteligne sert");
                 GO.GetComponentInChildren<Enigma>().enigmaUpdate();
             }
         }

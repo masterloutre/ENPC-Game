@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DataTest : MonoBehaviour {
 
-	void OnGUI()
+	/*void OnGUI()
    {
        if(GUI.Button(new Rect(100, 260, 150, 30), "Save"))
        {
@@ -14,5 +14,5 @@ public class DataTest : MonoBehaviour {
        {
            DataControl.control.Load();
        }
-    }
+    }*/
 }

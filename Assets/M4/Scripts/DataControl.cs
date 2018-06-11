@@ -35,7 +35,7 @@ public class DataControl : MonoBehaviour {
 
     void OnGUI()
     {
-        GUI.Label(new Rect(30, 40, 150, 30), "tentatives : "+ tentatives);
+        //GUI.Label(new Rect(30, 40, 150, 30), "tentatives : "+ tentatives);
     }
 
 	public string getJSON()
@@ -107,11 +107,4 @@ public class DataControl : MonoBehaviour {
         temps = 0;
         aideExt = false;
     }
-}
-
-[Serializable]
-class PlayerData
-{
-    public int temps;
-    public int bonnes_reponses;
 }
