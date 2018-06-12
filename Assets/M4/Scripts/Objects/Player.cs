@@ -2,6 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ * Classe qui décrit le joueur
+ * Les champs sont publics car l'objet doit être sérializable depuis un objet JSON
+ * Afin de protéger l'intégrité de l'objet, il est manipulé uniquement par le PlayerManager
+ */
+
 public class Player{
 	public int id;
 	public string studentNumber;
@@ -9,6 +15,7 @@ public class Player{
 	public string firstname;
 	public string graduatingYear;
 
+	//construit un objetjoueur anonyme
 	public Player(){
 		id = -1;
 		studentNumber = "0000000000";
@@ -17,6 +24,7 @@ public class Player{
 		graduatingYear = "0000";
 	}
 
+	//contruit un objet joueur à partir d'informations
 	public Player (int _id, string _studentNumber, string _surname, string _firstname, string graduatingYear)
 	{
 		id = _id;

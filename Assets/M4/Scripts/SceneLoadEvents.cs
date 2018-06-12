@@ -10,6 +10,7 @@ public class SceneLoadEvents : MonoBehaviour {
 
     void Awake()
     {
+		//Instanciaion du singleton
         print("SceneLoadEvents est appelé (Awake)");
         if (sceneOnLoad == null)
         {
@@ -21,11 +22,15 @@ public class SceneLoadEvents : MonoBehaviour {
             Destroy(gameObject);
         }
     }
+
+	//Load une scène
     public void load(string scenename)
     {
         SceneManager.LoadScene(scenename);
         print("SceneLoadEvents est appelé (Load)");
     }
+
+	//ajoute la methode OnSceneLoaded à l'event sceneLoaded
     public void UpdateScene(string sceneName)
     {
         print("SceneLoadEvents est appelé (UpdateScene)");
@@ -33,7 +38,11 @@ public class SceneLoadEvents : MonoBehaviour {
         // ??? c koi OnSceneLoaded ?
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
-    // ???
+    
+	//Marque la scène comme active
+	//Load des infos sauvegardée au préalable
+	//Boucle sur les game objets à la racine de la scène
+	//Si un game object à un component Enigma, utilise sa méthode enigmaUpdate()
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         print("SceneLoadEvents est appelé (OnSceneLoaded)");

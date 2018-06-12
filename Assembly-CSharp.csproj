@@ -68,6 +68,7 @@
      <Compile Include="Assets\M4\Scripts\ExpressionParser.cs" />
      <Compile Include="Assets\M4\Scripts\GameManager.cs" />
      <Compile Include="Assets\M4\Scripts\Global\DDOL.cs" />
+     <Compile Include="Assets\M4\Scripts\Global\EventManager.cs" />
      <Compile Include="Assets\M4\Scripts\Global\GlobalManager.cs" />
      <Compile Include="Assets\M4\Scripts\Global\PlayerManager.cs" />
      <Compile Include="Assets\M4\Scripts\Global\SceneLoader.cs" />
@@ -79,6 +80,7 @@
      <Compile Include="Assets\M4\Scripts\JsonHelper.cs" />
      <Compile Include="Assets\M4\Scripts\lancement_jeu.cs" />
      <Compile Include="Assets\M4\Scripts\LoadEnigmaScenes.cs" />
+     <Compile Include="Assets\M4\Scripts\Objects\Events.cs" />
      <Compile Include="Assets\M4\Scripts\Objects\Player.cs" />
      <Compile Include="Assets\M4\Scripts\Panel.cs" />
      <Compile Include="Assets\M4\Scripts\PopupAnimation.cs" />
