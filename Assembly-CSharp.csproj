@@ -68,7 +68,7 @@
      <Compile Include="Assets\M4\Scripts\ExpressionParser.cs" />
      <Compile Include="Assets\M4\Scripts\GameManager.cs" />
      <Compile Include="Assets\M4\Scripts\Global\DDOL.cs" />
-     <Compile Include="Assets\M4\Scripts\Global\GlobalConfig.cs" />
+     <Compile Include="Assets\M4\Scripts\Global\GlobalManager.cs" />
      <Compile Include="Assets\M4\Scripts\Global\PlayerManager.cs" />
      <Compile Include="Assets\M4\Scripts\Global\SceneLoader.cs" />
      <Compile Include="Assets\M4\Scripts\InputAnswer.cs" />
@@ -130,6 +130,7 @@
      <Compile Include="Assets\MaterialUI\Scripts\Toaster.cs" />
      <Compile Include="Assets\MaterialUI\Scripts\ToggleConfig.cs" />
      <Compile Include="Assets\MaterialUI\Scripts\ToggleTextChanger.cs" />
+     <Compile Include="Assets\PlayerInfoText.cs" />
      <None Include="Assets\M4\Typo\charteTypo.txt" />
      <None Include="Assets\MaterialUI\Fonts\NOTICE.txt" />
  <Reference Include="UnityEngine.UIAutomation">

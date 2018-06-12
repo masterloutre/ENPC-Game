@@ -4,12 +4,11 @@ using UnityEngine;
 using UnityEngine.Networking;
 
 public class PlayerManager : MonoBehaviour {
-	public Player player { get; private set; }
-
+	//public Player player { private get; private set; }
+	private Player player;
 	// Use this for initialization
 	void Start () {
-		this.player = new Player ();
-		StartCoroutine (getPlayerData());
+		
 	}
 	
 	// Update is called once per frame
@@ -17,8 +16,13 @@ public class PlayerManager : MonoBehaviour {
 		
 	}
 
+	public IEnumerator instanciatePlayer(){
+		this.player = new Player ();
+		yield return StartCoroutine (getPlayerData());
+	}
+
 	IEnumerator getPlayerData(){
-		string serverURL = GlobalConfig.webInterfaceRootURL;
+		string serverURL = GlobalManager.webInterfaceRootURL;
 		UnityWebRequest getRequest = UnityWebRequest.Get (serverURL + "/index.php?action=qui-joue");
 		yield return getRequest.SendWebRequest();
 
@@ -32,5 +36,17 @@ public class PlayerManager : MonoBehaviour {
 			JsonUtility.FromJsonOverwrite(getRequest.downloadHandler.text, this.player);
 
 		}
+	}
+
+	public string getPlayerName(){
+		return player.firstname + " " + player.surname;
+	}
+
+	public string getPlayerGraduatingYear(){
+		return player.graduatingYear;
+	}
+
+	public string getPlayerStudentNumber(){
+		return player.studentNumber;
 	}
 }
