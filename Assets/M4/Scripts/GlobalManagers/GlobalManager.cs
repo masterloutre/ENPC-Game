@@ -9,6 +9,7 @@ using UnityEngine;
 public class GlobalManager : MonoBehaviour {
 	private PlayerManager pm;
 	private SceneLoader sl;
+	private EnigmaManager em;
 
 	//variable statique : url root de l'interface web
 	public static string webInterfaceRootURL { 
@@ -19,6 +20,7 @@ public class GlobalManager : MonoBehaviour {
 	public void Awake(){
 		pm = gameObject.GetComponent<PlayerManager> ();
 		sl = gameObject.GetComponent<SceneLoader> ();
+		em = gameObject.GetComponent<EnigmaManager> ();
 		EventManager.instance.AddListener<RequestNextMenuEvent> (NextMenu);
 	}
 
@@ -35,7 +37,10 @@ public class GlobalManager : MonoBehaviour {
 	//les yield sont effecuté un par un dans l'ordre
 	IEnumerator startSequence(){
 		yield return StartCoroutine(pm.instanciatePlayer());
+		yield return StartCoroutine (em.instanciateEnigmas ());
 		yield return StartCoroutine(sl.loadLandingPage());
+		Debug.Log ("test enigme " + em.getIdByUnityIndex (2));
+		Debug.Log ("test enigme next" + em.getNextUnityIndex (2));
 	}
 
 	//load le prochain menu en fonction du nom de la scène actuelle
@@ -46,5 +51,7 @@ public class GlobalManager : MonoBehaviour {
 			StartCoroutine(sl.loadSkillsMenu ());
 		}
 	}
+
+	//void NextEnigme
 
 }
