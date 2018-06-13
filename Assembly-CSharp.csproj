@@ -80,6 +80,7 @@
      <Compile Include="Assets\M4\Scripts\JsonHelper.cs" />
      <Compile Include="Assets\M4\Scripts\lancement_jeu.cs" />
      <Compile Include="Assets\M4\Scripts\LoadEnigmaScenes.cs" />
+     <Compile Include="Assets\M4\Scripts\Managers\MenuManager.cs" />
      <Compile Include="Assets\M4\Scripts\Objects\Events.cs" />
      <Compile Include="Assets\M4\Scripts\Objects\Player.cs" />
      <Compile Include="Assets\M4\Scripts\Panel.cs" />

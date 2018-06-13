@@ -1,6 +1,6 @@
 ﻿using System;
 
-public class RequestNextMenuEvent : EventManager {
+public class RequestNextMenuEvent : GameEvent {
 	public string currentSceneName;
 	public int choiceId;
 

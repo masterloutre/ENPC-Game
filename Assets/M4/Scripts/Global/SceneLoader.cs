@@ -17,6 +17,7 @@ public class SceneLoader : MonoBehaviour {
 
 	//load la page de selection des compétences 
 	public IEnumerator loadSkillsMenu(){
+		Debug.Log ("Scene Loader load skills");
 		SceneManager.LoadScene("SelectionScene", LoadSceneMode.Single);
 		yield break;
 	}

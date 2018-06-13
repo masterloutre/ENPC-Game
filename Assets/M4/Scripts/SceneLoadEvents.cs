@@ -26,8 +26,8 @@ public class SceneLoadEvents : MonoBehaviour {
 	//Load une scène
     public void load(string scenename)
     {
-        SceneManager.LoadScene(scenename);
-        print("SceneLoadEvents est appelé (Load)");
+		print ("SceneLoadEvents est appelé (Load)");
+		SceneManager.LoadScene(scenename);
     }
 
 	//ajoute la methode OnSceneLoaded à l'event sceneLoaded
