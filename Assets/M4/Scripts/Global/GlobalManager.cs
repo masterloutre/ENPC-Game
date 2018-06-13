@@ -27,7 +27,7 @@ public class GlobalManager : MonoBehaviour {
 		StartCoroutine(startSequence ());
 	}
 
-	public void OnDestry(){
+	void OnDestroy(){
 		EventManager.instance.RemoveListener<RequestNextMenuEvent> (NextMenu);
 	}
 
@@ -38,6 +38,9 @@ public class GlobalManager : MonoBehaviour {
 		yield return StartCoroutine(sl.loadLandingPage());
 	}
 
+	//load le prochain menu en fonction du nom de la scène actuelle
+	//les coroutines ne sont peut etre pas forcément nécessaire mais on les garde pour pouvoir garder 
+	// les fct du scenenLoader avec des valeurs de retour IENumerator pour plus d'homogénéité
 	void NextMenu(RequestNextMenuEvent e){
 		if (e.currentSceneName == "HomeScene") {
 			StartCoroutine(sl.loadSkillsMenu ());

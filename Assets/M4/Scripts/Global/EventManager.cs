@@ -2,73 +2,98 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class GameEvent
-{
-
-}
+/*
+ * Gère le système d'events
+ * Est un singleton donc est accessible depuis tout le projet
+ * Garde une liste de listener, des fonction qui doivent être appelées quand un event est levé
+ */ 
 
 public class EventManager
 {
-	private static EventManager eventsInstance = null;
+	//déclaration de la signature des fonction delegates acceptées comme listener
+	//specifique
+	public delegate void EventDelegate<T> (T e) where T : GameEvent;
+	//général (super type)
+	private delegate void EventDelegate (GameEvent e);
+
+	//Dictionnaire de stockage des listener
+	//couple (type d'event, listener)
+	private Dictionary<System.Type, EventDelegate> delegates = new Dictionary<System.Type, EventDelegate>();
+	private Dictionary<System.Delegate, EventDelegate> delegateLookup = new Dictionary<System.Delegate, EventDelegate>();
+
+
+	//instencie le singleton
+	static EventManager instanceInternal = null;
 	public static EventManager instance
 	{
 		get
 		{
-			if (eventsInstance == null)
+			if (instanceInternal == null)
 			{
-				eventsInstance = new EventManager();
+				instanceInternal = new EventManager();
 			}
 
-			return eventsInstance;
+			return instanceInternal;
 		}
 	}
 
-	public delegate void EventDelegate<T> (T e) where T : GameEvent;
 
-	private Dictionary<System.Type, System.Delegate> delegates = new Dictionary<System.Type, System.Delegate>();
-
+	//Ajoute un listener au dictionnaire 
+	//Si un listener existe déja pour le type d'event concerné, combine le nouveau listener avec le précédent
 	public void AddListener<T> (EventDelegate<T> del) where T : GameEvent
-	{
-		if (delegates.ContainsKey(typeof(T)))
-		{
-			System.Delegate tempDel = delegates[typeof(T)];
+	{	
+		// Early-out if we've already registered this delegate
+		if (delegateLookup.ContainsKey(del))
+			return;
 
-			delegates[typeof(T)] = System.Delegate.Combine(tempDel, del);
+		// Create a new non-generic delegate which calls our generic one.
+		// This is the delegate we actually invoke.
+		EventDelegate internalDelegate = (e) => del((T)e);
+		delegateLookup[del] = internalDelegate;
+
+		EventDelegate tempDel;
+		if (delegates.TryGetValue(typeof(T), out tempDel))
+		{
+			delegates[typeof(T)] = tempDel += internalDelegate; 
 		}
 		else
 		{
-			delegates[typeof(T)] = del;
+			delegates[typeof(T)] = internalDelegate;
 		}
 	}
 
+	//Enlève un listener au 
 	public void RemoveListener<T> (EventDelegate<T> del) where T : GameEvent
 	{
-		if (delegates.ContainsKey(typeof(T)))
+		EventDelegate internalDelegate;
+		if (delegateLookup.TryGetValue(del, out internalDelegate))
 		{
-			var currentDel = System.Delegate.Remove(delegates[typeof(T)], del);
+			EventDelegate tempDel;
+			if (delegates.TryGetValue(typeof(T), out tempDel))
+			{
+				tempDel -= internalDelegate;
+				if (tempDel == null)
+				{
+					delegates.Remove(typeof(T));
+				}
+				else
+				{
+					delegates[typeof(T)] = tempDel;
+				}
+			}
 
-			if (currentDel == null)
-			{
-				delegates.Remove(typeof(T));
-			}
-			else
-			{
-				delegates[typeof(T)] = currentDel;
-			}
+			delegateLookup.Remove(del);
 		}
 	}
 
+	//Lève un évent
+	//execute les listener qui lui sont associé
 	public void Raise (GameEvent e)
 	{
-		if (e == null)
+		EventDelegate del;
+		if (delegates.TryGetValue(e.GetType(), out del))
 		{
-			Debug.Log("Invalid event argument: " + e.GetType().ToString());
-			return;
-		}
-
-		if (delegates.ContainsKey(e.GetType()))
-		{
-			delegates[e.GetType()].DynamicInvoke(e);
+			del.Invoke(e);
 		}
 	}
 }
