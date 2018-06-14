@@ -8,11 +8,11 @@ using UnityEngine.Networking;
  */ 
 
 public class PlayerManager : MonoBehaviour {
-	private Player player;
+	private PlayerData player;
 
 	//Crée le joueur en utilisant les infos de getPlayerData()
 	public IEnumerator instanciatePlayer(){
-		this.player = new Player ();
+		this.player = new PlayerData ();
 		yield return StartCoroutine (getPlayerData());
 	}
 

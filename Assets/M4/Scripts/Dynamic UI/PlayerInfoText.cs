@@ -21,7 +21,9 @@ public class PlayerInfoText : MonoBehaviour {
 
 	//récupère le component Text attaché au gameObject parent
 	public void Awake(){
-		pm = Object.FindObjectOfType<PlayerManager>();
+		QueryPlayerManagerEvent query = new QueryPlayerManagerEvent ();
+		EventManager.instance.Raise (query);
+		pm = query.playerManager;
 	}
 
 	//à l'initialisation du component génère le text en utilisant computeText()

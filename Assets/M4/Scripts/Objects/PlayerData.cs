@@ -8,7 +8,7 @@ using UnityEngine;
  * Afin de protéger l'intégrité de l'objet, il est manipulé uniquement par le PlayerManager
  */
 
-public class Player{
+public class PlayerData{
 	public int id;
 	public string studentNumber;
 	public string surname;
@@ -16,7 +16,7 @@ public class Player{
 	public string graduatingYear;
 
 	//construit un objetjoueur anonyme
-	public Player(){
+	public PlayerData(){
 		id = -1;
 		studentNumber = "0000000000";
 		surname = "anonyme";
@@ -25,7 +25,7 @@ public class Player{
 	}
 
 	//contruit un objet joueur à partir d'informations
-	public Player (int _id, string _studentNumber, string _surname, string _firstname, string graduatingYear)
+	public PlayerData (int _id, string _studentNumber, string _surname, string _firstname, string graduatingYear)
 	{
 		id = _id;
 		studentNumber = _studentNumber;

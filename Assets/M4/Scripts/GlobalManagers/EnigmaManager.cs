@@ -75,7 +75,7 @@ public class EnigmaManager : MonoBehaviour {
 		return new List<EnigmaData> (enigmas);
 	}
 
-	List<Skill> getskills(){
+	public List<Skill> getSkills(){
 		List<Skill> skills = new List<Skill> ();
 		foreach (EnigmaData ed in enigmas){
 			Skill newSkill = new Skill (ed.competence_id, ed.competence);

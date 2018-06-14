@@ -5,6 +5,9 @@
  */ 
 
 //Super classe des game events
+using System.Collections.Generic;
+
+
 public class GameEvent
 {
 
@@ -19,6 +22,22 @@ public class RequestNextMenuEvent : GameEvent {
 	public RequestNextMenuEvent(string _currentSceneName, int _choiceId){
 		currentSceneName = _currentSceneName;
 		choiceId = _choiceId;
+	}
+}
+
+public class QueryPlayerManagerEvent : GameEvent {
+	public PlayerManager playerManager;
+
+	public QueryPlayerManagerEvent(){
+		playerManager = null;
+	}
+}
+
+public class QuerySkillListEvent : GameEvent {
+	public List<Skill> skillList;
+
+	public QuerySkillListEvent(){
+		skillList = null;
 	}
 }
 

@@ -25,7 +25,9 @@ public class GlobalManager : MonoBehaviour {
 		pm = gameObject.GetComponent<PlayerManager> ();
 		sl = gameObject.GetComponent<SceneLoader> ();
 		em = gameObject.GetComponent<EnigmaManager> ();
-		EventManager.instance.AddListener<RequestNextMenuEvent> (NextMenu);
+		EventManager.instance.AddListener<RequestNextMenuEvent> (nextMenu);
+		EventManager.instance.AddListener<QueryPlayerManagerEvent> (getPlayerManager);
+		EventManager.instance.AddListener<QuerySkillListEvent> (getSkillList);
 	}
 
 	//à l'initialisation du gameObject, lance la séquence de démarrage
@@ -34,7 +36,9 @@ public class GlobalManager : MonoBehaviour {
 	}
 
 	void OnDestroy(){
-		EventManager.instance.RemoveListener<RequestNextMenuEvent> (NextMenu);
+		EventManager.instance.RemoveListener<RequestNextMenuEvent> (nextMenu);
+		EventManager.instance.RemoveListener<QueryPlayerManagerEvent> (getPlayerManager);
+		EventManager.instance.RemoveListener<QuerySkillListEvent> (getSkillList);
 	}
 
 	//Séquence de démarrage, les coroutines permettent d'attendre que la méthode appelée soit entierement executées avant de yield
@@ -68,15 +72,25 @@ public class GlobalManager : MonoBehaviour {
 		}
 	}
 
+
+	/**********************
+	 * GESTION DES EVENTS *
+	 * ********************/
+
 	//load le prochain menu en fonction du nom de la scène actuelle
 	//les coroutines ne sont peut etre pas forcément nécessaire mais on les garde pour pouvoir garder 
 	// les fct du scenenLoader avec des valeurs de retour IENumerator pour plus d'homogénéité
-	void NextMenu(RequestNextMenuEvent e){
+	void nextMenu(RequestNextMenuEvent e){
 		if (e.currentSceneName == "HomeScene") {
 			StartCoroutine(sl.loadSkillsMenu ());
 		}
 	}
 
-	//void NextEnigme
+	void getPlayerManager(QueryPlayerManagerEvent e){
+		e.playerManager = this.pm;
+	}
 
+	void getSkillList(QuerySkillListEvent e ){
+		e.skillList = em.getSkills ();
+	}
 }
