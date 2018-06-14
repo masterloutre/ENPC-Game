@@ -84,6 +84,7 @@
      <Compile Include="Assets\M4\Scripts\Objects\EnigmaData.cs" />
      <Compile Include="Assets\M4\Scripts\Objects\Events.cs" />
      <Compile Include="Assets\M4\Scripts\Objects\Player.cs" />
+     <Compile Include="Assets\M4\Scripts\Objects\ScoreData.cs" />
      <Compile Include="Assets\M4\Scripts\Panel.cs" />
      <Compile Include="Assets\M4\Scripts\PopupAnimation.cs" />
      <Compile Include="Assets\M4\Scripts\QCM_Answer.cs" />
@@ -135,6 +136,7 @@
      <Compile Include="Assets\MaterialUI\Scripts\ToggleConfig.cs" />
      <Compile Include="Assets\MaterialUI\Scripts\ToggleTextChanger.cs" />
      <Compile Include="Assets\PlayerInfoText.cs" />
+     <Compile Include="Assets\ScoreManager.cs" />
      <None Include="Assets\M4\Typo\charteTypo.txt" />
      <None Include="Assets\MaterialUI\Fonts\NOTICE.txt" />
  <Reference Include="UnityEngine.UIAutomation">
