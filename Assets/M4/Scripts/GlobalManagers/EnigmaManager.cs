@@ -75,6 +75,17 @@ public class EnigmaManager : MonoBehaviour {
 		return new List<EnigmaData> (enigmas);
 	}
 
+	List<Skill> getskills(){
+		List<Skill> skills = new List<Skill> ();
+		foreach (EnigmaData ed in enigmas){
+			Skill newSkill = new Skill (ed.competence_id, ed.competence);
+			if (!skills.Contains (newSkill)) {
+				skills.Add (newSkill);
+			}
+		}
+		return skills;
+	}
+
 
 
 		
