@@ -9,6 +9,7 @@ using UnityEngine.Networking;
 using System;
 
 public class GlobalManager : MonoBehaviour {
+	public bool startAtLandingPage = false;
 	private PlayerManager pm;
 	private SceneLoader sl;
 	private EnigmaManager em;
@@ -51,7 +52,9 @@ public class GlobalManager : MonoBehaviour {
 		}
 		yield return StartCoroutine(pm.instanciatePlayer());
 		yield return StartCoroutine (em.instanciateEnigmas ());
-		yield return StartCoroutine(sl.loadLandingPage());
+		if (startAtLandingPage) {
+			yield return StartCoroutine (sl.loadLandingPage ());
+		}
 	}
 
 	IEnumerator getSessionId(){

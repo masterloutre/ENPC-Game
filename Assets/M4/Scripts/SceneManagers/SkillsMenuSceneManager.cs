@@ -6,15 +6,13 @@ public class SkillsMenuSceneManager : MenuSceneManager {
 
 	public List<Skill> skillList;
 
-	public void Awake(){
+	public void Start(){
 		QuerySkillListEvent query = new QuerySkillListEvent ();
 		EventManager.instance.Raise (query);
 		skillList = query.skillList;
-		Debug.Log ("update skillMenuManager" + skillList);
 	}
 
 	public void Update(){
-		//Debug.Log ("update skillMenuManager" + skillList [0].name);
 	}
 
 	public void chooseSkill(int _choice){
