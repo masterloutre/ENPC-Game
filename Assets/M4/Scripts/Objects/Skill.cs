@@ -16,6 +16,20 @@ public class Skill
 		id = _id;
 		name = _name;
 	}
+
+	public override bool Equals(Object obj)
+	{
+		Skill skill = obj as Skill; 
+		if (skill == null)
+			return false;
+		else
+			return id.Equals(skill.id) && name.Equals(skill.name);
+	}
+
+	public override int GetHashCode()
+	{
+		return this.id.GetHashCode(); 
+	}
 }
 
 
