@@ -141,6 +141,7 @@
      <Compile Include="Assets\MaterialUI\Scripts\Toaster.cs" />
      <Compile Include="Assets\MaterialUI\Scripts\ToggleConfig.cs" />
      <Compile Include="Assets\MaterialUI\Scripts\ToggleTextChanger.cs" />
+     <Compile Include="Assets\ReturnButton.cs" />
      <None Include="Assets\M4\Typo\charteTypo.txt" />
      <None Include="Assets\MaterialUI\Fonts\NOTICE.txt" />
  <Reference Include="UnityEngine.UIAutomation">

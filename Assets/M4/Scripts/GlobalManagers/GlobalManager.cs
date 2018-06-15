@@ -27,6 +27,7 @@ public class GlobalManager : MonoBehaviour {
 		sl = gameObject.GetComponent<SceneLoader> ();
 		em = gameObject.GetComponent<EnigmaManager> ();
 		EventManager.instance.AddListener<RequestNextSceneEvent> (nextScene);
+		EventManager.instance.AddListener<RequestPreviousSceneEvent> (previousScene);
 		EventManager.instance.AddListener<QueryPlayerManagerEvent> (getPlayerManager);
 		EventManager.instance.AddListener<QuerySkillListEvent> (getSkillList);
 	}
@@ -38,6 +39,7 @@ public class GlobalManager : MonoBehaviour {
 
 	void OnDestroy(){
 		EventManager.instance.RemoveListener<RequestNextSceneEvent> (nextScene);
+		EventManager.instance.RemoveListener<RequestPreviousSceneEvent> (previousScene);
 		EventManager.instance.RemoveListener<QueryPlayerManagerEvent> (getPlayerManager);
 		EventManager.instance.RemoveListener<QuerySkillListEvent> (getSkillList);
 	}
@@ -84,11 +86,23 @@ public class GlobalManager : MonoBehaviour {
 	//les coroutines ne sont peut etre pas forcément nécessaire mais on les garde pour pouvoir garder 
 	// les fct du scenenLoader avec des valeurs de retour IENumerator pour plus d'homogénéité
 	void nextScene(RequestNextSceneEvent e){
+		Debug.Log ("Next scene requested by " + e.currentSceneName);
 		if (e.currentSceneName == "HomeScene") {
 			StartCoroutine(sl.loadSkillsMenu ());
 		} else if (e.currentSceneName == "SelectionScene"){
 			Skill chosenSkill = em.getSkills () [e.choiceId];
 			StartCoroutine (sl.loadEnigmaSequence (em.getSkills()[e.choiceId]));
+		}
+	}
+
+	void previousScene(RequestPreviousSceneEvent e){
+		Debug.Log ("Previous scene requested by " + e.currentSceneName);
+		if (e.currentSceneName == "HomeScene") {
+			//fermer le jeu?
+		} else if (e.currentSceneName == "SelectionScene") {
+			StartCoroutine (sl.loadLandingPage ());
+		} else if (e.currentSceneName == "EnigmaSequenceScene") {
+			StartCoroutine (sl.loadSkillsMenu ());
 		}
 	}
 
