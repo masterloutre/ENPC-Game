@@ -5,10 +5,12 @@ using UnityEngine.SceneManagement;
 
 /* Class qui gère les méthodes de load des scènes
  * */
+using UnityEngine.Events;
+
+
 public class SceneLoader : MonoBehaviour {
 
 	//les méthodes retournant des IEnumerator peuvent être utilisées dans des coroutines et donc dans une séquence d'action asynchrones
-
 
 	public void Awake(){
 		//à chaque fois que l'event sceneLoaded est appelé pour une scène effectue la methode setActive sur cette scene
@@ -45,7 +47,26 @@ public class SceneLoader : MonoBehaviour {
 		yield break;
 	}
 
+	public IEnumerator loadEnigmaSequence (Skill skill){
+		UnityAction<UnityEngine.SceneManagement.Scene,UnityEngine.SceneManagement.LoadSceneMode> setSkill = delegate (Scene scene, LoadSceneMode mode) {
+			//if(scene.name == "EnigmaSequenceScene"){
+				EnigmaSequenceManager esm = GameObject.Find("MainManager").GetComponent<EnigmaSequenceManager>();
+				esm.updateEnigmaSequence(skill);
+			//}
 
+		};
+		SceneManager.sceneLoaded += setSkill;
+		loadScene ("EnigmaSequenceScene");
+		SceneManager.sceneUnloaded += delegate (Scene scene) {
+			if(scene.name == "EnigmaSequenceScene"){
+				Debug.Log(scene.name + ", scene unloaded : removes setSkill");
+				SceneManager.sceneLoaded -= setSkill;
+			}
+		};
+		//REFAIR AVEC DES LOAD ASYNC ET DES COROUTINES
+		yield break;
+	}
+		
 		
 
 

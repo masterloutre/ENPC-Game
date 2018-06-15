@@ -7,11 +7,7 @@ public class ScoreManager : MonoBehaviour {
 	private List<ScoreData> scores;
 	// Use this for initialization
 	void Start () {
-		Debug.Log ("Score manager start");
 		scores = new List<ScoreData> ();
-		//test
-		ScoreData scoreTest = new ScoreData(26, 6, 47, 1, 1.5, 0);
-		StartCoroutine(sendScore (scoreTest));
 	}
 	
 	// Update is called once per frame
@@ -24,7 +20,6 @@ public class ScoreManager : MonoBehaviour {
 	}
 
 	IEnumerator sendScore(ScoreData score){
-		Debug.Log ("send score");
 		List<IMultipartFormSection> formData = new List<IMultipartFormSection>();
 		formData.Add( new MultipartFormDataSection("id_enigme", score.id_enigme.ToString()));
 		formData.Add( new MultipartFormDataSection("id_etudiant", score.id_etudiant.ToString()));

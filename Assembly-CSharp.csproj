@@ -93,6 +93,7 @@
      <Compile Include="Assets\M4\Scripts\QCM_Answer.cs" />
      <Compile Include="Assets\M4\Scripts\Save.cs" />
      <Compile Include="Assets\M4\Scripts\SceneLoadEvents.cs" />
+     <Compile Include="Assets\M4\Scripts\SceneManagers\EnigmaSequenceManager.cs" />
      <Compile Include="Assets\M4\Scripts\SceneManagers\MenuSceneManager.cs" />
      <Compile Include="Assets\M4\Scripts\SceneManagers\SkillsMenuSceneManager.cs" />
      <Compile Include="Assets\M4\Scripts\ScoreControl.cs" />

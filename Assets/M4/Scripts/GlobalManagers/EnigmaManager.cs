@@ -8,11 +8,14 @@ using System.Linq;
 
 public class EnigmaManager : MonoBehaviour {
 	private List<EnigmaData> enigmas;
+	private List<Skill> skills;
 
 	//instancie la liste d'énigmes 
 	public IEnumerator instanciateEnigmas(){
 		this.enigmas = new List<EnigmaData> ();
 		yield return StartCoroutine (getEnigmaData());
+		computeSkillList ();
+		yield break;
 	}
 
 	//récupère les informations des énigmes auprès de l'interface web
@@ -76,14 +79,17 @@ public class EnigmaManager : MonoBehaviour {
 	}
 
 	public List<Skill> getSkills(){
-		List<Skill> skills = new List<Skill> ();
+		return skills;
+	}
+
+	private void computeSkillList(){
+		skills = new List<Skill> ();
 		foreach (EnigmaData ed in enigmas){
 			Skill newSkill = new Skill (ed.competence_id, ed.competence);
 			if (!skills.Contains (newSkill)) {
 				skills.Add (newSkill);
 			}
 		}
-		return skills;
 	}
 
 

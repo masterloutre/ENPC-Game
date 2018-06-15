@@ -15,11 +15,11 @@ public class GameEvent
 
 //Event qui demande une transition vers le prochain menu dans le déroulement du jeu
 //Notamment écouté par le globalManager
-public class RequestNextMenuEvent : GameEvent {
+public class RequestNextSceneEvent : GameEvent {
 	public string currentSceneName;
 	public int choiceId;
 
-	public RequestNextMenuEvent(string _currentSceneName, int _choiceId){
+	public RequestNextSceneEvent(string _currentSceneName, int _choiceId){
 		currentSceneName = _currentSceneName;
 		choiceId = _choiceId;
 	}
@@ -38,6 +38,16 @@ public class QuerySkillListEvent : GameEvent {
 
 	public QuerySkillListEvent(){
 		skillList = null;
+	}
+}
+
+public class RequestPreviousSceneEvent : GameEvent {
+	public string currentSceneName;
+	public int choiceId;
+
+	public RequestPreviousSceneEvent(string _currentSceneName, int _choiceId){
+		currentSceneName = _currentSceneName;
+		choiceId = _choiceId;
 	}
 }
 

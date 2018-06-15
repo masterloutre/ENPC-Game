@@ -26,7 +26,7 @@ public class GlobalManager : MonoBehaviour {
 		pm = gameObject.GetComponent<PlayerManager> ();
 		sl = gameObject.GetComponent<SceneLoader> ();
 		em = gameObject.GetComponent<EnigmaManager> ();
-		EventManager.instance.AddListener<RequestNextMenuEvent> (nextMenu);
+		EventManager.instance.AddListener<RequestNextSceneEvent> (nextScene);
 		EventManager.instance.AddListener<QueryPlayerManagerEvent> (getPlayerManager);
 		EventManager.instance.AddListener<QuerySkillListEvent> (getSkillList);
 	}
@@ -37,7 +37,7 @@ public class GlobalManager : MonoBehaviour {
 	}
 
 	void OnDestroy(){
-		EventManager.instance.RemoveListener<RequestNextMenuEvent> (nextMenu);
+		EventManager.instance.RemoveListener<RequestNextSceneEvent> (nextScene);
 		EventManager.instance.RemoveListener<QueryPlayerManagerEvent> (getPlayerManager);
 		EventManager.instance.RemoveListener<QuerySkillListEvent> (getSkillList);
 	}
@@ -83,9 +83,12 @@ public class GlobalManager : MonoBehaviour {
 	//load le prochain menu en fonction du nom de la scène actuelle
 	//les coroutines ne sont peut etre pas forcément nécessaire mais on les garde pour pouvoir garder 
 	// les fct du scenenLoader avec des valeurs de retour IENumerator pour plus d'homogénéité
-	void nextMenu(RequestNextMenuEvent e){
+	void nextScene(RequestNextSceneEvent e){
 		if (e.currentSceneName == "HomeScene") {
 			StartCoroutine(sl.loadSkillsMenu ());
+		} else if (e.currentSceneName == "SelectionScene"){
+			Skill chosenSkill = em.getSkills () [e.choiceId];
+			StartCoroutine (sl.loadEnigmaSequence (em.getSkills()[e.choiceId]));
 		}
 	}
 
@@ -94,6 +97,10 @@ public class GlobalManager : MonoBehaviour {
 	}
 
 	void getSkillList(QuerySkillListEvent e ){
-		e.skillList = em.getSkills ();
+		try{
+			e.skillList = em.getSkills ();
+		} catch (Exception exception) {
+			throw exception;
+		}
 	}
 }

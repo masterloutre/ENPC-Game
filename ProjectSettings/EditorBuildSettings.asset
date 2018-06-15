@@ -14,3 +14,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Menus/SelectionScene.unity
     guid: c69853549192b72488a54459a3143d07
+  - enabled: 1
+    path: Assets/Scenes/Menus/EnigmaSequenceScene.unity
+    guid: c8d07a90ca50a4511a2ecf912aec99c9

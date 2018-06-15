@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class MenuSceneManager : MonoBehaviour {
 	public int choice = 0;
-	public void nextMenu(){
-		EventManager.instance.Raise (new RequestNextMenuEvent(gameObject.scene.name, choice));
+
+	public void nextScene(){
+		EventManager.instance.Raise (new RequestNextSceneEvent(gameObject.scene.name, choice));
 	}
 }
