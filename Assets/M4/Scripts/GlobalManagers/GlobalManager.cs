@@ -17,7 +17,7 @@ public class GlobalManager : MonoBehaviour {
 
 	//variable statique : url root de l'interface web
 	public static string webInterfaceRootURL { 
-		get { return "http://localhost:8888"; }
+		get { return "http://localhost/enpc-web-interface"; }
 	}
 
 	//récupère les références au PlayerManager, au SceneLoader, à l'EnigmaManager 
