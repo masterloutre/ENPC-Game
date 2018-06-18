@@ -66,6 +66,16 @@ public class SceneLoader : MonoBehaviour {
 		//REFAIR AVEC DES LOAD ASYNC ET DES COROUTINES
 		yield break;
 	}
+
+	IEnumerator loadEnigma(int unityIndex){
+		yield break;
+		
+	}
+
+	IEnumerator unLoadEnigma(int unityIndex){
+		yield break;
+	}
+
 		
 		
 
