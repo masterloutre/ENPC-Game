@@ -37,7 +37,7 @@ public class GlobalManager : MonoBehaviour {
 
 	//à l'initialisation du gameObject, lance la séquence de démarrage
 	public void Start(){
-		Debug.log ("ATTENTION : l'addresse indiquée pour l'interface est : " + webInterfaceRootURL + " Si ce n'est pas la bonne il faut décommenter la bonne version dans GlobalManager");
+		Debug.Log ("ATTENTION : l'addresse indiquée pour l'interface est : " + webInterfaceRootURL + " Si ce n'est pas la bonne il faut décommenter la bonne version dans GlobalManager");
 		StartCoroutine(startSequence ());
 	}
 
