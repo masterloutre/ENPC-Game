@@ -22,6 +22,14 @@ public class SceneLoader : MonoBehaviour {
 		SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
 	}
 
+	//load une scene
+	public IEnumerator  removeScene(string sceneName){
+		AsyncOperation async = SceneManager.UnloadSceneAsync(sceneName);
+		while (!async.isDone) {
+			yield return null;
+		}
+	}
+
 	//load une scene de façon additive, la scene ne deviendra pas la scène active
 	public void addScene(string sceneName){
 		SceneManager.sceneLoaded -= setActive;
@@ -67,13 +75,14 @@ public class SceneLoader : MonoBehaviour {
 		yield break;
 	}
 
-	IEnumerator loadEnigma(int unityIndex){
+	public IEnumerator loadEnigma(int unityIndex){
+		addScene ("Enigma" + unityIndex);
 		yield break;
 		
 	}
 
-	IEnumerator unLoadEnigma(int unityIndex){
-		yield break;
+	public IEnumerator unloadEnigma(int unityIndex){
+		yield return StartCoroutine(removeScene("Enigma" + unityIndex));
 	}
 
 		

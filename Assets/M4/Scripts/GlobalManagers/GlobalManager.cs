@@ -32,16 +32,14 @@ public class GlobalManager : MonoBehaviour {
 		EventManager.instance.AddListener<RequestNextSceneEvent> (nextScene);
 		EventManager.instance.AddListener<RequestPreviousSceneEvent> (previousScene);
 		EventManager.instance.AddListener<QueryPlayerManagerEvent> (getPlayerManager);
+		EventManager.instance.AddListener<QuerySceneLoaderEvent> (getSceneLoader);
 		EventManager.instance.AddListener<QuerySkillListEvent> (getSkillList);
+		EventManager.instance.AddListener<QueryEnigmaListEvent> (getEnigmaList);
 	}
 
 	//à l'initialisation du gameObject, lance la séquence de démarrage
 	public void Start(){
-<<<<<<< HEAD
 		Debug.Log ("ATTENTION : l'addresse indiquée pour l'interface est : " + webInterfaceRootURL + " Si ce n'est pas la bonne il faut décommenter la bonne version dans GlobalManager");
-=======
-		Debug.Log ("ATTENTION l'addresse configurée pour l'interface web est : " + webInterfaceRootURL + " si cela ne correspond pas, décommentez la bonne version dans le GlobalManager");
->>>>>>> 2b5685aa9233f229c01e9b39743239badc6d4687
 		StartCoroutine(startSequence ());
 	}
 
@@ -49,7 +47,9 @@ public class GlobalManager : MonoBehaviour {
 		EventManager.instance.RemoveListener<RequestNextSceneEvent> (nextScene);
 		EventManager.instance.RemoveListener<RequestPreviousSceneEvent> (previousScene);
 		EventManager.instance.RemoveListener<QueryPlayerManagerEvent> (getPlayerManager);
+		EventManager.instance.RemoveListener<QuerySceneLoaderEvent> (getSceneLoader);
 		EventManager.instance.RemoveListener<QuerySkillListEvent> (getSkillList);
+		EventManager.instance.RemoveListener<QueryEnigmaListEvent> (getEnigmaList);
 	}
 
 	//Séquence de démarrage, les coroutines permettent d'attendre que la méthode appelée soit entierement executées avant de yield
@@ -125,6 +125,18 @@ public class GlobalManager : MonoBehaviour {
 	void getSkillList(QuerySkillListEvent e ){
 		try{
 			e.skillList = em.getSkills ();
+		} catch (Exception exception) {
+			throw exception;
+		}
+	}
+
+	void getEnigmaList(QueryEnigmaListEvent e ){
+		try{
+			if(e.skill != null){
+				e.enigmaList = em.getEnigmasBySkill(e.skill);
+			} else {
+				e.enigmaList = em.getEnigmas();
+			}
 		} catch (Exception exception) {
 			throw exception;
 		}

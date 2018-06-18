@@ -32,6 +32,7 @@ public class QueryPlayerManagerEvent : GameEvent {
 		playerManager = null;
 	}
 }
+	
 
 public class QuerySceneLoaderEvent : GameEvent {
 	public SceneLoader sceneLoader;
@@ -46,6 +47,16 @@ public class QuerySkillListEvent : GameEvent {
 
 	public QuerySkillListEvent(){
 		skillList = null;
+	}
+}
+
+public class QueryEnigmaListEvent : GameEvent {
+	public List<EnigmaData> enigmaList;
+	public Skill skill;
+
+	public QueryEnigmaListEvent(Skill _skill){
+		enigmaList = null;
+		skill = _skill;
 	}
 }
 

@@ -50,16 +50,17 @@ public class EnigmaManager : MonoBehaviour {
         }
     }
 
+	/* dans une autre classe maintenant -> EnigmaSequenceManager
 	//récupère un objet représentant les datas d'une énigme à partir de son index unity
 	private EnigmaData getEnigmaByUnityIndex(int value){
 		EnigmaSearch es = new EnigmaSearch (value);
-		return this.enigmas.Find (es.UnityIndexSearch);
+		return this.enigmas.Find (es.unityIndexSearch);
 	}
 
 	//récupère l'id (position) d'une énigme dans la liste à partir de son index unity
 	public int getIdByUnityIndex(int value){
 		EnigmaSearch es = new EnigmaSearch (value);
-		return this.enigmas.FindIndex (es.UnityIndexSearch);
+		return this.enigmas.FindIndex (es.unityIndexSearch);
 	}
 
 	//récupère l'id de l'énigme suivante dans la liste à partir de l'index unity d'une énigme
@@ -73,9 +74,14 @@ public class EnigmaManager : MonoBehaviour {
 			return nextId;
 		}
 	}
+	*/
 
 	public List<EnigmaData> getEnigmas(){
 		return new List<EnigmaData> (enigmas);
+	}
+
+	public List<EnigmaData> getEnigmasBySkill(Skill skill){
+		return new List<EnigmaData> (enigmas).Where(ed => ed.competence == skill.name).ToList();
 	}
 
 	public List<Skill> getSkills(){
@@ -100,15 +106,27 @@ public class EnigmaManager : MonoBehaviour {
 //Classe décrivant les différents prédicats de recherche dans la liste d'énigmes
 public class EnigmaSearch
 {
-	private int searchValue;
+	private int searchValueInt;
+	private string searchValueString;
 
 	public EnigmaSearch (int _searchValue){
-		searchValue = _searchValue;
+		searchValueInt = _searchValue;
+		searchValueString = "";
+	}
+
+	public EnigmaSearch (string _searchValue){
+		searchValueInt = 0;
+		searchValueString = _searchValue;
 	}
 
 	//chercher à partir de l'index unity
-	public bool UnityIndexSearch(EnigmaData ed){
-		return ed.index_unity == searchValue;
+	public bool unityIndexSearch(EnigmaData ed){
+		return ed.index_unity == searchValueInt;
+	}
+
+	//chercher à partir de la compétence
+	public bool skillSearch(EnigmaData ed){
+		return ed.competence == searchValueString;
 	}
 
 }
