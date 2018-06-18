@@ -110,6 +110,10 @@ public class GlobalManager : MonoBehaviour {
 		e.playerManager = this.pm;
 	}
 
+	void getSceneLoader(QuerySceneLoaderEvent e){
+		e.sceneLoader = this.sl;
+	}
+
 	void getSkillList(QuerySkillListEvent e ){
 		try{
 			e.skillList = em.getSkills ();
