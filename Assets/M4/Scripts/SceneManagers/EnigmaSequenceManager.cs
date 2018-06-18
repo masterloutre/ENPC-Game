@@ -26,4 +26,7 @@ public class EnigmaSequenceManager : MonoBehaviour {
 		GameObject titleGO = GameObject.Find ("Title");
 		titleGO.GetComponent<Text> ().text += skill.name;
 	}
+
+	IEnumerator loadEnigma(int unityIndex){
+	}
 }
