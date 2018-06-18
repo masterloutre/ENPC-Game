@@ -33,6 +33,14 @@ public class QueryPlayerManagerEvent : GameEvent {
 	}
 }
 
+public class QuerySceneLoaderEvent : GameEvent {
+	public SceneLoader sceneLoader;
+
+	public QuerySceneLoaderEvent(){
+		sceneLoader = null;
+	}
+}
+
 public class QuerySkillListEvent : GameEvent {
 	public List<Skill> skillList;
 

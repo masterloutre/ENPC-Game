@@ -22,9 +22,9 @@ public class EnigmaManager : MonoBehaviour {
 	IEnumerator getEnigmaData(){
 		string serverURL = GlobalManager.webInterfaceRootURL;
 		UnityWebRequest getRequest = UnityWebRequest.Get (serverURL + "/index.php?action=enigmes-disponibles");
-		yield return getRequest.Send();
+		yield return getRequest.SendWebRequest();
 
-		if(getRequest.isNetworkError) {
+		if(getRequest.isNetworkError||getRequest.isHttpError) {
 			Debug.Log(getRequest.error);
 			Debug.Log(getRequest.downloadHandler.text);
 

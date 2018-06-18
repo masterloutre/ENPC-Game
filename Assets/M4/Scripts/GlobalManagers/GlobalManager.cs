@@ -17,7 +17,12 @@ public class GlobalManager : MonoBehaviour {
 
 	//variable statique : url root de l'interface web
 	public static string webInterfaceRootURL { 
-		get { return "http://localhost:8888"; }
+		get { 
+			//VERSION KEN
+			//return "http://localhost/enpc-web-interface";
+			//VERSION LOU
+			return "http://localhost:8888";
+		}
 	}
 
 	//récupère les références au PlayerManager, au SceneLoader, à l'EnigmaManager 
@@ -34,6 +39,7 @@ public class GlobalManager : MonoBehaviour {
 
 	//à l'initialisation du gameObject, lance la séquence de démarrage
 	public void Start(){
+		Debug.Log ("ATTENTION l'addresse configurée pour l'interface web est : " + webInterfaceRootURL + " si cela ne correspond pas, décommentez la bonne version dans le GlobalManager");
 		StartCoroutine(startSequence ());
 	}
 
