@@ -37,7 +37,11 @@ public class GlobalManager : MonoBehaviour {
 
 	//à l'initialisation du gameObject, lance la séquence de démarrage
 	public void Start(){
+<<<<<<< HEAD
 		Debug.Log ("ATTENTION : l'addresse indiquée pour l'interface est : " + webInterfaceRootURL + " Si ce n'est pas la bonne il faut décommenter la bonne version dans GlobalManager");
+=======
+		Debug.Log ("ATTENTION l'addresse configurée pour l'interface web est : " + webInterfaceRootURL + " si cela ne correspond pas, décommentez la bonne version dans le GlobalManager");
+>>>>>>> 2b5685aa9233f229c01e9b39743239badc6d4687
 		StartCoroutine(startSequence ());
 	}
 
@@ -112,6 +116,10 @@ public class GlobalManager : MonoBehaviour {
 
 	void getPlayerManager(QueryPlayerManagerEvent e){
 		e.playerManager = this.pm;
+	}
+
+	void getSceneLoader(QuerySceneLoaderEvent e){
+		e.sceneLoader = this.sl;
 	}
 
 	void getSkillList(QuerySkillListEvent e ){
