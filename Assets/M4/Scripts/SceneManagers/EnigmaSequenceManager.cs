@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 using System.Linq;
+using UnityEngine.SceneManagement;
 
 public class EnigmaSequenceManager : MonoBehaviour {
 
@@ -22,7 +23,8 @@ public class EnigmaSequenceManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
+		//StartCoroutine(sl.loadEnigma (enigmaDataList[currentEnigmaId].index_unity));
+		StartCoroutine(sl.loadEnigma (4));
 	}
 	
 	// Update is called once per frame
@@ -40,8 +42,6 @@ public class EnigmaSequenceManager : MonoBehaviour {
 		foreach (EnigmaData ed in enigmaDataList) {
 			Debug.Log ("EnigmaSequenceManager, nom d'énigme : " + ed.nom);
 		}
-		loadNextEnigma ();
-
 
 	}
 
@@ -87,21 +87,14 @@ public class EnigmaSequenceManager : MonoBehaviour {
 	public void loadNextEnigma(){
 		Debug.Log ("EnigmaSequenceManager : Load Next Enigme");
 		try {
-			//FUTURE VERSION
-			/*
 			int nextId = getNextEnigmaId();
 			sl.unloadEnigma(enigmaDataList[currentEnigmaId].index_unity);
 			sl.loadEnigma(enigmaDataList[nextId].index_unity);
 			currentEnigmaId = nextId;
-			*/
-
-
-			//POUR LES TEST 
-			sl.loadEnigma(4);
 		} catch (InvalidOperationException e){
+			Debug.Log (e.Message);
 			EventManager.instance.Raise (new RequestPreviousSceneEvent("EnigmaSequenceScene",0));
 		}
-
 	}
 		
 }

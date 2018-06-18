@@ -7,6 +7,7 @@ using UnityEngine;
  */
 using UnityEngine.Networking;
 using System;
+using UnityEngine.SceneManagement;
 
 public class GlobalManager : MonoBehaviour {
 	public bool startAtLandingPage = false;
@@ -97,6 +98,7 @@ public class GlobalManager : MonoBehaviour {
 		Debug.Log ("Next scene requested by " + e.currentSceneName);
 		if (e.currentSceneName == "HomeScene") {
 			StartCoroutine(sl.loadSkillsMenu ());
+			//StartCoroutine(sl.loadEnigma (4));
 		} else if (e.currentSceneName == "SelectionScene"){
 			Skill chosenSkill = em.getSkills () [e.choiceId];
 			StartCoroutine (sl.loadEnigmaSequence (em.getSkills()[e.choiceId]));
