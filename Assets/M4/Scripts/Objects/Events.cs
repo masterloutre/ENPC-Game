@@ -70,3 +70,22 @@ public class RequestPreviousSceneEvent : GameEvent {
 	}
 }
 
+public class RequestNextEnigmaEvent : GameEvent {
+
+	public RequestNextEnigmaEvent(){
+	}
+}
+
+public class RequestPreviousEnigmaEvent : GameEvent {
+
+	public RequestPreviousEnigmaEvent(){
+	}
+}
+
+public class QueryCurrentEnigmaDataEvent: GameEvent {
+	public EnigmaData enigmaData;
+	public QueryCurrentEnigmaDataEvent(){
+		enigmaData = null;
+	}
+}
+

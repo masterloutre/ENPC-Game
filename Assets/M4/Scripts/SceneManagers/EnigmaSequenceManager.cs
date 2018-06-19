@@ -15,16 +15,24 @@ public class EnigmaSequenceManager : MonoBehaviour {
 
 
 	void Awake(){
-		QuerySceneLoaderEvent query = new QuerySceneLoaderEvent ();
-		EventManager.instance.Raise (query);
-		sl = query.sceneLoader;
-		currentEnigmaId = 0;
+		enigmaDataList = new List<EnigmaData> ();
+		EventManager.instance.AddListener<RequestNextEnigmaEvent> (loadNextEnigma);
+		EventManager.instance.AddListener<RequestPreviousEnigmaEvent> (loadPreviousEnigma);
+		EventManager.instance.AddListener<QueryCurrentEnigmaDataEvent> (getCurrentEnigmaData);
+
 	}
 
 	// Use this for initialization
 	void Start () {
-		//StartCoroutine(sl.loadEnigma (enigmaDataList[currentEnigmaId].index_unity));
-		StartCoroutine(sl.loadEnigma (4));
+		QuerySceneLoaderEvent query = new QuerySceneLoaderEvent ();
+		EventManager.instance.Raise (query);
+		sl = query.sceneLoader;
+		currentEnigmaId = 0;
+		foreach (EnigmaData ed in enigmaDataList) {
+			Debug.Log ("EnigmaSequenceManager, nom d'énigme : " + ed.nom);
+		}
+		StartCoroutine(sl.loadEnigma (enigmaDataList[currentEnigmaId].index_unity));
+		//StartCoroutine(sl.loadEnigma (1));
 	}
 	
 	// Update is called once per frame
@@ -32,23 +40,28 @@ public class EnigmaSequenceManager : MonoBehaviour {
 		
 	}
 
+	void OnDestroy(){
+		EventManager.instance.RemoveListener<RequestNextEnigmaEvent> (loadNextEnigma);
+		EventManager.instance.RemoveListener<RequestPreviousEnigmaEvent> (loadPreviousEnigma);
+		EventManager.instance.RemoveListener<QueryCurrentEnigmaDataEvent> (getCurrentEnigmaData);
+	}
+
 	//arguments temporaire pour test 
 	public void updateEnigmaSequence(Skill _skill){
 		skill = _skill;
 		Debug.Log ("update enigma data : " + skill.name);
 		GameObject titleGO = GameObject.Find ("Title");
-		titleGO.GetComponent<Text> ().text += skill.name;
 		updateEnigmaList ();
-		foreach (EnigmaData ed in enigmaDataList) {
-			Debug.Log ("EnigmaSequenceManager, nom d'énigme : " + ed.nom);
-		}
+
 
 	}
 
 	public void updateEnigmaList(){
+		Debug.Log ("update enigma list : " + skill.name);
 		QueryEnigmaListEvent query = new QueryEnigmaListEvent (skill);
 		EventManager.instance.Raise (query);
 		enigmaDataList = query.enigmaList;
+		Debug.Log ("Enigma data list finished loading");
 	}
 
 	//récupère un objet représentant les datas d'une énigme à partir de son index unity
@@ -77,24 +90,49 @@ public class EnigmaSequenceManager : MonoBehaviour {
 
 	public int getNextEnigmaId(){
 		int nextId = currentEnigmaId + 1; 
-		if (nextId >= enigmaDataList.Count ()) {
+		if (nextId >= enigmaDataList.Count) {
 			throw new InvalidOperationException ("This was the last enigma");
 		} else {
 			return nextId;
 		}
 	}
 
-	public void loadNextEnigma(){
-		Debug.Log ("EnigmaSequenceManager : Load Next Enigme");
+	public void loadNextEnigma(RequestNextEnigmaEvent ev){
 		try {
 			int nextId = getNextEnigmaId();
-			sl.unloadEnigma(enigmaDataList[currentEnigmaId].index_unity);
-			sl.loadEnigma(enigmaDataList[nextId].index_unity);
+			StartCoroutine(sl.unloadEnigma(enigmaDataList[currentEnigmaId].index_unity));
+			StartCoroutine(sl.loadEnigma(enigmaDataList[nextId].index_unity));
 			currentEnigmaId = nextId;
 		} catch (InvalidOperationException e){
 			Debug.Log (e.Message);
-			EventManager.instance.Raise (new RequestPreviousSceneEvent("EnigmaSequenceScene",0));
+			//EventManager.instance.Raise (new RequestPreviousSceneEvent("EnigmaSequenceScene",0));
 		}
 	}
+
+	public int getPreviousEnigmaId(){
+		int nextId = currentEnigmaId - 1; 
+		if (nextId < 0) {
+			throw new InvalidOperationException ("This was the first enigma");
+		} else {
+			return nextId;
+		}
+	}
+
+	public void loadPreviousEnigma(RequestPreviousEnigmaEvent ev){
+		try {
+			int previousId = getPreviousEnigmaId();
+			StartCoroutine(sl.unloadEnigma(enigmaDataList[currentEnigmaId].index_unity));
+			StartCoroutine(sl.loadEnigma(enigmaDataList[previousId].index_unity));
+			currentEnigmaId = previousId;
+		} catch (InvalidOperationException e){
+			Debug.Log (e.Message);
+			//EventManager.instance.Raise (new RequestPreviousSceneEvent("EnigmaSequenceScene",0));
+		}
+	}
+
+	public void getCurrentEnigmaData(QueryCurrentEnigmaDataEvent e){
+		e.enigmaData = enigmaDataList [currentEnigmaId];
+	}
+
 		
 }

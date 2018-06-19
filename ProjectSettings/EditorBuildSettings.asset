@@ -18,8 +18,17 @@ EditorBuildSettings:
     path: Assets/Scenes/Menus/EnigmaSequenceScene.unity
     guid: c8d07a90ca50a4511a2ecf912aec99c9
   - enabled: 1
+    path: Assets/Scenes/Enigmes/Enigma1.unity
+    guid: 3a546b351217b472393a327cca9184e4
+  - enabled: 1
+    path: Assets/Scenes/Enigmes/Enigma2.unity
+    guid: 9ea1a099427474b01bdd72144d6688f3
+  - enabled: 1
+    path: Assets/Scenes/Enigmes/Enigma3.unity
+    guid: 994772eabcb7948efbe9876d6d104ca4
+  - enabled: 1
     path: Assets/Scenes/Enigmes/Enigma4.unity
     guid: 35354fffc38e446cdaab3d407930b1b5
-  - enabled: 1
-    path: Assets/Scenes/Enigmes/Enigma5.unity
+  - enabled: 0
+    path: Assets/__DELETED_GUID_Trash/b589934ad5f4345aa943e79b21a66958
     guid: b589934ad5f4345aa943e79b21a66958
