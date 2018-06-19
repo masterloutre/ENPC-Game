@@ -32,7 +32,6 @@ public class QueryPlayerManagerEvent : GameEvent {
 		playerManager = null;
 	}
 }
-	
 
 public class QuerySceneLoaderEvent : GameEvent {
 	public SceneLoader sceneLoader;
@@ -50,16 +49,6 @@ public class QuerySkillListEvent : GameEvent {
 	}
 }
 
-public class QueryEnigmaListEvent : GameEvent {
-	public List<EnigmaData> enigmaList;
-	public Skill skill;
-
-	public QueryEnigmaListEvent(Skill _skill){
-		enigmaList = null;
-		skill = _skill;
-	}
-}
-
 public class RequestPreviousSceneEvent : GameEvent {
 	public string currentSceneName;
 	public int choiceId;
@@ -69,23 +58,66 @@ public class RequestPreviousSceneEvent : GameEvent {
 		choiceId = _choiceId;
 	}
 }
+public class QueryEnigmaListEvent : GameEvent
+{
+    public List<EnigmaData> enigmaList;
+    public Skill skill;
 
-public class RequestNextEnigmaEvent : GameEvent {
-
-	public RequestNextEnigmaEvent(){
-	}
+    public QueryEnigmaListEvent(Skill _skill)
+    {
+        enigmaList = null;
+        skill = _skill;
+    }
 }
 
-public class RequestPreviousEnigmaEvent : GameEvent {
 
-	public RequestPreviousEnigmaEvent(){
-	}
+public class RequestNextEnigmaEvent : GameEvent
+{
+
+    public RequestNextEnigmaEvent()
+    {
+    }
 }
 
-public class QueryCurrentEnigmaDataEvent: GameEvent {
-	public EnigmaData enigmaData;
-	public QueryCurrentEnigmaDataEvent(){
-		enigmaData = null;
-	}
+public class RequestPreviousEnigmaEvent : GameEvent
+{
+
+    public RequestPreviousEnigmaEvent()
+    {
+    }
+}
+
+public class QueryCurrentEnigmaDataEvent : GameEvent
+{
+    public EnigmaData enigmaData;
+    public QueryCurrentEnigmaDataEvent()
+    {
+        enigmaData = null;
+    }
+}
+
+
+public class RequestNextQuestionEvent : GameEvent
+{
+    public string currentSceneName;
+    public int choiceId;
+
+    public RequestNextQuestionEvent(string _currentSceneName, int _choiceId)
+    {
+        currentSceneName = _currentSceneName;
+        choiceId = _choiceId;
+    }
+}
+
+public class RequestSelectionEvent : GameEvent
+{
+    public string currentSceneName;
+    public int choiceId;
+
+    public RequestSelectionEvent(string _currentSceneName, int _choiceId)
+    {
+        currentSceneName = _currentSceneName;
+        choiceId = _choiceId;
+    }
 }
 

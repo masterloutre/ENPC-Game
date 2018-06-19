@@ -11,19 +11,19 @@ public class DisplayControl : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         
-        enigmes = GameObject.Find("Enigmes Panel");
+        //enigmes = GameObject.Find("Enigmes Panel");
 
-        indexcurrentenigma = 0;
-        maxenigma = enigmes.transform.childCount;
+        //indexcurrentenigma = 0;
+        //maxenigma = enigmes.transform.childCount;
 
-        for (indexcurrentenigma =0;indexcurrentenigma< enigmes.transform.childCount; indexcurrentenigma++)
-        {
-            print(enigmes.transform.GetChild(indexcurrentenigma).name);
-            enigmes.transform.GetChild(indexcurrentenigma).transform.gameObject.SetActive(false);
-        }
-        indexcurrentenigma = 3;//change to numero de l'enigme par où on entre
-        print(enigmes.transform.GetChild(indexcurrentenigma).name);
-        enigmes.transform.GetChild(indexcurrentenigma).transform.gameObject.SetActive(true);
+        //for (indexcurrentenigma =0;indexcurrentenigma< enigmes.transform.childCount; indexcurrentenigma++)
+        //{
+        //    print(enigmes.transform.GetChild(indexcurrentenigma).name);
+        //    enigmes.transform.GetChild(indexcurrentenigma).transform.gameObject.SetActive(false);
+        //}
+        //indexcurrentenigma = 3;//change to numero de l'enigme par où on entre
+        //print(enigmes.transform.GetChild(indexcurrentenigma).name);
+        //enigmes.transform.GetChild(indexcurrentenigma).transform.gameObject.SetActive(true);
     }
 	
 	// Update is called once per frame

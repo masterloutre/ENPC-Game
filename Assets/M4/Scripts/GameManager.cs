@@ -58,8 +58,8 @@ public class GameManager : MonoBehaviour {
 	public void enigmaCallValidation(){
 		if (EnigmaList [currentEnigmaIndex].GetComponentInChildren<InputAnswer> () != null)
 			EnigmaList [currentEnigmaIndex].GetComponentInChildren<InputAnswer> ().validation ();
-		else if (EnigmaList [currentEnigmaIndex].GetComponentInChildren<QCM_Answer> () != null)
-			EnigmaList [currentEnigmaIndex].GetComponentInChildren<QCM_Answer> ().validation ();
+		else if (EnigmaList [currentEnigmaIndex].GetComponentInChildren<AlgoAnswer> () != null)
+			EnigmaList [currentEnigmaIndex].GetComponentInChildren<AlgoAnswer> ().validation ();
 	}
 
 

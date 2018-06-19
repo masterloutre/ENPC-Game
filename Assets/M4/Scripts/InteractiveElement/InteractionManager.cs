@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InteractionManager : MonoBehaviour {
 
@@ -10,8 +11,8 @@ public class InteractionManager : MonoBehaviour {
 	public void InfoChangeState(GameObject go){
 		go.SetActive (!go.activeSelf);
 	}
-
-	public void zoomOnHover(GameObject go){
+    
+public void zoomOnHover(GameObject go){
         Vector3 res = go.transform.localScale;
         res.Scale(new Vector3(coeffHover, coeffHover, coeffHover));
         go.transform.localScale=res;

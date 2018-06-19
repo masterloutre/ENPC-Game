@@ -77,7 +77,7 @@ public class Enigma : MonoBehaviour {
         print("calling validation");
         if (dataGO.GetComponentInChildren<InputAnswer>() != null)
             dataGO.GetComponentInChildren<InputAnswer>().validation(); // méthode de validation spécifique au script InputAnswer
-        else if (dataGO.GetComponentInChildren<QCM_Answer>() != null)
-            dataGO.GetComponentInChildren<QCM_Answer>().validation(); // méthode de validation spécifique au script QCM_Answer
+        else if (dataGO.GetComponentInChildren<AlgoAnswer>() != null)
+            dataGO.GetComponentInChildren<AlgoAnswer>().validation(); // méthode de validation spécifique au script QCM_Answer
     }
 }
