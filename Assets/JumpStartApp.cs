@@ -8,9 +8,11 @@ public class JumpStartApp : MonoBehaviour {
 
 	// Use this for initialization
 	public void Awake() {
-		if(FindObjectsOfType<GlobalManager>().Length == 0){
+		if (FindObjectsOfType<GlobalManager> ().Length == 0) {
 			Debug.Log ("Ap needs to jump start!!!");
-			Instantiate (appPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+			Instantiate (appPrefab, new Vector3 (0, 0, 0), Quaternion.identity);
+			Destroy (gameObject);
+		} else {
 			Destroy (gameObject);
 		}
 	}

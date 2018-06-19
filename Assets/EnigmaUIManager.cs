@@ -34,12 +34,10 @@ public class EnigmaUIManager : MonoBehaviour {
 	}
 
 	void fillEnigmaData(){
-		Debug.Log("GAME OBJECT : " + GameObject.Find ("Enigma Data/Enigma Title") );
-		Debug.Log("ENIGMA : " + enigma );
 		GameObject.Find ("Enigma Data/Enigma Title").GetComponent<Text>().text = enigma.nom;
 		EnigmaType type = (EnigmaType)enigma.type;
 		GameObject.Find ("Enigma Data/Enigma Type").GetComponent<Text>().text = "Type d'énigme : " + type;
 		EnigmaDifficulty difficulty = (EnigmaDifficulty)enigma.difficulte;
-		GameObject.Find ("Enigma Difficulty").GetComponent<Text>().text = "Difficulté de l'énigme : " + difficulty;
+		GameObject.Find ("Enigma Data/Enigma Difficulty").GetComponent<Text>().text = "Difficulté de l'énigme : " + difficulty;
 	}
 }
