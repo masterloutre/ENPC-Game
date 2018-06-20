@@ -120,14 +120,14 @@ public class RequestSelectionEvent : GameEvent
     }
 }
 
-public class GOButtonPressedEvent{
+public class GOButtonPressedEvent : GameEvent{
 	public GOButtonPressedEvent(){}
 }
 
-public class iButtonPressedEvent{
+public class iButtonPressedEvent : GameEvent{
 	public iButtonPressedEvent(){}
 }
 
-public class targetButtonPressedEvent{
+public class targetButtonPressedEvent : GameEvent{
 	public targetButtonPressedEvent(){}
 }
