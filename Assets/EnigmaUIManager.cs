@@ -22,6 +22,16 @@ public class EnigmaUIManager : MonoBehaviour {
 	void Update () {
 	}
 
+	void fillEnigmaData(){
+		GameObject.Find ("Enigma Data/Enigma Title").GetComponent<Text>().text = enigma.nom;
+		EnigmaType type = (EnigmaType)enigma.type;
+		GameObject.Find ("Enigma Data/Enigma Type").GetComponent<Text>().text = "Type d'énigme : " + type;
+		EnigmaDifficulty difficulty = (EnigmaDifficulty)enigma.difficulte;
+		GameObject.Find ("Enigma Data/Enigma Difficulty").GetComponent<Text>().text = "Difficulté de l'énigme : " + difficulty;
+	}
+
+	//EVENTS BUTTONS//
+
 	public void nextEnigma(){
 		EventManager.instance.Raise (new RequestNextEnigmaEvent ());
 	}
@@ -30,14 +40,17 @@ public class EnigmaUIManager : MonoBehaviour {
 		EventManager.instance.Raise (new RequestPreviousEnigmaEvent ());
 	}
 
-	public void submitResult(){
+	public void GOButtonPressed(){
+		EventManager.instance.Raise (new GOButtonPressedEvent ());
 	}
 
-	void fillEnigmaData(){
-		GameObject.Find ("Enigma Data/Enigma Title").GetComponent<Text>().text = enigma.nom;
-		EnigmaType type = (EnigmaType)enigma.type;
-		GameObject.Find ("Enigma Data/Enigma Type").GetComponent<Text>().text = "Type d'énigme : " + type;
-		EnigmaDifficulty difficulty = (EnigmaDifficulty)enigma.difficulte;
-		GameObject.Find ("Enigma Data/Enigma Difficulty").GetComponent<Text>().text = "Difficulté de l'énigme : " + difficulty;
+	public void iButtonPressed(){
+		EventManager.instance.Raise (new iButtonPressedEvent ());
 	}
+
+	public void targetButtonPressed(){
+		EventManager.instance.Raise (new targetButtonPressedEvent ());
+	}
+
+
 }

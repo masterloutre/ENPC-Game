@@ -73,7 +73,6 @@ public class QueryEnigmaListEvent : GameEvent
 
 public class RequestNextEnigmaEvent : GameEvent
 {
-
     public RequestNextEnigmaEvent()
     {
     }
@@ -121,3 +120,14 @@ public class RequestSelectionEvent : GameEvent
     }
 }
 
+public class GOButtonPressedEvent{
+	public GOButtonPressedEvent(){}
+}
+
+public class iButtonPressedEvent{
+	public iButtonPressedEvent(){}
+}
+
+public class targetButtonPressedEvent{
+	public targetButtonPressedEvent(){}
+}
