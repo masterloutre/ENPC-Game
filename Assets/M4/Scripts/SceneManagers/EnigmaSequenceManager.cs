@@ -34,8 +34,8 @@ public class EnigmaSequenceManager : MonoBehaviour {
 		foreach (EnigmaData ed in enigmaDataList) {
 			Debug.Log ("EnigmaSequenceManager, nom d'énigme : " + ed.nom);
 		}
-		//StartCoroutine(sl.loadEnigma (enigmaDataList[currentEnigmaId].index_unity));
-		StartCoroutine(sl.loadEnigma (1));
+		StartCoroutine(sl.loadEnigma (enigmaDataList[currentEnigmaId].index_unity));
+		//StartCoroutine(sl.loadEnigma (1));
 	}
 	
 	// Update is called once per frame
