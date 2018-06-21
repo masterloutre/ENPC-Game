@@ -51,6 +51,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\EnigmaSceneManager.cs" />
      <Compile Include="Assets\EnigmaUIManager.cs" />
      <Compile Include="Assets\JumpStartApp.cs" />
      <Compile Include="Assets\M4\Scripts\AlgoAnswer.cs" />
@@ -63,6 +64,8 @@
      <Compile Include="Assets\M4\Scripts\Draggable.cs" />
      <Compile Include="Assets\M4\Scripts\Dropzone.cs" />
      <Compile Include="Assets\M4\Scripts\Dynamic UI\PlayerInfoText.cs" />
+     <Compile Include="Assets\M4\Scripts\Enigma Logic\QCMValidation.cs" />
+     <Compile Include="Assets\M4\Scripts\Enigma Logic\ValidationMethod.cs" />
      <Compile Include="Assets\M4\Scripts\Enigma.cs" />
      <Compile Include="Assets\M4\Scripts\EnigmaEnums.cs" />
      <Compile Include="Assets\M4\Scripts\EnigmaSequence.cs" />
