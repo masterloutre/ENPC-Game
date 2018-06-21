@@ -6,6 +6,7 @@
 
 //Super classe des game events
 using System.Collections.Generic;
+using UnityEngine;
 
 
 public class GameEvent
@@ -130,4 +131,23 @@ public class iButtonPressedEvent : GameEvent{
 
 public class targetButtonPressedEvent : GameEvent{
 	public targetButtonPressedEvent(){}
+}
+
+public class EnigmaSubmittedEvent : GameEvent{
+	public EnigmaSubmittedEvent(){
+	}
+}
+
+public class QueryEnigmaScoreEvent : GameEvent{
+	public bool enigmaSuccess;
+	public QueryEnigmaScoreEvent(){
+		enigmaSuccess = false;
+	}
+}
+
+public class QueryPopUpQuestionsScoreEvent : GameEvent{
+	public float score;
+	public QueryPopUpQuestionsScoreEvent(){
+		score = 0;
+	}
 }

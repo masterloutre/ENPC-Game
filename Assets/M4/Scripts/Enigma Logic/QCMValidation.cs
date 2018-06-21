@@ -53,8 +53,6 @@ public class QCMValidation : MonoBehaviour, ValidationMethod
 		foreach (GameObject go in slotsList) {
 			Item it = go.GetComponentInChildren<Item>();
 			ItemSlot it_s = go.GetComponentInChildren<ItemSlot> ();
-			print ("item = " + it);
-			print ("itemSlot = " + it_s);
 
 			if (it.item_id != it_s.expected_id) {
 				Debug.Log (it.item_id + " est au mauvais endroit(" + it_s.expected_id + ")");

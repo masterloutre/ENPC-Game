@@ -9,20 +9,27 @@ public class EnigmaSceneManager : MonoBehaviour {
 	// Use this for initialization
 	void Awake () {
 		EventManager.instance.AddListener<GOButtonPressedEvent> (submitResult);
+		EventManager.instance.AddListener<QueryEnigmaScoreEvent> (sendScore);
 		validator = gameObject.GetComponent<ValidationMethod>();
 	}
 
 	void onDestroy () {
 		EventManager.instance.RemoveListener<GOButtonPressedEvent> (submitResult);
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
+		EventManager.instance.RemoveListener<QueryEnigmaScoreEvent> (sendScore);
+
 	}
 
 	public void submitResult(GOButtonPressedEvent e){
-		print ("Go button pressed");
 		success = validator.answerIsRight ();
+		enigmaSubmitted ();
+	}
+
+	public void enigmaSubmitted(){
+		//traité dans PopUpQuestionManager et EnigmaSequenceManager
+		EventManager.instance.Raise (new EnigmaSubmittedEvent ());
+	}
+
+	public void sendScore(QueryEnigmaScoreEvent e){
+		e.enigmaSuccess = success;
 	}
 }
