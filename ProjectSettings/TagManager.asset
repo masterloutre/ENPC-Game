@@ -9,6 +9,8 @@ TagManager:
   - MaterialButtonLayer
   - Slot
   - DestinationSlot
+  - Input Param
+  - Input Text
   layers:
   - Default
   - TransparentFX
