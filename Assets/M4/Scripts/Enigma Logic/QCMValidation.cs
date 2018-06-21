@@ -32,7 +32,7 @@ public class QCMValidation : MonoBehaviour, ValidationMethod
 		return isRightAnswer;
 	}
 
-	public bool checkEmptySlots(){
+	bool checkEmptySlots(){
 		bool returnCheck = true;
 		foreach( GameObject go in slotsList){
 
@@ -48,7 +48,7 @@ public class QCMValidation : MonoBehaviour, ValidationMethod
 	}
 
 
-	public bool checkAnswers(){
+	bool checkAnswers(){
 		bool returnCheck = true;
 		foreach (GameObject go in slotsList) {
 			Item it = go.GetComponentInChildren<Item>();
