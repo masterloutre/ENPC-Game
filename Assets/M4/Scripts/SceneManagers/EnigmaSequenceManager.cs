@@ -12,6 +12,8 @@ public class EnigmaSequenceManager : MonoBehaviour {
 	public Skill skill;
 	private SceneLoader sl;
 	private int currentEnigmaId;
+	private bool currentEnigmaSuccess;
+	private float currentEnigmaPopUpQuestionsScore;
 
 
 	void Awake(){
@@ -19,6 +21,7 @@ public class EnigmaSequenceManager : MonoBehaviour {
 		EventManager.instance.AddListener<RequestNextEnigmaEvent> (loadNextEnigma);
 		EventManager.instance.AddListener<RequestPreviousEnigmaEvent> (loadPreviousEnigma);
 		EventManager.instance.AddListener<QueryCurrentEnigmaDataEvent> (getCurrentEnigmaData);
+		EventManager.instance.AddListener<EnigmaSubmittedEvent> (getEnigmaScore);
 
 	}
 
@@ -44,6 +47,7 @@ public class EnigmaSequenceManager : MonoBehaviour {
 		EventManager.instance.RemoveListener<RequestNextEnigmaEvent> (loadNextEnigma);
 		EventManager.instance.RemoveListener<RequestPreviousEnigmaEvent> (loadPreviousEnigma);
 		EventManager.instance.RemoveListener<QueryCurrentEnigmaDataEvent> (getCurrentEnigmaData);
+		EventManager.instance.RemoveListener<EnigmaSubmittedEvent> (getEnigmaScore);
 	}
 
 	//arguments temporaire pour test 
@@ -134,5 +138,17 @@ public class EnigmaSequenceManager : MonoBehaviour {
 		e.enigmaData = enigmaDataList [currentEnigmaId];
 	}
 
+	public void getEnigmaScore(EnigmaSubmittedEvent e){
+		//traité dans EnigmaSceneManager
+		QueryEnigmaScoreEvent query = new QueryEnigmaScoreEvent ();
+		EventManager.instance.Raise (query);
+		currentEnigmaSuccess = query.enigmaSuccess;
+		if (currentEnigmaSuccess) {
+			print("ENIGMA VALIDATED !!!!!!!!!!!!!");
+		} else {
+			print("RESULT FASLE !!!!!!!!!!");
+		}
+
+	}
 		
 }

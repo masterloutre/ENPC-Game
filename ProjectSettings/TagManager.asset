@@ -7,6 +7,8 @@ TagManager:
   - Skill
   - Skill Panel
   - MaterialButtonLayer
+  - Slot
+  - DestinationSlot
   layers:
   - Default
   - TransparentFX

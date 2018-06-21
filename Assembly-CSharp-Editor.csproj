@@ -10,7 +10,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace>
     </RootNamespace>
-    <ProjectGuid>{52ED5A3B-0990-EDC7-020C-A424A0DB5F00}</ProjectGuid>
+    <ProjectGuid>{13B56976-44A7-84A4-3D50-30BC2F8511C8}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp-Editor</AssemblyName>
@@ -69,10 +69,10 @@
     <Compile Include="Assets\MaterialUI\Editor\SnapButtonToTextEditor.cs" />
     <Compile Include="Assets\MaterialUI\Editor\TexturePostProcessor.cs" />
     <Reference Include="UnityEditor.StandardEvents">
-      <HintPath>C:/Users/Thyvong/Documents/stage/ENPC WIP/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
+      <HintPath>C:/Users/Thyvong/Documents/stage/ENPC pour merge des trucs/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
     </Reference>
     <Reference Include="Unity.PackageManagerUI.Editor">
-      <HintPath>C:/Users/Thyvong/Documents/stage/ENPC WIP/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
+      <HintPath>C:/Users/Thyvong/Documents/stage/ENPC pour merge des trucs/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
@@ -365,7 +365,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp.csproj">
-      <Project>{F5B4CC8E-4AA5-CD2C-827C-7B196ABA9DF2}</Project>
+      <Project>{4EB1DDEF-262C-19F9-837F-1AD2ACD92144}</Project>
       <Name>Assembly-CSharp</Name>
     </ProjectReference>
   </ItemGroup>

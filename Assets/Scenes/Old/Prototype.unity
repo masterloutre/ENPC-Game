@@ -322,11 +322,6 @@ RectTransform:
   m_PrefabParentObject: {fileID: 224837218496374188, guid: 99434dc1eedcd5c429fb96f763837af6,
     type: 2}
   m_PrefabInternal: {fileID: 6027171}
---- !u!1 &6027173 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1823457911735880, guid: 99434dc1eedcd5c429fb96f763837af6,
-    type: 2}
-  m_PrefabInternal: {fileID: 6027171}
 --- !u!1 &6863538
 GameObject:
   m_ObjectHideFlags: 0
@@ -1223,10 +1218,10 @@ RectTransform:
   m_Father: {fileID: 1497892171}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 5.7745, y: -5.7745}
-  m_SizeDelta: {x: 10, y: 10}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!225 &89902837
 CanvasGroup:
@@ -1321,11 +1316,6 @@ RectTransform:
   m_PrefabParentObject: {fileID: 224017805741391544, guid: 015eac73b64f2f64ea89cb99ffd96a96,
     type: 2}
   m_PrefabInternal: {fileID: 1421734628}
---- !u!1 &104584065 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1397547499411932, guid: 03dfbee170f9a7240afabbeeca1ca455,
-    type: 2}
-  m_PrefabInternal: {fileID: 1055304641}
 --- !u!1001 &106535279
 Prefab:
   m_ObjectHideFlags: 0
@@ -2132,10 +2122,10 @@ RectTransform:
   m_Father: {fileID: 851348771}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 5.7745, y: -5.7745}
-  m_SizeDelta: {x: 10, y: 10}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!225 &226199577
 CanvasGroup:
@@ -2520,6 +2510,7 @@ Camera:
   m_TargetEye: 3
   m_HDR: 0
   m_AllowMSAA: 1
+  m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
@@ -2616,11 +2607,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 269838310}
---- !u!1 &273888688 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1043222254873614, guid: 0430d53d2a35355439743d60f6a1b885,
-    type: 2}
-  m_PrefabInternal: {fileID: 2095726113}
 --- !u!1 &275842297
 GameObject:
   m_ObjectHideFlags: 0
@@ -2902,12 +2888,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 784df4c6aab031c4f8ee24a55566a7a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slotsList:
-  - {fileID: 830401659}
-  - {fileID: 663645734}
-  - {fileID: 588293550}
-  victoryTimeline: {fileID: 1527836114}
-  errorTimeline: {fileID: 6027173}
 --- !u!1 &305550246
 GameObject:
   m_ObjectHideFlags: 0
@@ -3744,11 +3724,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 366729511}
---- !u!1 &366813267 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1043222254873614, guid: 0430d53d2a35355439743d60f6a1b885,
-    type: 2}
-  m_PrefabInternal: {fileID: 1772483542}
 --- !u!1 &374269689
 GameObject:
   m_ObjectHideFlags: 0
@@ -3883,10 +3858,10 @@ RectTransform:
   m_Father: {fileID: 1261705366}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 15, y: -15}
+  m_SizeDelta: {x: 30, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!225 &413452695
 CanvasGroup:
@@ -4208,10 +4183,10 @@ RectTransform:
   m_Father: {fileID: 1261705366}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 15, y: -45}
+  m_SizeDelta: {x: 30, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!225 &473298309
 CanvasGroup:
@@ -4553,11 +4528,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 784df4c6aab031c4f8ee24a55566a7a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slotsList:
-  - {fileID: 366813267}
-  - {fileID: 273888688}
-  victoryTimeline: {fileID: 1384888752}
-  errorTimeline: {fileID: 858031913}
 --- !u!1 &519760330
 GameObject:
   m_ObjectHideFlags: 0
@@ -5073,7 +5043,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &581002868
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5167,9 +5137,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac761d2a45c504b439978fcdc6ead893, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enigmaId: 0
   enigmaTitle: 3 Ballons
   enigmaType: 0
   enigmaDifficulty: 0
+  enigmaMaxAttempts: 1
+  time: 0
   enigmaDescription: Associez chaque ballon avec la valeur de pression qui lui correspond.
   enigmaEstimatedTime: 5:00
 --- !u!1001 &588293548
@@ -5303,11 +5276,6 @@ Prefab:
 --- !u!224 &588293549 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 224533349012110156, guid: 03dfbee170f9a7240afabbeeca1ca455,
-    type: 2}
-  m_PrefabInternal: {fileID: 588293548}
---- !u!1 &588293550 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1397547499411932, guid: 03dfbee170f9a7240afabbeeca1ca455,
     type: 2}
   m_PrefabInternal: {fileID: 588293548}
 --- !u!1 &595311812
@@ -5679,32 +5647,32 @@ Prefab:
     - target: {fileID: 224679258247226758, guid: c033cd5fa2f17194db981f2d5da8d374,
         type: 2}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224679258247226758, guid: c033cd5fa2f17194db981f2d5da8d374,
         type: 2}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224679258247226758, guid: c033cd5fa2f17194db981f2d5da8d374,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 5.7745
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224679258247226758, guid: c033cd5fa2f17194db981f2d5da8d374,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -5.7745
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224679258247226758, guid: c033cd5fa2f17194db981f2d5da8d374,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: 10
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224679258247226758, guid: c033cd5fa2f17194db981f2d5da8d374,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 10
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c033cd5fa2f17194db981f2d5da8d374, type: 2}
@@ -5946,11 +5914,6 @@ RectTransform:
   m_PrefabParentObject: {fileID: 224533349012110156, guid: 03dfbee170f9a7240afabbeeca1ca455,
     type: 2}
   m_PrefabInternal: {fileID: 663645732}
---- !u!1 &663645734 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1397547499411932, guid: 03dfbee170f9a7240afabbeeca1ca455,
-    type: 2}
-  m_PrefabInternal: {fileID: 663645732}
 --- !u!1 &666322741
 GameObject:
   m_ObjectHideFlags: 0
@@ -6123,10 +6086,10 @@ RectTransform:
   m_Father: {fileID: 324690149}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 15, y: -15}
+  m_SizeDelta: {x: 30, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!225 &678381783
 CanvasGroup:
@@ -6447,11 +6410,6 @@ CanvasRenderer:
     type: 2}
   m_PrefabInternal: {fileID: 1764808024}
   m_GameObject: {fileID: 699780340}
---- !u!1 &701289672 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1823457911735880, guid: 99434dc1eedcd5c429fb96f763837af6,
-    type: 2}
-  m_PrefabInternal: {fileID: 1151852536}
 --- !u!1 &716172424
 GameObject:
   m_ObjectHideFlags: 0
@@ -7480,11 +7438,6 @@ RectTransform:
   m_PrefabParentObject: {fileID: 224533349012110156, guid: 03dfbee170f9a7240afabbeeca1ca455,
     type: 2}
   m_PrefabInternal: {fileID: 830401657}
---- !u!1 &830401659 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1397547499411932, guid: 03dfbee170f9a7240afabbeeca1ca455,
-    type: 2}
-  m_PrefabInternal: {fileID: 830401657}
 --- !u!1 &831827212
 GameObject:
   m_ObjectHideFlags: 0
@@ -7660,11 +7613,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 851348770}
---- !u!1 &858031913 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1823457911735880, guid: 99434dc1eedcd5c429fb96f763837af6,
-    type: 2}
-  m_PrefabInternal: {fileID: 106535279}
 --- !u!1 &859365173
 GameObject:
   m_ObjectHideFlags: 0
@@ -7700,10 +7648,10 @@ RectTransform:
   m_Father: {fileID: 1436902024}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 5.7745, y: -5.7745}
-  m_SizeDelta: {x: 10, y: 10}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!225 &859365175
 CanvasGroup:
@@ -9618,9 +9566,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac761d2a45c504b439978fcdc6ead893, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enigmaId: 0
   enigmaTitle: Bande de caoutchouc
   enigmaType: 2
   enigmaDifficulty: 0
+  enigmaMaxAttempts: 1
+  time: 0
   enigmaDescription: "Quel est le poids (en Newtons) qui doit \xEAtre exerc\xE9 sur
     la bande en caoutchouc pour que la cage atteigne l'\xE9tage d\xE9sir\xE9?\r\nAttention
     au poids de l'ascenseur !"
@@ -11022,7 +10973,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1097101790
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11114,9 +11065,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac761d2a45c504b439978fcdc6ead893, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enigmaId: 0
   enigmaTitle: Gonflage de ballons
   enigmaType: 1
   enigmaDifficulty: 1
+  enigmaMaxAttempts: 1
+  time: 0
   enigmaDescription: "Rentrez la bonne s\xE9quence d'actions afin de permettre aux
     2 personnes d'atteindre le c\xF4t\xE9 droit de l'\xE9cran."
   enigmaEstimatedTime: 5:00
@@ -11132,7 +11086,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   temps: 0
-  bonnes_reponses: 0
+  enigmaId: 0
+  tentatives: 0
+  points: 0
+  aideExt: 0
+  enigmaMaxAttempts: 0
+  enigmeReussie: 0
+  save:
+    scores: []
+  enigmaTimesDone: 0
+  sceneToLoad: 0
+  enigmaDatas: []
 --- !u!1001 &1109808744
 Prefab:
   m_ObjectHideFlags: 0
@@ -12569,10 +12533,10 @@ RectTransform:
   m_Father: {fileID: 2085128830}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 5.7745, y: -5.7745}
-  m_SizeDelta: {x: 10, y: 10}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!225 &1268534729
 CanvasGroup:
@@ -13287,11 +13251,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &1384888752 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1903387401713546, guid: f8b44495dc7c3a74cbc361fdf103b13c,
-    type: 2}
-  m_PrefabInternal: {fileID: 1913395017}
 --- !u!1 &1389180033
 GameObject:
   m_ObjectHideFlags: 0
@@ -14221,9 +14180,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac761d2a45c504b439978fcdc6ead893, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enigmaId: 0
   enigmaTitle: Cuve d'eau 2 (test)
   enigmaType: 2
   enigmaDifficulty: 1
+  enigmaMaxAttempts: 1
+  time: 0
   enigmaDescription: Bla bla description
   enigmaEstimatedTime: 5:00
 --- !u!1 &1491181060
@@ -14411,12 +14373,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 784df4c6aab031c4f8ee24a55566a7a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slotsList:
-  - {fileID: 104584065}
-  - {fileID: 348736779}
-  - {fileID: 1529533143}
-  victoryTimeline: {fileID: 2115117267}
-  errorTimeline: {fileID: 701289672}
 --- !u!1001 &1527836112
 Prefab:
   m_ObjectHideFlags: 0
@@ -14520,11 +14476,6 @@ Prefab:
 --- !u!224 &1527836113 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 224285862527594298, guid: f8b44495dc7c3a74cbc361fdf103b13c,
-    type: 2}
-  m_PrefabInternal: {fileID: 1527836112}
---- !u!1 &1527836114 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1903387401713546, guid: f8b44495dc7c3a74cbc361fdf103b13c,
     type: 2}
   m_PrefabInternal: {fileID: 1527836112}
 --- !u!1 &1529533143
@@ -14917,9 +14868,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac761d2a45c504b439978fcdc6ead893, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enigmaId: 0
   enigmaTitle: Ballons (test)
   enigmaType: 0
   enigmaDifficulty: 2
+  enigmaMaxAttempts: 1
+  time: 0
   enigmaDescription: Bla bla ballons
   enigmaEstimatedTime: 5:00
 --- !u!1 &1583637409
@@ -19659,11 +19613,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &2115117267 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1903387401713546, guid: f8b44495dc7c3a74cbc361fdf103b13c,
-    type: 2}
-  m_PrefabInternal: {fileID: 884880885}
 --- !u!1 &2115330684
 GameObject:
   m_ObjectHideFlags: 0
@@ -19910,9 +19859,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac761d2a45c504b439978fcdc6ead893, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enigmaId: 0
   enigmaTitle: "Cuve d\u2019eau"
   enigmaType: 2
   enigmaDifficulty: 2
+  enigmaMaxAttempts: 1
+  time: 0
   enigmaDescription: "Combien de temps la cuve va-t-elle mettre pour se vider afin
     que l'eau atteigne le niveau souhait\xE9?"
   enigmaEstimatedTime: 5:00
