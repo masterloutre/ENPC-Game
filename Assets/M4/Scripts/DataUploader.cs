@@ -34,7 +34,7 @@ public class DataUploader : MonoBehaviour {
         request.uploadHandler = (UploadHandler) new UploadHandlerRaw(bodyRaw);
         request.downloadHandler = (DownloadHandler) new DownloadHandlerBuffer();
         request.SetRequestHeader("Content-Type", "application/json");
-        var ans = request.Send();
+        var ans = request.SendWebRequest();
         
         print("LA REQUETE RESSEMBLE A CA: " + request);
         print("LA REPONSE RESSEMBLE A CA: " + ans);
@@ -52,7 +52,7 @@ public class DataUploader : MonoBehaviour {
         request.uploadHandler = (UploadHandler)new UploadHandlerRaw(bodyRaw);
         request.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
         request.SetRequestHeader("Content-Type", "application/json");
-        var ans = request.Send();
+        var ans = request.SendWebRequest();
         
         yield return ans;
 
@@ -69,7 +69,7 @@ public class DataUploader : MonoBehaviour {
         request.uploadHandler = (UploadHandler)new UploadHandlerRaw(bodyRaw);
         request.downloadHandler = (DownloadHandler)new DownloadHandlerBuffer();
         request.SetRequestHeader("Content-Type", "application/json");
-        var ans = request.Send();
+        var ans = request.SendWebRequest();
         print("datauploader.checklogindata lancé");
         print("LA REQUETE RESSEMBLE A CA: " + request);
         print("LA REPONSE RESSEMBLE A CA: " + ans);

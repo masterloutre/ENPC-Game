@@ -35,7 +35,6 @@ public class QCMValidation : MonoBehaviour, ValidationMethod
 	bool checkEmptySlots(){
 		bool returnCheck = true;
 		foreach( GameObject go in slotsList){
-
 			Item it = go.GetComponentInChildren<Item>();
 			if(it == null){
 				ItemSlot it_s = go.GetComponent<ItemSlot> ();

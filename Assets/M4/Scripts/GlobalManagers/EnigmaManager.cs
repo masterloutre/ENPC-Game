@@ -9,9 +9,17 @@ using System.Linq;
 public class EnigmaManager : MonoBehaviour {
 	private List<EnigmaData> enigmas;
 	private List<Skill> skills;
+    private PopupManager popm;
 
-	//instancie la liste d'énigmes 
-	public IEnumerator instanciateEnigmas(){
+    public void Start()
+    {
+        EventManager.instance.AddListener<GOButtonPressedEvent>((e) => { });
+        EventManager.instance.AddListener<iButtonPressedEvent>((e) => { });
+        EventManager.instance.AddListener<targetButtonPressedEvent>((e) => { });
+
+    }
+    //instancie la liste d'énigmes
+    public IEnumerator instanciateEnigmas(){
 		this.enigmas = new List<EnigmaData> ();
 		yield return StartCoroutine (getEnigmaData());
 		computeSkillList ();
@@ -97,10 +105,6 @@ public class EnigmaManager : MonoBehaviour {
 			}
 		}
 	}
-
-
-
-		
 }
 
 //Classe décrivant les différents prédicats de recherche dans la liste d'énigmes

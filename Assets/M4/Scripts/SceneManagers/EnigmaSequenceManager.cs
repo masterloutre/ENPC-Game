@@ -24,7 +24,7 @@ public class EnigmaSequenceManager : MonoBehaviour {
 		EventManager.instance.AddListener<EnigmaSubmittedEvent> (getEnigmaScore);
 
 	}
-
+		
 	// Use this for initialization
 	void Start () {
 		QuerySceneLoaderEvent query = new QuerySceneLoaderEvent ();

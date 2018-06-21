@@ -121,16 +121,51 @@ public class RequestSelectionEvent : GameEvent
     }
 }
 
-public class GOButtonPressedEvent : GameEvent{
-	public GOButtonPressedEvent(){}
+
+public class GOButtonPressedEvent : GameEvent {
+    public GOButtonPressedEvent(){}
 }
 
-public class iButtonPressedEvent : GameEvent{
+public class iButtonPressedEvent : GameEvent {
 	public iButtonPressedEvent(){}
 }
 
-public class targetButtonPressedEvent : GameEvent{
-	public targetButtonPressedEvent(){}
+public class targetButtonPressedEvent : GameEvent {
+    public targetButtonPressedEvent(){}
+}
+
+public class ValidationScreenEvent : GameEvent
+{
+    string answer;
+    string state;
+    int confidance;
+    public ValidationScreenEvent(string etat) { // victoire/defaite
+        state = etat;
+        answer = "none";
+        confidance = -1;
+    }
+    public ValidationScreenEvent(string etat,string ans,int certitude) // justifier
+    {
+        answer = ans;
+        state = etat;
+        confidance = certitude;
+    }
+    public ValidationScreenEvent(string etat, string ans) // correction
+    {
+        answer = ans;
+        state = etat;
+        confidance = -1;
+    }
+}
+
+public class ConfidanceErrorItemSelectionEvent : GameEvent
+{
+    public int choiceindex;
+    public ConfidanceErrorItemSelectionEvent(int indice)
+    {
+        choiceindex = indice;
+    }
+
 }
 
 public class EnigmaSubmittedEvent : GameEvent{

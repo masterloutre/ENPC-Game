@@ -100,6 +100,7 @@ public class GlobalManager : MonoBehaviour {
 			StartCoroutine(sl.loadSkillsMenu ());
 			//StartCoroutine(sl.loadEnigma (4));
 		} else if (e.currentSceneName == "SelectionScene"){
+            print(e.currentSceneName + "|" + e.choiceId);
 			Skill chosenSkill = em.getSkills () [e.choiceId];
 			StartCoroutine (sl.loadEnigmaSequence (em.getSkills()[e.choiceId]));
 		}
