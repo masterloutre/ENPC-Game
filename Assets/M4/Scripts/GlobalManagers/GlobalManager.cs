@@ -95,7 +95,7 @@ public class GlobalManager : MonoBehaviour {
 	//les coroutines ne sont peut etre pas forcément nécessaire mais on les garde pour pouvoir garder 
 	// les fct du scenenLoader avec des valeurs de retour IENumerator pour plus d'homogénéité
 	void nextScene(RequestNextSceneEvent e){
-		Debug.Log ("Next scene requested by " + e.currentSceneName);
+		//Debug.Log ("Next scene requested by " + e.currentSceneName);
 		if (e.currentSceneName == "HomeScene") {
 			StartCoroutine(sl.loadSkillsMenu ());
 			//StartCoroutine(sl.loadEnigma (4));
@@ -107,7 +107,7 @@ public class GlobalManager : MonoBehaviour {
 	}
 
 	void previousScene(RequestPreviousSceneEvent e){
-		Debug.Log ("Previous scene requested by " + e.currentSceneName);
+		//Debug.Log ("Previous scene requested by " + e.currentSceneName);
 		if (e.currentSceneName == "HomeScene") {
 			//fermer le jeu?
 		} else if (e.currentSceneName == "SelectionScene") {
