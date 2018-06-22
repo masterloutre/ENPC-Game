@@ -9,14 +9,16 @@ using System.Linq;
 public class EnigmaManager : MonoBehaviour {
 	private List<EnigmaData> enigmas;
 	private List<Skill> skills;
-    private PopupManager popm;
+
 
     public void Start()
     {
+        
         EventManager.instance.AddListener<GOButtonPressedEvent>((e) => { });
         EventManager.instance.AddListener<iButtonPressedEvent>((e) => { });
         EventManager.instance.AddListener<targetButtonPressedEvent>((e) => { });
 
+        
     }
     //instancie la liste d'énigmes
     public IEnumerator instanciateEnigmas(){
@@ -58,7 +60,10 @@ public class EnigmaManager : MonoBehaviour {
         }
     }
 
-	/* dans une autre classe maintenant -> EnigmaSequenceManager
+    
+
+    
+    /* dans une autre classe maintenant -> EnigmaSequenceManager
 	//récupère un objet représentant les datas d'une énigme à partir de son index unity
 	private EnigmaData getEnigmaByUnityIndex(int value){
 		EnigmaSearch es = new EnigmaSearch (value);
@@ -84,7 +89,7 @@ public class EnigmaManager : MonoBehaviour {
 	}
 	*/
 
-	public List<EnigmaData> getEnigmas(){
+    public List<EnigmaData> getEnigmas(){
 		return new List<EnigmaData> (enigmas);
 	}
 

@@ -23,19 +23,19 @@ public class PopupManager : MonoBehaviour {
         methodchoice = errorchoice = -1;
         state = "none";
         answerblock= answerblock = justify.transform.Find("ChoiceButtonS").gameObject;
-        EventManager.instance.AddListener<ValidationScreenEvent>((e)=> { });
+        
         EventManager.instance.AddListener<ConfidanceErrorItemSelectionEvent>(answerSelection);
 
         //configurer le prefab pour le relier à ces variables de récupération
 
     }
 
-
+    // Renvoie l'indice d'enfant du go parmi les réponses possibles du bouton cliqué
     public void answerSelected(GameObject go)
     {
         EventManager.instance.Raise(new ConfidanceErrorItemSelectionEvent(go.transform.GetSiblingIndex()));
-
     }
+    // Colorie la sélection
     public void answerSelection(ConfidanceErrorItemSelectionEvent e)
     {
         int indextocolorback=-1 ;
@@ -80,6 +80,7 @@ public class PopupManager : MonoBehaviour {
 
 
     }
+    // Activé lorsque l'on confirme une sélection, lève un event contenant la réponse choisie
     public void submit()
     {
         switch (state)
@@ -110,38 +111,65 @@ public class PopupManager : MonoBehaviour {
     }
 
     
-
-    public void justifyScreen()
+    // méthode d'affichage
+    public void updateState(string value)
     {
-        justify.SetActive(true);
-        state = "Justification";
-        answerblock = justify.transform.Find("ChoiceButtonS").gameObject;
+        if(value == "Justification" || value == "Victoire" || value == "Défaite" || value == "Correction")
+        {
+            state = value;
+            displayScreen();
+        }
+        else
+        {
+            print("[ PopupManager.updateState a crashé ] WHAT IS THAT VALUE REEEEEEEEE : " + value);
+        }
     }
 
-    public void victoryScreen()
+    public void displayScreen()
     {
-        justify.SetActive(false);
-        victory.SetActive(true);
-        state = "Victoire";
-
+        switch (state)
+        {
+            case "Justification":
+                {
+                    correct.SetActive(false);
+                    victory.SetActive(false);
+                    defeat.SetActive(false);
+                    methodchoice=errorchoice=certitudelvl=-1;
+                    justify.SetActive(true);
+                    state = "Justification";
+                    answerblock = justify.transform.Find("ChoiceButtonS").gameObject;
+                }
+                break;
+            case "Victoire":
+                {
+                    justify.SetActive(false);
+                    victory.SetActive(true);
+                    state = "Victoire";
+                }
+                break;
+            case "Défaite":
+                {
+                    justify.SetActive(false);
+                    defeat.SetActive(true);
+                    state = "Défaite";
+                }
+                break;
+            case "Correction":
+                {
+                    defeat.SetActive(false);
+                    correct.SetActive(true);
+                    state = "Correction";
+                    answerblock = correct.transform.Find("ChoiceButtonS").gameObject;
+                }
+                break;
+            default:
+                {
+                    print("REEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
+                    return;
+                }
+        }
     }
 
-    public void defeatScreen()
-    {
-        justify.SetActive(false);
-        defeat.SetActive(true);
-        state = "Défaite";
-    }
-
-    public void correctScreen()
-    {
-        defeat.SetActive(false);
-        correct.SetActive(true);
-        state = "Correction";
-        answerblock = correct.transform.Find("ChoiceButtonS").gameObject;
-    }
-
-    
     // where does it raise, in enigmauimanager
 
     //what do you do then
