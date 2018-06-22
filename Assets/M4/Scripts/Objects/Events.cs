@@ -194,6 +194,13 @@ public class QueryScoreEvent : GameEvent{
 	}
 }
 
+public class QueryTimerEvent : GameEvent{
+	public float time;
+	public QueryTimerEvent(){
+		time = 0;
+	}
+}
+
 
 public class RequestSaveScoreEvent : GameEvent{
 	public ScoreData score;

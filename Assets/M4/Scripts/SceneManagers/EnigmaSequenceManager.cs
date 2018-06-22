@@ -158,9 +158,15 @@ public class EnigmaSequenceManager : MonoBehaviour {
 	ScoreData createScore(bool success){
 		EnigmaData currentEnigma = enigmaDataList [currentEnigmaId];
 		int points = (success)? currentEnigma.score_max : 0;
-		double time = 0;
+		double time = (double)getTime();
 		bool help = false;
 		return new ScoreData (currentEnigma.id, -1, points, 1, time, help);
+	}
+
+	public float getTime(){
+		QueryTimerEvent query = new QueryTimerEvent ();
+		EventManager.instance.Raise (query);
+		return query.time;
 	}
 		
 }
