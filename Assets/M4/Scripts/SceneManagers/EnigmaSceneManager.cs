@@ -8,20 +8,23 @@ public class EnigmaSceneManager : MonoBehaviour {
     private PopupManager popm;
 	// Use this for initialization
 	void Awake () {
+		validator = null;
         popm = new PopupManager();
-
-
         EventManager.instance.AddListener<GOButtonPressedEvent> (submitResult);
+
 		EventManager.instance.AddListener<QueryEnigmaScoreEvent> (sendScore);
+        EventManager.instance.AddListener<QueryEnigmaSuccessEvent> (sendScore);
         EventManager.instance.AddListener<ValidationScreenEvent>(yourResult); // coming from PopupManager.submit() (likely from a submit button ) | Contains answer only from additional questions post-enigma
 
         validator = gameObject.GetComponent<ValidationMethod>();
+
 	}
 
 	void OnDestroy () {
 		validator = null;
 		EventManager.instance.RemoveListener<GOButtonPressedEvent> (submitResult);
 		EventManager.instance.RemoveListener<QueryEnigmaScoreEvent> (sendScore);
+        EventManager.instance.RemoveListener<QueryEnigmaSuccessEvent>(sendScore);
         EventManager.instance.RemoveListener<ValidationScreenEvent> (yourResult);
     }
 
@@ -63,7 +66,7 @@ public class EnigmaSceneManager : MonoBehaviour {
         }
 
     }
-	public void sendScore(QueryEnigmaScoreEvent e){
+	public void sendScore(QueryEnigmaSuccessEvent e){
 		e.enigmaSuccess = success;
 	}
 

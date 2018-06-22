@@ -39,7 +39,7 @@ public class SceneLoader : MonoBehaviour {
 		//yield break;
 
 		while (!async.isDone) {
-			Debug.Log ("loading");
+			//Debug.Log ("loading");
 			yield return null;
 		}
 
@@ -49,7 +49,7 @@ public class SceneLoader : MonoBehaviour {
 	//La scène qui vient d'être loadée devient la scene active
 	void setActive(Scene scene, LoadSceneMode mode){
 		SceneManager.SetActiveScene(scene);
-		Debug.Log (scene.name + " is now active");
+		Debug.Log ("---------------------  " + scene.name + " is now active");
 	}
 
 	//load la page d'acceuil
@@ -76,7 +76,7 @@ public class SceneLoader : MonoBehaviour {
 		loadScene ("EnigmaSequenceScene");
 		SceneManager.sceneUnloaded += delegate (Scene scene) {
 			if(scene.name == "EnigmaSequenceScene"){
-				Debug.Log(scene.name + ", scene unloaded : removes setSkill");
+				//Debug.Log(scene.name + ", scene unloaded : removes setSkill");
 				SceneManager.sceneLoaded -= setSkill;
 			}
 		};
@@ -85,7 +85,7 @@ public class SceneLoader : MonoBehaviour {
 	}
 
 	public IEnumerator loadEnigma(int unityIndex){
-		Debug.Log ("Scene loader : load enigma");
+		//Debug.Log ("Scene loader : load enigma");
 		yield return StartCoroutine(addScene("Enigma" + unityIndex));
 		//loadScene ("Enigma" + unityIndex);
 		//StartCoroutine(addScene("Enigma" + unityIndex));

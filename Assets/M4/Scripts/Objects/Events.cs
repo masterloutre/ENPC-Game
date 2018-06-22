@@ -173,16 +173,21 @@ public class EnigmaSubmittedEvent : GameEvent{
 	}
 }
 
-public class QueryEnigmaScoreEvent : GameEvent{
+public class QueryEnigmaSuccessEvent : GameEvent{
 	public bool enigmaSuccess;
-	public QueryEnigmaScoreEvent(){
+	public QueryEnigmaSuccessEvent(){
 		enigmaSuccess = false;
 	}
 }
+public class QueryEnigmaScoreEvent : GameEvent
+{
 
+}
 public class QueryPopUpQuestionsScoreEvent : GameEvent{
 	public float score;
 	public QueryPopUpQuestionsScoreEvent(){
 		score = 0;
 	}
 }
+
+

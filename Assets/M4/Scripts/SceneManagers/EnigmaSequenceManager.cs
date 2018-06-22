@@ -31,9 +31,11 @@ public class EnigmaSequenceManager : MonoBehaviour {
 		EventManager.instance.Raise (query);
 		sl = query.sceneLoader;
 		currentEnigmaId = 0;
+		/*
 		foreach (EnigmaData ed in enigmaDataList) {
 			Debug.Log ("EnigmaSequenceManager, nom d'énigme : " + ed.nom);
 		}
+		*/
 		StartCoroutine(sl.loadEnigma (enigmaDataList[currentEnigmaId].index_unity));
 		//StartCoroutine(sl.loadEnigma (1));
 	}
@@ -53,7 +55,7 @@ public class EnigmaSequenceManager : MonoBehaviour {
 	//arguments temporaire pour test 
 	public void updateEnigmaSequence(Skill _skill){
 		skill = _skill;
-		Debug.Log ("update enigma data : " + skill.name);
+		//Debug.Log ("update enigma data : " + skill.name);
 		GameObject titleGO = GameObject.Find ("Title");
 		updateEnigmaList ();
 
@@ -61,11 +63,11 @@ public class EnigmaSequenceManager : MonoBehaviour {
 	}
 
 	public void updateEnigmaList(){
-		Debug.Log ("update enigma list : " + skill.name);
+		//Debug.Log ("update enigma list : " + skill.name);
 		QueryEnigmaListEvent query = new QueryEnigmaListEvent (skill);
 		EventManager.instance.Raise (query);
 		enigmaDataList = query.enigmaList;
-		Debug.Log ("Enigma data list finished loading");
+		//Debug.Log ("Enigma data list finished loading");
 	}
 
 	//récupère un objet représentant les datas d'une énigme à partir de son index unity
