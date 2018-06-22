@@ -12,27 +12,29 @@ public class EnigmaSceneManager : MonoBehaviour {
 
 
         EventManager.instance.AddListener<GOButtonPressedEvent> (submitResult);
-				EventManager.instance.AddListener<QueryEnigmaScoreEvent> (sendScore);
+		EventManager.instance.AddListener<QueryEnigmaScoreEvent> (sendScore);
         EventManager.instance.AddListener<ValidationScreenEvent>(yourResult); // coming from PopupManager.submit() (likely from a submit button ) | Contains answer only from additional questions post-enigma
 
         validator = gameObject.GetComponent<ValidationMethod>();
 	}
 
-	void onDestroy () {
+	void OnDestroy () {
 		validator = null;
 		EventManager.instance.RemoveListener<GOButtonPressedEvent> (submitResult);
 		EventManager.instance.RemoveListener<QueryEnigmaScoreEvent> (sendScore);
-
-	}
+        EventManager.instance.RemoveListener<ValidationScreenEvent> (yourResult);
+    }
 
 	public void submitResult(GOButtonPressedEvent e){
-		print ("validator  : " + validator.GetType ().Name);
-		success = validator.answerIsRight ();
+		//print ("validator  : " + validator.GetType ().Name);
+		//success = validator.answerIsRight ();
+        success = true;
 		enigmaSubmitted ();
 	}
 
 	public void enigmaSubmitted(){
         //traité dans PopUpQuestionManager et EnigmaSequenceManager
+        print("RESULTAT DE PRINT STATE : "+popm.getState());
         popm.updateState("Justification");
 	}
     public void yourResult(ValidationScreenEvent e)

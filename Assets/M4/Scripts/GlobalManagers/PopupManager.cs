@@ -25,9 +25,45 @@ public class PopupManager : MonoBehaviour {
         answerblock= answerblock = justify.transform.Find("ChoiceButtonS").gameObject;
         
         EventManager.instance.AddListener<ConfidanceErrorItemSelectionEvent>(answerSelection);
-
+        print(state);
+        print(correct);
+        scriptThisShit();
         //configurer le prefab pour le relier à ces variables de récupération
 
+    }
+    private void scriptThisShit()
+    {
+        print(justify);
+        // Scripting " Justification " gameobject
+        GameObject go = justify.transform.Find("ChoiceButtonS").gameObject;
+        for(int i = 0; i < go.transform.childCount; i++)
+        {
+            go.transform.GetChild(i).GetComponent<Button>().onClick.AddListener(delegate { answerSelected(go.transform.GetChild(i).gameObject); } );
+        }
+        go = justify.transform.Find("Validation_button").gameObject;
+        go.GetComponent<Button>().onClick.AddListener(submit);
+
+        // Scripting " Correction " gameobject
+        go = correct.transform.Find("ChoiceButtonS").gameObject;
+        for (int i = 0; i < go.transform.childCount; i++)
+        {
+            go.transform.GetChild(i).GetComponent<Button>().onClick.AddListener(delegate { answerSelected(go.transform.GetChild(i).gameObject); });
+        }
+        go = correct.transform.Find("Validation_button").gameObject;
+        go.GetComponent<Button>().onClick.AddListener(submit);
+
+        // Scripting " Victoire " gameobject
+        go = victory.transform.Find("Validation_button").gameObject;
+        go.GetComponent<Button>().onClick.AddListener(submit);
+
+        // Scripting " Défaite " gameobject
+        go = defeat.transform.Find("Validation_button").gameObject;
+        go.GetComponent<Button>().onClick.AddListener(submit);
+    }
+
+    public string getState()
+    {
+        return state;
     }
 
     // Renvoie l'indice d'enfant du go parmi les réponses possibles du bouton cliqué
@@ -114,7 +150,10 @@ public class PopupManager : MonoBehaviour {
     // méthode d'affichage
     public void updateState(string value)
     {
-        if(value == "Justification" || value == "Victoire" || value == "Défaite" || value == "Correction")
+        print("VOICI LE STATE DANS UPDATESTATE: " + state);
+        print("VOICI LE correct DANS UPDATESTATE: " + correct);
+
+        if (value == "Justification" || value == "Victoire" || value == "Défaite" || value == "Correction")
         {
             state = value;
             displayScreen();
@@ -131,6 +170,7 @@ public class PopupManager : MonoBehaviour {
         {
             case "Justification":
                 {
+                    print(correct);
                     correct.SetActive(false);
                     victory.SetActive(false);
                     defeat.SetActive(false);
