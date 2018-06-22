@@ -152,8 +152,7 @@ public class GlobalManager : MonoBehaviour {
 	}
 
 	void saveScoreToServer(RequestSaveScoreEvent e){
-		//e.score.id_etudiant = playerManager.getPlayerId ();
-		e.score.id_etudiant = 47;
+		e.score.id_etudiant = playerManager.getPlayerId ();
 		scoreManager.saveScoreToServer (e.score);
 	}
 }
