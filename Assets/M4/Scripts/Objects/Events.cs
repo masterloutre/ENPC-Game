@@ -136,9 +136,9 @@ public class targetButtonPressedEvent : GameEvent {
 
 public class ValidationScreenEvent : GameEvent
 {
-    string answer;
-    string state;
-    int confidance;
+    public string answer;
+    public string state;
+    public int confidance;
     public ValidationScreenEvent(string etat) { // victoire/defaite
         state = etat;
         answer = "none";

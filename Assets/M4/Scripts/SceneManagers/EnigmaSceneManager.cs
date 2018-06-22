@@ -5,12 +5,18 @@ using UnityEngine;
 public class EnigmaSceneManager : MonoBehaviour {
 	public ValidationMethod validator;
 	private bool success;
-
+    private PopupManager popm;
 	// Use this for initialization
 	void Awake () {
-		EventManager.instance.AddListener<GOButtonPressedEvent> (submitResult);
+        popm = new PopupManager();
+
+        
+        EventManager.instance.AddListener<GOButtonPressedEvent> (submitResult);
 		EventManager.instance.AddListener<QueryEnigmaScoreEvent> (sendScore);
-		validator = gameObject.GetComponent<ValidationMethod>();
+
+        EventManager.instance.AddListener<ValidationScreenEvent>(yourResult); // coming from PopupManager.submit() (likely from a submit button ) | Contains answer only from additional questions post-enigma
+
+        validator = gameObject.GetComponent<ValidationMethod>();
 	}
 
 	void onDestroy () {
@@ -25,11 +31,40 @@ public class EnigmaSceneManager : MonoBehaviour {
 	}
 
 	public void enigmaSubmitted(){
-		//traité dans PopUpQuestionManager et EnigmaSequenceManager
-		EventManager.instance.Raise (new EnigmaSubmittedEvent ());
+        //traité dans PopUpQuestionManager et EnigmaSequenceManager
+        popm.updateState("Justification");
 	}
+    public void yourResult(ValidationScreenEvent e)
+    {
+        if (e.state == "Justification")
+        {
+            if (success)
+            {
+                popm.updateState("Victoire");
+            }
+            else
+            {
+                popm.updateState("Défaite");
+            }
 
+            // chopper le score
+
+        }
+        else if (e.state=="Défaite")
+        {
+            popm.updateState("Correction");
+        }
+        else // correction ou victoire
+        {
+            // fin d'énigme
+        }
+        
+    }
 	public void sendScore(QueryEnigmaScoreEvent e){
 		e.enigmaSuccess = success;
 	}
+
+    
+
+    
 }
