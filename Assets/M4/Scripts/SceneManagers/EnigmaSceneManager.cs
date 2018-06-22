@@ -33,6 +33,8 @@ public class EnigmaSceneManager : MonoBehaviour {
 
 	public void enigmaSubmitted(){
         //traité dans PopUpQuestionManager et EnigmaSequenceManager
+
+		EventManager.instance.Raise(new EnigmaSubmittedEvent()); //test envoie score
         popm.updateState("Justification");
 	}
     public void yourResult(ValidationScreenEvent e)

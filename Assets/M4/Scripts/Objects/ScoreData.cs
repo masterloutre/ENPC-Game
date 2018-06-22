@@ -20,14 +20,14 @@ public class ScoreData
 		aide = 0;
 	}
 
-	public ScoreData (int _id_enigme, int _id_etudiant, int _points, int _tentatives, double _temps, int _aide)
+	public ScoreData (int _id_enigme, int _id_etudiant, int _points, int _tentatives, double _temps, bool _aide)
 	{
 		id_enigme = _id_enigme;
 		id_etudiant = _id_etudiant;
 		points = _points;
 		tentatives = _tentatives;
 		temps = _temps;
-		aide = _aide;
+		aide = (_aide)? 1: 0;
 	}
 }
 

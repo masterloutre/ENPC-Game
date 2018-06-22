@@ -187,4 +187,17 @@ public class QueryPopUpQuestionsScoreEvent : GameEvent{
 	}
 }
 
+public class QueryScoreEvent : GameEvent{
+	public ScoreData score;
+	public QueryScoreEvent(){
+		score = null;
+	}
+}
 
+
+public class RequestSaveScoreEvent : GameEvent{
+	public ScoreData score;
+	public RequestSaveScoreEvent(ScoreData _score){
+		score = _score;
+	}
+}
