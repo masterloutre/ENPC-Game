@@ -39,7 +39,7 @@ public class ScoreManager : MonoBehaviour {
 
 		if(www.isNetworkError || www.isHttpError) {
 			addScore (score);
-			throw new ServerException ("The score could not be saved : " + www.error);
+			yield return new ServerException ("The score could not be saved : " + www.error);
 		}
 		else {
 			Debug.Log("Form upload complete! : Score Sent");
@@ -56,11 +56,14 @@ public class ScoreManager : MonoBehaviour {
 
 	public void saveScoreToServer(ScoreData score){
 		try{
-			StartCoroutine(postScoreToServer (score));
+			Coroutine result = StartCoroutine(postScoreToServer (score));
+			if(result.GetType().Name == "ServerException"){
+				throw result;
+			}
 		} catch (ServerException exception){
-			print ("GlobalManager : " + exception.Message);
+			print ("ScoreManager : " + exception.Message);
 		} catch (ArgumentNullException exception){
-			print ("GlobalManager : " + exception.Message);
+			print ("ScoreManager : " + exception.Message);
 		}
 	}
 }

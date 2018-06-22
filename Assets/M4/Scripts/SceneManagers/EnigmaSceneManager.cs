@@ -22,7 +22,7 @@ public class EnigmaSceneManager : MonoBehaviour {
 		validator = null;
 		EventManager.instance.RemoveListener<GOButtonPressedEvent> (submitResult);
 		EventManager.instance.RemoveListener<QueryEnigmaSuccessEvent> (sendScore);
-		EventManager.instance.AddListener<ValidationScreenEvent>(yourResult);
+		EventManager.instance.RemoveListener<ValidationScreenEvent>(yourResult);
 
 	}
 
