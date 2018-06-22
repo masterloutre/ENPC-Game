@@ -11,26 +11,22 @@ public class EnigmaSceneManager : MonoBehaviour {
 		validator = null;
         popm = new PopupManager();
         EventManager.instance.AddListener<GOButtonPressedEvent> (submitResult);
-				EventManager.instance.AddListener<QueryEnigmaScoreEvent> (sendScore);
+				EventManager.instance.AddListener<QueryEnigmaSuccessEvent> (sendScore);
         EventManager.instance.AddListener<ValidationScreenEvent>(yourResult); // coming from PopupManager.submit() (likely from a submit button ) | Contains answer only from additional questions post-enigma
 
         validator = gameObject.GetComponent<ValidationMethod>();
-		print ("gameObject  : " + this.gameObject.name + "from scene " + this.gameObject.scene.name);
-		print ("validator  : " + validator.GetType ().Name);
+
 	}
 
 	void OnDestroy () {
-		print ("gameObject  : " + this.gameObject.name + "from scene " + this.gameObject.scene.name + " has been destroyed");
 		validator = null;
 		EventManager.instance.RemoveListener<GOButtonPressedEvent> (submitResult);
-		EventManager.instance.RemoveListener<QueryEnigmaScoreEvent> (sendScore);
+		EventManager.instance.RemoveListener<QueryEnigmaSuccessEvent> (sendScore);
 		EventManager.instance.AddListener<ValidationScreenEvent>(yourResult);
 
 	}
 
 	public void submitResult(GOButtonPressedEvent e){
-		print ("gameObject  : " + this.gameObject.name + "from scene " + this.gameObject.scene.name);
-		print ("validator  : " + this.validator.GetType ().Name);
 		success = validator.answerIsRight ();
 		enigmaSubmitted ();
 	}
@@ -65,7 +61,7 @@ public class EnigmaSceneManager : MonoBehaviour {
         }
 
     }
-	public void sendScore(QueryEnigmaScoreEvent e){
+	public void sendScore(QueryEnigmaSuccessEvent e){
 		e.enigmaSuccess = success;
 	}
 
