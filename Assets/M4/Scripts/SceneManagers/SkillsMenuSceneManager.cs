@@ -4,11 +4,16 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 
+/*
+ * Component qui gère le menu de choix de compétence
+ */ 
+
 public class SkillsMenuSceneManager : MenuSceneManager {
 
-	public List<Skill> skillList;
-	public GameObject skillPrefab;
+	public List<Skill> skillList; //liste des compétences disponibles
+	public GameObject skillPrefab; //lien vers le préfab qui reprénse un bouton de compétence, à entrer dans l'éditeur
 
+	//Au démarrage du component, récupère la liste de compétence et génère les boutons du menu en fonction de la liste
 	public void Start(){
 		try {
 			QuerySkillListEvent query = new QuerySkillListEvent ();
@@ -24,14 +29,13 @@ public class SkillsMenuSceneManager : MenuSceneManager {
 		instantiateSkills ();
 	}
 
-	public void Update(){
-	}
-
+	//Donne l'id de la compétence choisie comme choix et demande la prochaine scène
 	public void chooseSkill(int _choice){
 		choice = _choice;
 		nextScene ();
 	}
 
+	//Génère et affiche un icon + nom (sur le model du préfab) par compétence et y attache une action à faire au click (chooseSkill)
 	public void instantiateSkills(){
 		GameObject skillPanelGO = GameObject.FindGameObjectWithTag ("Skill Panel");
 		Vector3 wolrdPosition = skillPanelGO.transform.position;
@@ -46,6 +50,7 @@ public class SkillsMenuSceneManager : MenuSceneManager {
 		}
 	}
 
+	//Génère une liste factice de compétence si la connexion au serveur n'a pas encore eu lieu
 	public void generateDummySkillList(){
 		skillList = new List<Skill> ();
 		skillList.Add(new Skill(0, "Dummy skill number 0"));
