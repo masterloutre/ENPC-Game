@@ -7,7 +7,7 @@ public class InputValidation : MonoBehaviour, ValidationMethod
 {
 	public string formula;
 	public double marginError;
-	List<double> param;
+	List<double> paramList;
 	ExpressionParser parser;
 
 
@@ -15,9 +15,9 @@ public class InputValidation : MonoBehaviour, ValidationMethod
 	{
 		GameObject[] paramGOList = GameObject.FindGameObjectsWithTag ("Input Param");
 		parser = new ExpressionParser();
-		param = new List<double> ();
+		paramList = new List<double> ();
 		foreach(GameObject paramGO in paramGOList){
-			param.Add(double.Parse (paramGO.GetComponent<UnityEngine.UI.Text> ().text));
+			paramList.Add(paramGO.GetComponent<InteractiveValue> ().value);
 		}
 	}
 	
@@ -43,10 +43,10 @@ public class InputValidation : MonoBehaviour, ValidationMethod
 	}
 
 	void setParam(Expression expCorrect){ //set param in alphabetical order
-		for (int i = 0; i < param.Count; i++) {
+		for (int i = 0; i < paramList.Count; i++) {
 			char tmp = (char)('a' + i);
 			string id = "" + tmp;
-			expCorrect.Parameters[id].Value = param[i]; // set the named parameter 
+			expCorrect.Parameters[id].Value = paramList[i]; // set the named parameter 
 		}
 	}
 }
