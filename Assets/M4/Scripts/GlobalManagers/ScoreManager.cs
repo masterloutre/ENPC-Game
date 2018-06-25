@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using System.Runtime.Remoting;
+using System;
 
 public class ScoreManager : MonoBehaviour {
-	private List<ScoreData> scores;
+	private List<ScoreData> localScoreList;
 	// Use this for initialization
 	void Start () {
-		scores = new List<ScoreData> ();
+		localScoreList = new List<ScoreData> ();
 	}
 	
 	// Update is called once per frame
@@ -15,11 +17,14 @@ public class ScoreManager : MonoBehaviour {
 		
 	}
 
-	void addScore(ScoreData score){
-		scores.Add (score);
+	public void addScore(ScoreData score){
+		localScoreList.Add (score);
 	}
 
-	IEnumerator sendScore(ScoreData score){
+	public IEnumerator postScoreToServer(ScoreData score){
+		if (score == null) {
+			throw new ArgumentNullException("Score is null");
+		}
 		List<IMultipartFormSection> formData = new List<IMultipartFormSection>();
 		formData.Add( new MultipartFormDataSection("id_enigme", score.id_enigme.ToString()));
 		formData.Add( new MultipartFormDataSection("id_etudiant", score.id_etudiant.ToString()));
@@ -33,10 +38,31 @@ public class ScoreManager : MonoBehaviour {
 		yield return www.SendWebRequest();
 
 		if(www.isNetworkError || www.isHttpError) {
-			Debug.Log(www.error);
+			addScore (score);
+			Debug.Log(www.downloadHandler.text);
+			throw new ServerException ("The score could not be saved : " + www.error); // not catchou because coroutine
+
 		}
 		else {
-			Debug.Log("Form upload complete!");
+			Debug.Log("Form upload complete! : Score Sent");
+		}
+	}
+
+	public void sendLocalScoresToServer(){
+		List<ScoreData> tempList = localScoreList;
+		localScoreList = new List<ScoreData> ();
+		foreach (ScoreData score in tempList) {
+			saveScoreToServer (score);
+		} 
+	}
+
+	public void saveScoreToServer(ScoreData score){
+		try{
+			Coroutine result = StartCoroutine(postScoreToServer (score));
+		} catch (ServerException exception){
+			print ("ScoreManager : " + exception.Message);
+		} catch (ArgumentNullException exception){
+			print ("ScoreManager : " + exception.Message);
 		}
 	}
 }

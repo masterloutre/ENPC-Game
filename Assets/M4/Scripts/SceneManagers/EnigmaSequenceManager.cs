@@ -142,15 +142,25 @@ public class EnigmaSequenceManager : MonoBehaviour {
 
 	public void getEnigmaScore(EnigmaSubmittedEvent e){
 		//traité dans EnigmaSceneManager
-		QueryEnigmaScoreEvent query = new QueryEnigmaScoreEvent ();
+		QueryEnigmaSuccessEvent query = new QueryEnigmaSuccessEvent ();
 		EventManager.instance.Raise (query);
 		currentEnigmaSuccess = query.enigmaSuccess;
 		if (currentEnigmaSuccess) {
 			print("ENIGMA VALIDATED !!!!!!!!!!!!!");
-		} else {
-			print("RESULT FASLE !!!!!!!!!!");
-		}
 
+		} else {
+			print("RESULT FALSE !!!!!!!!!!");
+		}
+		EventManager.instance.Raise (new RequestSaveScoreEvent (createScore(currentEnigmaSuccess)));
+
+	}
+
+	ScoreData createScore(bool success){
+		EnigmaData currentEnigma = enigmaDataList [currentEnigmaId];
+		int points = (success)? currentEnigma.score_max : 0;
+		double time = 0;
+		bool help = false;
+		return new ScoreData (currentEnigma.id, -1, points, 1, time, help);
 	}
 		
 }

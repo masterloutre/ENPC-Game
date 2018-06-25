@@ -48,4 +48,8 @@ public class PlayerManager : MonoBehaviour {
 	public string getPlayerStudentNumber(){
 		return player.studentNumber;
 	}
+
+	public int getPlayerId(){
+		return player.id;
+	}
 }

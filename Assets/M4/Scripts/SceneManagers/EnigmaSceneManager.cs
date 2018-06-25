@@ -23,6 +23,7 @@ public class EnigmaSceneManager : MonoBehaviour {
 	void OnDestroy () {
 		validator = null;
 		EventManager.instance.RemoveListener<GOButtonPressedEvent> (submitResult);
+
 		EventManager.instance.RemoveListener<QueryEnigmaScoreEvent> (sendScore);
         EventManager.instance.RemoveListener<QueryEnigmaSuccessEvent>(sendScore);
         EventManager.instance.RemoveListener<ValidationScreenEvent> (yourResult);
@@ -30,17 +31,18 @@ public class EnigmaSceneManager : MonoBehaviour {
     public void sendScore(QueryEnigmaScoreEvent e)
     {
 
-    }
+	}
+
 	public void submitResult(GOButtonPressedEvent e){
 		//print ("validator  : " + validator.GetType ().Name);
 		//success = validator.answerIsRight ();
-        success = true;
+        success = false;
 		enigmaSubmitted ();
 	}
 
 	public void enigmaSubmitted(){
         //traité dans PopUpQuestionManager et EnigmaSequenceManager
-        
+		//EventManager.instance.Raise(new EnigmaSubmittedEvent()); //test envoie score
         popm.updateState("Justification");
 	}
     public void yourResult(ValidationScreenEvent e)
@@ -65,7 +67,7 @@ public class EnigmaSceneManager : MonoBehaviour {
         }
         else // correction ou victoire
         {
-            // fin d'énigme
+            // fin d'énigme, renvoyer l'user où l'on veut
         }
 
     }
