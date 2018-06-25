@@ -10,9 +10,9 @@ public class QCMValidation : MonoBehaviour, ValidationMethod
 	void Awake ()
 	{
 		slotsList = GameObject.FindGameObjectsWithTag ("DestinationSlot");
-		foreach (GameObject go in slotsList) {
-			print (go.name);		
-		}
+		//foreach (GameObject go in slotsList) {
+		//	print (go.name);		
+		//}
 	}
 
 

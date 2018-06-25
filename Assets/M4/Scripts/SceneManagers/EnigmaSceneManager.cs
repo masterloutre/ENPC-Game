@@ -9,7 +9,9 @@ public class EnigmaSceneManager : MonoBehaviour {
 	// Use this for initialization
 	void Awake () {
 		validator = null;
-        popm = GetComponent<PopupManager>();
+        popm = gameObject.GetComponent<PopupManager>();
+
+        
         EventManager.instance.AddListener<GOButtonPressedEvent> (submitResult);
 
 		EventManager.instance.AddListener<QueryEnigmaScoreEvent> (sendScore);
@@ -17,7 +19,7 @@ public class EnigmaSceneManager : MonoBehaviour {
         EventManager.instance.AddListener<ValidationScreenEvent>(yourResult); // coming from PopupManager.submit() (likely from a submit button ) | Contains answer only from additional questions post-enigma
 
         validator = gameObject.GetComponent<ValidationMethod>();
-        print("validator: " + validator.ToString());
+        
 
 	}
 
