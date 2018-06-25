@@ -1,19 +1,22 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-using System;
+﻿using UnityEngine;
+using System.Collections;
+using System.Linq;
 using UnityEngine.UI;
 
-public class QCMAnswer : MonoBehaviour
+public class CaseValidation : MonoBehaviour, ValidationMethod
 {
+    /*Référence à faire dans unity:
+     - flèche pour changer de question : arrowclicked(this)
+     - Entryxxx réponse : eventtrigger enter(colorchange(this)) exit(colorback(this)) click(answerselected(this))
+     */
+
     private GameObject stepsDots; // rpz les points bleu du style carousel
     private GameObject entries; // rpz les réponses possibles
     int activeDot; // rpz l'index de la question en cours
     private int[] answerSheet; // rpz la fiche de réponse sélectionnées par question
     private string[] answers; // rpz les bonnes réponses
 
-    Color unselected, selected; // rpz les couleurs d'une entry
+    Color unselected, selected; // rpz les couleurs des dots
 
     public void Start()
     {
@@ -35,17 +38,17 @@ public class QCMAnswer : MonoBehaviour
     }
 
 
-    public bool validation()
+    public bool answerIsRight()
     {
         GameObject go;
-        for(int i = 0; i < answerSheet.Length; i++)
+        for (int i = 0; i < answerSheet.Length; i++)
         {
             if (answerSheet[i] == -1)
             {
                 print("NOT ANSWERED");
                 return false;
             }
-            go=entries.transform.GetChild(answerSheet[i]).gameObject;
+            go = entries.transform.GetChild(answerSheet[i]).gameObject;
             if (go.GetComponentInChildren<Text>().text != answers[i])
             {
                 print("WRONNNNNNNG");
@@ -77,7 +80,7 @@ public class QCMAnswer : MonoBehaviour
     }
 
 
-    
+
     // Change la couleur de la réponse sélectionné à la réception d'un event " a sélectionné une réponse "
     // devient bleu, et l'ancienne réponse sélectionnée - s'il y en avait une - devient blanche
     public void answerSelection(RequestSelectionEvent e)
@@ -163,11 +166,6 @@ public class QCMAnswer : MonoBehaviour
 
     }
 
+
+    
 }
-
-
-
-
-
-
-

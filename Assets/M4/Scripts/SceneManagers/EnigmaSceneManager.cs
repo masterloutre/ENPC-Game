@@ -17,6 +17,7 @@ public class EnigmaSceneManager : MonoBehaviour {
         EventManager.instance.AddListener<ValidationScreenEvent>(yourResult); // coming from PopupManager.submit() (likely from a submit button ) | Contains answer only from additional questions post-enigma
 
         validator = gameObject.GetComponent<ValidationMethod>();
+        print("validator: " + validator.ToString());
 
 	}
 
