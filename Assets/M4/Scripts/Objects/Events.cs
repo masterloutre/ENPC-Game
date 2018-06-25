@@ -181,7 +181,7 @@ public class QueryEnigmaSuccessEvent : GameEvent{
 }
 public class QueryEnigmaScoreEvent : GameEvent
 {
-
+    public bool enigmaSuccess;
 }
 public class QueryPopUpQuestionsScoreEvent : GameEvent{
 	public float score;

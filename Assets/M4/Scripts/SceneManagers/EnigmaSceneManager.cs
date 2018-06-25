@@ -9,7 +9,7 @@ public class EnigmaSceneManager : MonoBehaviour {
 	// Use this for initialization
 	void Awake () {
 		validator = null;
-        popm = new PopupManager();
+        popm = GetComponent<PopupManager>();
         EventManager.instance.AddListener<GOButtonPressedEvent> (submitResult);
 
 		EventManager.instance.AddListener<QueryEnigmaScoreEvent> (sendScore);
@@ -27,7 +27,10 @@ public class EnigmaSceneManager : MonoBehaviour {
         EventManager.instance.RemoveListener<QueryEnigmaSuccessEvent>(sendScore);
         EventManager.instance.RemoveListener<ValidationScreenEvent> (yourResult);
     }
+    public void sendScore(QueryEnigmaScoreEvent e)
+    {
 
+    }
 	public void submitResult(GOButtonPressedEvent e){
 		//print ("validator  : " + validator.GetType ().Name);
 		//success = validator.answerIsRight ();
@@ -37,7 +40,7 @@ public class EnigmaSceneManager : MonoBehaviour {
 
 	public void enigmaSubmitted(){
         //traité dans PopUpQuestionManager et EnigmaSequenceManager
-        print("RESULTAT DE PRINT STATE : "+popm.getState());
+        
         popm.updateState("Justification");
 	}
     public void yourResult(ValidationScreenEvent e)

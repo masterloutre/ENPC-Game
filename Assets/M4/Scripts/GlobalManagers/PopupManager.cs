@@ -12,8 +12,7 @@ public class PopupManager : MonoBehaviour {
     int errorchoice;
     string state;
 
-
-    public void Start()
+    public void Awake()
     {
         justify = Instantiate(justify_model, GameObject.Find("Answer Popup").transform);
         victory = Instantiate(victory_model, GameObject.Find("Answer Popup").transform);
@@ -22,23 +21,30 @@ public class PopupManager : MonoBehaviour {
         certitudelvl = -1;
         methodchoice = errorchoice = -1;
         state = "none";
-        answerblock= answerblock = justify.transform.Find("ChoiceButtonS").gameObject;
-        
+        answerblock = justify.transform.Find("ChoiceButtonS").gameObject;
+    }
+    public void Start()
+    {
         EventManager.instance.AddListener<ConfidanceErrorItemSelectionEvent>(answerSelection);
-        print(state);
-        print(correct);
         scriptThisShit();
         //configurer le prefab pour le relier à ces variables de récupération
 
     }
     private void scriptThisShit()
     {
-        print(justify);
+        print("SCRIPT THIS SHIT EST LANCE");
         // Scripting " Justification " gameobject
         GameObject go = justify.transform.Find("ChoiceButtonS").gameObject;
-        for(int i = 0; i < go.transform.childCount; i++)
+        GameObject tmp;
+        print(justify.name+" "+go.name);
+        print("nb bouton détecté : "+go.transform.childCount);
+        for (int i = 0; i < go.transform.childCount; i++)
         {
-            go.transform.GetChild(i).GetComponent<Button>().onClick.AddListener(delegate { answerSelected(go.transform.GetChild(i).gameObject); } );
+            tmp = go.transform.GetChild(i).gameObject;
+            print("BOUTON " + i + ": "+go.transform.GetChild(i).gameObject.name);
+            go.transform.GetChild(i).Translate(new Vector3(20,20,20));
+            go.transform.GetChild(i).gameObject.GetComponent<Button>().onClick.AddListener(delegate { print(i); answerSelected(tmp); });
+            print(go.transform.GetChild(i).gameObject.GetComponent<Button>().onClick);
         }
         go = justify.transform.Find("Validation_button").gameObject;
         go.GetComponent<Button>().onClick.AddListener(submit);
@@ -69,6 +75,7 @@ public class PopupManager : MonoBehaviour {
     // Renvoie l'indice d'enfant du go parmi les réponses possibles du bouton cliqué
     public void answerSelected(GameObject go)
     {
+        print("selected YESSS");
         EventManager.instance.Raise(new ConfidanceErrorItemSelectionEvent(go.transform.GetSiblingIndex()));
     }
     // Colorie la sélection
@@ -150,9 +157,6 @@ public class PopupManager : MonoBehaviour {
     // méthode d'affichage
     public void updateState(string value)
     {
-        print("VOICI LE STATE DANS UPDATESTATE: " + state);
-        print("VOICI LE correct DANS UPDATESTATE: " + correct);
-
         if (value == "Justification" || value == "Victoire" || value == "Défaite" || value == "Correction")
         {
             state = value;
@@ -170,7 +174,6 @@ public class PopupManager : MonoBehaviour {
         {
             case "Justification":
                 {
-                    print(correct);
                     correct.SetActive(false);
                     victory.SetActive(false);
                     defeat.SetActive(false);
