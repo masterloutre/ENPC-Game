@@ -13,7 +13,7 @@ OcclusionCullingSettings:
 --- !u!104 &2
 RenderSettings:
   m_ObjectHideFlags: 0
-  serializedVersion: 8
+  serializedVersion: 9
   m_Fog: 0
   m_FogColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   m_FogMode: 3
@@ -39,6 +39,7 @@ RenderSettings:
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
   m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -54,11 +55,10 @@ LightmapSettings:
     m_EnableBakedLightmaps: 0
     m_EnableRealtimeLightmaps: 0
   m_LightmapEditorSettings:
-    serializedVersion: 9
+    serializedVersion: 10
     m_Resolution: 2
     m_BakeResolution: 40
-    m_TextureWidth: 1024
-    m_TextureHeight: 1024
+    m_AtlasSize: 1024
     m_AO: 0
     m_AOMaxDistance: 1
     m_CompAOExponent: 1
@@ -151,7 +151,7 @@ Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 541058127}
+    m_TransformParent: {fileID: 1170216839}
     m_Modifications:
     - target: {fileID: 224442650333152006, guid: c2b338cc2d55dae468e99858f84f6d42,
         type: 2}
@@ -196,12 +196,12 @@ Prefab:
     - target: {fileID: 224442650333152006, guid: c2b338cc2d55dae468e99858f84f6d42,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: -0.5333378
       objectReference: {fileID: 0}
     - target: {fileID: 224442650333152006, guid: c2b338cc2d55dae468e99858f84f6d42,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: 0.5333287
       objectReference: {fileID: 0}
     - target: {fileID: 224442650333152006, guid: c2b338cc2d55dae468e99858f84f6d42,
         type: 2}
@@ -242,14 +242,6 @@ Prefab:
         type: 2}
       propertyPath: m_Pivot.y
       value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1198438574941444, guid: c2b338cc2d55dae468e99858f84f6d42, type: 2}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1114624934284192, guid: c2b338cc2d55dae468e99858f84f6d42, type: 2}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c2b338cc2d55dae468e99858f84f6d42, type: 2}
@@ -404,6 +396,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &94727772
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -693,7 +686,7 @@ Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 541058127}
+    m_TransformParent: {fileID: 1170216839}
     m_Modifications:
     - target: {fileID: 224416079663544452, guid: faaa095cb44535943b54cb29bb599b55,
         type: 2}
@@ -738,12 +731,12 @@ Prefab:
     - target: {fileID: 224416079663544452, guid: faaa095cb44535943b54cb29bb599b55,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: -0.5333378
       objectReference: {fileID: 0}
     - target: {fileID: 224416079663544452, guid: faaa095cb44535943b54cb29bb599b55,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: 0.5333287
       objectReference: {fileID: 0}
     - target: {fileID: 224416079663544452, guid: faaa095cb44535943b54cb29bb599b55,
         type: 2}
@@ -785,13 +778,81 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 1829981202052914, guid: faaa095cb44535943b54cb29bb599b55, type: 2}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: faaa095cb44535943b54cb29bb599b55, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &193164839
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 193164840}
+  - component: {fileID: 193164842}
+  - component: {fileID: 193164841}
+  - component: {fileID: 193164843}
+  m_Layer: 0
+  m_Name: EnigmaSceneManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &193164840
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 193164839}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2057440719}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &193164841
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 193164839}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 74e15aab8ccb2e64ca7c0eb589e9d0b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  justify_model: {fileID: 1059341634635592, guid: 865308c9b166d854ca8bff3cc6e85b36,
+    type: 2}
+  victory_model: {fileID: 1114624934284192, guid: c2b338cc2d55dae468e99858f84f6d42,
+    type: 2}
+  defeat_model: {fileID: 1101275197906976, guid: 0bc329f761090d142a844064747f3173,
+    type: 2}
+  correct_model: {fileID: 1829981202052914, guid: faaa095cb44535943b54cb29bb599b55,
+    type: 2}
+--- !u!114 &193164842
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 193164839}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 458bd9b75d11e4f55ba7da505a657cc8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &193164843
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 193164839}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c65ae33810fc8d84fbcbc435640e4793, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &221047858
 GameObject:
   m_ObjectHideFlags: 0
@@ -1143,6 +1204,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &334141997
 GameObject:
   m_ObjectHideFlags: 0
@@ -1399,7 +1461,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &435756517
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1411,7 +1473,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1170216839}
-  m_RootOrder: 0
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1863,7 +1925,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "J'utilise ma carte pi\xE8ge ! C'est inadmissible. Ohayo FDP"
+  m_Text: "R\xE9ponse num\xE9ro 3"
 --- !u!222 &514509250
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1894,11 +1956,7 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 1220124546}
-  - {fileID: 1789529944}
-  - {fileID: 1980929763}
-  - {fileID: 1560762825}
+  m_Children: []
   m_Father: {fileID: 1470755454}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2243,7 +2301,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "J'utilise ma carte pi\xE8ge ! C'est inadmissible. Ohayo FDP"
+  m_Text: "R\xE9ponse num\xE9ro 3"
 --- !u!222 &763439349
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -2784,7 +2842,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1870631446}
+        - m_Target: {fileID: 193164843}
           m_MethodName: arrowClicked
           m_Mode: 2
           m_Arguments:
@@ -3153,6 +3211,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &1077380438
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3311,7 +3370,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1170216839
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3322,6 +3381,10 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.618756, y: 0.618756, z: 0.618756}
   m_Children:
+  - {fileID: 1220124546}
+  - {fileID: 1789529944}
+  - {fileID: 1980929763}
+  - {fileID: 1560762825}
   - {fileID: 435756517}
   m_Father: {fileID: 1470755454}
   m_RootOrder: 3
@@ -3441,7 +3504,7 @@ Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 541058127}
+    m_TransformParent: {fileID: 1170216839}
     m_Modifications:
     - target: {fileID: 224436357992292642, guid: 865308c9b166d854ca8bff3cc6e85b36,
         type: 2}
@@ -3461,17 +3524,17 @@ Prefab:
     - target: {fileID: 224436357992292642, guid: 865308c9b166d854ca8bff3cc6e85b36,
         type: 2}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 224436357992292642, guid: 865308c9b166d854ca8bff3cc6e85b36,
         type: 2}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 224436357992292642, guid: 865308c9b166d854ca8bff3cc6e85b36,
         type: 2}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 224436357992292642, guid: 865308c9b166d854ca8bff3cc6e85b36,
         type: 2}
@@ -3486,12 +3549,12 @@ Prefab:
     - target: {fileID: 224436357992292642, guid: 865308c9b166d854ca8bff3cc6e85b36,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: -0.5333378
       objectReference: {fileID: 0}
     - target: {fileID: 224436357992292642, guid: 865308c9b166d854ca8bff3cc6e85b36,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: 0.5333287
       objectReference: {fileID: 0}
     - target: {fileID: 224436357992292642, guid: 865308c9b166d854ca8bff3cc6e85b36,
         type: 2}
@@ -3532,20 +3595,6 @@ Prefab:
         type: 2}
       propertyPath: m_Pivot.y
       value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 224871882021921000, guid: 865308c9b166d854ca8bff3cc6e85b36,
-        type: 2}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 224662986927727860, guid: 865308c9b166d854ca8bff3cc6e85b36,
-        type: 2}
-      propertyPath: m_AnchorMax.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1059341634635592, guid: 865308c9b166d854ca8bff3cc6e85b36, type: 2}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 865308c9b166d854ca8bff3cc6e85b36, type: 2}
@@ -3858,6 +3907,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1388673683
 GameObject:
   m_ObjectHideFlags: 0
@@ -3944,7 +3994,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1870631446}
+        - m_Target: {fileID: 193164843}
           m_MethodName: arrowClicked
           m_Mode: 2
           m_Arguments:
@@ -4051,7 +4101,7 @@ Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 541058127}
+    m_TransformParent: {fileID: 1170216839}
     m_Modifications:
     - target: {fileID: 224592866577256680, guid: 0bc329f761090d142a844064747f3173,
         type: 2}
@@ -4096,12 +4146,12 @@ Prefab:
     - target: {fileID: 224592866577256680, guid: 0bc329f761090d142a844064747f3173,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: -0.5333378
       objectReference: {fileID: 0}
     - target: {fileID: 224592866577256680, guid: 0bc329f761090d142a844064747f3173,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: 0.5333287
       objectReference: {fileID: 0}
     - target: {fileID: 224592866577256680, guid: 0bc329f761090d142a844064747f3173,
         type: 2}
@@ -4495,7 +4545,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "J'utilise ma carte pi\xE8ge ! C'est inadmissible. Ohayo FDP"
+  m_Text: "R\xE9ponse num\xE9ro 3"
 --- !u!222 &1517747290
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4739,6 +4789,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &1667432438
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4820,7 +4871,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1870631446}
+        - m_Target: {fileID: 193164843}
           m_MethodName: colorChange
           m_Mode: 2
           m_Arguments:
@@ -4837,7 +4888,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1870631446}
+        - m_Target: {fileID: 193164843}
           m_MethodName: colorBack
           m_Mode: 2
           m_Arguments:
@@ -4854,7 +4905,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1870631446}
+        - m_Target: {fileID: 193164843}
           m_MethodName: answerSelected
           m_Mode: 2
           m_Arguments:
@@ -4937,7 +4988,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2057440719}
-  m_RootOrder: 0
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1728259673
 MonoBehaviour:
@@ -5132,6 +5183,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!114 &1862422438
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5331,6 +5383,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1926572040
 GameObject:
   m_ObjectHideFlags: 0
@@ -5844,10 +5897,12 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1728259672}
+  - {fileID: 1960255264}
   - {fileID: 800073807}
   - {fileID: 493503966}
   - {fileID: 1870631445}
+  - {fileID: 1728259672}
+  - {fileID: 193164840}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5899,7 +5954,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1870631446}
+        - m_Target: {fileID: 193164843}
           m_MethodName: colorChange
           m_Mode: 2
           m_Arguments:
@@ -5916,7 +5971,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1870631446}
+        - m_Target: {fileID: 193164843}
           m_MethodName: colorBack
           m_Mode: 2
           m_Arguments:
@@ -5933,7 +5988,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1870631446}
+        - m_Target: {fileID: 193164843}
           m_MethodName: answerSelected
           m_Mode: 2
           m_Arguments:
@@ -6130,7 +6185,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1870631446}
+        - m_Target: {fileID: 193164843}
           m_MethodName: colorChange
           m_Mode: 2
           m_Arguments:
@@ -6147,7 +6202,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1870631446}
+        - m_Target: {fileID: 193164843}
           m_MethodName: colorBack
           m_Mode: 2
           m_Arguments:
@@ -6164,7 +6219,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1870631446}
+        - m_Target: {fileID: 193164843}
           m_MethodName: answerSelected
           m_Mode: 2
           m_Arguments:

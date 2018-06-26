@@ -6,26 +6,33 @@ using System;
 using System.Linq;
 using UnityEngine.SceneManagement;
 
+/*
+ * Manager qui gère une séquence d'énigme
+ * Il connait la compétence évaluée, la liste d'énigme à faire jouer ainsi que l'id de l'énigme courante
+ * Il collecte le score de l'énigme et des questions de certitude et 
+ * C'est lui qui est chargé de loader et unloader les enigmes
+ */ 
+
 public class EnigmaSequenceManager : MonoBehaviour {
 
-	private List<EnigmaData> enigmaDataList;
-	public Skill skill;
-	private SceneLoader sl;
-	private int currentEnigmaId;
-	private bool currentEnigmaSuccess;
-	private float currentEnigmaPopUpQuestionsScore;
+	private List<EnigmaData> enigmaDataList; // la liste d'énigmes
+	public Skill skill; // la compétence évaluée
+	private SceneLoader sl;  // le loader de scenes
+	private int currentEnigmaId; // l'id de l'énigme en cours
+	private bool currentEnigmaSuccess; //le score de l'énigme en cours
+	private float currentEnigmaPopUpQuestionsScore; //le score des questions popup
 
-
+	//Instancie l'objet et ajoute les listeners
 	void Awake(){
 		enigmaDataList = new List<EnigmaData> ();
 		EventManager.instance.AddListener<RequestNextEnigmaEvent> (loadNextEnigma);
 		EventManager.instance.AddListener<RequestPreviousEnigmaEvent> (loadPreviousEnigma);
-		EventManager.instance.AddListener<QueryCurrentEnigmaDataEvent> (getCurrentEnigmaData);
+		EventManager.instance.AddListener<QueryCurrentEnigmaDataEvent> (sendCurrentEnigmaData);
 		EventManager.instance.AddListener<EnigmaSubmittedEvent> (getEnigmaScore);
 
 	}
 		
-	// Use this for initialization
+	//Load la première énigme
 	void Start () {
 		QuerySceneLoaderEvent query = new QuerySceneLoaderEvent ();
 		EventManager.instance.Raise (query);
@@ -45,29 +52,27 @@ public class EnigmaSequenceManager : MonoBehaviour {
 		
 	}
 
+	//Enlève les listener à la destruction du component
 	void OnDestroy(){
 		EventManager.instance.RemoveListener<RequestNextEnigmaEvent> (loadNextEnigma);
 		EventManager.instance.RemoveListener<RequestPreviousEnigmaEvent> (loadPreviousEnigma);
-		EventManager.instance.RemoveListener<QueryCurrentEnigmaDataEvent> (getCurrentEnigmaData);
+		EventManager.instance.RemoveListener<QueryCurrentEnigmaDataEvent> (sendCurrentEnigmaData);
 		EventManager.instance.RemoveListener<EnigmaSubmittedEvent> (getEnigmaScore);
 	}
 
-	//arguments temporaire pour test 
+	//Initialise la compétence évaluée et la liste d'énigme 
+	//Méthode appelée par GlobalManager entre Awake et Start
 	public void updateEnigmaSequence(Skill _skill){
 		skill = _skill;
-		//Debug.Log ("update enigma data : " + skill.name);
 		GameObject titleGO = GameObject.Find ("Title");
 		updateEnigmaList ();
-
-
 	}
 
+	//Récupère la liste d'énigme évaluant la compétence qui a été selectionnée
 	public void updateEnigmaList(){
-		//Debug.Log ("update enigma list : " + skill.name);
 		QueryEnigmaListEvent query = new QueryEnigmaListEvent (skill);
 		EventManager.instance.Raise (query);
 		enigmaDataList = query.enigmaList;
-		//Debug.Log ("Enigma data list finished loading");
 	}
 
 	//récupère un objet représentant les datas d'une énigme à partir de son index unity
@@ -94,6 +99,8 @@ public class EnigmaSequenceManager : MonoBehaviour {
 		}
 	}
 
+	//Calcule l'id de la prochaine énigme dans la liste
+	//Renvoie une exception si on est arrivés à la fin de la liste
 	public int getNextEnigmaId(){
 		int nextId = currentEnigmaId + 1; 
 		if (nextId >= enigmaDataList.Count) {
@@ -103,6 +110,29 @@ public class EnigmaSequenceManager : MonoBehaviour {
 		}
 	}
 
+	//Calcule l'id de l'énigme précédente dans la liste
+	//Renvoie une exception si on est arrivés au début de la liste
+	public int getPreviousEnigmaId(){
+		int nextId = currentEnigmaId - 1; 
+		if (nextId < 0) {
+			throw new InvalidOperationException ("This was the first enigma");
+		} else {
+			return nextId;
+		}
+	}
+
+	//Crée un objet Score Data à partir du score d'une énigme
+	ScoreData createScore(bool success){
+		EnigmaData currentEnigma = enigmaDataList [currentEnigmaId];
+		int points = (success)? currentEnigma.score_max : 0;
+		double time = 0;
+		bool help = false;
+		return new ScoreData (currentEnigma.id, -1, points, 1, time, help);
+	}
+
+	/*EVENTS*/
+
+	//Charge la prochaine énigme
 	public void loadNextEnigma(RequestNextEnigmaEvent ev){
 		try {
 			int nextId = getNextEnigmaId();
@@ -115,15 +145,8 @@ public class EnigmaSequenceManager : MonoBehaviour {
 		}
 	}
 
-	public int getPreviousEnigmaId(){
-		int nextId = currentEnigmaId - 1; 
-		if (nextId < 0) {
-			throw new InvalidOperationException ("This was the first enigma");
-		} else {
-			return nextId;
-		}
-	}
 
+	//Charge l'énigme précédente
 	public void loadPreviousEnigma(RequestPreviousEnigmaEvent ev){
 		try {
 			int previousId = getPreviousEnigmaId();
@@ -136,10 +159,12 @@ public class EnigmaSequenceManager : MonoBehaviour {
 		}
 	}
 
-	public void getCurrentEnigmaData(QueryCurrentEnigmaDataEvent e){
+	//Envoie l'id de l'énigme courante
+	public void sendCurrentEnigmaData(QueryCurrentEnigmaDataEvent e){
 		e.enigmaData = enigmaDataList [currentEnigmaId];
 	}
 
+	//Récupère le score de l'énigme courante et envoie une demande de sauvegarde
 	public void getEnigmaScore(EnigmaSubmittedEvent e){
 		//traité dans EnigmaSceneManager
 		QueryEnigmaSuccessEvent query = new QueryEnigmaSuccessEvent ();
@@ -155,18 +180,10 @@ public class EnigmaSequenceManager : MonoBehaviour {
 
 	}
 
-	ScoreData createScore(bool success){
-		EnigmaData currentEnigma = enigmaDataList [currentEnigmaId];
-		int points = (success)? currentEnigma.score_max : 0;
-		double time = (double)getTime();
-		bool help = false;
-		return new ScoreData (currentEnigma.id, -1, points, 1, time, help);
-	}
-
+	//récupère le temps qu'a duré la résolution de l'énigme
 	public float getTime(){
 		QueryTimerEvent query = new QueryTimerEvent ();
 		EventManager.instance.Raise (query);
 		return query.time;
 	}
-		
 }

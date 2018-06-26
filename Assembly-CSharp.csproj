@@ -51,7 +51,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\InputValidation.cs" />
+     <Compile Include="Assets\InteractiveValue.cs" />
      <Compile Include="Assets\M4\Scripts\AlgoAnswer.cs" />
      <Compile Include="Assets\M4\Scripts\ConnectionDataControl.cs" />
      <Compile Include="Assets\M4\Scripts\ConnectionManager.cs" />
@@ -63,6 +63,8 @@
      <Compile Include="Assets\M4\Scripts\Dropzone.cs" />
      <Compile Include="Assets\M4\Scripts\Dynamic UI\PlayerInfoText.cs" />
      <Compile Include="Assets\M4\Scripts\Dynamic UI\ReturnButton.cs" />
+     <Compile Include="Assets\M4\Scripts\Enigma Logic\CaseValidation.cs" />
+     <Compile Include="Assets\M4\Scripts\Enigma Logic\InputValidation.cs" />
      <Compile Include="Assets\M4\Scripts\Enigma Logic\QCMValidation.cs" />
      <Compile Include="Assets\M4\Scripts\Enigma Logic\ValidationMethod.cs" />
      <Compile Include="Assets\M4\Scripts\Enigma.cs" />

@@ -12,8 +12,7 @@ public class PopupManager : MonoBehaviour {
     int errorchoice;
     string state;
 
-
-    public void Start()
+    public void Awake()
     {
         justify = Instantiate(justify_model, GameObject.Find("Answer Popup").transform);
         victory = Instantiate(victory_model, GameObject.Find("Answer Popup").transform);
@@ -22,17 +21,73 @@ public class PopupManager : MonoBehaviour {
         certitudelvl = -1;
         methodchoice = errorchoice = -1;
         state = "none";
-        answerblock= answerblock = justify.transform.Find("ChoiceButtonS").gameObject;
-        
+        answerblock = justify.transform.Find("ChoiceButtonS").gameObject;
+    }
+    public void Start()
+    {
         EventManager.instance.AddListener<ConfidanceErrorItemSelectionEvent>(answerSelection);
-
+        scriptThisShit();
         //configurer le prefab pour le relier à ces variables de récupération
 
+    }
+    private void scriptThisShit()
+    {
+        print("SCRIPT THIS SHIT EST LANCE");
+        // Scripting " Justification " gameobject
+        GameObject go = justify.transform.Find("ChoiceButtonS").gameObject;
+        
+        print(justify.name+" "+go.name);
+        print("nb bouton détecté : "+go.transform.childCount);
+
+
+        // apparemment unity ne comprend pas que chaque script de bouton est associé dynamiquement au bouton d'index i (cad lui-même)
+        // les valeurs de variables ne seront pas résolu correctement
+        // -> Une fois instancié, les boutons auront pour direction " answerselected ( tmp ) avec tmp qui au lieu de valoir getchild( numéro souhaité  résolu) va valoir getchild (i)
+        // on a alors i qui vaut childCount-1 quelque soit le bouton
+        int i;
+        for (i=0; i < go.transform.childCount; i++)
+        {
+            //int pos = i;
+            GameObject tmp = go.transform.GetChild(i).gameObject;
+            tmp.GetComponent<Button>().onClick.AddListener(delegate { print(i); answerSelected(tmp); });
+            
+        }
+
+        // du coup on va mettre les instructions en dure parceque faitchier
+
+        go = justify.transform.Find("Validation_button").gameObject;
+        go.GetComponent<Button>().onClick.AddListener(submit);
+
+        // Scripting " Correction " gameobject
+        go = correct.transform.Find("ChoiceButtonS").gameObject;
+        for (i = 0; i < go.transform.childCount; i++)
+        {
+            //int pos = i;
+            GameObject tmp = go.transform.GetChild(i).gameObject;
+            tmp.GetComponent<Button>().onClick.AddListener(delegate { print(i); answerSelected(tmp); });
+
+        }
+        go = correct.transform.Find("Validation_button").gameObject;
+        go.GetComponent<Button>().onClick.AddListener(submit);
+
+        // Scripting " Victoire " gameobject
+        go = victory.transform.Find("Validation_button").gameObject;
+        go.GetComponent<Button>().onClick.AddListener(submit);
+
+        // Scripting " Défaite " gameobject
+        go = defeat.transform.Find("Validation_button").gameObject;
+        go.GetComponent<Button>().onClick.AddListener(submit);
+    }
+
+    public string getState()
+    {
+        return state;
     }
 
     // Renvoie l'indice d'enfant du go parmi les réponses possibles du bouton cliqué
     public void answerSelected(GameObject go)
     {
+        print("selected gameobject : "+ go.transform.GetSiblingIndex());
         EventManager.instance.Raise(new ConfidanceErrorItemSelectionEvent(go.transform.GetSiblingIndex()));
     }
     // Colorie la sélection
@@ -61,9 +116,7 @@ public class PopupManager : MonoBehaviour {
     public void colorChange(GameObject go)
     {
         Color outcolor;
-        ColorUtility.TryParseHtmlString("#64E8FF", out outcolor);
-        go.GetComponentInChildren<Text>().GetComponent<Text>().color = outcolor;
-
+        ColorUtility.TryParseHtmlString("#1E366D", out outcolor);
         go.GetComponentInChildren<Image>().GetComponent<Image>().color = outcolor;
 
 
@@ -73,9 +126,8 @@ public class PopupManager : MonoBehaviour {
     {
         
         Color outcolor;
-        ColorUtility.TryParseHtmlString("#FFFFFF", out outcolor);
-        go.GetComponentInChildren<Text>().GetComponent<Text>().color = outcolor;
-
+        ColorUtility.TryParseHtmlString("#080C15", out outcolor);
+        
         go.GetComponentInChildren<Image>().GetComponent<Image>().color = outcolor;
 
 
@@ -87,12 +139,13 @@ public class PopupManager : MonoBehaviour {
         {
             case "Justification":
                 {
-                    EventManager.instance.Raise(new ValidationScreenEvent(state,GameObject.Find("ChoiceButtonS").transform.GetChild(methodchoice).GetComponent<Text>().text,certitudelvl));
+                    
+                    EventManager.instance.Raise(new ValidationScreenEvent(state, GameObject.Find("ChoiceButtonS").transform.GetChild(methodchoice).GetComponentInChildren<Text>().text, certitudelvl));
                 }
                 break;
             case "Correction":
                 {
-                    EventManager.instance.Raise(new ValidationScreenEvent(state, GameObject.Find("ChoiceButtonS").transform.GetChild(errorchoice).GetComponent<Text>().text));
+                    EventManager.instance.Raise(new ValidationScreenEvent(state, GameObject.Find("ChoiceButtonS").transform.GetChild(errorchoice).GetComponentInChildren<Text>().text));
                 }
                 break;
             case "Victoire":
@@ -114,7 +167,8 @@ public class PopupManager : MonoBehaviour {
     // méthode d'affichage
     public void updateState(string value)
     {
-        if(value == "Justification" || value == "Victoire" || value == "Défaite" || value == "Correction")
+        print("CALLLING UPDATE STATE (" + value + ")");
+        if (value == "Justification" || value == "Victoire" || value == "Défaite" || value == "Correction")
         {
             state = value;
             displayScreen();

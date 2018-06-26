@@ -9,31 +9,40 @@ public class EnigmaSceneManager : MonoBehaviour {
 	// Use this for initialization
 	void Awake () {
 		validator = null;
-        popm = new PopupManager();
+        popm = GetComponent<PopupManager>();
         EventManager.instance.AddListener<GOButtonPressedEvent> (submitResult);
-				EventManager.instance.AddListener<QueryEnigmaSuccessEvent> (sendScore);
+
+		EventManager.instance.AddListener<QueryEnigmaScoreEvent> (sendScore);
+        EventManager.instance.AddListener<QueryEnigmaSuccessEvent> (sendScore);
         EventManager.instance.AddListener<ValidationScreenEvent>(yourResult); // coming from PopupManager.submit() (likely from a submit button ) | Contains answer only from additional questions post-enigma
 
         validator = gameObject.GetComponent<ValidationMethod>();
+        print("validator: " + validator.ToString());
 
 	}
 
 	void OnDestroy () {
 		validator = null;
 		EventManager.instance.RemoveListener<GOButtonPressedEvent> (submitResult);
-		EventManager.instance.RemoveListener<QueryEnigmaSuccessEvent> (sendScore);
-		EventManager.instance.RemoveListener<ValidationScreenEvent>(yourResult);
+
+		EventManager.instance.RemoveListener<QueryEnigmaScoreEvent> (sendScore);
+        EventManager.instance.RemoveListener<QueryEnigmaSuccessEvent>(sendScore);
+        EventManager.instance.RemoveListener<ValidationScreenEvent> (yourResult);
+    }
+    public void sendScore(QueryEnigmaScoreEvent e)
+    {
 
 	}
 
 	public void submitResult(GOButtonPressedEvent e){
+		//print ("validator  : " + validator.GetType ().Name);
 		success = validator.answerIsRight ();
+        //success = false;
 		enigmaSubmitted ();
 	}
 
 	public void enigmaSubmitted(){
         //traité dans PopUpQuestionManager et EnigmaSequenceManager
-
 		EventManager.instance.Raise(new EnigmaSubmittedEvent()); //test envoie score
         popm.updateState("Justification");
 	}
@@ -59,7 +68,7 @@ public class EnigmaSceneManager : MonoBehaviour {
         }
         else // correction ou victoire
         {
-            // fin d'énigme
+            // fin d'énigme, renvoyer l'user où l'on veut
         }
 
     }
