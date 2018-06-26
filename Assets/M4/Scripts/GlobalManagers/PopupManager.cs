@@ -57,7 +57,7 @@ public class PopupManager : MonoBehaviour {
         {
             
             GameObject tmp = go.transform.GetChild(i).gameObject;
-            tmp.GetComponent<Button>().onClick.AddListener(delegate { print(i); answerSelected(tmp); });
+            tmp.GetComponent<Button>().onClick.AddListener(delegate {answerSelected(tmp); });
 
         }
         go = correct.transform.Find("Validation_button").gameObject;
@@ -80,7 +80,7 @@ public class PopupManager : MonoBehaviour {
     // Renvoie l'indice d'enfant du go parmi les réponses possibles du bouton cliqué
     public void answerSelected(GameObject go)
     {
-        print("selected gameobject : "+ go.transform.GetSiblingIndex());
+
         EventManager.instance.Raise(new ConfidanceErrorItemSelectionEvent(go.transform.GetSiblingIndex()));
     }
     // Colorie la sélection
@@ -102,7 +102,7 @@ public class PopupManager : MonoBehaviour {
             errorchoice = e.choiceindex;
             
         }
-        print(indextocolorback);
+
         if (indextocolorback != -1)
         {
             colorBack(answerblock.transform.GetChild(indextocolorback).gameObject);

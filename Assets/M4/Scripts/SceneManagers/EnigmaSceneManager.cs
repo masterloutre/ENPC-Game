@@ -19,8 +19,8 @@ public class EnigmaSceneManager : MonoBehaviour {
         EventManager.instance.AddListener<ValidationScreenEvent>(yourResult); // coming from PopupManager.submit() (likely from a submit button ) | Contains answer only from additional questions post-enigma
 
         validator = gameObject.GetComponent<ValidationMethod>();
-        
 
+        print("POPUP MANAGER AWAKE");
 	}
 
 	void OnDestroy () {
@@ -44,8 +44,10 @@ public class EnigmaSceneManager : MonoBehaviour {
 	}
 
 	public void enigmaSubmitted(){
+        print("ENIGMA SUBMITTED");
         //traité dans PopUpQuestionManager et EnigmaSequenceManager
-		//EventManager.instance.Raise(new EnigmaSubmittedEvent()); //test envoie score
+		EventManager.instance.Raise(new EnigmaSubmittedEvent()); //test envoie score
+
         popm.updateState("Justification");
 	}
     public void yourResult(ValidationScreenEvent e)

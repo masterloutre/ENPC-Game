@@ -24,6 +24,8 @@ public class EnigmaSequenceManager : MonoBehaviour {
 
 	//Instancie l'objet et ajoute les listeners
 	void Awake(){
+        print(" --------------- AWAKING ESM ------------------");
+        print(gameObject.scene.name);
 		enigmaDataList = new List<EnigmaData> ();
 		EventManager.instance.AddListener<RequestNextEnigmaEvent> (loadNextEnigma);
 		EventManager.instance.AddListener<RequestPreviousEnigmaEvent> (loadPreviousEnigma);
@@ -176,7 +178,8 @@ public class EnigmaSequenceManager : MonoBehaviour {
 		} else {
 			print("RESULT FALSE !!!!!!!!!!");
 		}
-		EventManager.instance.Raise (new RequestSaveScoreEvent (createScore(currentEnigmaSuccess)));
+
+        EventManager.instance.Raise (new RequestSaveScoreEvent (createScore(currentEnigmaSuccess)));
 
 	}
 }

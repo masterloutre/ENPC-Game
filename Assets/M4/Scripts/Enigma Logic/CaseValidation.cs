@@ -20,6 +20,7 @@ public class CaseValidation : MonoBehaviour, ValidationMethod
 
     public void Start()
     {
+        print("Starting CASEVALIDATION");
         ColorUtility.TryParseHtmlString("#1067AC", out unselected);
         ColorUtility.TryParseHtmlString("#459FE7", out selected);
 
@@ -35,10 +36,16 @@ public class CaseValidation : MonoBehaviour, ValidationMethod
 
         stepsDots = GameObject.Find("StepsDots");
         entries = GameObject.Find("Entries");
+        print(entries);
         EventManager.instance.AddListener<RequestNextQuestionEvent>(nextQuestion);
         EventManager.instance.AddListener<RequestSelectionEvent>(answerSelection);
     }
 
+    public void OnDestroy()
+    {
+        EventManager.instance.RemoveListener<RequestNextQuestionEvent>(nextQuestion);
+        EventManager.instance.RemoveListener<RequestSelectionEvent>(answerSelection);
+    }
 
     public bool answerIsRight()
     {
@@ -87,6 +94,8 @@ public class CaseValidation : MonoBehaviour, ValidationMethod
     // devient bleu, et l'ancienne réponse sélectionnée - s'il y en avait une - devient blanche
     public void answerSelection(RequestSelectionEvent e)
     {
+        print("indice de choix: "+e.choiceId);
+        print("entries sélectionné: " + entries.transform.GetChild(e.choiceId));
         int indextocolorback = answerSheet[activeDot];
         colorChange(entries.transform.GetChild(e.choiceId).gameObject);
         answerSheet[activeDot] = e.choiceId;
