@@ -24,6 +24,8 @@ public class EnigmaSequenceManager : MonoBehaviour {
 
 	//Instancie l'objet et ajoute les listeners
 	void Awake(){
+        print(" --------------- AWAKING ESM ------------------");
+        print(gameObject.scene.name);
 		enigmaDataList = new List<EnigmaData> ();
 		EventManager.instance.AddListener<RequestNextEnigmaEvent> (loadNextEnigma);
 		EventManager.instance.AddListener<RequestPreviousEnigmaEvent> (loadPreviousEnigma);
@@ -166,17 +168,22 @@ public class EnigmaSequenceManager : MonoBehaviour {
 
 	//Récupère le score de l'énigme courante et envoie une demande de sauvegarde
 	public void getEnigmaScore(EnigmaSubmittedEvent e){
-		//traité dans EnigmaSceneManager
+
+		//on récupère le succès qui est traité dans EnigmaSceneManager
 		QueryEnigmaSuccessEvent query = new QueryEnigmaSuccessEvent ();
 		EventManager.instance.Raise (query);
+
+        // prepare to check
 		currentEnigmaSuccess = query.enigmaSuccess;
+
 		if (currentEnigmaSuccess) {
 			print("ENIGMA VALIDATED !!!!!!!!!!!!!");
 
 		} else {
 			print("RESULT FALSE !!!!!!!!!!");
 		}
-		EventManager.instance.Raise (new RequestSaveScoreEvent (createScore(currentEnigmaSuccess)));
+
+        EventManager.instance.Raise (new RequestSaveScoreEvent (createScore(currentEnigmaSuccess)));
 
 	}
 

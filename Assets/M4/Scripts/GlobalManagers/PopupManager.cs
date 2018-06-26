@@ -30,41 +30,34 @@ public class PopupManager : MonoBehaviour {
         //configurer le prefab pour le relier à ces variables de récupération
 
     }
+    void OnDestroy()
+    {
+        EventManager.instance.RemoveListener<ConfidanceErrorItemSelectionEvent>(answerSelection);
+    }
     private void scriptThisShit()
     {
         print("SCRIPT THIS SHIT EST LANCE");
         // Scripting " Justification " gameobject
         GameObject go = justify.transform.Find("ChoiceButtonS").gameObject;
         
-        print(justify.name+" "+go.name);
-        print("nb bouton détecté : "+go.transform.childCount);
-
-
-        // apparemment unity ne comprend pas que chaque script de bouton est associé dynamiquement au bouton d'index i (cad lui-même)
-        // les valeurs de variables ne seront pas résolu correctement
-        // -> Une fois instancié, les boutons auront pour direction " answerselected ( tmp ) avec tmp qui au lieu de valoir getchild( numéro souhaité  résolu) va valoir getchild (i)
-        // on a alors i qui vaut childCount-1 quelque soit le bouton
-        int i;
-        for (i=0; i < go.transform.childCount; i++)
+        for (int i=0; i < go.transform.childCount; i++)
         {
-            //int pos = i;
+            
             GameObject tmp = go.transform.GetChild(i).gameObject;
-            tmp.GetComponent<Button>().onClick.AddListener(delegate { print(i); answerSelected(tmp); });
+            tmp.GetComponent<Button>().onClick.AddListener(delegate {answerSelected(tmp); });
             
         }
-
-        // du coup on va mettre les instructions en dure parceque faitchier
-
+        
         go = justify.transform.Find("Validation_button").gameObject;
         go.GetComponent<Button>().onClick.AddListener(submit);
 
         // Scripting " Correction " gameobject
         go = correct.transform.Find("ChoiceButtonS").gameObject;
-        for (i = 0; i < go.transform.childCount; i++)
+        for (int i = 0; i < go.transform.childCount; i++)
         {
-            //int pos = i;
+            
             GameObject tmp = go.transform.GetChild(i).gameObject;
-            tmp.GetComponent<Button>().onClick.AddListener(delegate { print(i); answerSelected(tmp); });
+            tmp.GetComponent<Button>().onClick.AddListener(delegate {answerSelected(tmp); });
 
         }
         go = correct.transform.Find("Validation_button").gameObject;
@@ -87,7 +80,7 @@ public class PopupManager : MonoBehaviour {
     // Renvoie l'indice d'enfant du go parmi les réponses possibles du bouton cliqué
     public void answerSelected(GameObject go)
     {
-        print("selected gameobject : "+ go.transform.GetSiblingIndex());
+
         EventManager.instance.Raise(new ConfidanceErrorItemSelectionEvent(go.transform.GetSiblingIndex()));
     }
     // Colorie la sélection
@@ -109,7 +102,12 @@ public class PopupManager : MonoBehaviour {
             errorchoice = e.choiceindex;
             
         }
-        colorBack(answerblock.transform.GetChild(indextocolorback).gameObject);
+
+        if (indextocolorback != -1)
+        {
+            colorBack(answerblock.transform.GetChild(indextocolorback).gameObject);
+        }
+        
 
     }
     // Colorie en bleu clair une réponse
@@ -139,13 +137,27 @@ public class PopupManager : MonoBehaviour {
         {
             case "Justification":
                 {
+                    try
+                    {
+                        EventManager.instance.Raise(new ValidationScreenEvent(state, GameObject.Find("ChoiceButtonS").transform.GetChild(methodchoice).GetComponentInChildren<Text>().text, certitudelvl));
+                    }catch{
+                        throw new Exception("WRYYYYYY MANQUE UN ARGUMENT POUR RAISE");
+                    }
                     
-                    EventManager.instance.Raise(new ValidationScreenEvent(state, GameObject.Find("ChoiceButtonS").transform.GetChild(methodchoice).GetComponentInChildren<Text>().text, certitudelvl));
+                    
                 }
                 break;
             case "Correction":
                 {
-                    EventManager.instance.Raise(new ValidationScreenEvent(state, GameObject.Find("ChoiceButtonS").transform.GetChild(errorchoice).GetComponentInChildren<Text>().text));
+                    try
+                    {
+                        EventManager.instance.Raise(new ValidationScreenEvent(state, GameObject.Find("ChoiceButtonS").transform.GetChild(errorchoice).GetComponentInChildren<Text>().text));
+                    }
+                    catch
+                    {
+                        throw new Exception("WRYYYYYY MANQUE UN ARGUMENT POUR RAISE");
+                    }
+                    
                 }
                 break;
             case "Victoire":
@@ -224,7 +236,5 @@ public class PopupManager : MonoBehaviour {
         }
     }
 
-    // where does it raise, in enigmauimanager
-
-    //what do you do then
+    
 }

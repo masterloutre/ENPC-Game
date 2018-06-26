@@ -20,23 +20,32 @@ public class CaseValidation : MonoBehaviour, ValidationMethod
 
     public void Start()
     {
+        print("Starting CASEVALIDATION");
         ColorUtility.TryParseHtmlString("#1067AC", out unselected);
         ColorUtility.TryParseHtmlString("#459FE7", out selected);
 
         activeDot = 0;
         // taille dépendante du nombre de questions intermédiaire
+        // surement par le nombre de dot si on décide de laisser l'édition des énigmes
         answerSheet = new int[] { -1, -1, -1 };
 
         // Réponse fourni par enigma manager
-        answers = new string[] { "heeeeeey", "hoooooooooo", "yoooolooooo" };
+        // choix possible laissé à l'édition ?
+        answers = new string[] { "Réponse numéro 3", "Réponse numéro 3", "Réponse numéro 3" };
 
 
         stepsDots = GameObject.Find("StepsDots");
         entries = GameObject.Find("Entries");
+        print(entries);
         EventManager.instance.AddListener<RequestNextQuestionEvent>(nextQuestion);
         EventManager.instance.AddListener<RequestSelectionEvent>(answerSelection);
     }
 
+    public void OnDestroy()
+    {
+        EventManager.instance.RemoveListener<RequestNextQuestionEvent>(nextQuestion);
+        EventManager.instance.RemoveListener<RequestSelectionEvent>(answerSelection);
+    }
 
     public bool answerIsRight()
     {
@@ -85,6 +94,8 @@ public class CaseValidation : MonoBehaviour, ValidationMethod
     // devient bleu, et l'ancienne réponse sélectionnée - s'il y en avait une - devient blanche
     public void answerSelection(RequestSelectionEvent e)
     {
+        print("indice de choix: "+e.choiceId);
+        print("entries sélectionné: " + entries.transform.GetChild(e.choiceId));
         int indextocolorback = answerSheet[activeDot];
         colorChange(entries.transform.GetChild(e.choiceId).gameObject);
         answerSheet[activeDot] = e.choiceId;

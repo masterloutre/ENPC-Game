@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 224592866577256680}
   m_Layer: 5
-  m_Name: "De\u0301faite"
+  m_Name: "D\xE9faite"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
