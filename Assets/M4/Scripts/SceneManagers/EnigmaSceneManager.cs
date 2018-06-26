@@ -38,8 +38,8 @@ public class EnigmaSceneManager : MonoBehaviour {
 
 	public void submitResult(GOButtonPressedEvent e){
 		//print ("validator  : " + validator.GetType ().Name);
-		//success = validator.answerIsRight ();
-        success = false;
+		success = validator.answerIsRight ();
+        //success = false;
 		enigmaSubmitted ();
 	}
 

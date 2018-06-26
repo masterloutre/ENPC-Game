@@ -25,10 +25,12 @@ public class CaseValidation : MonoBehaviour, ValidationMethod
 
         activeDot = 0;
         // taille dépendante du nombre de questions intermédiaire
+        // surement par le nombre de dot si on décide de laisser l'édition des énigmes
         answerSheet = new int[] { -1, -1, -1 };
 
         // Réponse fourni par enigma manager
-        answers = new string[] { "heeeeeey", "hoooooooooo", "yoooolooooo" };
+        // choix possible laissé à l'édition ?
+        answers = new string[] { "Réponse numéro 3", "Réponse numéro 3", "Réponse numéro 3" };
 
 
         stepsDots = GameObject.Find("StepsDots");
