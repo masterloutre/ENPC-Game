@@ -37,7 +37,7 @@ public class EnigmaSceneManager : MonoBehaviour {
 	}
 
 	public void submitResult(GOButtonPressedEvent e){
-		//print ("validator  : " + validator.GetType ().Name);
+		print ("GO button event recieved");
 		success = validator.answerIsRight ();
         //success = false;
 		enigmaSubmitted ();
@@ -46,6 +46,7 @@ public class EnigmaSceneManager : MonoBehaviour {
 	public void enigmaSubmitted(){
         print("ENIGMA SUBMITTED");
         //traité dans PopUpQuestionManager et EnigmaSequenceManager
+		print("EnigmaSceneManager : Enigma submitted");
 		EventManager.instance.Raise(new EnigmaSubmittedEvent()); //test envoie score
 
         popm.updateState("Justification");
