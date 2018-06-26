@@ -19,7 +19,6 @@ public class InteractiveValue : MonoBehaviour {
 		value = valeur;
 		unit = unité;
 		variableName = nomDeVariable;
-		print ("tralal");
 		gameObject.GetComponent<Text> ().text = computeText();
 	}
 
