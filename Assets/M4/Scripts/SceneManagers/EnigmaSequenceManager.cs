@@ -168,10 +168,14 @@ public class EnigmaSequenceManager : MonoBehaviour {
 
 	//Récupère le score de l'énigme courante et envoie une demande de sauvegarde
 	public void getEnigmaScore(EnigmaSubmittedEvent e){
-		//traité dans EnigmaSceneManager
+
+		//on récupère le succès qui est traité dans EnigmaSceneManager
 		QueryEnigmaSuccessEvent query = new QueryEnigmaSuccessEvent ();
 		EventManager.instance.Raise (query);
+
+        // prepare to check
 		currentEnigmaSuccess = query.enigmaSuccess;
+
 		if (currentEnigmaSuccess) {
 			print("ENIGMA VALIDATED !!!!!!!!!!!!!");
 
