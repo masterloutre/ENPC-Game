@@ -18,6 +18,7 @@ public class CaseScenarioPartIcon {
 	}
 
 	public void activateScenarioPart(){
+		Debug.Log ("button clicked activate scenario part");
 		scenarioPart.show ();
 	}
 
@@ -27,7 +28,7 @@ public class CaseScenarioPartIcon {
 
 		GameObject iconGO = GameObject.Instantiate(prefab, parentGO.transform, false);
 		iconGO.transform.position += new Vector3 (0, offsetY, 0);
-		iconGO.GetComponent<UnityEngine.UI.Button> ().onClick.AddListener (activateScenarioPart);
+		iconGO.GetComponentInChildren<UnityEngine.UI.Button>().onClick.AddListener (activateScenarioPart);
 	}
 
 }
