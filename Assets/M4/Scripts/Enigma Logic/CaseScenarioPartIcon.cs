@@ -14,6 +14,9 @@ public class CaseScenarioPartIcon {
 		prefab = _prefab;
 
 		createGameObject ();
+		if (scenarioPart.id != 0) {
+			scenarioPart.hide ();
+		}
 
 	}
 
@@ -23,7 +26,7 @@ public class CaseScenarioPartIcon {
 	}
 
 	public void createGameObject(){
-		float offsetY = scenarioPart.id * (-30) - 30;
+		float offsetY = scenarioPart.id * (-25) - 25;
 		GameObject parentGO = GameObject.Find ("TimeLine");
 
 		GameObject iconGO = GameObject.Instantiate(prefab, parentGO.transform, false);
