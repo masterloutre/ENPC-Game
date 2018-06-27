@@ -47,7 +47,7 @@ public class AlgoAnswer : MonoBehaviour
         {
             //quitter l'énigme
             ScoreControl.Success(isRightAnswer);
-            EnigmaManager.enigmaEnd();
+            //EnigmaManager.enigmaEnd();
         }
     }
 

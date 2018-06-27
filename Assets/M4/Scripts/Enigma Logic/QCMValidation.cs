@@ -21,7 +21,10 @@ public class QCMValidation : MonoBehaviour, ValidationMethod
 		//}
 	}
 
-
+    public float score()
+    {
+        return 0.0f;
+    }
 	public bool answerIsRight(){
 		bool isRightAnswer = false;
 		if (checkEmptySlots ()) {

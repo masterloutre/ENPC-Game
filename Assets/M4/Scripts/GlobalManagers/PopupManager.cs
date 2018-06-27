@@ -3,29 +3,35 @@ using UnityEngine.Networking;
 using System;
 using UnityEngine.UI;
 
-public class PopupManager : MonoBehaviour {
-    public GameObject justify_model, victory_model, defeat_model,correct_model; // à relier au prefab dans l'éditeur
-    private GameObject justify, victory, defeat, correct;
-    private GameObject answerblock;
-    int certitudelvl;
-    int methodchoice;
-    int errorchoice;
-    string state;
+public class PopupManager : MonoBehaviour
+{
+    int certitudelvl; // Niveau de certitude
+    int methodchoice; // Indice du choix de réponse de justification
+    string state; // Étape en cours, peut valoir : "none", "Certitude", "Justification", "Correction", "Victoire", "Défaite"
+
+    public GameObject sure_model, justify_model, victory_model, defeat_model,correct_model; // Variable de référence des Prefabs correspondant à chaque étape, doivent être attribués depuis l'éditeur
+    private GameObject sure, justify, victory, defeat, correct; // Écrans des étapes
+    private GameObject answerblock; // Les justifications possible
+    
 
     public void Awake()
     {
+        // INSTANCIATION des modèles, masqués par défaut
+        sure = Instantiate(sure_model, GameObject.Find("Answer Popup").transform);
         justify = Instantiate(justify_model, GameObject.Find("Answer Popup").transform);
         victory = Instantiate(victory_model, GameObject.Find("Answer Popup").transform);
         defeat = Instantiate(defeat_model, GameObject.Find("Answer Popup").transform);
         correct = Instantiate(correct_model, GameObject.Find("Answer Popup").transform);
+
         certitudelvl = -1;
-        methodchoice = errorchoice = -1;
+        methodchoice = -1;
         state = "none";
         answerblock = justify.transform.Find("ChoiceButtonS").gameObject;
     }
     public void Start()
     {
-        EventManager.instance.AddListener<ConfidanceErrorItemSelectionEvent>(answerSelection);
+        // LISTENERS
+        EventManager.instance.AddListener<ConfidanceErrorItemSelectionEvent>(answerSelection); // En réponse à la sélection d'un choix
         scriptThisShit();
         //configurer le prefab pour le relier à ces variables de récupération
 
@@ -70,6 +76,10 @@ public class PopupManager : MonoBehaviour {
         // Scripting " Défaite " gameobject
         go = defeat.transform.Find("Validation_button").gameObject;
         go.GetComponent<Button>().onClick.AddListener(submit);
+
+        // Scripting " Certitude " gameobject
+        go = sure.transform.Find("Validation_button").gameObject;
+        go.GetComponent<Button>().onClick.AddListener(submit);
     }
 
     public string getState()
@@ -88,21 +98,9 @@ public class PopupManager : MonoBehaviour {
     {
         int indextocolorback=-1 ;
         colorChange(answerblock.transform.GetChild(e.choiceindex).gameObject);
-        if (state == "Justification")
-        {
-            indextocolorback = methodchoice;
-            
-            methodchoice= e.choiceindex;
-            
-        }
-        if (state == "Correction")
-        {
-            indextocolorback = errorchoice;
-            
-            errorchoice = e.choiceindex;
-            
-        }
-
+        indextocolorback = methodchoice;
+        methodchoice= e.choiceindex;
+        
         if (indextocolorback != -1)
         {
             colorBack(answerblock.transform.GetChild(indextocolorback).gameObject);
@@ -135,31 +133,31 @@ public class PopupManager : MonoBehaviour {
     {
         switch (state)
         {
-            case "Justification":
+            case "Certitude":
                 {
                     try
                     {
-                        EventManager.instance.Raise(new ValidationScreenEvent(state, GameObject.Find("ChoiceButtonS").transform.GetChild(methodchoice).GetComponentInChildren<Text>().text, certitudelvl));
-                    }catch{
-                        throw new Exception("WRYYYYYY MANQUE UN ARGUMENT POUR RAISE");
-                    }
-                    
-                    
-                }
-                break;
-            case "Correction":
-                {
-                    try
-                    {
-                        EventManager.instance.Raise(new ValidationScreenEvent(state, GameObject.Find("ChoiceButtonS").transform.GetChild(errorchoice).GetComponentInChildren<Text>().text));
+                        EventManager.instance.Raise(new ValidationScreenEvent(state, GameObject.Find("Slider").GetComponent<Slider>().value));
                     }
                     catch
                     {
                         throw new Exception("WRYYYYYY MANQUE UN ARGUMENT POUR RAISE");
                     }
-                    
                 }
                 break;
+            case "Correction":
+            case "Justification":
+                {
+                    try
+                    {
+                        EventManager.instance.Raise(new ValidationScreenEvent(state, GameObject.Find("ChoiceButtonS").transform.GetChild(methodchoice).GetComponentInChildren<Text>().text));
+                    } catch {
+                        throw new Exception("WRYYYYYY MANQUE UN ARGUMENT POUR RAISE");
+                    }
+
+
+                }break;
+        
             case "Victoire":
             case "Défaite":
                 {
@@ -180,7 +178,7 @@ public class PopupManager : MonoBehaviour {
     public void updateState(string value)
     {
         print("CALLLING UPDATE STATE (" + value + ")");
-        if (value == "Justification" || value == "Victoire" || value == "Défaite" || value == "Correction")
+        if (value == "Certitude" || value == "Justification" || value == "Victoire" || value == "Défaite" || value == "Correction")
         {
             state = value;
             displayScreen();
@@ -195,39 +193,53 @@ public class PopupManager : MonoBehaviour {
     {
         switch (state)
         {
-            case "Justification":
+            case "Certitude":
                 {
                     correct.SetActive(false);
                     victory.SetActive(false);
                     defeat.SetActive(false);
-                    methodchoice=errorchoice=certitudelvl=-1;
-                    justify.SetActive(true);
-                    state = "Justification";
-                    answerblock = justify.transform.Find("ChoiceButtonS").gameObject;
+                    justify.SetActive(false);
+                    sure.SetActive(true);
+
+                    methodchoice = -1;
+                    certitudelvl = 0;
+                    
                 }
                 break;
+            
             case "Victoire":
                 {
-                    justify.SetActive(false);
+                    sure.SetActive(false);
                     victory.SetActive(true);
-                    state = "Victoire";
                 }
                 break;
             case "Défaite":
                 {
-                    justify.SetActive(false);
+                    sure.SetActive(false);
                     defeat.SetActive(true);
-                    state = "Défaite";
+                    
+                }
+                break;
+
+            case "Justification":
+                {
+                    victory.SetActive(false);
+                    justify.SetActive(true);
+
+                    methodchoice = certitudelvl = -1;
+                    answerblock = justify.transform.Find("ChoiceButtonS").gameObject;
                 }
                 break;
             case "Correction":
                 {
                     defeat.SetActive(false);
                     correct.SetActive(true);
-                    state = "Correction";
+
+                    methodchoice = certitudelvl = -1;
                     answerblock = correct.transform.Find("ChoiceButtonS").gameObject;
                 }
                 break;
+
             default:
                 {
                     print("REEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");

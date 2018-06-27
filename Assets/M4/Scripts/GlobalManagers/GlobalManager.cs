@@ -10,15 +10,18 @@ using System;
 using UnityEngine.SceneManagement;
 using System.Runtime.Remoting;
 
-public class GlobalManager : MonoBehaviour {
-	public bool startAtLandingPage = false;
-	private PlayerManager playerManager;
+public class GlobalManager : MonoBehaviour
+{
+
+    public bool startAtLandingPage = false;
+    private int gameSessionId;
+
+    private PlayerManager playerManager;
 	private SceneLoader sceneLoader;
 	private EnigmaManager enigmaManager;
-	private int gameSessionId;
 	private ScoreManager scoreManager;
 
-	//variable statique : url root de l'interface web
+	// Variable statique : url root de l'interface web
 	public static string webInterfaceRootURL { 
 		//VERSION KEN
 		get { return "http://localhost/enpc-web-interface"; }
@@ -29,34 +32,40 @@ public class GlobalManager : MonoBehaviour {
 	//récupère les références au PlayerManager, au SceneLoader, à l'EnigmaManager 
 	//enregistre les listener d'events
 	public void Awake(){
+
+        // RÉFÉRENCES des managers stockés
 		playerManager = gameObject.GetComponent<PlayerManager> ();
 		sceneLoader = gameObject.GetComponent<SceneLoader> ();
 		enigmaManager = gameObject.GetComponent<EnigmaManager> ();
 		scoreManager = gameObject.GetComponent<ScoreManager> ();
-		EventManager.instance.AddListener<RequestNextSceneEvent> (nextScene);
-		EventManager.instance.AddListener<RequestPreviousSceneEvent> (previousScene);
-		EventManager.instance.AddListener<QueryPlayerManagerEvent> (getPlayerManager);
-		EventManager.instance.AddListener<QuerySceneLoaderEvent> (getSceneLoader);
-		EventManager.instance.AddListener<QuerySkillListEvent> (getSkillList);
-		EventManager.instance.AddListener<QueryEnigmaListEvent> (getEnigmaList);
-		EventManager.instance.AddListener<RequestSaveScoreEvent> (saveScoreToServer);
-	}
 
-	//à l'initialisation du gameObject, lance la séquence de démarrage
-	public void Start(){
+        // LISTENERS initialisés
+		EventManager.instance.AddListener<RequestNextSceneEvent> (nextScene); // Prochain écran || MenuSceneManager.nextScene()
+        EventManager.instance.AddListener<RequestPreviousSceneEvent> (previousScene); // Précédent écran || ReturnButton.PreviousScene()
+        EventManager.instance.AddListener<QueryPlayerManagerEvent> (getPlayerManager); // Demande de l'instance de PlayerManager || PlayerInfoText.Awake()
+        EventManager.instance.AddListener<QuerySkillListEvent>(getSkillList); // Demande de l'instance de la liste des compétences || SkillsMenuSceneManager.Start()
+
+        EventManager.instance.AddListener<QuerySceneLoaderEvent> (getSceneLoader); // Demande de l'instance de SceneLoader || EnigmaSequenceManager.Awake()
+		EventManager.instance.AddListener<QueryEnigmaListEvent> (getEnigmaList); // Demande de l'instance de la liste des énigmes || EnigmaSequenceManager.updateEnigmaList()
+        EventManager.instance.AddListener<RequestSaveScoreEvent> (saveScoreToServer); // Envoi de score au serveur || EnigmaSequenceManager.getEnigmaScore(EnigmaSubmittedEvent)
+    }
+    // SUPPRESSION des listeners une fois terminé
+    void OnDestroy()
+    {
+        EventManager.instance.RemoveListener<RequestNextSceneEvent>(nextScene);
+        EventManager.instance.RemoveListener<RequestPreviousSceneEvent>(previousScene);
+        EventManager.instance.RemoveListener<QueryPlayerManagerEvent>(getPlayerManager);
+        EventManager.instance.RemoveListener<QuerySceneLoaderEvent>(getSceneLoader);
+        EventManager.instance.RemoveListener<QuerySkillListEvent>(getSkillList);
+        EventManager.instance.RemoveListener<QueryEnigmaListEvent>(getEnigmaList);
+        EventManager.instance.RemoveListener<RequestSaveScoreEvent>(saveScoreToServer);
+
+    }
+
+    //à l'initialisation du gameObject, lance la séquence de démarrage
+    public void Start(){
 		Debug.Log ("ATTENTION : l'addresse indiquée pour l'interface est : " + webInterfaceRootURL + " Si ce n'est pas la bonne il faut décommenter la bonne version dans GlobalManager");
 		StartCoroutine(startSequence ());
-	}
-
-	void OnDestroy(){
-		EventManager.instance.RemoveListener<RequestNextSceneEvent> (nextScene);
-		EventManager.instance.RemoveListener<RequestPreviousSceneEvent> (previousScene);
-		EventManager.instance.RemoveListener<QueryPlayerManagerEvent> (getPlayerManager);
-		EventManager.instance.RemoveListener<QuerySceneLoaderEvent> (getSceneLoader);
-		EventManager.instance.RemoveListener<QuerySkillListEvent> (getSkillList);
-		EventManager.instance.RemoveListener<QueryEnigmaListEvent> (getEnigmaList);
-		EventManager.instance.RemoveListener<RequestSaveScoreEvent> (saveScoreToServer);
-
 	}
 
 	//Séquence de démarrage, les coroutines permettent d'attendre que la méthode appelée soit entierement executées avant de yield
@@ -74,6 +83,8 @@ public class GlobalManager : MonoBehaviour {
 		}
 	}
 
+    // Récupère l'ID de la session en cours
+    // si aucune session n'est ouverte, renvoie 0
 	IEnumerator getSessionId(){
 		string serverURL = GlobalManager.webInterfaceRootURL;
 		UnityWebRequest getRequest = UnityWebRequest.Get (serverURL + "/index.php?action=session-ouverte");
@@ -88,7 +99,6 @@ public class GlobalManager : MonoBehaviour {
 			{
 				this.gameSessionId = 0;
 			}
-
 		}
 	}
 
@@ -97,7 +107,7 @@ public class GlobalManager : MonoBehaviour {
 	 * GESTION DES EVENTS *
 	 * ********************/
 
-	//load le prochain menu en fonction du nom de la scène actuelle
+	// Load le prochain menu en fonction du nom de la scène actuelle
 	//les coroutines ne sont peut etre pas forcément nécessaire mais on les garde pour pouvoir garder 
 	// les fct du scenenLoader avec des valeurs de retour IENumerator pour plus d'homogénéité
 	void nextScene(RequestNextSceneEvent e){
@@ -111,7 +121,6 @@ public class GlobalManager : MonoBehaviour {
 			StartCoroutine (sceneLoader.loadEnigmaSequence (enigmaManager.getSkills()[e.choiceId]));
 		}
 	}
-
 	void previousScene(RequestPreviousSceneEvent e){
 		//Debug.Log ("Previous scene requested by " + e.currentSceneName);
 		if (e.currentSceneName == "HomeScene") {
@@ -123,14 +132,13 @@ public class GlobalManager : MonoBehaviour {
 		}
 	}
 
+    // GETTERs
 	void getPlayerManager(QueryPlayerManagerEvent e){
 		e.playerManager = this.playerManager;
 	}
-
 	void getSceneLoader(QuerySceneLoaderEvent e){
 		e.sceneLoader = this.sceneLoader;
 	}
-
 	void getSkillList(QuerySkillListEvent e ){
 		try{
 			e.skillList = enigmaManager.getSkills ();
@@ -138,7 +146,6 @@ public class GlobalManager : MonoBehaviour {
 			throw exception;
 		}
 	}
-
 	void getEnigmaList(QueryEnigmaListEvent e ){
 		try{
 			if(e.skill != null){
@@ -151,6 +158,7 @@ public class GlobalManager : MonoBehaviour {
 		}
 	}
 
+    // Envoi du score au serveur
 	void saveScoreToServer(RequestSaveScoreEvent e){
 		e.score.id_etudiant = playerManager.getPlayerId ();
 		scoreManager.saveScoreToServer (e.score);

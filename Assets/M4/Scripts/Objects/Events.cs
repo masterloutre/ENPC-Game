@@ -138,21 +138,21 @@ public class ValidationScreenEvent : GameEvent
 {
     public string answer;
     public string state;
-    public int confidance;
+    public float confidance;
     public ValidationScreenEvent(string etat) { // victoire/defaite
-        state = etat;
+        state = etat; //crucial
         answer = "none";
         confidance = -1;
     }
-    public ValidationScreenEvent(string etat,string ans,int certitude) // justifier
+    public ValidationScreenEvent(string etat,float certitude) // certitude
     {
-        answer = ans;
+        answer = "none";
         state = etat;
-        confidance = certitude;
+        confidance = certitude; //crucial
     }
-    public ValidationScreenEvent(string etat, string ans) // correction
+    public ValidationScreenEvent(string etat, string ans) // correction/justification
     {
-        answer = ans;
+        answer = ans; //crucial
         state = etat;
         confidance = -1;
     }
@@ -175,8 +175,14 @@ public class EnigmaSubmittedEvent : GameEvent{
 
 public class QueryEnigmaSuccessEvent : GameEvent{
 	public bool enigmaSuccess;
+    public float certitude;
+    public string method;
+    public float score;
 	public QueryEnigmaSuccessEvent(){
 		enigmaSuccess = false;
+        certitude = -1;
+        method = "none";
+        score = -1;
 	}
 }
 public class QueryEnigmaScoreEvent : GameEvent

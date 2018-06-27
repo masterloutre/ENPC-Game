@@ -6,21 +6,14 @@ using UnityEngine.Networking;
 using System;
 using System.Linq;
 
-public class EnigmaManager : MonoBehaviour {
-	private List<EnigmaData> enigmas;
+public class EnigmaManager : MonoBehaviour
+{
+
+    private List<EnigmaData> enigmas;
 	private List<Skill> skills;
 
-
-    public void Start()
-    {
-        
-        EventManager.instance.AddListener<GOButtonPressedEvent>((e) => { });
-        EventManager.instance.AddListener<iButtonPressedEvent>((e) => { });
-        EventManager.instance.AddListener<targetButtonPressedEvent>((e) => { });
-
-        
-    }
-    //instancie la liste d'énigmes
+    
+    // INSTANCIATION des variables
     public IEnumerator instanciateEnigmas(){
 		this.enigmas = new List<EnigmaData> ();
 		yield return StartCoroutine (getEnigmaData());
@@ -28,7 +21,7 @@ public class EnigmaManager : MonoBehaviour {
 		yield break;
 	}
 
-	//récupère les informations des énigmes auprès de l'interface web
+	// RÉCUPÉRATION des données d'énigmes depuis le serveur
 	IEnumerator getEnigmaData(){
 		string serverURL = GlobalManager.webInterfaceRootURL;
 		UnityWebRequest getRequest = UnityWebRequest.Get (serverURL + "/index.php?action=enigmes-disponibles");
@@ -45,6 +38,33 @@ public class EnigmaManager : MonoBehaviour {
 		}
 	}
 
+    // REMPLISSAGE des valeurs obtenues
+    private void computeSkillList()
+    {
+        skills = new List<Skill>();
+        foreach (EnigmaData ed in enigmas)
+        {
+            Skill newSkill = new Skill(ed.competence_id, ed.competence);
+            if (!skills.Contains(newSkill))
+            {
+                skills.Add(newSkill);
+            }
+        }
+    }
+
+    // GETTER
+    public List<EnigmaData> getEnigmas(){
+		return new List<EnigmaData> (enigmas);
+	}
+	public List<EnigmaData> getEnigmasBySkill(Skill skill){
+		return new List<EnigmaData> (enigmas).Where(ed => ed.competence == skill.name).ToList();
+	}
+	public List<Skill> getSkills(){
+		return skills;
+	}
+
+
+    /*
 	// OLD MAY NEED TO DELETE
     public static void enigmaEnd()
     {
@@ -59,57 +79,7 @@ public class EnigmaManager : MonoBehaviour {
             }
         }
     }
-
-    
-
-    
-    /* dans une autre classe maintenant -> EnigmaSequenceManager
-	//récupère un objet représentant les datas d'une énigme à partir de son index unity
-	private EnigmaData getEnigmaByUnityIndex(int value){
-		EnigmaSearch es = new EnigmaSearch (value);
-		return this.enigmas.Find (es.unityIndexSearch);
-	}
-
-	//récupère l'id (position) d'une énigme dans la liste à partir de son index unity
-	public int getIdByUnityIndex(int value){
-		EnigmaSearch es = new EnigmaSearch (value);
-		return this.enigmas.FindIndex (es.unityIndexSearch);
-	}
-
-	//récupère l'id de l'énigme suivante dans la liste à partir de l'index unity d'une énigme
-	//envoie une exception si il n'y a pas d'énigme suivante
-	public int getNextUnityIndex(int currentUnityIndex){
-		int enigmaId = getIdByUnityIndex (currentUnityIndex);
-		int nextId = enigmaId + 1;
-		if (nextId >= enigmas.Count ()) {
-			throw new InvalidOperationException ("This was the last enigma");
-		} else {
-			return nextId;
-		}
-	}
-	*/
-
-    public List<EnigmaData> getEnigmas(){
-		return new List<EnigmaData> (enigmas);
-	}
-
-	public List<EnigmaData> getEnigmasBySkill(Skill skill){
-		return new List<EnigmaData> (enigmas).Where(ed => ed.competence == skill.name).ToList();
-	}
-
-	public List<Skill> getSkills(){
-		return skills;
-	}
-
-	private void computeSkillList(){
-		skills = new List<Skill> ();
-		foreach (EnigmaData ed in enigmas){
-			Skill newSkill = new Skill (ed.competence_id, ed.competence);
-			if (!skills.Contains (newSkill)) {
-				skills.Add (newSkill);
-			}
-		}
-	}
+    */
 }
 
 //Classe décrivant les différents prédicats de recherche dans la liste d'énigmes

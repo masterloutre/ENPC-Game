@@ -47,6 +47,10 @@ public class CaseValidation : MonoBehaviour, ValidationMethod
         EventManager.instance.RemoveListener<RequestSelectionEvent>(answerSelection);
     }
 
+    public float score()
+    {
+        return 0.0f;
+    }
     public bool answerIsRight()
     {
         GameObject go;

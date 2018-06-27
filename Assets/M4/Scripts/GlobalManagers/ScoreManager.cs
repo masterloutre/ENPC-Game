@@ -5,18 +5,17 @@ using UnityEngine.Networking;
 using System.Runtime.Remoting;
 using System;
 
-public class ScoreManager : MonoBehaviour {
-	private List<ScoreData> localScoreList;
+public class ScoreManager : MonoBehaviour
+{
+
+    private List<ScoreData> localScoreList;
+
+
 	// Use this for initialization
 	void Start () {
 		localScoreList = new List<ScoreData> ();
 	}
 	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
 	public void addScore(ScoreData score){
 		localScoreList.Add (score);
 	}

@@ -20,8 +20,12 @@ public class InputValidation : MonoBehaviour, ValidationMethod
 			paramList.Add(paramGO.GetComponent<InteractiveValue> ().value);
 		}
 	}
-	
-	public bool answerIsRight(){
+
+    public float score()
+    {
+        return 0.0f;
+    }
+    public bool answerIsRight(){
 		string studentInput = GameObject.FindGameObjectWithTag("Input Text").GetComponentInChildren<UnityEngine.UI.Text> ().text;
 		Expression expCorrect = parser.EvaluateExpression(formula);
 		if(studentInput != ""){

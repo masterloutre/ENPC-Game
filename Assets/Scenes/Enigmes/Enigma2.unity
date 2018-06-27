@@ -4599,6 +4599,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74e15aab8ccb2e64ca7c0eb589e9d0b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sure_model: {fileID: 1020755925901250, guid: c76057368ffa8d042aceff583269c273, type: 2}
   justify_model: {fileID: 1059341634635592, guid: 865308c9b166d854ca8bff3cc6e85b36,
     type: 2}
   victory_model: {fileID: 1114624934284192, guid: c2b338cc2d55dae468e99858f84f6d42,
