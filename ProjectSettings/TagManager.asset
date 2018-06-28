@@ -11,6 +11,7 @@ TagManager:
   - DestinationSlot
   - Input Param
   - Input Text
+  - ScenarioPart
   layers:
   - Default
   - TransparentFX

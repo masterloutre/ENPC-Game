@@ -7,8 +7,12 @@ public class CaseScenarioPart : MonoBehaviour {
 	public int id { get; private set; }
 	public GameObject iconPrefab;
 	// Use this for initialization
-	void Start () {
+	void Awake(){
 		id = Array.IndexOf(transform.parent.GetComponentsInChildren<CaseScenarioPart> (), this);
+	}
+		
+
+	void Start () {
 		CaseScenarioPartIcon icon = new CaseScenarioPartIcon (this, iconPrefab);
 	}
 
@@ -26,5 +30,23 @@ public class CaseScenarioPart : MonoBehaviour {
 
 	public void hide(){
 		gameObject.SetActive (false);
+	}
+
+	public override bool Equals(object obj)
+	{
+		
+		CaseScenarioPart item = obj as CaseScenarioPart;
+
+		if (item == null)
+		{
+			return false;
+		}
+		Debug.Log ("Equal override : " + this.gameObject.name + " = " + item.gameObject.name);
+		return this.id == item.id && this.iconPrefab == item.iconPrefab && this.gameObject.name == item.gameObject.name;
+	}
+
+	public override int GetHashCode()
+	{
+		return this.id.GetHashCode();
 	}
 }
