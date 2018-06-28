@@ -148,7 +148,7 @@ public class EnigmaSequenceManager : MonoBehaviour
 			StartCoroutine(sl.loadEnigma(enigmaDataList[nextId].index_unity));
 			currentEnigmaId = nextId;
 		} catch (InvalidOperationException e){
-			Debug.Log (e.Message);
+			Debug.Log ("Erreur chopée dans enigma sequence manager" + e.Message);
 			//EventManager.instance.Raise (new RequestPreviousSceneEvent("EnigmaSequenceScene",0));
 		}
 	}
