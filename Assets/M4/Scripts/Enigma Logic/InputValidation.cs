@@ -26,6 +26,7 @@ public class InputValidation : MonoBehaviour, ValidationMethod
         return 0.0f;
     }
     public bool answerIsRight(){
+        //print(gameObject.name + " " + gameObject.transform.parent.name);
 		string studentInput = GameObject.FindGameObjectWithTag("Input Text").GetComponentInChildren<UnityEngine.UI.Text> ().text;
 		Expression expCorrect = parser.EvaluateExpression(formula);
 		if(studentInput != ""){

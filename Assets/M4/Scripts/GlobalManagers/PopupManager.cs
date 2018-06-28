@@ -3,13 +3,25 @@ using UnityEngine.Networking;
 using System;
 using UnityEngine.UI;
 
+/*
+ * Pour utiliser PopupManager, vous devez créer un gameobject nommé "Answer Popup" dans le Canvas.
+ * Il faut ensuite insérer ce script dans le gameobject contenant le script EnigmaSceneManager, et le compléter avec les préfab.
+ * 
+*/
 public class PopupManager : MonoBehaviour
 {
+    // pour l'élève
     int certitudelvl; // Niveau de certitude
     int methodchoice; // Indice du choix de réponse de justification
-    string state; // Étape en cours, peut valoir : "none", "Certitude", "Justification", "Correction", "Victoire", "Défaite"
 
-    public GameObject sure_model, justify_model, victory_model, defeat_model,correct_model; // Variable de référence des Prefabs correspondant à chaque étape, doivent être attribués depuis l'éditeur
+    // pour le créateur
+    public string[] answerList;
+    public int goodAnswer; // numéro dans answerList
+    // à référencer dans l'éditeur
+    public GameObject button_model, sure_model, justify_model, victory_model, defeat_model,correct_model; // Variable de référence des Prefabs correspondant à chaque étape
+
+    
+    string state; // Étape en cours, peut valoir : "none", "Certitude", "Justification", "Correction", "Victoire", "Défaite"
     private GameObject sure, justify, victory, defeat, correct; // Écrans des étapes
     private GameObject answerblock; // Les justifications possible
     
@@ -22,11 +34,27 @@ public class PopupManager : MonoBehaviour
         victory = Instantiate(victory_model, GameObject.Find("Answer Popup").transform);
         defeat = Instantiate(defeat_model, GameObject.Find("Answer Popup").transform);
         correct = Instantiate(correct_model, GameObject.Find("Answer Popup").transform);
-
+        
         certitudelvl = -1;
         methodchoice = -1;
         state = "none";
         answerblock = justify.transform.Find("ChoiceButtonS").gameObject;
+        // pour créer dynamiquement des boutons custom
+        
+        for ( int i = 0 ; i < answerList.Length ; i++ )
+        {
+            
+            GameObject button1 = Instantiate(button_model,new Vector3(0,0,0),new Quaternion(0,0,0,0), justify.transform.Find("ChoiceButtonS"));
+            button1.GetComponentInChildren<Text>().text = answerList[i];
+            button1.GetComponent<RectTransform>().anchoredPosition = new Vector2(57+ 240.1671f* 0.4485958f* 0.4458359f* 2.64067f * i, 17);
+
+            GameObject button2 = Instantiate(button_model, new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0), correct.transform.Find("ChoiceButtonS"));
+            button2.GetComponentInChildren<Text>().text = answerList[i];
+            button2.GetComponent<RectTransform>().anchoredPosition = new Vector2(57 + 240.1671f * 0.4485958f * 0.4458359f * 2.64067f * i, 17);
+            //print(button1.GetComponent<RectTransform>().rect.width+" "+ button1.GetComponent<RectTransform>().localScale);
+            //print("bouton" + i);
+        }
+        
     }
     public void Start()
     {
