@@ -11,6 +11,7 @@ public class Timer : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		time = 0;
+		EventManager.instance.AddListener<QueryTimerEvent> (sendTime);
 	}
 
 	void OnEnable(){
@@ -23,6 +24,11 @@ public class Timer : MonoBehaviour {
 		timerOnScreen.GetComponent<UnityEngine.UI.Text> ().text = (int)time / 60 + " : " + (int)time % 60;
 	}
 
+	void OnDestroy(){
+		EventManager.instance.RemoveListener<QueryTimerEvent> (sendTime);
+
+	}
+
 	public void resetTimer(){
 		time = 0;
 	}
@@ -31,4 +37,8 @@ public class Timer : MonoBehaviour {
     {
         return time;
     }
+
+	public void sendTime(QueryTimerEvent e){
+		e.time = time;
+	}
 }

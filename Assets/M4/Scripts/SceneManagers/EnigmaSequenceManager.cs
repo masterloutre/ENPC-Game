@@ -194,4 +194,11 @@ public class EnigmaSequenceManager : MonoBehaviour
 
 	}
 
+	//récupère le temps qu'a duré la résolution de l'énigme
+	public float getTime(){
+		QueryTimerEvent query = new QueryTimerEvent ();
+		EventManager.instance.Raise (query);
+		return query.time;
+	}
+
 }

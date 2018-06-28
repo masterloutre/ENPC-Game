@@ -37,12 +37,12 @@ public class SkillsMenuSceneManager : MenuSceneManager {
     {
 		GameObject skillPanelGO = GameObject.FindGameObjectWithTag ("Skill Panel");
 		Vector3 wolrdPosition = skillPanelGO.transform.position;
-		float offsetX = 150;
+		float offsetX = 250;
 		float offsetY = 120;
 
         // Itération sur la liste de skills
 		for (int i = 0; i < skillList.Count; i++) {
-			GameObject skillGO = Instantiate(skillPrefab, wolrdPosition + new Vector3(i%2 * 200 - 100, i/2 * (-offsetY) ,0), Quaternion.identity, skillPanelGO.transform);
+			GameObject skillGO = Instantiate(skillPrefab, wolrdPosition + new Vector3(i%2 * offsetX - offsetX/2, i/2 * (-offsetY) ,0), Quaternion.identity, skillPanelGO.transform);
 			skillGO.transform.GetChild (1).gameObject.GetComponent<Text>().text = skillList [i].name;
 			//int skillId = skillList[i].id;
 			int skillId = i;
