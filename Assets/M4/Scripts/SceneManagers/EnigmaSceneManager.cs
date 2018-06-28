@@ -20,19 +20,25 @@ public class EnigmaSceneManager : MonoBehaviour
 
         // LISTENERS
         EventManager.instance.AddListener<GOButtonPressedEvent> (submitResult); // En réponse à la question || EnigmaUIManager.GOButtonPressed()
-        EventManager.instance.AddListener<QueryEnigmaScoreEvent> (sendScore); // ?
+        //EventManager.instance.AddListener<QueryEnigmaScoreEvent> (sendScore); // ?
         EventManager.instance.AddListener<QueryEnigmaSuccessEvent> (sendScore); // Demande la réussite de la question || EnigmaSequenceManager.getEnigmaScore(EnigmaSubmittedEvent)
-        EventManager.instance.AddListener<ValidationScreenEvent>(yourResult); // En réponse à un Popup || PopupManager.submit()
+        //EventManager.instance.AddListener<ValidationScreenEvent>(yourResult); // En réponse à un Popup || PopupManager.submit()
+        EventManager.instance.AddListener<PopUpQuestionsOverEvent>(PopUpQuestionsHaveEnded);
 
 	}
-    // SUPPRESSION des listeners une fois terminé
-    void OnDestroy () {
-		validator = null;
-		EventManager.instance.RemoveListener<GOButtonPressedEvent> (submitResult);
-		EventManager.instance.RemoveListener<QueryEnigmaScoreEvent> (sendScore);
-        EventManager.instance.RemoveListener<QueryEnigmaSuccessEvent>(sendScore);
-        EventManager.instance.RemoveListener<ValidationScreenEvent> (yourResult);
-    }
+
+  // SUPPRESSION des listeners une fois terminé
+  void OnDestroy () {
+	    validator = null;
+	    EventManager.instance.RemoveListener<GOButtonPressedEvent> (submitResult);
+	    //EventManager.instance.RemoveListener<QueryEnigmaScoreEvent> (sendScore);
+      EventManager.instance.RemoveListener<QueryEnigmaSuccessEvent>(sendScore);
+      //EventManager.instance.RemoveListener<ValidationScreenEvent> (yourResult);
+      EventManager.instance.RemoveListener<PopUpQuestionsOverEvent>(PopUpQuestionsHaveEnded);
+
+  }
+
+
 
     // Lance la phase de Certitude et prévient la création du résultat
 	public void enigmaSubmitted(){
@@ -40,8 +46,8 @@ public class EnigmaSceneManager : MonoBehaviour
 
 
         //pour tester l'envoi du score
-        EventManager.instance.Raise(new EnigmaSubmittedEvent());
-
+        //EventManager.instance.Raise(new EnigmaSubmittedEvent());
+        popm.setEnigmaSuccess(success);
         popm.updateState("Certitude");
 
 
@@ -65,7 +71,9 @@ public class EnigmaSceneManager : MonoBehaviour
         score = validator.score();
         enigmaSubmitted();
     }
+
     // Affiche l'écran de certitude en fonction de la situation
+    /*
     public void yourResult(ValidationScreenEvent e)
     {
         if (e.state == "Certitude")
@@ -98,17 +106,21 @@ public class EnigmaSceneManager : MonoBehaviour
         }
 
     }
+*/
+
     // Donne le résultat de ValidationMethod.isRightAnswer() à EnigmaSequenceManager.getEnigmaScore(EnigmaSubmittedEvent)
     public void sendScore(QueryEnigmaSuccessEvent e){
-		e.enigmaSuccess = success;
+		    e.enigmaSuccess = success;
         e.certitude = certitude;
         e.method = method;
         e.score = score;
     }
-    // ?????
-    public void sendScore(QueryEnigmaScoreEvent e)
-    {
 
+    public void PopUpQuestionsHaveEnded(PopUpQuestionsOverEvent e){
+      certitude = popm.certitudeUserInput;
+      method = popm.methodeUserInput;
+      //traité dans EnigmaSequenceManager
+      EventManager.instance.Raise(new EnigmaSubmittedEvent());
     }
 
 

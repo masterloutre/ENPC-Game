@@ -9,9 +9,9 @@ using UnityEngine.SceneManagement;
 /*
  * Manager qui gère une séquence d'énigme
  * Il connait la compétence évaluée, la liste d'énigme à faire jouer ainsi que l'id de l'énigme courante
- * Il collecte le score de l'énigme et des questions de certitude et 
+ * Il collecte le score de l'énigme et des questions de certitude et
  * C'est lui qui est chargé de loader et unloader les enigmes
- */ 
+ */
 
 public class EnigmaSequenceManager : MonoBehaviour
 {
@@ -23,7 +23,7 @@ public class EnigmaSequenceManager : MonoBehaviour
     private List<EnigmaData> enigmaDataList; // la liste d'énigmes
 	public Skill skill; // la compétence évaluée
 	private SceneLoader sl;  // le loader de scène
-	
+
 	void Awake(){
         print(" --------------- AWAKING ESM ------------------");
         print(gameObject.scene.name);
@@ -54,13 +54,13 @@ public class EnigmaSequenceManager : MonoBehaviour
 		sl = query.sceneLoader;
 
 		currentEnigmaId = 0;
-		
+
 		StartCoroutine(sl.loadEnigma (enigmaDataList[currentEnigmaId].index_unity));
-		
+
 	}
-	
-	
-	// Initialise la compétence évaluée et la liste d'énigme 
+
+
+	// Initialise la compétence évaluée et la liste d'énigme
 	// appelée par GlobalManager entre Awake et Start
 	public void updateEnigmaSequence(Skill _skill){
 		skill = _skill;
@@ -136,7 +136,7 @@ public class EnigmaSequenceManager : MonoBehaviour
 			return nextId;
 		}
 	}
-	
+
 
 	/*EVENTS*/
 
@@ -152,7 +152,7 @@ public class EnigmaSequenceManager : MonoBehaviour
 			//EventManager.instance.Raise (new RequestPreviousSceneEvent("EnigmaSequenceScene",0));
 		}
 	}
-    
+
 	//Charge l'énigme précédente
 	public void loadPreviousEnigma(RequestPreviousEnigmaEvent ev){
 		try {
@@ -173,7 +173,7 @@ public class EnigmaSequenceManager : MonoBehaviour
 
 	//Récupère le score de l'énigme courante et envoie une demande de sauvegarde
 	public void getEnigmaScore(EnigmaSubmittedEvent e){
-        
+
 		//on récupère le succès qui est traité dans EnigmaSceneManager
 		QueryEnigmaSuccessEvent query = new QueryEnigmaSuccessEvent ();
 		EventManager.instance.Raise (query);
@@ -182,7 +182,7 @@ public class EnigmaSequenceManager : MonoBehaviour
 
         // prepare to check
 		currentEnigmaSuccess = query.enigmaSuccess;
-		print("ENIGMA SCORE : " + query.score);
+		print("ENIGMA SCORE : " + query.score + "\n Success: " + query.enigmaSuccess +"\n Certitude : " + query.certitude + "\n Methode : " + query.method);
 		if (currentEnigmaSuccess) {
 			print("ENIGMA VALIDATED !!!!!!!!!!!!!");
 

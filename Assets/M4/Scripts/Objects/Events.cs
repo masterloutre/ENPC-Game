@@ -2,7 +2,7 @@
 
 /*
  * TOUTES LES CLASSES D'EVENTS
- */ 
+ */
 
 //Super classe des game events
 using System.Collections.Generic;
@@ -216,4 +216,8 @@ public class RequestSaveScoreEvent : GameEvent{
 	public RequestSaveScoreEvent(ScoreData _score){
 		score = _score;
 	}
+}
+
+//à envoyer quand le séquence de questions popUp est terminée, traité dans EnigmaSceneManager
+public class PopUpQuestionsOverEvent : GameEvent{
 }
