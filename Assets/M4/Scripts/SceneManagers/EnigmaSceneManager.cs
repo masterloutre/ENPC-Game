@@ -17,7 +17,6 @@ public class EnigmaSceneManager : MonoBehaviour
         // RÉFÉRENCES des managers stockés
         validator = gameObject.GetComponent<ValidationMethod>();
         popm = gameObject.GetComponent<PopupManager>();
-
         // LISTENERS
         EventManager.instance.AddListener<GOButtonPressedEvent> (submitResult); // En réponse à la question || EnigmaUIManager.GOButtonPressed()
         //EventManager.instance.AddListener<QueryEnigmaScoreEvent> (sendScore); // ?

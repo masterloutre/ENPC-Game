@@ -6,7 +6,7 @@ using System;
 
 /*
  * Component qui gère le menu de choix de compétence
- */ 
+ */
 
 public class SkillsMenuSceneManager : MenuSceneManager {
 
@@ -54,7 +54,7 @@ public class SkillsMenuSceneManager : MenuSceneManager {
     public void chooseSkill(int _choice)
     {
         choice = _choice;
-        nextScene();
+        nextScene(); //hérité de MenuSceneManager
     }
 
     // Génère une liste factice de compétence dummies. A utilisé si la connexion au serveur n'a pas encore eu lieu
@@ -65,6 +65,6 @@ public class SkillsMenuSceneManager : MenuSceneManager {
 		skillList.Add(new Skill(2, "Dummy skill number 2"));
         // ajouter autant de dummies que souhaité, ce n'est important
 	}
-		
+
 
 }

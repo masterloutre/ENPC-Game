@@ -69,6 +69,12 @@ public class QueryEnigmaListEvent : GameEvent
         enigmaList = null;
         skill = _skill;
     }
+
+		public QueryEnigmaListEvent()
+    {
+        enigmaList = null;
+        skill = null;
+    }
 }
 
 
