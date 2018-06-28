@@ -182,7 +182,7 @@ public class EnigmaSequenceManager : MonoBehaviour
 
         // prepare to check
 		currentEnigmaSuccess = query.enigmaSuccess;
-
+		print("ENIGMA SCORE : " + query.score);
 		if (currentEnigmaSuccess) {
 			print("ENIGMA VALIDATED !!!!!!!!!!!!!");
 

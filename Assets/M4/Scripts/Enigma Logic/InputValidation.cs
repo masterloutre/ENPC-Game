@@ -5,6 +5,7 @@ using B83.ExpressionParser;
 
 public class InputValidation : MonoBehaviour, ValidationMethod
 {
+	public float expectedResult;
 	public string formula;
 	public double marginError;
 	List<double> paramList;
@@ -21,18 +22,23 @@ public class InputValidation : MonoBehaviour, ValidationMethod
 		}
 	}
 
-    public float score()
-    {
-        return 0.0f;
-    }
-    public bool answerIsRight(){
+  public float score()
+  {
+		return (answerIsRight()) ? 100F : 0F;
+  }
+
+  public bool answerIsRight(){
 		string studentInput = GameObject.FindGameObjectWithTag("Input Text").GetComponentInChildren<UnityEngine.UI.Text> ().text;
 		Expression expCorrect = parser.EvaluateExpression(formula);
 		if(studentInput != ""){
-			float studentAnswer = float.Parse(studentInput); 
+			float studentAnswer = float.Parse(studentInput);
 			setParam (expCorrect);
 
 			float error = (float)(studentAnswer - expCorrect.Value);
+
+			//quicki fix pour le prototype à revoir après
+			error = (float)(studentAnswer - expectedResult);
+
 
 			if (Mathf.Abs (error) <= marginError) {
 				Debug.Log ("Bonne réponse : ");
@@ -42,7 +48,7 @@ public class InputValidation : MonoBehaviour, ValidationMethod
 				Debug.Log ("Mauvaise réponse : "+studentAnswer+" " + expCorrect.Value);
 				return false;
 			}
-		} 
+		}
 		return false;
 	}
 
@@ -50,8 +56,7 @@ public class InputValidation : MonoBehaviour, ValidationMethod
 		for (int i = 0; i < paramList.Count; i++) {
 			char tmp = (char)('a' + i);
 			string id = "" + tmp;
-			expCorrect.Parameters[id].Value = paramList[i]; // set the named parameter 
+			expCorrect.Parameters[id].Value = paramList[i]; // set the named parameter
 		}
 	}
 }
-

@@ -8,7 +8,6 @@ public class EnigmaSceneManager : MonoBehaviour
     private float score;
     private float certitude;
     private string method;
-
     public ValidationMethod validator;
     private PopupManager popm;
 
@@ -24,7 +23,7 @@ public class EnigmaSceneManager : MonoBehaviour
         EventManager.instance.AddListener<QueryEnigmaScoreEvent> (sendScore); // ?
         EventManager.instance.AddListener<QueryEnigmaSuccessEvent> (sendScore); // Demande la réussite de la question || EnigmaSequenceManager.getEnigmaScore(EnigmaSubmittedEvent)
         EventManager.instance.AddListener<ValidationScreenEvent>(yourResult); // En réponse à un Popup || PopupManager.submit()
-        
+
 	}
     // SUPPRESSION des listeners une fois terminé
     void OnDestroy () {
@@ -38,13 +37,20 @@ public class EnigmaSceneManager : MonoBehaviour
     // Lance la phase de Certitude et prévient la création du résultat
 	public void enigmaSubmitted(){
         print("ENIGMA SUBMITTED");
+
+
+        //pour tester l'envoi du score
+        EventManager.instance.Raise(new EnigmaSubmittedEvent());
+
         popm.updateState("Certitude");
+
+
 	}
 
 
 
     /*
-    
+
         ////////////////////////
         // GESTION DES EVENTS //
         ////////////////////////
@@ -52,7 +58,7 @@ public class EnigmaSceneManager : MonoBehaviour
 
     */
 
-    // Lance la correction de la question et prévient l'affichage de la certitude 
+    // Lance la correction de la question et prévient l'affichage de la certitude
     public void submitResult(GOButtonPressedEvent e)
     {
         success = validator.answerIsRight();
@@ -73,7 +79,7 @@ public class EnigmaSceneManager : MonoBehaviour
             {
                 popm.updateState("Défaite");
             }
-            
+
         }
         else if (e.state=="Défaite")
         {
@@ -85,7 +91,7 @@ public class EnigmaSceneManager : MonoBehaviour
         }
         else // state soit justif soit correct
         {
-            
+
             method = e.answer;
             EventManager.instance.Raise(new EnigmaSubmittedEvent());
             // retour menu
@@ -104,7 +110,7 @@ public class EnigmaSceneManager : MonoBehaviour
     {
 
     }
-    
+
 
 
 }
