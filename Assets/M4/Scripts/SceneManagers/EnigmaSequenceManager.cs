@@ -148,7 +148,8 @@ public class EnigmaSequenceManager : MonoBehaviour
 			StartCoroutine(sl.loadEnigma(enigmaDataList[nextId].index_unity));
 			currentEnigmaId = nextId;
 		} catch (InvalidOperationException e){
-			Debug.Log ("Erreur chopée dans enigma sequence manager" + e.Message);
+      StartCoroutine(sl.loadPopUp("EndOfEnigmaSequencePopUp"));
+			//Debug.Log ("Erreur chopée dans enigma sequence manager" + e.Message);
 			//EventManager.instance.Raise (new RequestPreviousSceneEvent("EnigmaSequenceScene",0));
 		}
 	}
@@ -190,7 +191,8 @@ public class EnigmaSequenceManager : MonoBehaviour
 			print("RESULT FALSE !!!!!!!!!!");
 		}
 
-        EventManager.instance.Raise (new RequestSaveScoreEvent (createScore(currentEnigmaSuccess)));
+    EventManager.instance.Raise (new RequestSaveScoreEvent (createScore(currentEnigmaSuccess)));
+    loadNextEnigma(null);
 
 	}
 
