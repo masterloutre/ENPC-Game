@@ -55,7 +55,7 @@ public class SceneLoader : MonoBehaviour {
 		yield break;
 	}
 
-	// Load la page de selection des compétences 
+	// Load la page de selection des compétences
 	public IEnumerator loadSkillsMenu(){
 		loadScene("SelectionScene");
 		yield break;
@@ -63,7 +63,7 @@ public class SceneLoader : MonoBehaviour {
     // Charge de nouvelles énigmes en rapport avec skill
 	public IEnumerator loadEnigmaSequence (Skill skill){
 
-        // Appel du EnigmaSequenceManager existant pour loader une nouvelle série d'énigme en rapport avec skill 
+        // Appel du EnigmaSequenceManager existant pour loader une nouvelle série d'énigme en rapport avec skill
         UnityAction<UnityEngine.SceneManagement.Scene,UnityEngine.SceneManagement.LoadSceneMode> setSkill = delegate (Scene scene, LoadSceneMode mode) {
 		    //if(scene.name == "EnigmaSequenceScene"){
 		    EnigmaSequenceManager esm = GameObject.Find("MainManager").GetComponent<EnigmaSequenceManager>();
@@ -90,11 +90,15 @@ public class SceneLoader : MonoBehaviour {
 		//loadScene ("Enigma" + unityIndex);
 		//StartCoroutine(addScene("Enigma" + unityIndex));
 		//yield break;
-		
+
 	}
     // Suppression de la scène de l'énigme EnigmaX dans le SceneManager
     public IEnumerator unloadEnigma(int unityIndex){
 		yield return StartCoroutine(removeScene("Enigma" + unityIndex));
+	}
+
+	public IEnumerator loadPopUp(string name){
+		yield return StartCoroutine(addScene(name));
 	}
 
 

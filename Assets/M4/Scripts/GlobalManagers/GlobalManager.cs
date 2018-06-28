@@ -15,21 +15,21 @@ public class GlobalManager : MonoBehaviour
 
     public bool startAtLandingPage = false;
     private int gameSessionId;
-
     private PlayerManager playerManager;
-	private SceneLoader sceneLoader;
-	private EnigmaManager enigmaManager;
-	private ScoreManager scoreManager;
+	  private SceneLoader sceneLoader;
+	  private EnigmaManager enigmaManager;
+	  private ScoreManager scoreManager;
+    private Skill currentEvaluatedSkill;
 
 	// Variable statique : url root de l'interface web
-	public static string webInterfaceRootURL { 
+	public static string webInterfaceRootURL {
 		//VERSION KEN
 		//get { return "http://localhost/enpc-web-interface"; }
 		//VERSION LOU
 		get { return "http://localhost:8888"; }
 	}
 
-	//récupère les références au PlayerManager, au SceneLoader, à l'EnigmaManager 
+	//récupère les références au PlayerManager, au SceneLoader, à l'EnigmaManager
 	//enregistre les listener d'events
 	public void Awake(){
 
@@ -38,6 +38,7 @@ public class GlobalManager : MonoBehaviour
 		sceneLoader = gameObject.GetComponent<SceneLoader> ();
 		enigmaManager = gameObject.GetComponent<EnigmaManager> ();
 		scoreManager = gameObject.GetComponent<ScoreManager> ();
+    currentEvaluatedSkill = null;
 
         // LISTENERS initialisés
 		EventManager.instance.AddListener<RequestNextSceneEvent> (nextScene); // Prochain écran || MenuSceneManager.nextScene()
@@ -108,7 +109,7 @@ public class GlobalManager : MonoBehaviour
 	 * ********************/
 
 	// Load le prochain menu en fonction du nom de la scène actuelle
-	//les coroutines ne sont peut etre pas forcément nécessaire mais on les garde pour pouvoir garder 
+	//les coroutines ne sont peut etre pas forcément nécessaire mais on les garde pour pouvoir garder
 	// les fct du scenenLoader avec des valeurs de retour IENumerator pour plus d'homogénéité
 	void nextScene(RequestNextSceneEvent e){
 		//Debug.Log ("Next scene requested by " + e.currentSceneName);
@@ -117,7 +118,8 @@ public class GlobalManager : MonoBehaviour
 			//StartCoroutine(sl.loadEnigma (4));
 		} else if (e.currentSceneName == "SelectionScene"){
             print(e.currentSceneName + "|" + e.choiceId);
-			Skill chosenSkill = enigmaManager.getSkills () [e.choiceId];
+			currentEvaluatedSkill = enigmaManager.getSkills () [e.choiceId];
+      print("skill saved in globalManager " + currentEvaluatedSkill.name);
 			StartCoroutine (sceneLoader.loadEnigmaSequence (enigmaManager.getSkills()[e.choiceId]));
 		}
 	}
@@ -148,11 +150,17 @@ public class GlobalManager : MonoBehaviour
 	}
 	void getEnigmaList(QueryEnigmaListEvent e ){
 		try{
+      //si la skill était déja précisée dans l'event
+      print("skill of event : " + e.skill);
 			if(e.skill != null){
 				e.enigmaList = enigmaManager.getEnigmasBySkill(e.skill);
-			} else {
-				e.enigmaList = enigmaManager.getEnigmas();
-			}
+			} else if(currentEvaluatedSkill != null){ //si elle n'était pas précisée dans l'évent mais qu'elle est connue par GlobalManager
+          e.skill = currentEvaluatedSkill;
+          e.enigmaList = enigmaManager.getEnigmasBySkill(e.skill);
+      } else { // si il n'y a pas d'info sur la skill
+          e.enigmaList = enigmaManager.getEnigmas();
+      }
+      print("skill of event : " + e.skill);
 		} catch (Exception exception) {
 			throw exception;
 		}

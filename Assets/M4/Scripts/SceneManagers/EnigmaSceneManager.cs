@@ -17,7 +17,6 @@ public class EnigmaSceneManager : MonoBehaviour
         // RÉFÉRENCES des managers stockés
         validator = gameObject.GetComponent<ValidationMethod>();
         popm = gameObject.GetComponent<PopupManager>();
-
         // LISTENERS
         EventManager.instance.AddListener<GOButtonPressedEvent> (submitResult); // En réponse à la question || EnigmaUIManager.GOButtonPressed()
         //EventManager.instance.AddListener<QueryEnigmaScoreEvent> (sendScore); // ?
@@ -43,14 +42,7 @@ public class EnigmaSceneManager : MonoBehaviour
     // Lance la phase de Certitude et prévient la création du résultat
 	public void enigmaSubmitted(){
         print("ENIGMA SUBMITTED");
-
-
-        //pour tester l'envoi du score
-        //EventManager.instance.Raise(new EnigmaSubmittedEvent());
-        popm.setEnigmaSuccess(success);
-        popm.updateState("Certitude");
-
-
+        EventManager.instance.Raise(new EnigmaSubmittedEvent());
 	}
 
 
@@ -67,9 +59,11 @@ public class EnigmaSceneManager : MonoBehaviour
     // Lance la correction de la question et prévient l'affichage de la certitude
     public void submitResult(GOButtonPressedEvent e)
     {
+      Debug.Log("GO");
         success = validator.answerIsRight();
         score = validator.score();
-        enigmaSubmitted();
+        popm.setEnigmaSuccess(success);
+        popm.updateState("Certitude");
     }
 
     // Affiche l'écran de certitude en fonction de la situation
@@ -120,7 +114,7 @@ public class EnigmaSceneManager : MonoBehaviour
       certitude = popm.certitudeUserInput;
       method = popm.methodeUserInput;
       //traité dans EnigmaSequenceManager
-      EventManager.instance.Raise(new EnigmaSubmittedEvent());
+      enigmaSubmitted();
     }
 
 

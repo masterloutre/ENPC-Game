@@ -21,16 +21,17 @@ public class EnigmaSequenceManager : MonoBehaviour
     private float currentEnigmaPopUpQuestionsScore; //le score des questions popup en cours
 
     private List<EnigmaData> enigmaDataList; // la liste d'énigmes
-	public Skill skill; // la compétence évaluée
-	private SceneLoader sl;  // le loader de scène
+	  public Skill skill; // la compétence évaluée
+	  private SceneLoader sl;  // le loader de scène
 
 	void Awake(){
         print(" --------------- AWAKING ESM ------------------");
         print(gameObject.scene.name);
-		enigmaDataList = new List<EnigmaData> ();
+        skill = null;
+		    enigmaDataList = new List<EnigmaData> ();
 
         // LISTENERS
-		EventManager.instance.AddListener<RequestNextEnigmaEvent> (loadNextEnigma); // Passer à l'énigme suivante || EnigmaUIManager.nextEnigma()
+		    EventManager.instance.AddListener<RequestNextEnigmaEvent> (loadNextEnigma); // Passer à l'énigme suivante || EnigmaUIManager.nextEnigma()
         EventManager.instance.AddListener<RequestPreviousEnigmaEvent> (loadPreviousEnigma); // Passer à l'énigme précédente || EnigmaUIManager.previousEnigma()
         EventManager.instance.AddListener<QueryCurrentEnigmaDataEvent> (sendCurrentEnigmaData); // Demande des données de l'énigme en cours || EnigmaUIManager.Awake()
         EventManager.instance.AddListener<EnigmaSubmittedEvent> (getEnigmaScore); // Création du score || EnigmaSceneManager.submitResult(GOButtonPressedEvent)
@@ -52,9 +53,9 @@ public class EnigmaSequenceManager : MonoBehaviour
 		QuerySceneLoaderEvent query = new QuerySceneLoaderEvent ();
 		EventManager.instance.Raise (query);
 		sl = query.sceneLoader;
-
+    updateEnigmaList ();
 		currentEnigmaId = 0;
-
+    print(enigmaDataList.Count());
 		StartCoroutine(sl.loadEnigma (enigmaDataList[currentEnigmaId].index_unity));
 
 	}
@@ -65,11 +66,12 @@ public class EnigmaSequenceManager : MonoBehaviour
 	public void updateEnigmaSequence(Skill _skill){
 		skill = _skill;
 		GameObject titleGO = GameObject.Find ("Title");
-		updateEnigmaList ();
+		//updateEnigmaList ();
 	}
 	//Récupère la liste d'énigme évaluant la compétence qui a été selectionnée
 	public void updateEnigmaList(){
-		QueryEnigmaListEvent query = new QueryEnigmaListEvent (skill);
+		//QueryEnigmaListEvent query = new QueryEnigmaListEvent (skill);
+		QueryEnigmaListEvent query = new QueryEnigmaListEvent ();
 		EventManager.instance.Raise (query);
 		enigmaDataList = query.enigmaList;
 	}
@@ -148,7 +150,8 @@ public class EnigmaSequenceManager : MonoBehaviour
 			StartCoroutine(sl.loadEnigma(enigmaDataList[nextId].index_unity));
 			currentEnigmaId = nextId;
 		} catch (InvalidOperationException e){
-			Debug.Log (e.Message);
+      StartCoroutine(sl.loadPopUp("EndOfEnigmaSequencePopUp"));
+			//Debug.Log ("Erreur chopée dans enigma sequence manager" + e.Message);
 			//EventManager.instance.Raise (new RequestPreviousSceneEvent("EnigmaSequenceScene",0));
 		}
 	}
@@ -173,6 +176,7 @@ public class EnigmaSequenceManager : MonoBehaviour
 
 	//Récupère le score de l'énigme courante et envoie une demande de sauvegarde
 	public void getEnigmaScore(EnigmaSubmittedEvent e){
+    print("EnigmaSubmittedEvent is being processed");
 
 		//on récupère le succès qui est traité dans EnigmaSceneManager
 		QueryEnigmaSuccessEvent query = new QueryEnigmaSuccessEvent ();
@@ -190,7 +194,8 @@ public class EnigmaSequenceManager : MonoBehaviour
 			print("RESULT FALSE !!!!!!!!!!");
 		}
 
-        EventManager.instance.Raise (new RequestSaveScoreEvent (createScore(currentEnigmaSuccess)));
+    EventManager.instance.Raise (new RequestSaveScoreEvent (createScore(currentEnigmaSuccess)));
+    loadNextEnigma(null);
 
 	}
 
