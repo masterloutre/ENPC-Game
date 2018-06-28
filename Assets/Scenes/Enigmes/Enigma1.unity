@@ -286,7 +286,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 15.200012, y: 1.8999939}
+  m_AnchoredPosition: {x: 15.200195, y: 1.8999939}
   m_SizeDelta: {x: 91.5, y: 78.01999}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &92665013
@@ -2999,6 +2999,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d98ea19ee622486f923d182739e7b37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  expectedResult: 171
   formula: 421-a
   marginError: 0
 --- !u!114 &1087013167
@@ -3687,6 +3688,11 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2a768e0ad65ca469f86c1eb261efe456, type: 2}
   m_IsPrefabParent: 0
+--- !u!224 &1399108872 stripped
+RectTransform:
+  m_PrefabParentObject: {fileID: 224396245287916084, guid: 2a768e0ad65ca469f86c1eb261efe456,
+    type: 2}
+  m_PrefabInternal: {fileID: 1399108871}
 --- !u!1 &1422522059
 GameObject:
   m_ObjectHideFlags: 0
@@ -3827,7 +3833,7 @@ RectTransform:
   - {fileID: 1557371710}
   - {fileID: 37975654}
   - {fileID: 1124294386}
-  - {fileID: 1697320741}
+  - {fileID: 1399108872}
   m_Father: {fileID: 1422522060}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4678,6 +4684,39 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1767668857}
+--- !u!1 &1822436996
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1822436997}
+  m_Layer: 5
+  m_Name: Answer Popup
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1822436997
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1822436996}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 4.2677145, y: 4.2677145, z: 4.2677145}
+  m_Children: []
+  m_Father: {fileID: 24873823}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &1828667688 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 224837218496374188, guid: 99434dc1eedcd5c429fb96f763837af6,

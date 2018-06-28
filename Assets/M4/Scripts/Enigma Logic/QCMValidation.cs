@@ -23,7 +23,7 @@ public class QCMValidation : MonoBehaviour, ValidationMethod
 
     public float score()
     {
-        return 0.0f;
+		return (answerIsRight()) ? 100F : 0F;
     }
 	public bool answerIsRight(){
 		bool isRightAnswer = false;
