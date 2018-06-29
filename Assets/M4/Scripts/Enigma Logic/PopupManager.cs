@@ -6,7 +6,7 @@ using UnityEngine.UI;
 /*
  * Pour utiliser PopupManager, vous devez créer un gameobject nommé "Answer Popup" dans le Canvas.
  * Il faut ensuite insérer ce script dans le gameobject contenant le script EnigmaSceneManager, et le compléter avec les préfab.
- * 
+ *
 */
 public class PopupManager : MonoBehaviour
 {
@@ -28,7 +28,7 @@ public class PopupManager : MonoBehaviour
 
     private AnswerBlock[] block; // bloc de choix de méthode
     private GameObject sure, justify, victory, defeat, correct; // Écrans des étapes
-    
+
 
 
     public void Awake()
@@ -40,7 +40,7 @@ public class PopupManager : MonoBehaviour
         victory = Instantiate(victory_model, GameObject.Find("Answer Popup").transform);
         defeat = Instantiate(defeat_model, GameObject.Find("Answer Popup").transform);
         correct = Instantiate(correct_model, GameObject.Find("Answer Popup").transform);
-        
+
         certitudelvl = -1;
         methodchoice = -1;
         methodeUserInput = "";
@@ -51,7 +51,10 @@ public class PopupManager : MonoBehaviour
         block = new AnswerBlock[answerList.Length];
         for ( int i = 0 ; i < answerList.Length ; i++ )
         {
-            block[i] = new AnswerBlock(button_model, answerList[i], new Vector2(240 * i, 0));
+          float offsetY = i / 2 * (-50);
+          print("offsetY : " + offsetY);
+
+            block[i] = new AnswerBlock(button_model, answerList[i], new Vector2(200 * (i%2) - 100, offsetY));
             GameObject tmp = block[i].go;
             block[i].script(delegate { answerSelected(tmp); });
         }
@@ -71,28 +74,28 @@ public class PopupManager : MonoBehaviour
     // Pour scripter les boutons de validations
     private void setValidationButton()
     {
-        
+
         GameObject go;
 
-        // " Justification " 
+        // " Justification "
         go = justify.transform.Find("Validation_button").gameObject;
         go.GetComponent<Button>().onClick.AddListener(submit);
 
-        // " Correction " 
+        // " Correction "
         go = correct.transform.Find("ChoiceButtonS").gameObject;
-        
+
         go = correct.transform.Find("Validation_button").gameObject;
         go.GetComponent<Button>().onClick.AddListener(submit);
 
-        // " Victoire " 
+        // " Victoire "
         go = victory.transform.Find("Validation_button").gameObject;
         go.GetComponent<Button>().onClick.AddListener(submit);
 
-        // " Défaite " 
+        // " Défaite "
         go = defeat.transform.Find("Validation_button").gameObject;
         go.GetComponent<Button>().onClick.AddListener(submit);
 
-        // " Certitude " 
+        // " Certitude "
         go = sure.transform.Find("Validation_button").gameObject;
         go.GetComponent<Button>().onClick.AddListener(submit);
     }
@@ -105,11 +108,11 @@ public class PopupManager : MonoBehaviour
         enigmaSuccess = success;
     }
 
-    
+
     // colorie le go lorsqu'on clique dessus
     public void answerSelected(GameObject go)
     {
-        
+
         int index = go.transform.GetSiblingIndex();
         int indextocolorback=-1 ;
 
@@ -120,8 +123,8 @@ public class PopupManager : MonoBehaviour
         if (indextocolorback != -1)
         {
             colorBack(block[indextocolorback].go);
-        } 
-        
+        }
+
     }
     // Colorie en bleu foncé
     public void colorChange(GameObject go)
