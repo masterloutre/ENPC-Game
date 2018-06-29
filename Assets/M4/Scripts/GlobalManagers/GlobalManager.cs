@@ -41,15 +41,17 @@ public class GlobalManager : MonoBehaviour
     currentEvaluatedSkill = null;
 
         // LISTENERS initialisés
-		EventManager.instance.AddListener<RequestNextSceneEvent> (nextScene); // Prochain écran || MenuSceneManager.nextScene()
+		    EventManager.instance.AddListener<RequestNextSceneEvent> (nextScene); // Prochain écran || MenuSceneManager.nextScene()
         EventManager.instance.AddListener<RequestPreviousSceneEvent> (previousScene); // Précédent écran || ReturnButton.PreviousScene()
         EventManager.instance.AddListener<QueryPlayerManagerEvent> (getPlayerManager); // Demande de l'instance de PlayerManager || PlayerInfoText.Awake()
         EventManager.instance.AddListener<QuerySkillListEvent>(getSkillList); // Demande de l'instance de la liste des compétences || SkillsMenuSceneManager.Start()
 
         EventManager.instance.AddListener<QuerySceneLoaderEvent> (getSceneLoader); // Demande de l'instance de SceneLoader || EnigmaSequenceManager.Awake()
-		EventManager.instance.AddListener<QueryEnigmaListEvent> (getEnigmaList); // Demande de l'instance de la liste des énigmes || EnigmaSequenceManager.updateEnigmaList()
+		    EventManager.instance.AddListener<QueryEnigmaListEvent> (getEnigmaList); // Demande de l'instance de la liste des énigmes || EnigmaSequenceManager.updateEnigmaList()
         EventManager.instance.AddListener<RequestSaveScoreEvent> (saveScoreToServer); // Envoi de score au serveur || EnigmaSequenceManager.getEnigmaScore(EnigmaSubmittedEvent)
+        EventManager.instance.AddListener<RequestEnigmaRemoved> (removeEnigma);
     }
+
     // SUPPRESSION des listeners une fois terminé
     void OnDestroy()
     {
@@ -60,6 +62,8 @@ public class GlobalManager : MonoBehaviour
         EventManager.instance.RemoveListener<QuerySkillListEvent>(getSkillList);
         EventManager.instance.RemoveListener<QueryEnigmaListEvent>(getEnigmaList);
         EventManager.instance.RemoveListener<RequestSaveScoreEvent>(saveScoreToServer);
+        EventManager.instance.RemoveListener<RequestEnigmaRemoved> (removeEnigma);
+
 
     }
 
@@ -133,6 +137,10 @@ public class GlobalManager : MonoBehaviour
 			StartCoroutine (sceneLoader.loadSkillsMenu ());
 		}
 	}
+
+  void removeEnigma(RequestEnigmaRemoved e){
+    enigmaManager.removeEnigma(e.enigma);
+  }
 
     // GETTERs
 	void getPlayerManager(QueryPlayerManagerEvent e){

@@ -144,6 +144,8 @@ public class EnigmaSequenceManager : MonoBehaviour
 
 	//Charge la prochaine énigme
 	public void loadNextEnigma(RequestNextEnigmaEvent ev){
+    EventManager.instance.Raise(new RequestEnigmaRemoved(enigmaDataList[currentEnigmaId]));
+
 		try {
 			int nextId = getNextEnigmaId();
 			StartCoroutine(sl.unloadEnigma(enigmaDataList[currentEnigmaId].index_unity));

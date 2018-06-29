@@ -227,3 +227,10 @@ public class RequestSaveScoreEvent : GameEvent{
 //à envoyer quand le séquence de questions popUp est terminée, traité dans EnigmaSceneManager
 public class PopUpQuestionsOverEvent : GameEvent{
 }
+
+public class RequestEnigmaRemoved : GameEvent{
+	public EnigmaData enigma;
+	public RequestEnigmaRemoved(EnigmaData _enigma){
+		enigma = _enigma;
+	}
+}
