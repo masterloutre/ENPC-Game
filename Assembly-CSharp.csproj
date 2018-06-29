@@ -71,6 +71,7 @@
     <Compile Include="Assets\M4\Scripts\Dropzone.cs" />
     <Compile Include="Assets\M4\Scripts\Dynamic UI\PlayerInfoText.cs" />
     <Compile Include="Assets\M4\Scripts\Dynamic UI\ReturnButton.cs" />
+    <Compile Include="Assets\M4\Scripts\Enigma Logic\AnswerBlock.cs" />
     <Compile Include="Assets\M4\Scripts\Enigma Logic\CaseScenarioPart.cs" />
     <Compile Include="Assets\M4\Scripts\Enigma Logic\CaseScenarioPartIcon.cs" />
     <Compile Include="Assets\M4\Scripts\Enigma Logic\CaseValidation.cs" />
@@ -161,6 +162,7 @@
     <Compile Include="Assets\MaterialUI\Scripts\Toaster.cs" />
     <Compile Include="Assets\MaterialUI\Scripts\ToggleConfig.cs" />
     <Compile Include="Assets\MaterialUI\Scripts\ToggleTextChanger.cs" />
+    <Compile Include="Assets\SliderText.cs" />
     <None Include="Assets\M4\Typo\charteTypo.txt" />
     <None Include="Assets\MaterialUI\Fonts\NOTICE.txt" />
     <Reference Include="UnityEditor.StandardEvents">

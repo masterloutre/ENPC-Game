@@ -25,10 +25,10 @@ public class PopupManager : MonoBehaviour
     // à référencer dans l'éditeur
     public GameObject button_model, sure_model, justify_model, victory_model, defeat_model,correct_model; // Variable de référence des Prefabs correspondant à chaque étape
 
-    
 
+    private AnswerBlock[] block; // bloc de choix de méthode
     private GameObject sure, justify, victory, defeat, correct; // Écrans des étapes
-    private GameObject answerblock; // Les justifications possible
+    
 
 
     public void Awake()
@@ -46,121 +46,84 @@ public class PopupManager : MonoBehaviour
         methodeUserInput = "";
         certitudeUserInput = 0F;
         state = "none";
-        answerblock = justify.transform.Find("ChoiceButtonS").gameObject;
+
         // pour créer dynamiquement des boutons custom
-        
+        block = new AnswerBlock[answerList.Length];
         for ( int i = 0 ; i < answerList.Length ; i++ )
         {
-            
-            GameObject button1 = Instantiate(button_model,new Vector3(0,0,0),new Quaternion(0,0,0,0), justify.transform.Find("ChoiceButtonS"));
-            button1.GetComponentInChildren<Text>().text = answerList[i];
-            button1.GetComponent<RectTransform>().anchoredPosition = new Vector2(57+ 240.1671f* 0.4485958f* 0.4458359f* 2.64067f * i, 17);
-
-            GameObject button2 = Instantiate(button_model, new Vector3(0, 0, 0), new Quaternion(0, 0, 0, 0), correct.transform.Find("ChoiceButtonS"));
-            button2.GetComponentInChildren<Text>().text = answerList[i];
-            button2.GetComponent<RectTransform>().anchoredPosition = new Vector2(57 + 240.1671f * 0.4485958f * 0.4458359f * 2.64067f * i, 17);
-            //print(button1.GetComponent<RectTransform>().rect.width+" "+ button1.GetComponent<RectTransform>().localScale);
-            //print("bouton" + i);
+            block[i] = new AnswerBlock(button_model, answerList[i], new Vector2(240 * i, 0));
+            GameObject tmp = block[i].go;
+            block[i].script(delegate { answerSelected(tmp); });
         }
-        
-
         enigmaSuccess = false;
-    }
 
+    }
+    public void Start()
+    {
+        setValidationButton();
+    }
     void OnDisable()
     {
         Debug.Log("PrintOnDisable: script PopupManager was disabled");
 
     }
 
-    public void Start()
+    // Pour scripter les boutons de validations
+    private void setValidationButton()
     {
-        // LISTENERS
-        EventManager.instance.AddListener<ConfidanceErrorItemSelectionEvent>(answerSelection); // En réponse à la sélection d'un choix
-        scriptThisShit();
-        //configurer le prefab pour le relier à ces variables de récupération
+        
+        GameObject go;
 
-    }
-
-    public void setEnigmaSuccess(bool success){
-      enigmaSuccess = success;
-    }
-
-    void OnDestroy()
-    {
-        EventManager.instance.RemoveListener<ConfidanceErrorItemSelectionEvent>(answerSelection);
-    }
-
-    private void scriptThisShit()
-    {
-        print("SCRIPT THIS SHIT EST LANCE");
-        // Scripting " Justification " gameobject
-        GameObject go = justify.transform.Find("ChoiceButtonS").gameObject;
-
-        for (int i=0; i < go.transform.childCount; i++)
-        {
-
-            GameObject tmp = go.transform.GetChild(i).gameObject;
-            tmp.GetComponent<Button>().onClick.AddListener(delegate {answerSelected(tmp); });
-
-        }
-
+        // " Justification " 
         go = justify.transform.Find("Validation_button").gameObject;
         go.GetComponent<Button>().onClick.AddListener(submit);
 
-        // Scripting " Correction " gameobject
+        // " Correction " 
         go = correct.transform.Find("ChoiceButtonS").gameObject;
-        for (int i = 0; i < go.transform.childCount; i++)
-        {
-
-            GameObject tmp = go.transform.GetChild(i).gameObject;
-            tmp.GetComponent<Button>().onClick.AddListener(delegate {answerSelected(tmp); });
-
-        }
+        
         go = correct.transform.Find("Validation_button").gameObject;
         go.GetComponent<Button>().onClick.AddListener(submit);
 
-        // Scripting " Victoire " gameobject
+        // " Victoire " 
         go = victory.transform.Find("Validation_button").gameObject;
         go.GetComponent<Button>().onClick.AddListener(submit);
 
-        // Scripting " Défaite " gameobject
+        // " Défaite " 
         go = defeat.transform.Find("Validation_button").gameObject;
         go.GetComponent<Button>().onClick.AddListener(submit);
 
-        // Scripting " Certitude " gameobject
+        // " Certitude " 
         go = sure.transform.Find("Validation_button").gameObject;
         go.GetComponent<Button>().onClick.AddListener(submit);
     }
-
     public string getState()
     {
         return state;
     }
-
-    // Renvoie l'indice d'enfant du go parmi les réponses possibles du bouton cliqué
-    public void answerSelected(GameObject go)
+    public void setEnigmaSuccess(bool success)
     {
-        EventManager.instance.Raise(new ConfidanceErrorItemSelectionEvent(go.transform.GetSiblingIndex()));
+        enigmaSuccess = success;
     }
 
-    // Colorie la sélection
-    public void answerSelection(ConfidanceErrorItemSelectionEvent e)
+    
+    // colorie le go lorsqu'on clique dessus
+    public void answerSelected(GameObject go)
     {
+        
+        int index = go.transform.GetSiblingIndex();
         int indextocolorback=-1 ;
-        colorChange(answerblock.transform.GetChild(e.choiceindex).gameObject);
-        indextocolorback = methodchoice;
-        methodchoice= e.choiceindex;
+
+        colorChange(go);
+        indextocolorback = methodchoice; // le choix précédent, s'il y en avait un
+        methodchoice= index;
 
         if (indextocolorback != -1)
         {
-            colorBack(answerblock.transform.GetChild(indextocolorback).gameObject);
-        }
-
-
+            colorBack(block[indextocolorback].go);
+        } 
+        
     }
-
-    // Colorie en bleu clair une réponse
+    // Colorie en bleu foncé
     public void colorChange(GameObject go)
     {
         Color outcolor;
@@ -169,7 +132,7 @@ public class PopupManager : MonoBehaviour
 
 
     }
-    // Colorie en blanc une réponse, sauf si elle est sélectionné comme réponse finale par l'user
+    // Colorie en noir
     public void colorBack(GameObject go)
     {
 
@@ -180,7 +143,8 @@ public class PopupManager : MonoBehaviour
 
 
     }
-    // Activé lorsque l'on confirme une sélection, lève un event contenant la réponse choisie
+
+    // Activé lorsque l'on confirme une sélection
     public void submit()
     {
         switch (state)
@@ -198,22 +162,20 @@ public class PopupManager : MonoBehaviour
             case "Correction":
             case "Justification":
                 {
-                  methodeUserInput = GameObject.Find("ChoiceButtonS").transform.GetChild(methodchoice).GetComponentInChildren<Text>().text;
-                  //EventManager.instance.Raise(new EnigmaSubmittedEvent());
-                  Debug.Log("ON DEVRAIT PASSER A LA FIN LA");
-                  endPopUpQuestionsSequence();
+                    methodeUserInput = GameObject.Find("ChoiceButtonS").transform.GetChild(methodchoice).GetComponentInChildren<Text>().text;
+                    endPopUpQuestionsSequence();
                 }break;
 
             case "Victoire":
-              {
-                updateState("Justification");
-              }
-              break;
+                {
+                    updateState("Justification");
+                }break;
+
             case "Défaite":
                 {
                     updateState("Correction");
-                }
-                break;
+                }break;
+
             default:
                 {
                     print("reeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
@@ -222,8 +184,6 @@ public class PopupManager : MonoBehaviour
         }
 
     }
-
-
     // méthode d'affichage
     public void updateState(string value)
     {
@@ -238,7 +198,6 @@ public class PopupManager : MonoBehaviour
             print("[ PopupManager.updateState a crashé ] WHAT IS THAT VALUE REEEEEEEEE : " + value);
         }
     }
-
     public void displayScreen()
     {
         switch (state)
@@ -277,7 +236,10 @@ public class PopupManager : MonoBehaviour
                     justify.SetActive(true);
 
                     methodchoice = certitudelvl = -1;
-                    answerblock = justify.transform.Find("ChoiceButtonS").gameObject;
+                    foreach(AnswerBlock ab in block)
+                    {
+                        ab.parent(justify.transform.Find("ChoiceButtonS").gameObject);
+                    }
                 }
                 break;
             case "Correction":
@@ -286,7 +248,10 @@ public class PopupManager : MonoBehaviour
                     correct.SetActive(true);
 
                     methodchoice = certitudelvl = -1;
-                    answerblock = correct.transform.Find("ChoiceButtonS").gameObject;
+                    foreach (AnswerBlock ab in block)
+                    {
+                        ab.parent(correct.transform.Find("ChoiceButtonS").gameObject);
+                    }
                 }
                 break;
 
@@ -297,6 +262,7 @@ public class PopupManager : MonoBehaviour
                 }
         }
     }
+
 
     public void endPopUpQuestionsSequence(){
       Debug.Log("on est passé à la fin");
