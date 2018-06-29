@@ -25,7 +25,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &1055590686842218
 GameObject:
   m_ObjectHideFlags: 1
@@ -173,6 +173,7 @@ GameObject:
   m_Component:
   - component: {fileID: 224186563718051582}
   - component: {fileID: 114573009686230118}
+  - component: {fileID: 114340073343326976}
   m_Layer: 5
   m_Name: Slider
   m_TagString: Untagged
@@ -487,6 +488,18 @@ MonoBehaviour:
       m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
         Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   delegates: []
+--- !u!114 &114340073343326976
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1469981621279502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1439a947c5ec4223a9d1e455339c61b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sliderText: {fileID: 114457837973325478}
 --- !u!114 &114345511022402986
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -645,21 +658,21 @@ MonoBehaviour:
   m_HandleRect: {fileID: 224932688716065176}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 999
+  m_MaxValue: 100
   m_WholeNumbers: 1
-  m_Value: 0
+  m_Value: 49
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114457837973325478}
-        m_MethodName: set_text
-        m_Mode: 5
+      - m_Target: {fileID: 114340073343326976}
+        m_MethodName: displaySliderValue
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: GameObject.Find("Slider").GetComponent<Slider>().value
+          m_StringArgument: GameObject.Find("Slider").GetComponent<Slider>().value.ToString()
           m_BoolArgument: 0
         m_CallState: 2
     m_TypeName: UnityEngine.UI.Slider+SliderEvent, UnityEngine.UI, Version=1.0.0.0,
@@ -872,7 +885,7 @@ RectTransform:
   m_GameObject: {fileID: 1020755925901250}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.0000015, y: 1.0000015, z: 1.61615}
+  m_LocalScale: {x: 0.23431782, y: 0.23431782, z: 0.37869218}
   m_Children:
   - {fileID: 224025270180364270}
   - {fileID: 224186563718051582}
@@ -884,7 +897,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.53341675, y: 0.53330994}
+  m_AnchoredPosition: {x: -0.12498468, y: 0.12496141}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224106186762930122
@@ -1107,7 +1120,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1143,7 +1156,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
