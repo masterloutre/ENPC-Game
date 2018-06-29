@@ -162,6 +162,7 @@
     <Compile Include="Assets\MaterialUI\Scripts\Toaster.cs" />
     <Compile Include="Assets\MaterialUI\Scripts\ToggleConfig.cs" />
     <Compile Include="Assets\MaterialUI\Scripts\ToggleTextChanger.cs" />
+    <Compile Include="Assets\SliderText.cs" />
     <None Include="Assets\M4\Typo\charteTypo.txt" />
     <None Include="Assets\MaterialUI\Fonts\NOTICE.txt" />
     <Reference Include="UnityEditor.StandardEvents">

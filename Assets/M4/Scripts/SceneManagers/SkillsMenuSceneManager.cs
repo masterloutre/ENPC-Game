@@ -6,15 +6,17 @@ using System;
 
 /*
  * Component qui gère le menu de choix de compétence
- */ 
+ */
 
 public class SkillsMenuSceneManager : MenuSceneManager {
 
 	public List<Skill> skillList; // Liste des compétences disponibles
 	public GameObject skillPrefab; // Lien vers le préfab qui représente un bouton de compétence, à référencer dans l'éditeur
+	public GameObject NoSkillText;
 
 
 	public void Start(){
+		NoSkillText.SetActive(false);
 		try {
             // on récupère la liste de compétences
 			QuerySkillListEvent query = new QuerySkillListEvent ();
@@ -35,26 +37,32 @@ public class SkillsMenuSceneManager : MenuSceneManager {
     // Crée un bouton intéractif par compétence (icone et nom, sur le modèle du préfab). Une action est associée à chaque instance (chooseSkill) pour repérer la compétence ciblée
     public void instantiateSkills()
     {
-		GameObject skillPanelGO = GameObject.FindGameObjectWithTag ("Skill Panel");
-		Vector3 wolrdPosition = skillPanelGO.transform.position;
-		float offsetX = 250;
-		float offsetY = 120;
 
-        // Itération sur la liste de skills
-		for (int i = 0; i < skillList.Count; i++) {
-			GameObject skillGO = Instantiate(skillPrefab, wolrdPosition + new Vector3(i%2 * offsetX - offsetX/2, i/2 * (-offsetY) ,0), Quaternion.identity, skillPanelGO.transform);
-			skillGO.transform.GetChild (1).gameObject.GetComponent<Text>().text = skillList [i].name;
-			//int skillId = skillList[i].id;
-			int skillId = i;
-			skillGO.GetComponent<Button> ().onClick.AddListener (delegate {chooseSkill(skillId); });
+		if (skillList.Count == 0 ){
+			NoSkillText.SetActive(true);
+		} else {
+			GameObject skillPanelGO = GameObject.FindGameObjectWithTag ("Skill Panel");
+			Vector3 wolrdPosition = skillPanelGO.transform.position;
+			float offsetX = 250;
+			float offsetY = 120;
+
+	        // Itération sur la liste de skills
+			for (int i = 0; i < skillList.Count; i++) {
+				GameObject skillGO = Instantiate(skillPrefab, wolrdPosition + new Vector3(i%2 * offsetX - offsetX/2, i/2 * (-offsetY) ,0), Quaternion.identity, skillPanelGO.transform);
+				skillGO.transform.GetChild (1).gameObject.GetComponent<Text>().text = skillList [i].name;
+				//int skillId = skillList[i].id;
+				int skillId = i;
+				skillGO.GetComponent<Button> ().onClick.AddListener (delegate {chooseSkill(skillId); });
+			}
 		}
+
 	}
 
     // Renseigne l'ID de la compétence choisie (récupéré lors du clic) et demande la prochaine scène
     public void chooseSkill(int _choice)
     {
         choice = _choice;
-        nextScene();
+        nextScene(); //hérité de MenuSceneManager
     }
 
     // Génère une liste factice de compétence dummies. A utilisé si la connexion au serveur n'a pas encore eu lieu
@@ -65,6 +73,6 @@ public class SkillsMenuSceneManager : MenuSceneManager {
 		skillList.Add(new Skill(2, "Dummy skill number 2"));
         // ajouter autant de dummies que souhaité, ce n'est important
 	}
-		
+
 
 }

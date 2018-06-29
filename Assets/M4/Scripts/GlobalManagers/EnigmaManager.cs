@@ -12,7 +12,7 @@ public class EnigmaManager : MonoBehaviour
     private List<EnigmaData> enigmas;
 	private List<Skill> skills;
 
-    
+
     // INSTANCIATION des variables
     public IEnumerator instanciateEnigmas(){
 		this.enigmas = new List<EnigmaData> ();
@@ -62,6 +62,13 @@ public class EnigmaManager : MonoBehaviour
 	public List<Skill> getSkills(){
 		return skills;
 	}
+
+  public void removeEnigma (EnigmaData enigma){
+
+    enigmas.Remove(enigma);
+    computeSkillList();
+    Debug.Log("Removed Enigma " + enigma.nom);
+  }
 
 
     /*
