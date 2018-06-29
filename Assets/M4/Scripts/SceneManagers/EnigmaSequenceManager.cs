@@ -17,7 +17,7 @@ public class EnigmaSequenceManager : MonoBehaviour
 {
 
     private int currentEnigmaId; // l'id de l'énigme en cours
-    private bool currentEnigmaSuccess; //le score de l'énigme en cours
+    private float currentEnigmaScore; //le score de l'énigme en cours
     private float currentEnigmaPopUpQuestionsScore; //le score des questions popup en cours
 
     private List<EnigmaData> enigmaDataList; // la liste d'énigmes
@@ -106,11 +106,11 @@ public class EnigmaSequenceManager : MonoBehaviour
     }
 
     // Crée un objet ScoreData à partir du score d'une énigme
-    ScoreData createScore(bool success)
+    ScoreData createScore(float score)
     {
         EnigmaData currentEnigma = enigmaDataList[currentEnigmaId];
-        int points = (success) ? currentEnigma.score_max : 0;
-        double time = 0;
+        int points = (int)Math.Round(score * currentEnigma.score_max / 100.0);
+        double time = getTime();
         bool help = false;
         return new ScoreData(currentEnigma.id, -1, points, 1, time, help);
     }
@@ -187,16 +187,16 @@ public class EnigmaSequenceManager : MonoBehaviour
         //après ces deux lignes, l'objet query a été updaté dans EnigmaSceneManager.sendScore();
 
         // prepare to check
-		currentEnigmaSuccess = query.enigmaSuccess;
+		currentEnigmaScore = query.score;
 		print("ENIGMA SCORE : " + query.score + "\n Success: " + query.enigmaSuccess +"\n Certitude : " + query.certitude + "\n Methode : " + query.method);
-		if (currentEnigmaSuccess) {
+		if (currentEnigmaScore >= 50) {
 			print("ENIGMA VALIDATED !!!!!!!!!!!!!");
 
 		} else {
 			print("RESULT FALSE !!!!!!!!!!");
 		}
 
-    EventManager.instance.Raise (new RequestSaveScoreEvent (createScore(currentEnigmaSuccess)));
+    EventManager.instance.Raise (new RequestSaveScoreEvent (createScore(currentEnigmaScore)));
     loadNextEnigma(null);
 
 	}

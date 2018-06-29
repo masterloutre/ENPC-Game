@@ -3017,7 +3017,8 @@ MonoBehaviour:
   - Un cochon
   - Un Lapin
   goodAnswer: 0
-  button_model: {fileID: 0}
+  button_model: {fileID: 1629060699202456, guid: 4dd54fac4559b1b408043cab811da3ba,
+    type: 2}
   sure_model: {fileID: 1020755925901250, guid: c76057368ffa8d042aceff583269c273, type: 2}
   justify_model: {fileID: 1059341634635592, guid: 865308c9b166d854ca8bff3cc6e85b36,
     type: 2}

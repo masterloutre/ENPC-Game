@@ -47,9 +47,10 @@ public class EnigmaSceneManager : MonoBehaviour
 	}
 
   public float computeScore( float score, float certainty){
-    int deltaMax = (int)((1/Math.Exp(Math.Pow(score, 0.83)/25.0)) -0.58) *120;
-    Debug.Log("max delta certainty = " + deltaMax);
-    float delta = (float)((100.0 - certainty) * deltaMax / 100.0);
+    int deltaMax =(int)Math.Round(( (1/ Math.Exp(Math.Pow(score, 0.83)/25.0)) - 0.58) * 120);
+    //int deltaMax = (int)((1/Math.Exp(Math.Pow(score, 0.83)/25.0)) -0.58) *120;
+    Debug.Log("max delta certainty = " + deltaMax.ToString());
+    float delta = (float)Math.Round((100.0 - certainty) * deltaMax / 100.0);
     float result = score + delta;
     return (result < 0)? 0 : (result > 100)? 100 : result;
   }
