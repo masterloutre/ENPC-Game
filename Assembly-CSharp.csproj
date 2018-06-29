@@ -71,6 +71,7 @@
     <Compile Include="Assets\M4\Scripts\Dropzone.cs" />
     <Compile Include="Assets\M4\Scripts\Dynamic UI\PlayerInfoText.cs" />
     <Compile Include="Assets\M4\Scripts\Dynamic UI\ReturnButton.cs" />
+    <Compile Include="Assets\M4\Scripts\Enigma Logic\AnswerBlock.cs" />
     <Compile Include="Assets\M4\Scripts\Enigma Logic\CaseScenarioPart.cs" />
     <Compile Include="Assets\M4\Scripts\Enigma Logic\CaseScenarioPartIcon.cs" />
     <Compile Include="Assets\M4\Scripts\Enigma Logic\CaseValidation.cs" />
