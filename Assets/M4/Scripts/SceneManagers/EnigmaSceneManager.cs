@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class EnigmaSceneManager : MonoBehaviour
 {
@@ -45,6 +46,13 @@ public class EnigmaSceneManager : MonoBehaviour
         EventManager.instance.Raise(new EnigmaSubmittedEvent());
 	}
 
+  public float computeScore( float score, float certainty){
+    int deltaMax = (int)((1/Math.Exp(Math.Pow(score, 0.83)/25.0)) -0.58) *120;
+    Debug.Log("max delta certainty = " + deltaMax);
+    float delta = (float)((100.0 - certainty) * deltaMax / 100.0);
+    float result = score + delta;
+    return (result < 0)? 0 : (result > 100)? 100 : result;
+  }
 
 
     /*
@@ -107,7 +115,8 @@ public class EnigmaSceneManager : MonoBehaviour
 		    e.enigmaSuccess = success;
         e.certitude = certitude;
         e.method = method;
-        e.score = score;
+        //e.score = score;
+        e.score = computeScore(score, certitude);
     }
 
     public void PopUpQuestionsHaveEnded(PopUpQuestionsOverEvent e){
