@@ -6,11 +6,12 @@ using System;
 public class CaseScenarioPart : MonoBehaviour {
 	public int id { get; private set; }
 	public GameObject iconPrefab;
+	public bool indiquerNumeroPartie;
 	// Use this for initialization
 	void Awake(){
 		id = Array.IndexOf(transform.parent.GetComponentsInChildren<CaseScenarioPart> (), this);
 	}
-		
+
 
 	void Start () {
 		CaseScenarioPartIcon icon = new CaseScenarioPartIcon (this, iconPrefab);
@@ -18,7 +19,7 @@ public class CaseScenarioPart : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		
+
 	}
 
 	public void show(){
@@ -34,7 +35,7 @@ public class CaseScenarioPart : MonoBehaviour {
 
 	public override bool Equals(object obj)
 	{
-		
+
 		CaseScenarioPart item = obj as CaseScenarioPart;
 
 		if (item == null)
