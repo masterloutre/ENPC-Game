@@ -2999,7 +2999,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d98ea19ee622486f923d182739e7b37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  expectedResult: 171
   formula: 421-a
   marginError: 0
 --- !u!114 &1087013167
@@ -5057,7 +5056,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58698ef82d7b74d188b3523479223861, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  valeur: 250
+  valeur: 230
   "unit\xE9": N
   nomDeVariable: 97
   "l\xE9gende": Poids
