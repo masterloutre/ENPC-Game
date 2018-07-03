@@ -26,13 +26,17 @@ public class CaseScenarioPartIcon {
 	}
 
 	public void createGameObject(){
-		
-		float offsetY = scenarioPart.id * (-25) - 25;
+
+		float offsetY = scenarioPart.id * (-35) - 25;
 		GameObject parentGO = GameObject.Find ("TimeLine");
 
 		GameObject iconGO = GameObject.Instantiate(prefab, parentGO.transform, false);
 		iconGO.transform.position += new Vector3 (0, offsetY, 0);
 		iconGO.GetComponentInChildren<UnityEngine.UI.Button>().onClick.AddListener (activateScenarioPart);
+
+		if(scenarioPart.indiquerNumeroPartie){
+			iconGO.GetComponentInChildren<Text>().text += scenarioPart.id+1;
+		}
 
 		Debug.Log ("Creating Icon for : " + scenarioPart.name + " at y = " + offsetY + ", id = " + scenarioPart.id);
 	}
