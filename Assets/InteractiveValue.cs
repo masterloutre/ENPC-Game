@@ -15,7 +15,7 @@ public class InteractiveValue : MonoBehaviour {
 
 
 	//Initialise la valeur en récupérant la valeur et unité entrées dans l'éditeur et en les affichant dans le component
-	void Start () {
+	void Awake () {
 		value = valeur;
 		unit = unité;
 		variableName = nomDeVariable;
