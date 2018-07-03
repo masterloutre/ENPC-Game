@@ -11362,9 +11362,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   answerList:
-  - Un Poulett
-  - Des lentilles
-  - Une crevette
+  - "M\xE9thode 1"
+  - "M\xE9thode 2"
+  - "M\xE9thode 3"
   goodAnswer: 2
   button_model: {fileID: 1629060699202456, guid: 4dd54fac4559b1b408043cab811da3ba,
     type: 2}

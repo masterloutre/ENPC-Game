@@ -3014,8 +3014,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   answerList:
-  - Un cochon
-  - Un Lapin
+  - "M\xE9thode 1"
+  - "M\xE9thode 2"
   goodAnswer: 0
   button_model: {fileID: 1629060699202456, guid: 4dd54fac4559b1b408043cab811da3ba,
     type: 2}
