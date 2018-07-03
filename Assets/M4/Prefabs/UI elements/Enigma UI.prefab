@@ -242,6 +242,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 224396245287916084}
+  - component: {fileID: 114181263544432680}
   - component: {fileID: 114572351113139744}
   m_Layer: 5
   m_Name: Enigma UI
@@ -429,6 +430,19 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114181263544432680
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1912570565782054}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce6d0c9e2f460485bba140e2414eba27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  message: "NE PAS MODIFIER\nLes informations dans ce groupe se compl\xE8tent automatiquement
+    au lancement du jeu gr\xE2ce \xE0 l'interface WEB"
 --- !u!114 &114203531529763096
 MonoBehaviour:
   m_ObjectHideFlags: 1
