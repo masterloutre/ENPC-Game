@@ -60,6 +60,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\InteractiveValue.cs" />
+    <Compile Include="Assets\M4\Scripts\Aides\HelpBox.cs" />
     <Compile Include="Assets\M4\Scripts\AlgoAnswer.cs" />
     <Compile Include="Assets\M4\Scripts\ConnectionDataControl.cs" />
     <Compile Include="Assets\M4\Scripts\ConnectionManager.cs" />
@@ -90,6 +91,7 @@
     <Compile Include="Assets\M4\Scripts\GlobalManagers\EnigmaManager.cs" />
     <Compile Include="Assets\M4\Scripts\GlobalManagers\EventManager.cs" />
     <Compile Include="Assets\M4\Scripts\GlobalManagers\GlobalManager.cs" />
+    <Compile Include="Assets\M4\Scripts\GlobalManagers\HelpAttribute.cs" />
     <Compile Include="Assets\M4\Scripts\GlobalManagers\JumpStartApp.cs" />
     <Compile Include="Assets\M4\Scripts\GlobalManagers\PlayerManager.cs" />
     <Compile Include="Assets\M4\Scripts\GlobalManagers\SceneLoader.cs" />

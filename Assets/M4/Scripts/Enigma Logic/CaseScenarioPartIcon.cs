@@ -30,7 +30,7 @@ public class CaseScenarioPartIcon {
 
 	public void createGameObject(){
 
-		float offsetY = scenarioPart.id * (-35) - 25;
+		float offsetY = scenarioPart.id * (-45) - 25;
 		GameObject parentGO = GameObject.Find ("TimeLine");
 
 		GameObject iconGO = GameObject.Instantiate(prefab, parentGO.transform, false);
@@ -38,7 +38,11 @@ public class CaseScenarioPartIcon {
 		iconGO.GetComponentInChildren<UnityEngine.UI.Button>().onClick.AddListener (activateScenarioPart);
 
 		if(scenarioPart.indiquerNumeroPartie){
-			iconGO.GetComponentInChildren<Text>().text += scenarioPart.id+1;
+			string separator = "";
+			if(prefab.name != "PartIcon"){
+				separator = " ";
+			}
+			iconGO.GetComponentInChildren<Text>().text += separator + (scenarioPart.id+1).ToString();
 		}
 
 		Debug.Log ("Creating Icon for : " + scenarioPart.name + " at y = " + offsetY + ", id = " + scenarioPart.id);
