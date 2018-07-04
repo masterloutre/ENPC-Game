@@ -563,11 +563,6 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 1478821716}
     m_Modifications:
-    - target: {fileID: 114429566790024552, guid: f8452673a84184b73a3626297d2c4034,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 224932361134262508, guid: f8452673a84184b73a3626297d2c4034,
         type: 2}
       propertyPath: m_LocalPosition.x
@@ -658,28 +653,7 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 114429566790024552, guid: f8452673a84184b73a3626297d2c4034,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114429566790024552, guid: f8452673a84184b73a3626297d2c4034,
-        type: 2}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 224932361134262508, guid: f8452673a84184b73a3626297d2c4034,
-        type: 2}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 224932361134262508, guid: f8452673a84184b73a3626297d2c4034,
-        type: 2}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 114691743890488932, guid: f8452673a84184b73a3626297d2c4034, type: 2}
+    m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f8452673a84184b73a3626297d2c4034, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &322166415
@@ -756,35 +730,11 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 322166415}
---- !u!1 &323951133 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1090457024626410, guid: f8452673a84184b73a3626297d2c4034,
-    type: 2}
-  m_PrefabInternal: {fileID: 209772130}
 --- !u!224 &323951134 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 224932361134262508, guid: f8452673a84184b73a3626297d2c4034,
     type: 2}
   m_PrefabInternal: {fileID: 209772130}
---- !u!114 &323951135
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 323951133}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 1679637790, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IgnoreLayout: 0
-  m_MinWidth: -1
-  m_MinHeight: -1
-  m_PreferredWidth: 100
-  m_PreferredHeight: 100
-  m_FlexibleWidth: -1
-  m_FlexibleHeight: 1
-  m_LayoutPriority: 1
 --- !u!1 &333482904
 GameObject:
   m_ObjectHideFlags: 0
