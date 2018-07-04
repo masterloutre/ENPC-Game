@@ -60,14 +60,14 @@ public class EnigmaSceneManager : MonoBehaviour
     {
         GameObject.Find("go_button").GetComponent<Image>().raycastTarget = true;
         GameObject.Find("Next Enigma").GetComponent<Image>().raycastTarget = true;
-        GameObject.Find("Return Button").GetComponent<Image>().raycastTarget = true;
+        GameObject.Find("Return Button").GetComponent<Button>().interactable = true;
     }
     static public void disableUI()
     {
 
         GameObject.Find("go_button").GetComponent<Image>().raycastTarget = false;
         GameObject.Find("Next Enigma").GetComponent<Image>().raycastTarget = false;
-        GameObject.Find("Return Button").GetComponent<Image>().raycastTarget = false;
+        GameObject.Find("Return Button").GetComponent<Button>().interactable = false;
     }
 
     /*
