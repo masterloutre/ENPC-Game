@@ -14,6 +14,7 @@ public class CaseScenarioPartIcon {
 		prefab = _prefab;
 
 		createGameObject ();
+        
 		if (scenarioPart.id != 0) {
 			scenarioPart.hide ();
 		}
@@ -23,7 +24,9 @@ public class CaseScenarioPartIcon {
 	public void activateScenarioPart(){
 		Debug.Log ("button clicked activate scenario part");
 		scenarioPart.show ();
-	}
+        Debug.Log(scenarioPart.id);
+        EventManager.instance.Raise(new RequestNextQuestionEvent(scenarioPart.name,scenarioPart.id));
+    }
 
 	public void createGameObject(){
 
