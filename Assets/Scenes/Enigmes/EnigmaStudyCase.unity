@@ -3363,8 +3363,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74e15aab8ccb2e64ca7c0eb589e9d0b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  answerList: []
+  answerList:
+  - "M\xE9thode 1"
+  - "M\xE9thode 2"
   goodAnswer: 0
+  button_model: {fileID: 1629060699202456, guid: 4dd54fac4559b1b408043cab811da3ba,
+    type: 2}
   sure_model: {fileID: 1020755925901250, guid: c76057368ffa8d042aceff583269c273, type: 2}
   justify_model: {fileID: 1059341634635592, guid: 865308c9b166d854ca8bff3cc6e85b36,
     type: 2}
@@ -3396,6 +3400,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c65ae33810fc8d84fbcbc435640e4793, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  answers:
+  - 
+  - 
+  - 
+  - 
+  selectionColor: '#459FE7'
+  normalColor: '#1067AC'
 --- !u!1 &1124294385
 GameObject:
   m_ObjectHideFlags: 0
@@ -3663,6 +3674,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   iconPrefab: {fileID: 1688381101459542, guid: cc7bb44a8fd54471ea7d1fd213f6ae87, type: 2}
+  indiquerNumeroPartie: 0
 --- !u!1 &1163328245
 GameObject:
   m_ObjectHideFlags: 0
@@ -4896,6 +4908,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   iconPrefab: {fileID: 1688381101459542, guid: e489aaad1d207467990b5016e9ded560, type: 2}
+  indiquerNumeroPartie: 0
 --- !u!1 &1597008933
 GameObject:
   m_ObjectHideFlags: 0
@@ -5590,6 +5603,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   iconPrefab: {fileID: 1688381101459542, guid: e489aaad1d207467990b5016e9ded560, type: 2}
+  indiquerNumeroPartie: 0
 --- !u!224 &1828667688 stripped
 RectTransform:
   m_PrefabParentObject: {fileID: 224837218496374188, guid: 99434dc1eedcd5c429fb96f763837af6,
@@ -6103,6 +6117,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   iconPrefab: {fileID: 1688381101459542, guid: aa20ca44f7270490c99faf0562002709, type: 2}
+  indiquerNumeroPartie: 0
 --- !u!114 &2044490180
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6225,6 +6240,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   iconPrefab: {fileID: 1688381101459542, guid: cc7bb44a8fd54471ea7d1fd213f6ae87, type: 2}
+  indiquerNumeroPartie: 0
 --- !u!1 &2057440718
 GameObject:
   m_ObjectHideFlags: 0

@@ -52,8 +52,6 @@ public class PopupManager : MonoBehaviour
         for ( int i = 0 ; i < answerList.Length ; i++ )
         {
           float offsetY = i / 2 * (-50);
-          print("offsetY : " + offsetY);
-
             block[i] = new AnswerBlock(button_model, answerList[i], new Vector2(200 * (i%2) - 100, offsetY));
             GameObject tmp = block[i].go;
             block[i].script(delegate { answerSelected(tmp); });
@@ -181,7 +179,6 @@ public class PopupManager : MonoBehaviour
 
             default:
                 {
-                    print("reeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
                     return;
                 }
         }
@@ -198,7 +195,6 @@ public class PopupManager : MonoBehaviour
         }
         else
         {
-            print("[ PopupManager.updateState a crashé ] WHAT IS THAT VALUE REEEEEEEEE : " + value);
         }
     }
     public void displayScreen()
@@ -268,7 +264,6 @@ public class PopupManager : MonoBehaviour
 
 
     public void endPopUpQuestionsSequence(){
-      Debug.Log("on est passé à la fin");
       GameObject.Find("Answer Popup").SetActive(false);
       EventManager.instance.Raise(new PopUpQuestionsOverEvent());
     }

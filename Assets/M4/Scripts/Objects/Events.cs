@@ -191,6 +191,8 @@ public class QueryEnigmaSuccessEvent : GameEvent{
         score = -1;
 	}
 }
+
+
 public class QueryEnigmaScoreEvent : GameEvent
 {
     public bool enigmaSuccess;
@@ -202,8 +204,9 @@ public class QueryPopUpQuestionsScoreEvent : GameEvent{
 	}
 }
 
+//traité dans EnigmaSceneManager
 public class QueryScoreEvent : GameEvent{
-	public ScoreData score;
+	public Score score;
 	public QueryScoreEvent(){
 		score = null;
 	}

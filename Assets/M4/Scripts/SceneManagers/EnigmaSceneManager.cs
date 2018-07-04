@@ -5,26 +5,22 @@ using System;
 
 public class EnigmaSceneManager : MonoBehaviour
 {
-    private bool success;
-    private float score;
-    private float certitude;
-    private string method;
     public ValidationMethod validator;
     private PopupManager popm;
+    public Score score {get; private set;}
 
 
 	void Awake () {
-
+        score = new Score();
         // RÉFÉRENCES des managers stockés
         validator = gameObject.GetComponent<ValidationMethod>();
         popm = gameObject.GetComponent<PopupManager>();
         // LISTENERS
         EventManager.instance.AddListener<GOButtonPressedEvent> (submitResult); // En réponse à la question || EnigmaUIManager.GOButtonPressed()
         //EventManager.instance.AddListener<QueryEnigmaScoreEvent> (sendScore); // ?
-        EventManager.instance.AddListener<QueryEnigmaSuccessEvent> (sendScore); // Demande la réussite de la question || EnigmaSequenceManager.getEnigmaScore(EnigmaSubmittedEvent)
+        EventManager.instance.AddListener<QueryScoreEvent> (sendScore); // Demande la réussite de la question || EnigmaSequenceManager.getEnigmaScore(EnigmaSubmittedEvent)
         //EventManager.instance.AddListener<ValidationScreenEvent>(yourResult); // En réponse à un Popup || PopupManager.submit()
         EventManager.instance.AddListener<PopUpQuestionsOverEvent>(PopUpQuestionsHaveEnded);
-
 	}
 
   // SUPPRESSION des listeners une fois terminé
@@ -32,13 +28,10 @@ public class EnigmaSceneManager : MonoBehaviour
 	    validator = null;
 	    EventManager.instance.RemoveListener<GOButtonPressedEvent> (submitResult);
 	    //EventManager.instance.RemoveListener<QueryEnigmaScoreEvent> (sendScore);
-      EventManager.instance.RemoveListener<QueryEnigmaSuccessEvent>(sendScore);
+      EventManager.instance.RemoveListener<QueryScoreEvent>(sendScore);
       //EventManager.instance.RemoveListener<ValidationScreenEvent> (yourResult);
       EventManager.instance.RemoveListener<PopUpQuestionsOverEvent>(PopUpQuestionsHaveEnded);
-
   }
-
-
 
     // Lance la phase de Certitude et prévient la création du résultat
 	public void enigmaSubmitted(){
@@ -46,15 +39,12 @@ public class EnigmaSceneManager : MonoBehaviour
         EventManager.instance.Raise(new EnigmaSubmittedEvent());
 	}
 
-  public float computeScore( float score, float certainty){
-    int deltaMax =(int)Math.Round(( (1/ Math.Exp(Math.Pow(score, 0.83)/25.0)) - 0.58) * 120);
-    //int deltaMax = (int)((1/Math.Exp(Math.Pow(score, 0.83)/25.0)) -0.58) *120;
-    Debug.Log("max delta certainty = " + deltaMax.ToString());
-    float delta = (float)Math.Round((100.0 - certainty) * deltaMax / 100.0);
-    float result = score + delta;
-    return (result < 0)? 0 : (result > 100)? 100 : result;
-  }
-
+  //récupère le temps qu'a duré la résolution de l'énigme
+	public float getTime(){
+		QueryTimerEvent query = new QueryTimerEvent ();
+		EventManager.instance.Raise (query);
+		return query.time;
+	}
 
     /*
 
@@ -68,61 +58,25 @@ public class EnigmaSceneManager : MonoBehaviour
     // Lance la correction de la question et prévient l'affichage de la certitude
     public void submitResult(GOButtonPressedEvent e)
     {
-      Debug.Log("GO");
-        success = validator.answerIsRight();
-        score = validator.score();
-        popm.setEnigmaSuccess(success);
-        popm.updateState("Certitude");
+      Debug.Log("GO submit result");
+      score.enigmaSuccess = validator.answerIsRight();
+      score.addEnigmaSuccess(0,validator.score());
+      score.time = getTime();
+      score.help = false;
+      popm.setEnigmaSuccess(score.enigmaSuccess);
+      popm.updateState("Certitude");
     }
 
-    // Affiche l'écran de certitude en fonction de la situation
-    /*
-    public void yourResult(ValidationScreenEvent e)
-    {
-        if (e.state == "Certitude")
-        {
-            certitude = e.confidance;
-            if (success)
-            {
-                popm.updateState("Victoire");
-            }
-            else
-            {
-                popm.updateState("Défaite");
-            }
-
-        }
-        else if (e.state=="Défaite")
-        {
-            popm.updateState("Correction");
-        }
-        else if (e.state == "Victoire")
-        {
-            popm.updateState("Justification");
-        }
-        else // state soit justif soit correct
-        {
-
-            method = e.answer;
-            EventManager.instance.Raise(new EnigmaSubmittedEvent());
-            // retour menu
-        }
-
-    }
-*/
-
-    // Donne le résultat de ValidationMethod.isRightAnswer() à EnigmaSequenceManager.getEnigmaScore(EnigmaSubmittedEvent)
-    public void sendScore(QueryEnigmaSuccessEvent e){
-		    e.enigmaSuccess = success;
-        e.certitude = certitude;
-        e.method = method;
-        //e.score = score;
-        e.score = computeScore(score, certitude);
+    //event lancé par EnigmaSequenceManager.getEnigmaScore
+    public void sendScore(QueryScoreEvent e){
+		    e.score = score;
     }
 
     public void PopUpQuestionsHaveEnded(PopUpQuestionsOverEvent e){
-      certitude = popm.certitudeUserInput;
-      method = popm.methodeUserInput;
+      score.certaintyLevel = popm.certitudeUserInput;
+      score.addMethodSuccess(0, 0);
+      //certitude = popm.certitudeUserInput;
+      //method = popm.methodeUserInput;
       //traité dans EnigmaSequenceManager
       enigmaSubmitted();
     }

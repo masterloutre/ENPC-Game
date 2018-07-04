@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-
+/*
 public class Enigma : MonoBehaviour {
 
     // ce truc est un GO qui contient toutes les valeurs de références concernant l'énigme et qui les assignent aux GO en dessous
@@ -60,7 +60,7 @@ public class Enigma : MonoBehaviour {
     // Récupération des statistiques à la fin de l'énigme
     public void enigmaEnd()
     {
-        
+
         ScoreControl.saveTime(timerGO.GetComponent<Timer>().getTime());
         Save();
         // Passe à la suite, nouvelle scène
@@ -81,3 +81,4 @@ public class Enigma : MonoBehaviour {
             dataGO.GetComponentInChildren<AlgoAnswer>().validation(); // méthode de validation spécifique au script QCM_Answer
     }
 }
+*/
