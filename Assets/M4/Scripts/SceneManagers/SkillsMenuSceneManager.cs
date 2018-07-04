@@ -41,7 +41,7 @@ public class SkillsMenuSceneManager : MenuSceneManager {
 		if (skillList.Count == 0 ){
 			NoSkillText.SetActive(true);
 		} else {
-			GameObject skillPanelGO = GameObject.FindGameObjectWithTag ("Skill Panel");
+			GameObject skillPanelGO = GameObject.FindGameObjectWithTag ("Skill Panel").transform.Find("content").gameObject;
 			Vector3 wolrdPosition = skillPanelGO.transform.position;
 			float offsetX = 250;
 			float offsetY = 120;
