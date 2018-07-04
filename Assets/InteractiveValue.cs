@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+[ExecuteInEditMode]
 public class InteractiveValue : MonoBehaviour {
 	public float valeur; //pour la lisibilité dans l'éditeur
 	public string unité; //pour la lisibilité dans l'éditeur
@@ -20,6 +21,15 @@ public class InteractiveValue : MonoBehaviour {
 		unit = unité;
 		variableName = nomDeVariable;
 		gameObject.GetComponent<Text> ().text = computeText();
+	}
+
+	void OnInspectorGUI()
+  {
+		Debug.Log("Hello!");
+			value = valeur;
+			unit = unité;
+			variableName = nomDeVariable;
+			gameObject.GetComponent<Text> ().text = computeText();
 	}
 
 	//crée le text qui doit etre affiché en fonction des valeurs des attributs du component
