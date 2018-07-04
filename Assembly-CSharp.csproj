@@ -102,11 +102,13 @@
     <Compile Include="Assets\M4\Scripts\JsonHelper.cs" />
     <Compile Include="Assets\M4\Scripts\lancement_jeu.cs" />
     <Compile Include="Assets\M4\Scripts\LoadEnigmaScenes.cs" />
+    <Compile Include="Assets\M4\Scripts\Objects\Enigma.cs" />
     <Compile Include="Assets\M4\Scripts\Objects\EnigmaData.cs" />
     <Compile Include="Assets\M4\Scripts\Objects\Events.cs" />
     <Compile Include="Assets\M4\Scripts\Objects\Item.cs" />
     <Compile Include="Assets\M4\Scripts\Objects\ItemSlot.cs" />
     <Compile Include="Assets\M4\Scripts\Objects\PlayerData.cs" />
+    <Compile Include="Assets\M4\Scripts\Objects\Score.cs" />
     <Compile Include="Assets\M4\Scripts\Objects\ScoreData.cs" />
     <Compile Include="Assets\M4\Scripts\Objects\Skill.cs" />
     <Compile Include="Assets\M4\Scripts\Panel.cs" />
