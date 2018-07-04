@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.UI;
 
 public class EnigmaSceneManager : MonoBehaviour
 {
@@ -55,6 +56,19 @@ public class EnigmaSceneManager : MonoBehaviour
     return (result < 0)? 0 : (result > 100)? 100 : result;
   }
 
+    static public void enableUI()
+    {
+        GameObject.Find("go_button").GetComponent<Image>().raycastTarget = true;
+        GameObject.Find("Next Enigma").GetComponent<Image>().raycastTarget = true;
+        GameObject.Find("Return Button").GetComponent<Image>().raycastTarget = true;
+    }
+    static public void disableUI()
+    {
+
+        GameObject.Find("go_button").GetComponent<Image>().raycastTarget = false;
+        GameObject.Find("Next Enigma").GetComponent<Image>().raycastTarget = false;
+        GameObject.Find("Return Button").GetComponent<Image>().raycastTarget = false;
+    }
 
     /*
 

@@ -203,6 +203,7 @@ public class PopupManager : MonoBehaviour
     }
     public void displayScreen()
     {
+        EnigmaSceneManager.disableUI();
         switch (state)
         {
             case "Certitude":
