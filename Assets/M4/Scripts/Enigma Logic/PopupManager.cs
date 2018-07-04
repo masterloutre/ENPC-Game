@@ -199,6 +199,7 @@ public class PopupManager : MonoBehaviour
     }
     public void displayScreen()
     {
+        EventManager.instance.Raise(new RequestDisableEnigmaUIEvent());
         switch (state)
         {
             case "Certitude":

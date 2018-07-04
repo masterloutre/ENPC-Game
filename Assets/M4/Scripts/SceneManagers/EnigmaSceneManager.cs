@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.UI;
 
 public class EnigmaSceneManager : MonoBehaviour
 {
@@ -39,12 +40,14 @@ public class EnigmaSceneManager : MonoBehaviour
         EventManager.instance.Raise(new EnigmaSubmittedEvent());
 	}
 
+
   //récupère le temps qu'a duré la résolution de l'énigme
 	public float getTime(){
 		QueryTimerEvent query = new QueryTimerEvent ();
 		EventManager.instance.Raise (query);
 		return query.time;
 	}
+
 
     /*
 

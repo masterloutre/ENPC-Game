@@ -237,3 +237,7 @@ public class RequestEnigmaRemoved : GameEvent{
 		enigma = _enigma;
 	}
 }
+
+public class RequestDisableEnigmaUIEvent : GameEvent{
+	//public RequestDisableEnigmaUIEvent(){}
+}
