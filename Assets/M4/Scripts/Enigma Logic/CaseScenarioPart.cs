@@ -22,7 +22,7 @@ public class CaseScenarioPart : MonoBehaviour {
 		CaseScenarioPartIcon icon = new CaseScenarioPartIcon (this, iconPrefab);
 	}
 
-	
+
     // ask the others to hide themselves
 	public void show(){
 		foreach (CaseScenarioPart scenarioPart in transform.parent.GetComponentsInChildren<CaseScenarioPart>()) {
@@ -46,7 +46,6 @@ public class CaseScenarioPart : MonoBehaviour {
 		{
 			return false;
 		}
-		Debug.Log ("Equal override : " + this.gameObject.name + " = " + item.gameObject.name);
 		return this.id == item.id && this.iconPrefab == item.iconPrefab && this.gameObject.name == item.gameObject.name;
 	}
 	public override int GetHashCode()
