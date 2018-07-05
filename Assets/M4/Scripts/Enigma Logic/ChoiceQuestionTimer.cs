@@ -7,10 +7,15 @@ public class ChoiceQuestionTimer : ChoiceQuestion {
 	private bool timerStarted;
 	GameObject questionTextGO;
 	GameObject answerListGO;
+
+	public void Awake(){
+		timerStarted = false;
+	}
+
+
 	// Use this for initialization
 	void Start () {
 		base.Start();
-		timerStarted = false;
 		questionTextGO = GameObject.Find("QuestionText");
 		answerListGO = GameObject.Find("AnswerList");
 		if(timer > 0){
@@ -29,13 +34,21 @@ public class ChoiceQuestionTimer : ChoiceQuestion {
 			timer --;
 		}
 		if(timer <= 0){
-		gameObject.SetActive(false);
+			endTimer();
 		}
 	}
  	public void startTimer(){
-		GameObject.Find("StartQuestionButton").SetActive(false);
+		//GameObject.Find("StartQuestionButton").SetActive(false);
+		Destroy(GameObject.Find("StartQuestionButton"));
 		questionTextGO.SetActive(true);
 		answerListGO.SetActive(true);
 		timerStarted = true;
+	}
+
+	public void endTimer(){
+		//GameObject.Find("EndQuestionText").SetActive(false);
+		GameObject.Find("TimerArea").transform.GetChild(0).gameObject.SetActive(true);
+		questionTextGO.SetActive(false);
+		answerListGO.SetActive(false);
 	}
 }
