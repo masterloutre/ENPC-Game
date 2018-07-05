@@ -23,12 +23,16 @@ public class InputValidation : MonoBehaviour, ValidationMethod
 
 	}
 
-
-
-  public float score()
-  {
-		return (answerIsRight()) ? 100F : 0F;
-  }
+	public Score fillScore(Score score){
+		score.enigmaSuccess = answerIsRight();
+		score.addEnigmaSuccess(0, (answerIsRight()) ? 100F : 0F);
+		if(answerIsRight()){
+			print("RIGHT !!!");
+		} else {
+			print("WRONNNNNNNG");
+		}
+		return score;
+	}
 
   public bool answerIsRight(){
 		string studentInput = GameObject.FindGameObjectWithTag("Input Text").GetComponentInChildren<UnityEngine.UI.Text> ().text;

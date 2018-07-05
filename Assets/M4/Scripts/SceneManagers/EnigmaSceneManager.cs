@@ -62,8 +62,9 @@ public class EnigmaSceneManager : MonoBehaviour
     public void submitResult(GOButtonPressedEvent e)
     {
       Debug.Log("GO submit result");
-      score.enigmaSuccess = validator.answerIsRight();
-      score.addEnigmaSuccess(0,validator.score());
+      //score.enigmaSuccess = validator.answerIsRight();
+      //score.addEnigmaSuccess(0,validator.score());
+      score = validator.fillScore(score);
       score.time = getTime();
       score.help = false;
       popm.setEnigmaSuccess(score.enigmaSuccess);

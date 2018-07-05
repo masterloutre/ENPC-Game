@@ -5,6 +5,7 @@ using System;
 
 
 // script définissant comme objet question un GameObject, il crée un bouton de controle CaseScenarioPartIcon qui permet de masquer/afficher cette section
+//[ExecuteInEditMode]
 public class CaseScenarioPart : MonoBehaviour {
 	public int id { get; private set; }
 	public GameObject iconPrefab;

@@ -12,6 +12,7 @@ TagManager:
   - Input Param
   - Input Text
   - ScenarioPart
+  - CaseStudyAnswer
   layers:
   - Default
   - TransparentFX

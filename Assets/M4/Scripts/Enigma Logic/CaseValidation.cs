@@ -13,7 +13,7 @@ public class CaseValidation : MonoBehaviour, ValidationMethod
      - Entryxxx réponse : eventtrigger enter(colorchange(this)) exit(colorback(this)) click(answerselected(this))
      */
 
-    
+
     private GameObject activeEntries; // rpz les réponses possibles affichées
     int activeQuestionIndex; // rpz l'index de la question en cours dans les deux tableaux de réponses answersheet et answers
 
@@ -23,9 +23,14 @@ public class CaseValidation : MonoBehaviour, ValidationMethod
     public string selectionColor = "#459FE7";
     public string normalColor = "#1067AC";
     private Color unselected, selected; // rpz les couleurs des dots
-    
-    
 
+    private Dictionary<ChoiceQuestion, float> successByQuestion;
+
+
+    public void Awake(){
+      successByQuestion = new Dictionary<ChoiceQuestion, float>();
+
+    }
 
     public void Start()
     {
@@ -33,22 +38,22 @@ public class CaseValidation : MonoBehaviour, ValidationMethod
         ColorUtility.TryParseHtmlString(normalColor, out unselected);
         ColorUtility.TryParseHtmlString(selectionColor, out selected);
 
-        activeQuestionIndex = 0;
         // initialise answersheet à la bonne taille, avec que des -1
-        answerSheet = Enumerable.Repeat<int>(-1, findQuestion().ToArray().Length).ToArray();
+        //answerSheet = Enumerable.Repeat<int>(-1, findQuestion().ToArray().Length).ToArray();
 
         // scripter les choix
-        scriptthisshit(findQuestion().ToArray());
+        //scriptthisshit(findQuestion().ToArray());
 
-        EventManager.instance.AddListener<RequestNextQuestionEvent>(nextQuestion);
-        
+        //EventManager.instance.AddListener<RequestNextQuestionEvent>(nextQuestion);
+
     }
 
     public void OnDestroy()
     {
-        EventManager.instance.RemoveListener<RequestNextQuestionEvent>(nextQuestion);
+        //EventManager.instance.RemoveListener<RequestNextQuestionEvent>(nextQuestion);
     }
 
+/*
     private void scriptthisshit(GameObject[] questions)
     {
         foreach(GameObject question in questions)
@@ -59,6 +64,8 @@ public class CaseValidation : MonoBehaviour, ValidationMethod
             }
         }
     }
+    */
+    /*
     private List<GameObject> findQuestion()
     {
         List<GameObject> list= new List<GameObject>();
@@ -72,11 +79,48 @@ public class CaseValidation : MonoBehaviour, ValidationMethod
         }
         return list;
     }
-    
-    public float score()
-    {
-        return 0.0f;
+    */
+
+    private void getQuestionsValidation(){
+      if(successByQuestion.Count == 0){
+        ChoiceQuestion[] questionList = GameObject.Find("Parts").GetComponentsInChildren<ChoiceQuestion>(true);
+        foreach(ChoiceQuestion question in questionList){
+          successByQuestion.Add(question, question.getAnswerValidation());
+        }
+      }
     }
+
+    public bool answerIsRight(){
+      getQuestionsValidation();
+      float result = 0;
+      foreach(KeyValuePair<ChoiceQuestion, float> question in successByQuestion){
+        result += question.Value;
+        print("succes de la question : " + question.Value );
+      }
+      result = result/successByQuestion.Count;
+      print("moyenne score : " + result);
+      result = (result < 0)? 0: (result > 100)? 100: result;
+
+      return (result >= 50);
+    }
+
+
+    public Score fillScore(Score score){
+      getQuestionsValidation();
+      foreach(KeyValuePair<ChoiceQuestion, float> question in successByQuestion){
+        score.addEnigmaSuccess(question.Key.professionalSituationId, question.Value);
+        print("succes de la question : " + question.Value );
+      }
+      score.enigmaSuccess = answerIsRight();
+      if(answerIsRight()){
+        print("RIGHT !!!");
+      } else {
+        print("WRONNNNNNNG");
+      }
+      return score;
+
+    }
+    /*
     public bool answerIsRight()
     {
         GameObject go;
@@ -98,9 +142,9 @@ public class CaseValidation : MonoBehaviour, ValidationMethod
         }
         return true;
     }
+*/
+/*
 
-    
-     
     // Soulève un event de type " a sélectionné une réponse "
     // à relier à un gameobject entry en onclick
     public void answerSelected(GameObject go)
@@ -110,9 +154,9 @@ public class CaseValidation : MonoBehaviour, ValidationMethod
         answerSheet[activeQuestionIndex] = go.transform.GetSiblingIndex();
         colorBack(activeEntries.transform.GetChild(indextocolorback).gameObject);
     }
-    
+*/
 
-
+/*
     // Change la question en cours et réactualise les couleurs des réponses sélectionnées précédemment
     public void nextQuestion(RequestNextQuestionEvent e)
     {
@@ -127,63 +171,15 @@ public class CaseValidation : MonoBehaviour, ValidationMethod
             print(activeEntries.name);
             colorRefresh();
         }
-        
 
-
-    }
-
-    // Recolorie les réponses, blanc par défaut et bleu si sélectionné
-    public void colorRefresh()
-    {
-        GameObject go;
-        print("voici la réponse choisi dans answersheet[" + activeQuestionIndex + "] : " + answerSheet[activeQuestionIndex]);
-        for (int i = 0; i < activeEntries.transform.childCount; i++)
-        {
-            go = activeEntries.transform.GetChild(i).gameObject;
-            // answersheet contient -1 si c'est la 1er fois, sinon on se contente de recolorier ce qui a été choisi avant
-            
-            if (i == answerSheet[activeQuestionIndex])
-            {
-                colorChange(go);
-            }
-            else
-            {
-                colorBack(go);
-            }
-        }
-    }
-
-    // Colorie en bleu clair une réponse
-    public void colorChange(GameObject go)
-    {
-        print("Coloring : " + go.name);
-        Color outcolor;
-        ColorUtility.TryParseHtmlString("#64E8FF", out outcolor);
-        go.GetComponentInChildren<Text>().GetComponent<Text>().color = outcolor;
-
-        go.GetComponentInChildren<Image>().GetComponent<Image>().color = outcolor;
 
 
     }
-    // Colorie en blanc une réponse, sauf si elle est sélectionné comme réponse finale par l'user
-    public void colorBack(GameObject go)
-    {
-        print("Coloring back: " + go.name);
-        if (go.transform.GetSiblingIndex() == answerSheet[activeQuestionIndex])
-        {
-            return;
-        }
-        Color outcolor;
-        ColorUtility.TryParseHtmlString("#FFFFFF", out outcolor);
-        go.GetComponentInChildren<Text>().GetComponent<Text>().color = outcolor;
-
-        go.GetComponentInChildren<Image>().GetComponent<Image>().color = outcolor;
+*/
 
 
-    }
 
 
-    
 }
 // Soulève un event de type " a cliqué sur la flèche "
 // à relier à un gameobject flèche en onclick

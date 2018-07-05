@@ -17,14 +17,21 @@ public class QCMValidation : MonoBehaviour, ValidationMethod
             slotsList[i]= list.GetChild(i).gameObject;
         }
 		//foreach (GameObject go in slotsList) {
-		//	print (go.name);		
+		//	print (go.name);
 		//}
 	}
 
-    public float score()
-    {
-		return (answerIsRight()) ? 100F : 0F;
-    }
+	public Score fillScore(Score score){
+		score.enigmaSuccess = answerIsRight();
+		score.addEnigmaSuccess(0, (answerIsRight()) ? 100F : 0F);
+		if(answerIsRight()){
+			print("RIGHT !!!");
+		} else {
+			print("WRONNNNNNNG");
+		}
+		return score;
+	}
+
 	public bool answerIsRight(){
 		bool isRightAnswer = false;
 		if (checkEmptySlots ()) {
@@ -70,4 +77,3 @@ public class QCMValidation : MonoBehaviour, ValidationMethod
 		return returnCheck;
 	}
 }
-
