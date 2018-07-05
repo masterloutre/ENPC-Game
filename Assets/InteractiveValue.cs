@@ -23,13 +23,14 @@ public class InteractiveValue : MonoBehaviour {
 		gameObject.GetComponent<Text> ().text = computeText();
 	}
 
-	void OnInspectorGUI()
+	void Update()
   {
-		Debug.Log("Hello!");
+		if(Application.isEditor){
 			value = valeur;
 			unit = unité;
 			variableName = nomDeVariable;
 			gameObject.GetComponent<Text> ().text = computeText();
+		}
 	}
 
 	//crée le text qui doit etre affiché en fonction des valeurs des attributs du component

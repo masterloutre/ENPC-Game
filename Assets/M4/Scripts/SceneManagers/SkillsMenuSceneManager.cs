@@ -71,6 +71,8 @@ public class SkillsMenuSceneManager : MenuSceneManager {
 		skillList.Add(new Skill(0, "Dummy skill number 0"));
 		skillList.Add(new Skill(1, "Dummy skill number 1"));
 		skillList.Add(new Skill(2, "Dummy skill number 2"));
+		skillList.Add(new Skill(3, "Dummy skill number 3"));
+		skillList.Add(new Skill(4, "Dummy skill number 4"));
         // ajouter autant de dummies que souhaité, ce n'est important
 	}
 
