@@ -1,9 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class InteractionManager : MonoBehaviour {
+public class InteractionManager : MonoBehaviour, InteractiveUI {
 
 
 	float coeffHover = 1.5f;
@@ -12,7 +13,7 @@ public class InteractionManager : MonoBehaviour {
 		go.SetActive (!go.activeSelf);
 	}
     
-public void zoomOnHover(GameObject go){
+    public void zoomOnHover(GameObject go){
         Vector3 res = go.transform.localScale;
         res.Scale(new Vector3(coeffHover, coeffHover, coeffHover));
         go.transform.localScale=res;
@@ -30,9 +31,13 @@ public void zoomOnHover(GameObject go){
 		Application.Quit ();
 	}
 
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        zoomOnHover(gameObject);
+    }
 
-
-
-
-
+    public void OnPointerUp(PointerEventData eventData)
+    {
+        throw new System.NotImplementedException();
+    }
 }
