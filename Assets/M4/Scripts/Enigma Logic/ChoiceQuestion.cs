@@ -8,28 +8,14 @@ public class ChoiceQuestion : MonoBehaviour {
 	public string text;
 	public Answer[] answerList;
 	private int userChoice;
-	public int timer;
-	private bool timerStarted;
 	public int professionalSituationId;
-	GameObject questionTextGO;
-	GameObject answerListGO;
+
 
 	// Use this for initialization
-	void Start () {
-		timerStarted = false;
+	public void Start () {
 		userChoice = -1;
-		questionTextGO = GameObject.Find("QuestionText");
-		answerListGO = GameObject.Find("AnswerList");
-		questionTextGO.GetComponent<Text>().text = this.text;
-		questionTextGO.SetActive(false);
-
+		GameObject.Find("QuestionText").GetComponent<Text>().text = this.text;
 		createAnswerGameObject();
-		answerListGO.SetActive(false);
-	}
-
-	// Update is called once per frame
-	void Update () {
-		updateTimer();
 	}
 
 //crée les gameObject des réponse et leur assigne un script au click
@@ -88,23 +74,5 @@ public class ChoiceQuestion : MonoBehaviour {
 
 			go.GetComponentInChildren<Image>().GetComponent<Image>().color = outcolor;
 	}
-
-	private void updateTimer(){
-		if(timerStarted){
-			timer --;
-		}
-		if(timer <= 0){
-		gameObject.SetActive(false);
-		}
-	}
- 	public void startTimer(){
-		GameObject.Find("StartQuestionButton").SetActive(false);
-		questionTextGO.SetActive(true);
-		answerListGO.SetActive(true);
-		timerStarted = true;
-	}
-
-
-
 
 }
