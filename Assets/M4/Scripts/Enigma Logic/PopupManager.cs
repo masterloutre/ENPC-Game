@@ -12,21 +12,13 @@ public class PopupManager : MonoBehaviour
 {
     // pour l'élève
     int certitudelvl; // Niveau de certitude
-    int methodchoice; // Indice du choix de réponse de justification
 
     public string methodeUserInput { get; private set;}
     public float certitudeUserInput { get; private set;}
     string state; // Étape en cours, peut valoir : "none", "Certitude", "Justification", "Correction", "Victoire", "Défaite"
     bool enigmaSuccess;
 
-    // pour le créateur
-    public string[] answerList;
-    public int goodAnswer; // numéro dans answerList
-    // à référencer dans l'éditeur
-    public GameObject button_model, sure_model, justify_model, victory_model, defeat_model,correct_model; // Variable de référence des Prefabs correspondant à chaque étape
-
-
-    private AnswerBlock[] block; // bloc de choix de méthode
+    public ChoiceQuestion correctquestions,justifyquestions;
     private GameObject sure, justify, victory, defeat, correct; // Écrans des étapes
 
 
@@ -35,27 +27,26 @@ public class PopupManager : MonoBehaviour
     {
         // INSTANCIATION des modèles, masqués par défaut
 
-        sure = Instantiate(sure_model, GameObject.Find("Answer Popup").transform);
-        justify = Instantiate(justify_model, GameObject.Find("Answer Popup").transform);
-        victory = Instantiate(victory_model, GameObject.Find("Answer Popup").transform);
-        defeat = Instantiate(defeat_model, GameObject.Find("Answer Popup").transform);
-        correct = Instantiate(correct_model, GameObject.Find("Answer Popup").transform);
+        sure = GameObject.Find("Certitude");
+        justify = GameObject.Find("Justification");
+        victory = GameObject.Find("Victoire");
+        defeat = GameObject.Find("Défaite");
+        correct = GameObject.Find("Correction");
+
+        sure.SetActive(false);
+        justify.SetActive(false);
+        victory.SetActive(false);
+        defeat.SetActive(false);
+        correct.SetActive(false);
 
         certitudelvl = -1;
-        methodchoice = -1;
         methodeUserInput = "";
         certitudeUserInput = 0F;
         state = "none";
 
         // pour créer dynamiquement des boutons custom
-        block = new AnswerBlock[answerList.Length];
-        for ( int i = 0 ; i < answerList.Length ; i++ )
-        {
-          float offsetY = i / 2 * (-50);
-            block[i] = new AnswerBlock(button_model, answerList[i], new Vector2(200 * (i%2) - 100, offsetY));
-            GameObject tmp = block[i].go;
-            block[i].script(delegate { answerSelected(tmp); });
-        }
+        correctquestions = correct.GetComponent<ChoiceQuestion>();
+        justifyquestions = justify.GetComponent<ChoiceQuestion>();
         enigmaSuccess = false;
 
     }
@@ -76,12 +67,11 @@ public class PopupManager : MonoBehaviour
         GameObject go;
 
         // " Justification "
+        print(justify);
         go = justify.transform.Find("Validation_button").gameObject;
         go.GetComponent<Button>().onClick.AddListener(submit);
 
         // " Correction "
-        go = correct.transform.Find("ChoiceButtonS").gameObject;
-
         go = correct.transform.Find("Validation_button").gameObject;
         go.GetComponent<Button>().onClick.AddListener(submit);
 
@@ -107,43 +97,7 @@ public class PopupManager : MonoBehaviour
     }
 
 
-    // colorie le go lorsqu'on clique dessus
-    public void answerSelected(GameObject go)
-    {
-
-        int index = go.transform.GetSiblingIndex();
-        int indextocolorback=-1 ;
-
-        colorChange(go);
-        indextocolorback = methodchoice; // le choix précédent, s'il y en avait un
-        methodchoice= index;
-
-        if (indextocolorback != -1)
-        {
-            colorBack(block[indextocolorback].go);
-        }
-
-    }
-    // Colorie en bleu foncé
-    public void colorChange(GameObject go)
-    {
-        Color outcolor;
-        ColorUtility.TryParseHtmlString("#1E366D", out outcolor);
-        go.GetComponentInChildren<Image>().GetComponent<Image>().color = outcolor;
-
-
-    }
-    // Colorie en noir
-    public void colorBack(GameObject go)
-    {
-
-        Color outcolor;
-        ColorUtility.TryParseHtmlString("#080C15", out outcolor);
-
-        go.GetComponentInChildren<Image>().GetComponent<Image>().color = outcolor;
-
-
-    }
+    
 
     // Activé lorsque l'on confirme une sélection
     public void submit()
@@ -161,9 +115,18 @@ public class PopupManager : MonoBehaviour
                 }
                 break;
             case "Correction":
+                {
+                    // pour ne pas confondre answer list de popup manager avec answerlist de casestudy
+                    print(correctquestions.getUserChoice());
+                    methodeUserInput = GameObject.Find("Answer Popup").transform.Find("Correction").transform.Find("AnswerList").GetChild(correctquestions.getUserChoice()).GetComponentInChildren<Text>().text;
+                    endPopUpQuestionsSequence();
+                }
+                break;
             case "Justification":
                 {
-                    methodeUserInput = GameObject.Find("ChoiceButtonS").transform.GetChild(methodchoice).GetComponentInChildren<Text>().text;
+                    // pour ne pas confondre answer list de popup manager avec answerlist de casestudy
+                    print(justifyquestions.getUserChoice());
+                    methodeUserInput = GameObject.Find("Answer Popup").transform.Find("Justification").transform.Find("AnswerList").GetChild(justifyquestions.getUserChoice()).GetComponentInChildren<Text>().text;
                     endPopUpQuestionsSequence();
                 }break;
 
@@ -209,8 +172,7 @@ public class PopupManager : MonoBehaviour
                     defeat.SetActive(false);
                     justify.SetActive(false);
                     sure.SetActive(true);
-
-                    methodchoice = -1;
+                    
                     certitudelvl = 0;
 
                 }
@@ -234,24 +196,16 @@ public class PopupManager : MonoBehaviour
                 {
                     victory.SetActive(false);
                     justify.SetActive(true);
-
-                    methodchoice = certitudelvl = -1;
-                    foreach(AnswerBlock ab in block)
-                    {
-                        ab.parent(justify.transform.Find("ChoiceButtonS").gameObject);
-                    }
+                    certitudelvl = -1;
+                    
                 }
                 break;
             case "Correction":
                 {
                     defeat.SetActive(false);
                     correct.SetActive(true);
-
-                    methodchoice = certitudelvl = -1;
-                    foreach (AnswerBlock ab in block)
-                    {
-                        ab.parent(correct.transform.Find("ChoiceButtonS").gameObject);
-                    }
+                    certitudelvl = -1;
+                    
                 }
                 break;
 
