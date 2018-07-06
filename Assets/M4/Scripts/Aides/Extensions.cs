@@ -1,3 +1,9 @@
+/**
+ * Written by Bunny83
+ * Found here : https://answers.unity.com/questions/960413/editor-window-how-to-center-a-window.html
+ *
+ */
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
