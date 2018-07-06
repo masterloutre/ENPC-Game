@@ -36,20 +36,31 @@ public class ChoiceQuestion : MonoBehaviour {
 
 	//assigne à l'attribut userChoice le bon index et change les couleurs des boutons
 	public void setUserChoice(int id){
-		GameObject[] answerGOList = GameObject.FindGameObjectsWithTag("CaseStudyAnswer");
-		print(id);
+        // passer par gameobject et non pas GameObejct sinon la recherche se fait globale et il prend le premier venu, donc pas forcément celui appartenant à cette question
+        // ce qui était le cas : les valeurs prises ici étaient systématiquement celle de la première question dans la hiérarchie
+        // now it's fixed
+
+        GameObject answerGOList = gameObject.transform.Find("AnswerList").gameObject;
+		print("(SetUserChoice) Vous avez sélectionné la réponse numéro: "+id);
 		if(userChoice != -1){
-			colorBack(answerGOList[userChoice]);
+			colorBack(answerGOList.transform.GetChild(userChoice).gameObject);
 		}
 		userChoice = id;
-		colorChange(answerGOList[userChoice]);
+		colorChange(answerGOList.transform.GetChild(userChoice).gameObject);
 	}
 
 	//retourne le pourcentage de balidation de la question
-	public float getAnswerValidation(){
-		try{
-			print("answer selected : " + answerList[userChoice].text + ", percent : " + answerList[userChoice].percent);
-			return answerList[userChoice].percent;
+	public float getAnswerValidation()
+    {
+        print("(getAnswerValidation) Votre réponse:");
+        print("Texte: " + answerList[userChoice].text);
+        print("Numéro du choix: " + userChoice);
+        print("Valeur de point accordé(%) : " + answerList[userChoice].percent);
+        
+        try
+        {
+            
+            return answerList[userChoice].percent;
 		} catch( Exception e){
 			print(e.Message);
 		}

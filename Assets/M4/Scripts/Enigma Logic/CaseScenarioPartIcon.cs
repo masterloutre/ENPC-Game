@@ -23,7 +23,7 @@ public class CaseScenarioPartIcon {
 
 	public void activateScenarioPart(){
 		scenarioPart.show ();
-        Debug.Log(scenarioPart.id);
+        Debug.Log("(activateScenarioPart) Vous êtes sur la partie numéro: "+scenarioPart.id);
         EventManager.instance.Raise(new RequestNextQuestionEvent(scenarioPart.name,scenarioPart.id));
     }
 

@@ -2002,11 +2002,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c65ae33810fc8d84fbcbc435640e4793, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  answers:
-  - Oeuf
-  - "R\xE9ponse num\xE9ro 3"
-  selectionColor: '#459FE7'
-  normalColor: '#1067AC'
 --- !u!1 &1124294385
 GameObject:
   m_ObjectHideFlags: 0
