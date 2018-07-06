@@ -17,18 +17,18 @@ public class EnigmaSequenceManager : MonoBehaviour
 {
 
     private int currentEnigmaId; // l'id de l'énigme en cours
-    private float currentEnigmaScore; //le score de l'énigme en cours
+    private Score currentEnigmaScore; //le score de l'énigme en cours
     private float currentEnigmaPopUpQuestionsScore; //le score des questions popup en cours
 
     private List<EnigmaData> enigmaDataList; // la liste d'énigmes
+    private List<Enigma> enigmaList;
 	  public Skill skill; // la compétence évaluée
 	  private SceneLoader sl;  // le loader de scène
 
 	void Awake(){
-        print(" --------------- AWAKING ESM ------------------");
-        print(gameObject.scene.name);
         skill = null;
 		    enigmaDataList = new List<EnigmaData> ();
+        enigmaList = new List<Enigma> ();
 
         // LISTENERS
 		    EventManager.instance.AddListener<RequestNextEnigmaEvent> (loadNextEnigma); // Passer à l'énigme suivante || EnigmaUIManager.nextEnigma()
@@ -48,16 +48,13 @@ public class EnigmaSequenceManager : MonoBehaviour
 
     //Load la première énigme
     void Start () {
-
-        // Récupère la référence du SceneLoader de GlobalManager
+    // Récupère la référence du SceneLoader de GlobalManager
 		QuerySceneLoaderEvent query = new QuerySceneLoaderEvent ();
 		EventManager.instance.Raise (query);
 		sl = query.sceneLoader;
     updateEnigmaList ();
 		currentEnigmaId = 0;
-    print(enigmaDataList.Count());
 		StartCoroutine(sl.loadEnigma (enigmaDataList[currentEnigmaId].index_unity));
-
 	}
 
 
@@ -65,15 +62,20 @@ public class EnigmaSequenceManager : MonoBehaviour
 	// appelée par GlobalManager entre Awake et Start
 	public void updateEnigmaSequence(Skill _skill){
 		skill = _skill;
-		GameObject titleGO = GameObject.Find ("Title");
+		//GameObject titleGO = GameObject.Find ("Title");
 		//updateEnigmaList ();
 	}
+
 	//Récupère la liste d'énigme évaluant la compétence qui a été selectionnée
 	public void updateEnigmaList(){
 		//QueryEnigmaListEvent query = new QueryEnigmaListEvent (skill);
 		QueryEnigmaListEvent query = new QueryEnigmaListEvent ();
 		EventManager.instance.Raise (query);
 		enigmaDataList = query.enigmaList;
+    foreach(EnigmaData data in query.enigmaList){
+      enigmaList.Add(new Enigma(data));
+    }
+
 	}
 
     //Calcule l'id de la prochaine énigme dans la liste
@@ -105,18 +107,7 @@ public class EnigmaSequenceManager : MonoBehaviour
         }
     }
 
-    // Crée un objet ScoreData à partir du score d'une énigme
-    ScoreData createScore(float score)
-    {
-        EnigmaData currentEnigma = enigmaDataList[currentEnigmaId];
-        int points = (int)Math.Round(score * currentEnigma.score_max / 100.0);
-        double time = getTime();
-        bool help = false;
-        return new ScoreData(currentEnigma.id, -1, points, 1, time, help);
-    }
-
-    // Unity-related method
-
+/*
     //récupère un objet représentant les datas d'une énigme à partir de son index unity
     private EnigmaData getEnigmaByUnityIndex(int value){
 		EnigmaSearch es = new EnigmaSearch (value);
@@ -139,13 +130,12 @@ public class EnigmaSequenceManager : MonoBehaviour
 		}
 	}
 
-
+*/
 	/*EVENTS*/
 
 	//Charge la prochaine énigme
 	public void loadNextEnigma(RequestNextEnigmaEvent ev){
     EventManager.instance.Raise(new RequestEnigmaRemoved(enigmaDataList[currentEnigmaId]));
-
 		try {
 			int nextId = getNextEnigmaId();
 			StartCoroutine(sl.unloadEnigma(enigmaDataList[currentEnigmaId].index_unity));
@@ -181,31 +171,25 @@ public class EnigmaSequenceManager : MonoBehaviour
     print("EnigmaSubmittedEvent is being processed");
 
 		//on récupère le succès qui est traité dans EnigmaSceneManager
-		QueryEnigmaSuccessEvent query = new QueryEnigmaSuccessEvent ();
+
+    QueryScoreEvent query = new QueryScoreEvent();
+
+		//QueryEnigmaSuccessEvent query = new QueryEnigmaSuccessEvent ();
 		EventManager.instance.Raise (query);
-
-        //après ces deux lignes, l'objet query a été updaté dans EnigmaSceneManager.sendScore();
-
-        // prepare to check
+    //après ces deux lignes, l'objet query a été updaté dans EnigmaSceneManager.sendScore();
 		currentEnigmaScore = query.score;
-		print("ENIGMA SCORE : " + query.score + "\n Success: " + query.enigmaSuccess +"\n Certitude : " + query.certitude + "\n Methode : " + query.method);
-		if (currentEnigmaScore >= 50) {
+    currentEnigmaScore.maxNumberPoints = enigmaList[currentEnigmaId].maxScore;
+		print("ENIGMA SCORE : " + query.score);
+		if (currentEnigmaScore.enigmaSuccess) {
 			print("ENIGMA VALIDATED !!!!!!!!!!!!!");
 
 		} else {
 			print("RESULT FALSE !!!!!!!!!!");
 		}
-
-    EventManager.instance.Raise (new RequestSaveScoreEvent (createScore(currentEnigmaScore)));
+    print(currentEnigmaScore.ToString());
+    EventManager.instance.Raise (new RequestSaveScoreEvent (new ScoreData(enigmaList[currentEnigmaId].dbId, -1, currentEnigmaScore)));
     loadNextEnigma(null);
 
-	}
-
-	//récupère le temps qu'a duré la résolution de l'énigme
-	public float getTime(){
-		QueryTimerEvent query = new QueryTimerEvent ();
-		EventManager.instance.Raise (query);
-		return query.time;
 	}
 
 }

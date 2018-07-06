@@ -31,8 +31,6 @@ public class InteractiveValue : MonoBehaviour {
 			variableName = nomDeVariable;
 			gameObject.GetComponent<Text> ().text = computeText();
 		}
-
-
 	}
 
 	//crée le text qui doit etre affiché en fonction des valeurs des attributs du component

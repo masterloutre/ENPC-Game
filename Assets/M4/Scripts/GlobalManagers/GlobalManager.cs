@@ -123,7 +123,6 @@ public class GlobalManager : MonoBehaviour
 		} else if (e.currentSceneName == "SelectionScene"){
             print(e.currentSceneName + "|" + e.choiceId);
 			currentEvaluatedSkill = enigmaManager.getSkills () [e.choiceId];
-      print("skill saved in globalManager " + currentEvaluatedSkill.name);
 			StartCoroutine (sceneLoader.loadEnigmaSequence (enigmaManager.getSkills()[e.choiceId]));
 		}
 	}
@@ -159,7 +158,6 @@ public class GlobalManager : MonoBehaviour
 	void getEnigmaList(QueryEnigmaListEvent e ){
 		try{
       //si la skill était déja précisée dans l'event
-      print("skill of event : " + e.skill);
 			if(e.skill != null){
 				e.enigmaList = enigmaManager.getEnigmasBySkill(e.skill);
 			} else if(currentEvaluatedSkill != null){ //si elle n'était pas précisée dans l'évent mais qu'elle est connue par GlobalManager
@@ -168,7 +166,6 @@ public class GlobalManager : MonoBehaviour
       } else { // si il n'y a pas d'info sur la skill
           e.enigmaList = enigmaManager.getEnigmas();
       }
-      print("skill of event : " + e.skill);
 		} catch (Exception exception) {
 			throw exception;
 		}

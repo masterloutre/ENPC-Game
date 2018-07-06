@@ -2,185 +2,80 @@
 using System.Collections;
 using System.Linq;
 using UnityEngine.UI;
+using System.Collections.Generic;
+using System;
+using UnityEditor;
 
 public class CaseValidation : MonoBehaviour, ValidationMethod
 {
-    /*Référence à faire dans unity:
-     - flèche pour changer de question : arrowclicked(this)
-     - Entryxxx réponse : eventtrigger enter(colorchange(this)) exit(colorback(this)) click(answerselected(this))
-     */
+    // les questions de l'énigme, et le taux de réussite associé à la réponse choisi
+    // la réponse choisi est contenu dans l'objet question, en indice UserChoice (le taux aussi tu me diras, mais à un niveau plus profond que la réponse)
+    private Dictionary<ChoiceQuestion, float> successByQuestion;
 
-    private GameObject stepsDots; // rpz les points bleu du style carousel
-    private GameObject entries; // rpz les réponses possibles
-    int activeDot; // rpz l'index de la question en cours
-    private int[] answerSheet; // rpz la fiche de réponse sélectionnées par question
-    private string[] answers; // rpz les bonnes réponses
 
-    Color unselected, selected; // rpz les couleurs des dots
+    public void Awake(){
+      successByQuestion = new Dictionary<ChoiceQuestion, float>();
+
+    }
 
     public void Start()
     {
-        print("Starting CASEVALIDATION");
-        ColorUtility.TryParseHtmlString("#1067AC", out unselected);
-        ColorUtility.TryParseHtmlString("#459FE7", out selected);
+        
 
-        activeDot = 0;
-        // taille dépendante du nombre de questions intermédiaire
-        // surement par le nombre de dot si on décide de laisser l'édition des énigmes
-        answerSheet = new int[] { -1, -1, -1 };
-
-        // Réponse fourni par enigma manager
-        // choix possible laissé à l'édition ?
-        answers = new string[] { "Réponse numéro 3", "Réponse numéro 3", "Réponse numéro 3" };
-
-
-        stepsDots = GameObject.Find("StepsDots");
-        entries = GameObject.Find("Entries");
-        print(entries);
-        EventManager.instance.AddListener<RequestNextQuestionEvent>(nextQuestion);
-        EventManager.instance.AddListener<RequestSelectionEvent>(answerSelection);
     }
-
-    public void OnDestroy()
-    {
-        EventManager.instance.RemoveListener<RequestNextQuestionEvent>(nextQuestion);
-        EventManager.instance.RemoveListener<RequestSelectionEvent>(answerSelection);
-    }
-
-    public float score()
-    {
-        return 0.0f;
-    }
-    public bool answerIsRight()
-    {
-        GameObject go;
-        for (int i = 0; i < answerSheet.Length; i++)
-        {
-            if (answerSheet[i] == -1)
-            {
-                print("NOT ANSWERED");
-                return false;
-            }
-            go = entries.transform.GetChild(answerSheet[i]).gameObject;
-            if (go.GetComponentInChildren<Text>().text != answers[i])
-            {
-                print("WRONNNNNNNG");
-                return false;
-            }
+    // rempli le dico en recherchant chaque réponse aux questions de l'énigme
+    private void getQuestionsValidation(){
+      if(successByQuestion.Count == 0){
+        ChoiceQuestion[] questionList = GameObject.Find("Parts").GetComponentsInChildren<ChoiceQuestion>(true);
+        foreach(ChoiceQuestion question in questionList){
+          successByQuestion.Add(question, question.getAnswerValidation());
         }
-        return true;
+      }
     }
-
-    // Soulève un event de type " a cliqué sur la flèche "
-    // à relier à un gameobject flèche en onclick
-    public void arrowClicked(GameObject go)
-    {
-        if (go.name == "left_arrow")
-        {
-            EventManager.instance.Raise(new RequestNextQuestionEvent(go.name, 0));
-        }
-        if (go.name == "right_arrow")
-        {
-            EventManager.instance.Raise(new RequestNextQuestionEvent(go.name, 1));
-        }
-    }
-    // Soulève un event de type " a sélectionné une réponse "
-    // à relier à un gameobject entry en onclick
-    public void answerSelected(GameObject go)
-    {
-        EventManager.instance.Raise(new RequestSelectionEvent(go.name, go.transform.GetSiblingIndex()));
-
-    }
-
-
-
-    // Change la couleur de la réponse sélectionné à la réception d'un event " a sélectionné une réponse "
-    // devient bleu, et l'ancienne réponse sélectionnée - s'il y en avait une - devient blanche
-    public void answerSelection(RequestSelectionEvent e)
-    {
-        print("indice de choix: "+e.choiceId);
-        print("entries sélectionné: " + entries.transform.GetChild(e.choiceId));
-        int indextocolorback = answerSheet[activeDot];
-        colorChange(entries.transform.GetChild(e.choiceId).gameObject);
-        answerSheet[activeDot] = e.choiceId;
-        colorBack(entries.transform.GetChild(indextocolorback).gameObject);
-    }
-
-
-    // Change la question en cours et réactualise les couleurs des réponses sélectionnées précédemment
-    public void nextQuestion(RequestNextQuestionEvent e)
-    {
-        if (e.choiceId == 0)
-        {
-            stepsDots.transform.GetChild(activeDot).transform.GetComponent<Image>().color = unselected;
-            if (activeDot == 0)
-            {
-                activeDot = answerSheet.Length - 1;
-            }
-            else
-            {
-                activeDot--;
-            }
-
-            stepsDots.transform.GetChild(activeDot).transform.GetComponent<Image>().color = selected;
-        }
-
-        if (e.choiceId == 1)
-        {
-            stepsDots.transform.GetChild(activeDot).transform.GetComponent<Image>().color = unselected;
-            activeDot = (activeDot + 1) % answerSheet.Length;
-            stepsDots.transform.GetChild(activeDot).transform.GetComponent<Image>().color = selected;
-        }
-        colorRefresh();
-
-
-    }
-
-    // Recolorie les réponses, blanc par défaut et bleu si sélectionné
-    public void colorRefresh()
-    {
-        GameObject go;
-        for (int i = 0; i < entries.transform.childCount; i++)
-        {
-            go = entries.transform.GetChild(i).gameObject;
-            if (i == answerSheet[activeDot])
-            {
-                colorChange(go);
-            }
-            else
-            {
-                colorBack(go);
-            }
-        }
-    }
-
-    // Colorie en bleu clair une réponse
-    public void colorChange(GameObject go)
-    {
-        Color outcolor;
-        ColorUtility.TryParseHtmlString("#64E8FF", out outcolor);
-        go.GetComponentInChildren<Text>().GetComponent<Text>().color = outcolor;
-
-        go.GetComponentInChildren<Image>().GetComponent<Image>().color = outcolor;
-
-
-    }
-    // Colorie en blanc une réponse, sauf si elle est sélectionné comme réponse finale par l'user
-    public void colorBack(GameObject go)
-    {
-        if (go.transform.GetSiblingIndex() == answerSheet[activeDot])
-        {
-            return;
-        }
-        Color outcolor;
-        ColorUtility.TryParseHtmlString("#FFFFFF", out outcolor);
-        go.GetComponentInChildren<Text>().GetComponent<Text>().color = outcolor;
-
-        go.GetComponentInChildren<Image>().GetComponent<Image>().color = outcolor;
-
-
-    }
-
-
     
+    public bool answerIsRight(){
+      float result = 0;
+        // évite la division par 0 en dessous
+        if (successByQuestion.Count == 0)
+        {
+            print("--------------------------------ERREUR : AnswerIsRight - NO QUESTION ANSWERED ------------------------------");
+            return false;
+        }
+        print("Calcul de la moyenne ...");
+      foreach(KeyValuePair<ChoiceQuestion, float> question in successByQuestion){
+        result += question.Value;
+      }
+      result = result/successByQuestion.Count;
+      print("Moyenne : " + result);
+      result = (result < 0)? 0: (result > 100)? 100: result;
+
+      return (result >= 50);
+    }
+
+
+    public Score fillScore(Score score){
+        // on récupère les réponses
+      getQuestionsValidation();
+      foreach(KeyValuePair<ChoiceQuestion, float> question in successByQuestion){
+        score.addEnigmaSuccess(question.Key.professionalSituationId, question.Value);
+        print("A la situation pro n°"+ question.Key.professionalSituationId+", vous avez obtenu "+ question.Value+"%" );
+      }
+      score.enigmaSuccess = answerIsRight();
+      if(score.enigmaSuccess){
+        print("VOUS AVEZ REUSSI !!!");
+      } else {
+        print("VOUS AVEZ ECHOUE !!!");
+      }
+      return score;
+
+    }
+   
+
+
+
+
+
+
+
 }
+

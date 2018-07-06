@@ -5,19 +5,24 @@ using UnityEngine.UI;
 
 /*
  * Component qui gère l'interface utilisateur des énigmes, à savoir les boutons et infos qui sont communs à toutes les énigmes
- */ 
+ */
 
 public class EnigmaUIManager : MonoBehaviour
 {
 
 	EnigmaData enigma; // Données de l'énigme en cours
-	
+
 	void Awake ()
     {
         // Récupère les données de l'énigme en cours
         QueryCurrentEnigmaDataEvent query = new QueryCurrentEnigmaDataEvent ();
 		EventManager.instance.Raise (query);
 		enigma = query.enigmaData;
+		EventManager.instance.AddListener<RequestDisableEnigmaUIEvent>(disableUI);
+	}
+
+	void OnDestroy(){
+		EventManager.instance.RemoveListener<RequestDisableEnigmaUIEvent>(disableUI);
 	}
 
 	void Start(){
@@ -61,6 +66,21 @@ public class EnigmaUIManager : MonoBehaviour
 	public void targetButtonPressed(){
 		//Pas encore utilisé
 		EventManager.instance.Raise (new targetButtonPressedEvent ());
+	}
+
+	public void enableUI()
+	{
+			GameObject.Find("go_button").GetComponent<Image>().raycastTarget = true;
+			GameObject.Find("Next Enigma").GetComponent<Image>().raycastTarget = true;
+			GameObject.Find("Return Button").GetComponent<Button>().interactable = true;
+	}
+
+	public void disableUI(RequestDisableEnigmaUIEvent e)
+	{
+
+			GameObject.Find("go_button").GetComponent<Image>().raycastTarget = false;
+			GameObject.Find("Next Enigma").GetComponent<Image>().raycastTarget = false;
+			GameObject.Find("Return Button").GetComponent<Button>().interactable = false;
 	}
 
 

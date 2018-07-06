@@ -38,7 +38,7 @@ public class SceneLoadEvents : MonoBehaviour {
         // ??? c koi OnSceneLoaded ?
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
-    
+
 	//Marque la scène comme active
 	//Load des infos sauvegardée au préalable
 	//Boucle sur les game objets à la racine de la scène
@@ -57,16 +57,18 @@ public class SceneLoadEvents : MonoBehaviour {
         foreach (GameObject GO in scene.GetRootGameObjects())
         {
             print("Checking RootGameObjects in Scene " + SceneManager.GetActiveScene().name+": "+GO.name);
-            
+
             // check l'existence d'une énigme et si oui l'update
             // why do that ?
             // Scénario comprenant un update d'énigme ?
+            /*
             if (GO.GetComponentInChildren<Enigma>() != null)
             {
                 //get scene's Enigma
                 print("cetteligne sert");
                 GO.GetComponentInChildren<Enigma>().enigmaUpdate();
             }
+            */
         }
     }
 }

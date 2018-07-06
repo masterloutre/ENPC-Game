@@ -3,36 +3,41 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
+
+// script définissant comme objet question un GameObject, il crée un bouton de controle CaseScenarioPartIcon qui permet de masquer/afficher cette section
+//[ExecuteInEditMode]
 public class CaseScenarioPart : MonoBehaviour {
 	public int id { get; private set; }
 	public GameObject iconPrefab;
 	public bool indiquerNumeroPartie;
 	// Use this for initialization
+
+
 	void Awake(){
 		id = Array.IndexOf(transform.parent.GetComponentsInChildren<CaseScenarioPart> (), this);
 	}
 
 
 	void Start () {
+        //not used
 		CaseScenarioPartIcon icon = new CaseScenarioPartIcon (this, iconPrefab);
 	}
 
-	// Update is called once per frame
-	void Update () {
 
-	}
-
+    // ask the others to hide themselves
 	public void show(){
 		foreach (CaseScenarioPart scenarioPart in transform.parent.GetComponentsInChildren<CaseScenarioPart>()) {
 			scenarioPart.hide ();
 		}
 		gameObject.SetActive (true);
 	}
-
+    // hide itself
 	public void hide(){
 		gameObject.SetActive (false);
 	}
 
+
+    // override
 	public override bool Equals(object obj)
 	{
 
@@ -42,10 +47,8 @@ public class CaseScenarioPart : MonoBehaviour {
 		{
 			return false;
 		}
-		Debug.Log ("Equal override : " + this.gameObject.name + " = " + item.gameObject.name);
 		return this.id == item.id && this.iconPrefab == item.iconPrefab && this.gameObject.name == item.gameObject.name;
 	}
-
 	public override int GetHashCode()
 	{
 		return this.id.GetHashCode();
