@@ -5,22 +5,35 @@ using UnityEngine;
 public class Timer : MonoBehaviour {
 
 	public GameObject timerOnScreen;
-
 	public float timeLimit = 300f;
 	float time;
+	public bool reverse = false;
 	// Use this for initialization
 	void Start () {
-		time = 0;
+		if(reverse){
+			time = timeLimit;
+		} else {
+			time = 0;
+		}
 		EventManager.instance.AddListener<QueryTimerEvent> (sendTime);
 	}
 
 	void OnEnable(){
-		time = 0;
+		if(reverse){
+			time = timeLimit;
+		} else {
+			time = 0;
+		}
 	}
-	
+
 	// Update is called once per frame
 	void Update () {
-		time += Time.deltaTime;
+		if(reverse){
+			time -= Time.deltaTime;
+		} else {
+			time += Time.deltaTime;
+		}
+
 		timerOnScreen.GetComponent<UnityEngine.UI.Text> ().text = (int)time / 60 + " : " + (int)time % 60;
 	}
 
@@ -30,7 +43,11 @@ public class Timer : MonoBehaviour {
 	}
 
 	public void resetTimer(){
-		time = 0;
+		if(reverse){
+			time = timeLimit;
+		} else {
+			time = 0;
+		}
 	}
 
     public float getTime()
