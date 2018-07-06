@@ -105,6 +105,7 @@
     <Compile Include="Assets\M4\Scripts\InteractiveElement\InteractionManager.cs" />
     <Compile Include="Assets\M4\Scripts\InteractiveElement\InteractiveUI.cs" />
     <Compile Include="Assets\M4\Scripts\InteractiveElement\StateManager.cs" />
+    <Compile Include="Assets\M4\Scripts\InteractiveElement\ZoomOnHover.cs" />
     <Compile Include="Assets\M4\Scripts\lancement_jeu.cs" />
     <Compile Include="Assets\M4\Scripts\LoadEnigmaScenes.cs" />
     <Compile Include="Assets\M4\Scripts\Objects\Enigma.cs" />
