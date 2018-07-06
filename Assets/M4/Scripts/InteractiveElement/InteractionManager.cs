@@ -4,7 +4,8 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class InteractionManager : InteractiveUI{
+public class InteractionManager : InteractiveUI
+{
     
     
 
@@ -17,8 +18,5 @@ public class InteractionManager : InteractiveUI{
         // ne fonctionne pas sur l'éditeur, uniquement en application
 		Application.Quit ();
 	}
-
-    
-
     
 }

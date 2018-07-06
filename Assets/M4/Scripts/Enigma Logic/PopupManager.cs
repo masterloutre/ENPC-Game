@@ -10,13 +10,13 @@ using UnityEngine.UI;
 */
 public class PopupManager : MonoBehaviour
 {
-    // pour l'élève
+    bool enigmaSuccess;
     int certitudelvl; // Niveau de certitude
 
     public string methodeUserInput { get; private set;}
     public float certitudeUserInput { get; private set;}
     string state; // Étape en cours, peut valoir : "none", "Certitude", "Justification", "Correction", "Victoire", "Défaite"
-    bool enigmaSuccess;
+    
 
     public ChoiceQuestion correctquestions,justifyquestions;
     private GameObject sure, justify, victory, defeat, correct; // Écrans des étapes
@@ -95,9 +95,12 @@ public class PopupManager : MonoBehaviour
     {
         enigmaSuccess = success;
     }
+    public bool getEnigmaSuccess()
+    {
+        return enigmaSuccess;
+    }
 
 
-    
 
     // Activé lorsque l'on confirme une sélection
     public void submit()
