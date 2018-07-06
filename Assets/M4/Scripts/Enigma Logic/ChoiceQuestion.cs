@@ -4,6 +4,11 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 
+
+/**
+ * Component qui représente une question à choix multiples
+ * @type {[type]}
+ */
 public class ChoiceQuestion : MonoBehaviour {
 	public string text;
 	public Answer[] answerList;
