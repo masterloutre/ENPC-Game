@@ -18,9 +18,7 @@ public abstract class CreateEnigmaEditor : EditorWindow
 		editorCenter.Set(editorCenter.width/2, editorCenter.height/2, 0, 0);	
 		
 		//position de la fenetre d'éditeur en coordonnées d'écran
-		Rect windowPos = this.position;
-		Debug.Log("window pos" + windowPos.ToString());
-		
+		Rect windowPos = this.position;		
 		//centre de la fenetre unity en coordonnées relative à la fenetre d'éditeur
 		Rect relativeCenter = new Rect(editorCenter.x - windowPos.x, editorCenter.y - windowPos.y, popupContentSize.x, popupContentSize.y);
 		//décalage pour que le milieu du popup soit au milieu de l'écran
