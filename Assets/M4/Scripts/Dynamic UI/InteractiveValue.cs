@@ -14,6 +14,13 @@ public class InteractiveValue : MonoBehaviour {
 	public string unit { get; private set;} //pour l'utilisation dans le programme
 	public char variableName { get; private set;} //pour l'utilisation dans le programme
 
+	public InteractiveValue(float _value, string _unit, char _variableName, string _legend, bool _jump){
+		value = _value;
+		unit = _unit;
+		variableName = _variableName;
+		légende = _legend;
+		valeurÀLaLigne = _jump;
+	}
 
 	//Initialise la valeur en récupérant la valeur et unité entrées dans l'éditeur et en les affichant dans le component
 	void Awake () {
