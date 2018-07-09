@@ -17,8 +17,8 @@ public class CreateInputEnigmaEditor : CreateEnigmaEditor
   {
     GUILayout.Label("Creation d'énigme de type input", EditorStyles.boldLabel);
 		
-		if (GUILayout.Button("Créer une énigme depuis un fichier", GUILayout.Width(200))) {
-				showPopupContentAtCenter(new CreateEnigmaFromFilePopup(EnigmaType.INPUT));
+		if (GUILayout.Button("Créer une énigme", GUILayout.Width(200))) {
+				showPopupContentAtCenter(new CreateEnigmaPopup(EnigmaType.INPUT));
     }
     if (GUILayout.Button("Ajouter une légende", GUILayout.Width(200))) {
         showPopupContentAtCenter(new CreateLegendPopup());
