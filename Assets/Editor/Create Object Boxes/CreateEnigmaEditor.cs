@@ -31,6 +31,12 @@ public abstract class CreateEnigmaEditor : EditorWindow
 		Rect position = placeAtCenter(popupContent.GetWindowSize());
 		PopupWindow.Show(position, popupContent);
 	}
+  
+  public virtual void showPopupContentAtCenter(EditorWindow popupWindow){
+    
+    popupWindow.position = new Rect(Screen.width / 2, Screen.height / 2, 250, 150);
+    popupWindow.ShowPopup();
+    }
 	
   public virtual void OnGUI()
   {

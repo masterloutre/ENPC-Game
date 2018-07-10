@@ -23,5 +23,9 @@ public class CreateInputEnigmaEditor : CreateEnigmaEditor
     if (GUILayout.Button("Ajouter une légende", GUILayout.Width(200))) {
         showPopupContentAtCenter(new CreateLegendPopup());
     }
+    if (GUILayout.Button("Ajouter un schéma", GUILayout.Width(200))) {
+        showPopupContentAtCenter(new CreateDiagramPopup());
+        
+    }
   }
 }
