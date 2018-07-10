@@ -18,7 +18,7 @@ public class PopupManager : MonoBehaviour
     string state; // Étape en cours, peut valoir : "none", "Certitude", "Justification", "Correction", "Victoire", "Défaite"
     
 
-    public ChoiceQuestion correctquestions,justifyquestions;
+    private ChoiceQuestion correctquestions,justifyquestions;
     private GameObject sure, justify, victory, defeat, correct; // Écrans des étapes
 
 
