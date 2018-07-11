@@ -32,5 +32,8 @@ public class CreateInputEnigmaEditor : CreateEnigmaEditor
     if (GUILayout.Button("Modifier le calcul du résultat", GUILayout.Width(250))) {
         showPopupContentAtCenter(new SetInputValidationPopup());
     }
+    if (GUILayout.Button("Modifier les questions de méthode", GUILayout.Width(250))) {
+        showPopupContentAtCenter(new SetMethodQuestionsPopup());
+    }
   }
 }
