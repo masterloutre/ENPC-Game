@@ -9,11 +9,13 @@ using UnityEngine.Networking;
 using System;
 using UnityEngine.SceneManagement;
 using System.Runtime.Remoting;
+using UnityEngine.UI;
 
 public class GlobalManager : MonoBehaviour
 {
 
     public bool startAtLandingPage = false;
+    public bool isOnline { get; private set; }
     private int gameSessionId;
     private PlayerManager playerManager;
 	  private SceneLoader sceneLoader;
@@ -77,14 +79,20 @@ public class GlobalManager : MonoBehaviour
 	//les yield sont effecuté un par un dans l'ordre
 	IEnumerator startSequence(){
 		yield return StartCoroutine (getSessionId ());
-		if (gameSessionId == 0) {
-			Debug.Log ("Le jeu n'est pas autorisé");
-			yield break;
-		}
+
 		yield return StartCoroutine(playerManager.instanciatePlayer());
 		yield return StartCoroutine (enigmaManager.instanciateEnigmas ());
 		if (startAtLandingPage) {
 			yield return StartCoroutine (sceneLoader.loadLandingPage ());
+            if (gameSessionId == 0)
+            {
+                Debug.Log("Le jeu n'est pas autorisé");
+
+            }
+            else
+            {
+                GameObject.Find("access_disabled").SetActive(false);
+            }
 		}
 	}
 
@@ -102,9 +110,12 @@ public class GlobalManager : MonoBehaviour
 		else {
 			if (!Int32.TryParse(getRequest.downloadHandler.text, out this.gameSessionId))
 			{
+                print("Game Session ID Parsing failed: "+ getRequest.downloadHandler.text);
 				this.gameSessionId = 0;
 			}
 		}
+        // analyse de la valeur
+        isOnline= (this.gameSessionId == 0) ? false : true;
 	}
 
 

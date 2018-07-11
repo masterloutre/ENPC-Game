@@ -53,7 +53,9 @@ public class SkillsMenuSceneManager : MenuSceneManager {
 				//int skillId = skillList[i].id;
 				int skillId = i;
 				skillGO.GetComponent<Button> ().onClick.AddListener (delegate {chooseSkill(skillId); });
-			}
+                // 2 en 1 : ajoute un script zoom et le paramètre à 1.2
+                skillGO.AddComponent<ZoomOnHover>().coeffHover = 1.2f ;
+            }
 		}
 
 	}

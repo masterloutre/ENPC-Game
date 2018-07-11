@@ -3,12 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public interface InteractiveUI : IPointerDownHandler, IPointerUpHandler
+public abstract class InteractiveUI : MonoBehaviour
 {
-    new void OnPointerDown(PointerEventData eventData);
-
-    new void OnPointerUp(PointerEventData eventData);
-
     
 	
 }

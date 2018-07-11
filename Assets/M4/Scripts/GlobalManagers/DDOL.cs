@@ -8,7 +8,7 @@ public class DDOL : MonoBehaviour {
 	// Use this for initialization
 	void Awake () {
 		DontDestroyOnLoad (gameObject);
-		//Debug.Log ("DDOL : " + gameObject.name);
+		Debug.Log ("DDOL : " + gameObject.name);
 	}
 
 }
