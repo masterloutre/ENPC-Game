@@ -16,7 +16,7 @@ public class PopupManager : MonoBehaviour
     public string methodeUserInput { get; private set;}
     public float certitudeUserInput { get; private set;}
     string state; // Étape en cours, peut valoir : "none", "Certitude", "Justification", "Correction", "Victoire", "Défaite"
-    
+
 
     private ChoiceQuestion correctquestions,justifyquestions;
     private GameObject sure, justify, victory, defeat, correct; // Écrans des étapes
@@ -26,11 +26,14 @@ public class PopupManager : MonoBehaviour
     public void Awake()
     {
         // INSTANCIATION des modèles, masqués par défaut
+        GameObject popupGroup = GameObject.Find("Answer Popup");
+        Debug.Log("group : " + popupGroup);
 
         sure = GameObject.Find("Certitude");
         justify = GameObject.Find("Justification");
         victory = GameObject.Find("Victoire");
         defeat = GameObject.Find("Défaite");
+
         correct = GameObject.Find("Correction");
 
         sure.SetActive(false);
@@ -175,7 +178,7 @@ public class PopupManager : MonoBehaviour
                     defeat.SetActive(false);
                     justify.SetActive(false);
                     sure.SetActive(true);
-                    
+
                     certitudelvl = 0;
 
                 }
@@ -200,7 +203,7 @@ public class PopupManager : MonoBehaviour
                     victory.SetActive(false);
                     justify.SetActive(true);
                     certitudelvl = -1;
-                    
+
                 }
                 break;
             case "Correction":
@@ -208,7 +211,7 @@ public class PopupManager : MonoBehaviour
                     defeat.SetActive(false);
                     correct.SetActive(true);
                     certitudelvl = -1;
-                    
+
                 }
                 break;
 

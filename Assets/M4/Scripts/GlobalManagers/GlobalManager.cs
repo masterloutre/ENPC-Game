@@ -26,9 +26,9 @@ public class GlobalManager : MonoBehaviour
 	// Variable statique : url root de l'interface web
 	public static string webInterfaceRootURL {
 		//VERSION KEN
-		get { return "http://localhost/enpc-web-interface"; }
+		//get { return "http://localhost/enpc-web-interface"; }
 		//VERSION LOU
-		//get { return "http://localhost:8888"; }
+		get { return "http://localhost:8888"; }
 	}
 
 	//récupère les références au PlayerManager, au SceneLoader, à l'EnigmaManager
@@ -79,7 +79,7 @@ public class GlobalManager : MonoBehaviour
 	//les yield sont effecuté un par un dans l'ordre
 	IEnumerator startSequence(){
 		yield return StartCoroutine (getSessionId ());
-		
+
 		yield return StartCoroutine(playerManager.instanciatePlayer());
 		yield return StartCoroutine (enigmaManager.instanciateEnigmas ());
 		if (startAtLandingPage) {

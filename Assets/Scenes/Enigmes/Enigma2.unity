@@ -2356,6 +2356,10 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 1101275197906976, guid: 0bc329f761090d142a844064747f3173, type: 2}
+      propertyPath: m_Name
+      value: "D\xE9faite"
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0bc329f761090d142a844064747f3173, type: 2}
   m_IsPrefabParent: 0
@@ -3377,6 +3381,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 1028475878}
     m_Modifications:
+    - target: {fileID: 114174001899413730, guid: 865308c9b166d854ca8bff3cc6e85b36,
+        type: 2}
+      propertyPath: answerList.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 224436357992292642, guid: 865308c9b166d854ca8bff3cc6e85b36,
         type: 2}
       propertyPath: m_LocalPosition.x
@@ -3466,6 +3475,26 @@ Prefab:
         type: 2}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114174001899413730, guid: 865308c9b166d854ca8bff3cc6e85b36,
+        type: 2}
+      propertyPath: text
+      value: "Quelle m\xE9thode avez vous utilis\xE9?"
+      objectReference: {fileID: 0}
+    - target: {fileID: 114174001899413730, guid: 865308c9b166d854ca8bff3cc6e85b36,
+        type: 2}
+      propertyPath: answerList.Array.data[0].text
+      value: "Alawal\xE9gu\xE8ne"
+      objectReference: {fileID: 0}
+    - target: {fileID: 114174001899413730, guid: 865308c9b166d854ca8bff3cc6e85b36,
+        type: 2}
+      propertyPath: answerList.Array.data[1].text
+      value: "La m\xE9thode cool"
+      objectReference: {fileID: 0}
+    - target: {fileID: 114174001899413730, guid: 865308c9b166d854ca8bff3cc6e85b36,
+        type: 2}
+      propertyPath: answerList.Array.data[1].percent
+      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 865308c9b166d854ca8bff3cc6e85b36, type: 2}
