@@ -19,28 +19,28 @@ public class PopupManager : MonoBehaviour
 
 
     private ChoiceQuestion correctquestions,justifyquestions;
-    private GameObject sure, justify, victory, defeat, correct; // Écrans des étapes
+    private GameObject sure, justify, victory, defeat, correct, validationButton; // Écrans des étapes
 
 
 
     public void Awake()
     {
         // INSTANCIATION des modèles, masqués par défaut
-        GameObject popupGroup = GameObject.Find("Answer Popup");
-        Debug.Log("group : " + popupGroup);
 
         sure = GameObject.Find("Certitude");
         justify = GameObject.Find("Justification");
         victory = GameObject.Find("Victoire");
         defeat = GameObject.Find("Défaite");
-
         correct = GameObject.Find("Correction");
+        validationButton = GameObject.Find("ValidationButton");
 
         sure.SetActive(false);
         justify.SetActive(false);
         victory.SetActive(false);
         defeat.SetActive(false);
         correct.SetActive(false);
+        validationButton.SetActive(false);
+        
 
         certitudelvl = -1;
         methodeUserInput = "";
@@ -66,29 +66,8 @@ public class PopupManager : MonoBehaviour
     // Pour scripter les boutons de validations
     private void setValidationButton()
     {
-
-        GameObject go;
-
-        // " Justification "
-        print(justify);
-        go = justify.transform.Find("Validation_button").gameObject;
-        go.GetComponent<Button>().onClick.AddListener(submit);
-
-        // " Correction "
-        go = correct.transform.Find("Validation_button").gameObject;
-        go.GetComponent<Button>().onClick.AddListener(submit);
-
-        // " Victoire "
-        go = victory.transform.Find("Validation_button").gameObject;
-        go.GetComponent<Button>().onClick.AddListener(submit);
-
-        // " Défaite "
-        go = defeat.transform.Find("Validation_button").gameObject;
-        go.GetComponent<Button>().onClick.AddListener(submit);
-
-        // " Certitude "
-        go = sure.transform.Find("Validation_button").gameObject;
-        go.GetComponent<Button>().onClick.AddListener(submit);
+        validationButton.GetComponent<Button>().onClick.AddListener(submit);
+        
     }
     public string getState()
     {
@@ -169,6 +148,7 @@ public class PopupManager : MonoBehaviour
     public void displayScreen()
     {
         EventManager.instance.Raise(new RequestDisableEnigmaUIEvent());
+        validationButton.SetActive(true);
         switch (state)
         {
             case "Certitude":
