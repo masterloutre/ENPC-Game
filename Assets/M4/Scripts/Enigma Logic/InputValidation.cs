@@ -10,13 +10,14 @@ public class InputValidation : MonoBehaviour, ValidationMethod
 	ExpressionParser parser;
 	Dictionary<char,double> paramList;
 
+	/*
 	public InputValidation(InputValidation validator){
 		formula = validator.formula;
 		marginError = validator.marginError;
 		parser = validator.parser;
 		paramList = validator.paramList;
 	}
-
+	*/
 
 	void Start ()
 	{

@@ -15,6 +15,8 @@ public class SetMethodQuestionsPopup : PopupWindowContent
 {
 	List<ChoiceQuestion> questionList = new List<ChoiceQuestion>();
 	Vector2 scrollPos;
+	int selectedIndex = 0;
+	//ChoiceQuestion test;
 
 
 		//taille du popup
@@ -24,18 +26,16 @@ public class SetMethodQuestionsPopup : PopupWindowContent
 
 		///affichage des champs et bouttons et assignement des variables
     public override void OnGUI(Rect rect){
-
+			//ActiveEditorTracker.sharedTracker.isLocked = false;
       GUILayout.Label("Configurer les questions de méthode.", EditorStyles.boldLabel);
 			scrollPos = EditorGUILayout.BeginScrollView(scrollPos, GUILayout.Width(400), GUILayout.Height(300));
+			//test.text = EditorGUILayout.TextField("test ",test.text);
+			
 			foreach(ChoiceQuestion question in questionList){
 				displayQuestionEditor(question);
 			}
-			//bouton OK
-			/*
-			if (GUILayout.Button("OK", GUILayout.Width(200))) {
-	      setValidator();
-	    }
-			*/
+			
+			
 			EditorGUILayout.EndScrollView();
     }
 
@@ -43,7 +43,10 @@ public class SetMethodQuestionsPopup : PopupWindowContent
 			GameObject popUpGroup = GameObject.Find("Answer Popup");
 			foreach(ChoiceQuestion question in popUpGroup.GetComponentsInChildren<ChoiceQuestion>()){
 				questionList.Add(question);
+				EditorUtility.SetDirty(question);
 			}
+			
+			//test = popUpGroup.GetComponentsInChildren<ChoiceQuestion>()[0];
 		}
 
 		public void displayQuestionEditor(ChoiceQuestion question){
@@ -55,7 +58,36 @@ public class SetMethodQuestionsPopup : PopupWindowContent
 				answer.percent = EditorGUILayout.FloatField("Pourcentage de réussite associé à la réponse", answer.percent);
 				GUILayout.EndVertical();
 			}
+			if (GUILayout.Button("Ajouter une réponse", GUILayout.Width(200))) {
+	      addAnswer(question);
+	    }
+			deleteAnswerPopup(question);
+			if (GUILayout.Button("Supprimer une réponse", GUILayout.Width(200))) {
+	      deleteAnswer(question, selectedIndex);
+	    }
+			question.professionalSituationId = EditorGUILayout.IntField("Identifiant de la situation professionnelle", question.professionalSituationId);
 			GUILayout.EndVertical();
+		}
+		
+		public void addAnswer(ChoiceQuestion question){
+			question.answerList.Add(new Answer());
+		}
+		
+		public void deleteAnswer(ChoiceQuestion question, int selectedIndex){
+			try{
+				question.answerList.RemoveAt(selectedIndex - 1);
+			} catch (Exception e){
+				Debug.Log("Exception caught : " + e.Message);
+			}
+		}
+		
+		public void deleteAnswerPopup(ChoiceQuestion question){
+			List<string> optionList = new List<string>();
+			optionList.Add("aucune");
+			foreach(Answer answer in question.answerList){
+				optionList.Add(answer.text);
+			}
+			selectedIndex = EditorGUILayout.Popup(selectedIndex, optionList.ToArray());
 		}
 
 

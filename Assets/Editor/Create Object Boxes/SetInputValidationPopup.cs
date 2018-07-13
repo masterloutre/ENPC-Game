@@ -41,7 +41,7 @@ public class SetInputValidationPopup : PopupWindowContent
     }
 
 		public override void OnOpen(){
-			validator = new InputValidation(GameObject.Find("Managers").GetComponentInChildren<InputValidation>());
+			//validator = new InputValidation(GameObject.Find("Managers").GetComponentInChildren<InputValidation>());
 			validator = GameObject.Find("Managers").GetComponentInChildren<InputValidation>();
 			GameObject[] paramGOList = GameObject.FindGameObjectsWithTag("Input Param");
 			foreach(GameObject go in paramGOList){
