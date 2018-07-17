@@ -67,8 +67,16 @@ public class EnigmaSceneManager : MonoBehaviour
       score = validator.fillScore(score);
       score.time = getTime();
       score.help = false;
-      popm.setEnigmaSuccess(score.enigmaSuccess);
-      popm.updateState("Certitude");
+        if (popm != null)
+        {
+            popm.setEnigmaSuccess(score.enigmaSuccess);
+            popm.updateState("Certitude");
+        }
+        else
+        {
+            EventManager.instance.Raise(new PopUpQuestionsOverEvent());
+        }
+
     }
 
     //event lancé par EnigmaSequenceManager.getEnigmaScore
@@ -77,8 +85,16 @@ public class EnigmaSceneManager : MonoBehaviour
     }
 
     public void PopUpQuestionsHaveEnded(PopUpQuestionsOverEvent e){
-      score.certaintyLevel = popm.certitudeUserInput;
-      score.addMethodSuccess(0, 0);
+        if (popm != null)
+        {
+            score.certaintyLevel = popm.certitudeUserInput;
+            score.addMethodSuccess(0, 0);
+        }
+        else
+        {
+            score.certaintyLevel = 100;
+            score.addMethodSuccess(0, 0);
+        }
       //certitude = popm.certitudeUserInput;
       //method = popm.methodeUserInput;
       //traité dans EnigmaSequenceManager
