@@ -59,6 +59,19 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Editor\Create Object Boxes\CreateDepartureSlotPopup.cs" />
+    <Compile Include="Assets\Editor\Create Object Boxes\CreateDestinationSlotPopup.cs" />
+    <Compile Include="Assets\Editor\Create Object Boxes\CreateDiagramPopup.cs" />
+    <Compile Include="Assets\Editor\Create Object Boxes\CreateEnigmaEditor.cs" />
+    <Compile Include="Assets\Editor\Create Object Boxes\CreateEnigmaFromFilePopup.cs" />
+    <Compile Include="Assets\Editor\Create Object Boxes\CreateEnigmaPopup.cs" />
+    <Compile Include="Assets\Editor\Create Object Boxes\CreateInputEnigmaEditor.cs" />
+    <Compile Include="Assets\Editor\Create Object Boxes\CreateLegendPopup.cs" />
+    <Compile Include="Assets\Editor\Create Object Boxes\CreateQCMEnigmaEditor.cs" />
+    <Compile Include="Assets\Editor\Create Object Boxes\CreateStudyCaseEnigmaEditor.cs" />
+    <Compile Include="Assets\Editor\Create Object Boxes\CreateUserInputPopup.cs" />
+    <Compile Include="Assets\Editor\Create Object Boxes\SetInputValidationPopup.cs" />
+    <Compile Include="Assets\Editor\Create Object Boxes\SetMethodQuestionsPopup.cs" />
     <Compile Include="Assets\Editor\Dynamic UI Elements\InteractiveValueEditor.cs" />
     <Compile Include="Assets\MaterialUI\Editor\CheckboxConfigEditor.cs" />
     <Compile Include="Assets\MaterialUI\Editor\EZAnimEditor.cs" />

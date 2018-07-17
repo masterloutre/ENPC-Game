@@ -19,27 +19,35 @@ public class CaseScenarioPart : MonoBehaviour {
 
     void Awake(){
 		id = Array.IndexOf(transform.parent.GetComponentsInChildren<CaseScenarioPart> (), this);
-	}
+        EventManager.instance.AddListener<ChoiceQuestionEvent>(unlock);
+    }
+    private void OnDestroy()
+    {
+        EventManager.instance.RemoveListener<ChoiceQuestionEvent>(unlock);
+    }
 
-
-	void Start () {
+    void Start () {
         //not used
-		CaseScenarioPartIcon icon = new CaseScenarioPartIcon (this, iconPrefab);
+		icon = new CaseScenarioPartIcon (this, iconPrefab);
         foreach(int val in chain)
         {
             transform.parent.GetChild(val).GetComponent<CaseScenarioPart>().icon.hide();
         }
 	}
 
-    public void unlock()
+    public void unlock(ChoiceQuestionEvent e)
     {
-        if (chain.Length != 0)
+        if (e.self == gameObject)
         {
-            foreach (int val in chain)
+            if (chain.Length != 0)
             {
-                transform.parent.GetChild(val).GetComponent<CaseScenarioPart>().icon.show();
+                foreach (int val in chain)
+                {
+                    transform.parent.GetChild(val).GetComponent<CaseScenarioPart>().icon.show();
+                }
             }
         }
+        
     }
 
     // ask the others to hide themselves

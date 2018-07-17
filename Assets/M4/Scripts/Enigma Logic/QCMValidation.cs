@@ -53,7 +53,7 @@ public class QCMValidation : MonoBehaviour, ValidationMethod
 		foreach( GameObject go in slotsList){
 			Item it = go.GetComponentInChildren<Item>();
 			if(it == null){
-				ItemSlot it_s = go.GetComponent<ItemSlot> ();
+				ItemSlot it_s = go.GetComponentInChildren<ItemSlot> ();
 				if(it_s != null)
 					it_s.glowMissingItem ();
 				returnCheck = false;

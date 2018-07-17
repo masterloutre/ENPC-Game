@@ -10,6 +10,14 @@ public class InputValidation : MonoBehaviour, ValidationMethod
 	ExpressionParser parser;
 	Dictionary<char,double> paramList;
 
+	/*
+	public InputValidation(InputValidation validator){
+		formula = validator.formula;
+		marginError = validator.marginError;
+		parser = validator.parser;
+		paramList = validator.paramList;
+	}
+	*/
 
 	void Start ()
 	{
@@ -57,9 +65,15 @@ public class InputValidation : MonoBehaviour, ValidationMethod
 	}
 
 	void setParam(Expression expCorrect){ //set param in alphabetical order
+
 		foreach( KeyValuePair<char, double> param in paramList){
-			string name = "" + param.Key;
-			expCorrect.Parameters[name].Value = param.Value; // set the named parameter
+			try{
+				string name = "" + param.Key;
+				expCorrect.Parameters[name].Value = param.Value; // set the named parameter
+			} catch (KeyNotFoundException e){
+				print("This may be wanted or not but the parameter named " + param.Key + "is not used for computing the result");
+			}
+
 		}
 	}
 }

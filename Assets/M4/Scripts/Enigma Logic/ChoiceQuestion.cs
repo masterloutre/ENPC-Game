@@ -9,17 +9,21 @@ using System;
  * Component qui représente une question à choix multiples
  * @type {[type]}
  */
+[System.Serializable]
 public class ChoiceQuestion : MonoBehaviour {
 	public string text;
-	public Answer[] answerList;
-	private int userChoice;
+	public List<Answer> answerList;
+	int userChoice;
 	public int professionalSituationId;
 
     // #64E8FF pour du bleu cyan
-    public string normalColor, selectedColor; //hexa
+   string normalColor, selectedColor; //hexa
 
 	// Use this for initialization
 	public void Start () {
+		professionalSituationId = 0;
+		normalColor = "";
+		selectedColor = "";
         userChoice = -1;
         print("Start:" + gameObject.name);
         gameObject.transform.Find("QuestionText").GetComponent<Text>().text = this.text;
@@ -57,6 +61,7 @@ public class ChoiceQuestion : MonoBehaviour {
 		}
 		userChoice = id;
 		colorChange(answerGOList.transform.GetChild(userChoice).gameObject);
+        EventManager.instance.Raise(new ChoiceQuestionEvent(gameObject));
 	}
 
 	//retourne le pourcentage de balidation de la question
@@ -69,7 +74,6 @@ public class ChoiceQuestion : MonoBehaviour {
             print("Texte: " + answerList[userChoice].text);
             print("Numéro du choix: " + userChoice);
             print("Valeur de point accordé(%) : " + answerList[userChoice].percent);
-
             return answerList[userChoice].percent;
 		} catch( Exception e){
 			print(e.Message);
@@ -100,5 +104,6 @@ public class ChoiceQuestion : MonoBehaviour {
 
 			go.GetComponentInChildren<Image>().GetComponent<Image>().color = outcolor;
 	}
+	
 
 }

@@ -2890,7 +2890,7 @@ GameObject:
   m_Component:
   - component: {fileID: 983119965}
   m_Layer: 5
-  m_Name: Datas
+  m_Name: "L\xE9gendes"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

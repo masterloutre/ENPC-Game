@@ -59,7 +59,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\InteractiveValue.cs" />
+    <Compile Include="Assets\M4\Scripts\Aides\Extensions.cs" />
     <Compile Include="Assets\M4\Scripts\Aides\HelpBox.cs" />
     <Compile Include="Assets\M4\Scripts\Aides\JsonHelper.cs" />
     <Compile Include="Assets\M4\Scripts\AlgoAnswer.cs" />
@@ -70,6 +70,7 @@
     <Compile Include="Assets\M4\Scripts\DataUploader.cs" />
     <Compile Include="Assets\M4\Scripts\DisplayControl.cs" />
     <Compile Include="Assets\M4\Scripts\Dynamic UI\Border.cs" />
+    <Compile Include="Assets\M4\Scripts\Dynamic UI\InteractiveValue.cs" />
     <Compile Include="Assets\M4\Scripts\Dynamic UI\PlayerInfoText.cs" />
     <Compile Include="Assets\M4\Scripts\Dynamic UI\ReturnButton.cs" />
     <Compile Include="Assets\M4\Scripts\Dynamic UI\Timer.cs" />

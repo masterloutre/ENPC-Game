@@ -242,3 +242,9 @@ public class RequestEnigmaRemoved : GameEvent{
 public class RequestDisableEnigmaUIEvent : GameEvent{
 	//public RequestDisableEnigmaUIEvent(){}
 }
+
+public class ChoiceQuestionEvent : GameEvent
+{
+    public GameObject self;
+    public ChoiceQuestionEvent(GameObject me){ self = me; }
+}
