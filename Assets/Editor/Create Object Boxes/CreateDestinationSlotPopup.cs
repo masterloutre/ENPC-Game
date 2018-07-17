@@ -24,7 +24,7 @@ public class CreateDestinationSlotPopup : PopupWindowContent
 
 		///affichage des champs et bouttons et assignement des variables
     public override void OnGUI(Rect rect){
-        GUILayout.Label("Ajouter un slot de départ", EditorStyles.boldLabel);
+        GUILayout.Label("Ajouter un slot d'arrivée", EditorStyles.boldLabel);
 				name = EditorGUILayout.TextField("Nom de l'object", name);
 
 				expectedId =  EditorGUILayout.IntField("Identifiant attendu", expectedId);
