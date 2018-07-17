@@ -67,8 +67,9 @@ public class EnigmaSceneManager : MonoBehaviour
       score = validator.fillScore(score);
       score.time = getTime();
       score.help = false;
-      popm.setEnigmaSuccess(score.enigmaSuccess);
-      popm.updateState("Certitude");
+      //popm.setScore(score);
+      //popm.updateState("Certitude");
+      popm.beginPopUpQuestionsSequence(score);
     }
 
     //event lancé par EnigmaSequenceManager.getEnigmaScore

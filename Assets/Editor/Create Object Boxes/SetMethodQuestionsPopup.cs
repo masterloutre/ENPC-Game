@@ -59,13 +59,20 @@ public class SetMethodQuestionsPopup : PopupWindowContent
 			question.professionalSituationId = EditorGUILayout.IntField("Identifiant de la situation professionnelle", question.professionalSituationId);
 			foreach(Answer answer in question.answerList){
 				GUILayout.BeginVertical("box");
+
 				answer.text = EditorGUILayout.TextField("Réponse", answer.text);
 				answer.percent = EditorGUILayout.FloatField("Pourcentage de réussite associé à la réponse", answer.percent);
+				/*
+				Editor editor = Editor.CreateEditor(answer);
+				editor.OnInspectorGUI();
+				*/
 				GUILayout.EndVertical();
 			}
 			if (GUILayout.Button("Ajouter une réponse", GUILayout.Width(200))) {
 	      addAnswer(question);
 	    }
+
+
 			deleteAnswerPopup(question);
 			if (GUILayout.Button("Supprimer une réponse", GUILayout.Width(200))) {
 	      deleteAnswer(question, selectedIndex);

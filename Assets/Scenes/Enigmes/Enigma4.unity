@@ -1911,6 +1911,7 @@ GameObject:
   - component: {fileID: 1087013168}
   - component: {fileID: 1087013167}
   - component: {fileID: 1087013169}
+  - component: {fileID: 1087013166}
   m_Layer: 0
   m_Name: EnigmaSceneManager
   m_TagString: Untagged
@@ -1931,6 +1932,17 @@ Transform:
   m_Father: {fileID: 2057440719}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1087013166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1087013164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cad6f0cb0d11340368a498f5f94e17cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1087013167
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2982,70 +2994,6 @@ Prefab:
         type: 2}
       propertyPath: m_AnchorMax.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224300997372673584, guid: ab9c2616c4bc84d18908f23fb19b84e9,
-        type: 2}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224300997372673584, guid: ab9c2616c4bc84d18908f23fb19b84e9,
-        type: 2}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224300997372673584, guid: ab9c2616c4bc84d18908f23fb19b84e9,
-        type: 2}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224300997372673584, guid: ab9c2616c4bc84d18908f23fb19b84e9,
-        type: 2}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224300997372673584, guid: ab9c2616c4bc84d18908f23fb19b84e9,
-        type: 2}
-      propertyPath: m_SizeDelta.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224300997372673584, guid: ab9c2616c4bc84d18908f23fb19b84e9,
-        type: 2}
-      propertyPath: m_SizeDelta.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224888606056362290, guid: ab9c2616c4bc84d18908f23fb19b84e9,
-        type: 2}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224888606056362290, guid: ab9c2616c4bc84d18908f23fb19b84e9,
-        type: 2}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224888606056362290, guid: ab9c2616c4bc84d18908f23fb19b84e9,
-        type: 2}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224888606056362290, guid: ab9c2616c4bc84d18908f23fb19b84e9,
-        type: 2}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224888606056362290, guid: ab9c2616c4bc84d18908f23fb19b84e9,
-        type: 2}
-      propertyPath: m_SizeDelta.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224888606056362290, guid: ab9c2616c4bc84d18908f23fb19b84e9,
-        type: 2}
-      propertyPath: m_SizeDelta.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1409474079384060, guid: ab9c2616c4bc84d18908f23fb19b84e9, type: 2}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ab9c2616c4bc84d18908f23fb19b84e9, type: 2}
