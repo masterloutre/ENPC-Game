@@ -15,10 +15,7 @@ public class CaseScenarioPartIcon {
 		prefab = _prefab;
 
 		createGameObject ();
-
-		if (scenarioPart.id != 0) {
-			scenarioPart.hide ();
-		}
+        
 
 	}
     public void hide()
@@ -30,11 +27,7 @@ public class CaseScenarioPartIcon {
     {
         iconGO.SetActive(true);
     }
-	public void activateScenarioPart(){
-		scenarioPart.show ();
-        Debug.Log("(activateScenarioPart) Vous êtes sur la partie numéro: "+scenarioPart.id);
-        EventManager.instance.Raise(new RequestNextQuestionEvent(scenarioPart.name,scenarioPart.id));
-    }
+	
 
 	public void createGameObject(){
 
@@ -44,9 +37,10 @@ public class CaseScenarioPartIcon {
 		iconGO = GameObject.Instantiate(prefab, parentGO.transform, false);
         iconGO.name = prefab.name+scenarioPart.id;
 		iconGO.transform.position += new Vector3 (0, offsetY, 0);
-		iconGO.GetComponentInChildren<UnityEngine.UI.Button>().onClick.AddListener (activateScenarioPart);
+		//iconGO.GetComponentInChildren<UnityEngine.UI.Button>().onClick.AddListener (activateScenarioPart);
+        iconGO.GetComponentInChildren<UnityEngine.UI.Button>().onClick.AddListener(delegate { EventManager.instance.Raise(new RequestNextQuestionEvent(scenarioPart.name, scenarioPart.id)); });
 
-		if(scenarioPart.indiquerNumeroPartie){
+        if (scenarioPart.indiquerNumeroPartie){
 			string separator = "";
 			if(prefab.name != "PartIcon"){
 				separator = " ";

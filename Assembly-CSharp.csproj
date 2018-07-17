@@ -76,6 +76,7 @@
     <Compile Include="Assets\M4\Scripts\Dynamic UI\Timer.cs" />
     <Compile Include="Assets\M4\Scripts\Enigma Logic\Answer.cs" />
     <Compile Include="Assets\M4\Scripts\Enigma Logic\AnswerBlock.cs" />
+    <Compile Include="Assets\M4\Scripts\Enigma Logic\CaseScenarioManager.cs" />
     <Compile Include="Assets\M4\Scripts\Enigma Logic\CaseScenarioPart.cs" />
     <Compile Include="Assets\M4\Scripts\Enigma Logic\CaseScenarioPartIcon.cs" />
     <Compile Include="Assets\M4\Scripts\Enigma Logic\CaseValidation.cs" />

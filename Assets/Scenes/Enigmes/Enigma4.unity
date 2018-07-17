@@ -401,16 +401,16 @@ RectTransform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 94830494}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1134521727}
-  m_RootOrder: 0
+  m_Father: {fileID: 2102971012}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 28, y: -200}
   m_SizeDelta: {x: 2, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &94830496
@@ -609,7 +609,7 @@ Prefab:
     - target: {fileID: 114311224053470996, guid: e534e2443f248904e831281958839838,
         type: 2}
       propertyPath: chain.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 224096666601521410, guid: e534e2443f248904e831281958839838,
         type: 2}
@@ -843,6 +843,11 @@ Prefab:
     - target: {fileID: 114311224053470996, guid: e534e2443f248904e831281958839838,
         type: 2}
       propertyPath: chain.Array.data[0]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114311224053470996, guid: e534e2443f248904e831281958839838,
+        type: 2}
+      propertyPath: chain.Array.data[1]
       value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -1921,6 +1926,7 @@ GameObject:
   - component: {fileID: 1087013168}
   - component: {fileID: 1087013167}
   - component: {fileID: 1087013169}
+  - component: {fileID: 1087013166}
   m_Layer: 0
   m_Name: EnigmaSceneManager
   m_TagString: Untagged
@@ -1941,6 +1947,17 @@ Transform:
   m_Father: {fileID: 2057440719}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1087013166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1087013164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d49700a8d9ee9574699a9966d9a20eee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1087013167
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2089,6 +2106,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 1134521727}
+  - component: {fileID: 1134521728}
   m_Layer: 5
   m_Name: TimeLine
   m_TagString: Untagged
@@ -2105,16 +2123,37 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 94830495}
+  m_Children: []
   m_Father: {fileID: 2102971012}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 50, y: 0}
+  m_AnchoredPosition: {x: 3.0000305, y: 0}
   m_SizeDelta: {x: 100, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1134521728
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1134521726}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1297475563, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Padding:
+    m_Left: 0
+    m_Right: 0
+    m_Top: 0
+    m_Bottom: 0
+  m_ChildAlignment: 0
+  m_Spacing: 0
+  m_ChildForceExpandWidth: 1
+  m_ChildForceExpandHeight: 1
+  m_ChildControlWidth: 0
+  m_ChildControlHeight: 0
 --- !u!1 &1154268555
 GameObject:
   m_ObjectHideFlags: 0
@@ -3527,6 +3566,7 @@ RectTransform:
   m_Children:
   - {fileID: 595464175}
   - {fileID: 853334185}
+  - {fileID: 94830495}
   - {fileID: 1134521727}
   m_Father: {fileID: 92665012}
   m_RootOrder: 1
@@ -3624,6 +3664,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 853334185}
     m_Modifications:
+    - target: {fileID: 114311224053470996, guid: e534e2443f248904e831281958839838,
+        type: 2}
+      propertyPath: chain.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 224096666601521410, guid: e534e2443f248904e831281958839838,
         type: 2}
       propertyPath: m_LocalPosition.x
@@ -3863,6 +3908,11 @@ Prefab:
         type: 2}
       propertyPath: normalColor
       value: '#FFFFFF'
+      objectReference: {fileID: 0}
+    - target: {fileID: 114311224053470996, guid: e534e2443f248904e831281958839838,
+        type: 2}
+      propertyPath: chain.Array.data[0]
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e534e2443f248904e831281958839838, type: 2}

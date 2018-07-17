@@ -7,18 +7,18 @@ using System;
 // script définissant comme "section de question" un GameObject, il crée un bouton de controle CaseScenarioPartIcon qui permet de masquer/afficher cette section
 //[ExecuteInEditMode]
 public class CaseScenarioPart : MonoBehaviour {
-	public int id { get; private set; }
-	public GameObject iconPrefab;
-	public bool indiquerNumeroPartie;
+    public int id { get; private set; }
+    public GameObject iconPrefab;
+    public bool indiquerNumeroPartie;
 
-    private CaseScenarioPartIcon icon;
+    public CaseScenarioPartIcon icon;
     public int[] chain;
 
 
 
 
-    void Awake(){
-		id = Array.IndexOf(transform.parent.GetComponentsInChildren<CaseScenarioPart> (), this);
+    void Awake() {
+        id = Array.IndexOf(transform.parent.GetComponentsInChildren<CaseScenarioPart>(), this);
         EventManager.instance.AddListener<ChoiceQuestionEvent>(unlock);
     }
     private void OnDestroy()
@@ -26,14 +26,25 @@ public class CaseScenarioPart : MonoBehaviour {
         EventManager.instance.RemoveListener<ChoiceQuestionEvent>(unlock);
     }
 
-    void Start () {
-        //not used
-		icon = new CaseScenarioPartIcon (this, iconPrefab);
-        foreach(int val in chain)
+    public void init() {
+        print("Starting CaseScenarioPart: " + id);
+        icon = new CaseScenarioPartIcon(this, iconPrefab);
+        
+    }
+
+    public void locked(){
+        foreach (int val in chain)
         {
-            transform.parent.GetChild(val).GetComponent<CaseScenarioPart>().icon.hide();
+            if (transform.parent.GetChild(val).GetComponent<CaseScenarioPart>().icon != null)
+            {
+                transform.parent.GetChild(val).GetComponent<CaseScenarioPart>().icon.hide();
+            }
+            else
+            {
+                print("erreur");
+            }
         }
-	}
+    }
 
     public void unlock(ChoiceQuestionEvent e)
     {
@@ -50,17 +61,7 @@ public class CaseScenarioPart : MonoBehaviour {
         
     }
 
-    // ask the others to hide themselves
-	public void show(){
-		foreach (CaseScenarioPart scenarioPart in transform.parent.GetComponentsInChildren<CaseScenarioPart>()) {
-			scenarioPart.hide ();
-		}
-		gameObject.SetActive (true);
-	}
-    // hide itself
-	public void hide(){
-		gameObject.SetActive (false);
-	}
+    
 
 
     // override
