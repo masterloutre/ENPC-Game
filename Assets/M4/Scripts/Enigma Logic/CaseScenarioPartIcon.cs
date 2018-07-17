@@ -7,6 +7,7 @@ using System;
 public class CaseScenarioPartIcon {
 	private GameObject prefab;
 	private CaseScenarioPart scenarioPart;
+    private GameObject iconGO;
 	// Use this for initialization
 
 	public CaseScenarioPartIcon(CaseScenarioPart _scenarioPart, GameObject _prefab){
@@ -20,7 +21,15 @@ public class CaseScenarioPartIcon {
 		}
 
 	}
-
+    public void hide()
+    {
+        Debug.Log("Hiding ICON" + scenarioPart);
+        iconGO.SetActive(false);
+    }
+    public void show()
+    {
+        iconGO.SetActive(true);
+    }
 	public void activateScenarioPart(){
 		scenarioPart.show ();
         Debug.Log("(activateScenarioPart) Vous êtes sur la partie numéro: "+scenarioPart.id);
@@ -32,7 +41,8 @@ public class CaseScenarioPartIcon {
 		float offsetY = scenarioPart.id * (-45) - 25;
 		GameObject parentGO = GameObject.Find ("TimeLine");
 
-		GameObject iconGO = GameObject.Instantiate(prefab, parentGO.transform, false);
+		iconGO = GameObject.Instantiate(prefab, parentGO.transform, false);
+        iconGO.name = prefab.name+scenarioPart.id;
 		iconGO.transform.position += new Vector3 (0, offsetY, 0);
 		iconGO.GetComponentInChildren<UnityEngine.UI.Button>().onClick.AddListener (activateScenarioPart);
 
@@ -42,7 +52,8 @@ public class CaseScenarioPartIcon {
 				separator = " ";
 			}
 			iconGO.GetComponentInChildren<Text>().text += separator + (scenarioPart.id+1).ToString();
-		}
+            Debug.Log(iconGO.GetComponentInChildren<Text>().text);
+        }
 	}
 
 }

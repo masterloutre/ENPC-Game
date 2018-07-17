@@ -69,6 +69,7 @@
     <Compile Include="Assets\M4\Scripts\DataTest.cs" />
     <Compile Include="Assets\M4\Scripts\DataUploader.cs" />
     <Compile Include="Assets\M4\Scripts\DisplayControl.cs" />
+    <Compile Include="Assets\M4\Scripts\Dynamic UI\Border.cs" />
     <Compile Include="Assets\M4\Scripts\Dynamic UI\PlayerInfoText.cs" />
     <Compile Include="Assets\M4\Scripts\Dynamic UI\ReturnButton.cs" />
     <Compile Include="Assets\M4\Scripts\Dynamic UI\Timer.cs" />
@@ -171,6 +172,7 @@
     <Compile Include="Assets\MaterialUI\Scripts\Toaster.cs" />
     <Compile Include="Assets\MaterialUI\Scripts\ToggleConfig.cs" />
     <Compile Include="Assets\MaterialUI\Scripts\ToggleTextChanger.cs" />
+    <Compile Include="Assets\RectBorder.cs" />
     <Compile Include="Assets\SliderText.cs" />
     <None Include="Assets\M4\Typo\charteTypo.txt" />
     <None Include="Assets\MaterialUI\Fonts\NOTICE.txt" />

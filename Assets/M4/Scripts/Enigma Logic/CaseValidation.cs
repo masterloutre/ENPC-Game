@@ -23,7 +23,7 @@ public class CaseValidation : MonoBehaviour, ValidationMethod
         
 
     }
-    // rempli le dico en recherchant chaque réponse aux questions de l'énigme
+    // rempli le dico avec toute les questions et tous les points (%) associés au réponses choisies à ces questions
     private void getQuestionsValidation(){
       if(successByQuestion.Count == 0){
         ChoiceQuestion[] questionList = GameObject.Find("Parts").GetComponentsInChildren<ChoiceQuestion>(true);

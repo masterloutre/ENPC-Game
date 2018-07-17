@@ -4,16 +4,20 @@ using UnityEngine;
 using System;
 
 
-// script définissant comme objet question un GameObject, il crée un bouton de controle CaseScenarioPartIcon qui permet de masquer/afficher cette section
+// script définissant comme "section de question" un GameObject, il crée un bouton de controle CaseScenarioPartIcon qui permet de masquer/afficher cette section
 //[ExecuteInEditMode]
 public class CaseScenarioPart : MonoBehaviour {
 	public int id { get; private set; }
 	public GameObject iconPrefab;
 	public bool indiquerNumeroPartie;
-	// Use this for initialization
+
+    private CaseScenarioPartIcon icon;
+    public int[] chain;
 
 
-	void Awake(){
+
+
+    void Awake(){
 		id = Array.IndexOf(transform.parent.GetComponentsInChildren<CaseScenarioPart> (), this);
 	}
 
@@ -21,8 +25,22 @@ public class CaseScenarioPart : MonoBehaviour {
 	void Start () {
         //not used
 		CaseScenarioPartIcon icon = new CaseScenarioPartIcon (this, iconPrefab);
+        foreach(int val in chain)
+        {
+            transform.parent.GetChild(val).GetComponent<CaseScenarioPart>().icon.hide();
+        }
 	}
 
+    public void unlock()
+    {
+        if (chain.Length != 0)
+        {
+            foreach (int val in chain)
+            {
+                transform.parent.GetChild(val).GetComponent<CaseScenarioPart>().icon.show();
+            }
+        }
+    }
 
     // ask the others to hide themselves
 	public void show(){

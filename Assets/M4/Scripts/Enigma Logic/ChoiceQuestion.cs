@@ -62,14 +62,14 @@ public class ChoiceQuestion : MonoBehaviour {
 	//retourne le pourcentage de balidation de la question
 	public float getAnswerValidation()
     {
-        print("(getAnswerValidation) Votre réponse:");
-        print("Texte: " + answerList[userChoice].text);
-        print("Numéro du choix: " + userChoice);
-        print("Valeur de point accordé(%) : " + answerList[userChoice].percent);
         
         try
         {
-            
+            print("(getAnswerValidation) Votre réponse:");
+            print("Texte: " + answerList[userChoice].text);
+            print("Numéro du choix: " + userChoice);
+            print("Valeur de point accordé(%) : " + answerList[userChoice].percent);
+
             return answerList[userChoice].percent;
 		} catch( Exception e){
 			print(e.Message);
