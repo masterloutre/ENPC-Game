@@ -12,24 +12,26 @@ public class CaseScenarioPart : MonoBehaviour {
     public bool indiquerNumeroPartie;
 
     public CaseScenarioPartIcon icon;
+    public bool conditional = false;
     public int[] chain;
 
 
 
 
     void Awake() {
-        id = Array.IndexOf(transform.parent.GetComponentsInChildren<CaseScenarioPart>(), this);
-        EventManager.instance.AddListener<ChoiceQuestionEvent>(unlock);
+        //id = Array.IndexOf(transform.parent.GetComponentsInChildren<CaseScenarioPart>(), this);
+        id = transform.GetSiblingIndex();
+        //EventManager.instance.AddListener<ChoiceQuestionEvent>(unseal);
     }
     private void OnDestroy()
     {
-        EventManager.instance.RemoveListener<ChoiceQuestionEvent>(unlock);
+        //EventManager.instance.RemoveListener<ChoiceQuestionEvent>(unseal);
     }
 
     public void init() {
         print("Starting CaseScenarioPart: " + id);
         icon = new CaseScenarioPartIcon(this, iconPrefab);
-        
+
     }
 
     public void locked(){
@@ -45,7 +47,7 @@ public class CaseScenarioPart : MonoBehaviour {
             }
         }
     }
-
+/*
     public void unlock(ChoiceQuestionEvent e)
     {
         if (e.self == gameObject)
@@ -58,11 +60,26 @@ public class CaseScenarioPart : MonoBehaviour {
                 }
             }
         }
-        
     }
 
-    
+*/
 
+public void unseal(){
+  icon.show();
+}
+
+public void seal(){
+  icon.hide();
+  hide();
+}
+
+public void hide(){
+  this.gameObject.SetActive(false);
+}
+
+public void show(){
+  this.gameObject.SetActive(true);
+}
 
     // override
 	public override bool Equals(object obj)

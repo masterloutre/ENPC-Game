@@ -15,7 +15,7 @@ public class ChoiceQuestionTimer : ChoiceQuestion {
 
 
 	// Use this for initialization
-	void Start () {
+	public void Start () {
 		//utilise le start de la class parente
 		base.Start();
 		//Le timer n'a jamais démarré
@@ -29,7 +29,7 @@ public class ChoiceQuestionTimer : ChoiceQuestion {
 	}
 
 	// Update is called once per frame
-	void Update () {
+	public void Update () {
 		updateTimer();
 	}
 
@@ -55,7 +55,7 @@ public class ChoiceQuestionTimer : ChoiceQuestion {
 		setTimerComponent();
 	}
 
-	public void endTimer(){
+	virtual public void endTimer(){
 		timer.gameObject.SetActive(false);
 		questionTextGO.SetActive(false);
 		answerListGO.SetActive(false);

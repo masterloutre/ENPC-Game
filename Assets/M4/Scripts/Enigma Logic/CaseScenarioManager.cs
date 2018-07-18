@@ -3,44 +3,72 @@ using System.Collections;
 
 public class CaseScenarioManager : MonoBehaviour
 {
-    CaseScenarioPart[] parts;
+    CaseScenarioPart[] partList;
     int activePartIndex = 0;
 
     // Use this for initialization
-    
+
     void Awake()
     {
-        EventManager.instance.AddListener<RequestNextQuestionEvent>(show);
+      partList = GameObject.Find("Parts").GetComponentsInChildren<CaseScenarioPart>(true);
+      EventManager.instance.AddListener<RequestUnlockNextPartsEvent>(unsealParts);
+      EventManager.instance.AddListener<RequestShowPartEvent>(showPart);
+
     }
     private void OnDestroy()
     {
-        EventManager.instance.RemoveListener<RequestNextQuestionEvent>(show);
+      EventManager.instance.RemoveListener<RequestUnlockNextPartsEvent>(unsealParts);
+      EventManager.instance.RemoveListener<RequestShowPartEvent>(showPart);
     }
     void Start()
     {
-        parts = GameObject.Find("Parts").GetComponentsInChildren<CaseScenarioPart>();
-        foreach(CaseScenarioPart part in parts)
+
+        foreach(CaseScenarioPart part in partList)
         {
             part.init();
+            /*
             if(part.id != 0)
             {
-                part.gameObject.SetActive(false);
+
+            part.seal();
             }
+            */
+           part.seal();
+           //part.hide();
+
 
         }
-        foreach (CaseScenarioPart part in parts)
+      setActiveUntilConditionalFrom(0);
+      partList[activePartIndex].show();
+        /*
+        foreach (CaseScenarioPart part in partList)
         {
             part.locked();
 
         }
+        */
+
     }
-    void show(RequestNextQuestionEvent e)
+    void unsealParts(RequestUnlockNextPartsEvent e)
     {
-        parts[e.choiceId].gameObject.SetActive(true);
-        if(activePartIndex != e.choiceId)
-        {
-            parts[activePartIndex].gameObject.SetActive(false);
+      if(e.currentPartId >= partList.Length){
+        return;
+      }
+      setActiveUntilConditionalFrom(e.currentPartId + 1);
+    }
+
+    void setActiveUntilConditionalFrom(int startId){
+      for(int i = startId; i<partList.Length; i++){
+        partList[i].unseal();
+        if(partList[i].gameObject.GetComponent<ChoiceQuestionTimerConditional>() != null){
+          break;
         }
-        activePartIndex = e.choiceId;
+      }
+    }
+
+    void showPart(RequestShowPartEvent e){
+      partList[activePartIndex].hide();
+      activePartIndex = e.partId;
+      partList[activePartIndex].show();
     }
 }

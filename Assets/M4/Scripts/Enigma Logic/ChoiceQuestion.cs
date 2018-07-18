@@ -29,7 +29,7 @@ public class ChoiceQuestion : MonoBehaviour {
         gameObject.transform.Find("QuestionText").GetComponent<Text>().text = this.text;
         createAnswerGameObject();
     }
-    
+
 
 //crée les gameObject des réponse et leur assigne un script au click
 	public void createAnswerGameObject(){
@@ -67,7 +67,7 @@ public class ChoiceQuestion : MonoBehaviour {
 	//retourne le pourcentage de balidation de la question
 	public float getAnswerValidation()
     {
-        
+
         try
         {
             print("(getAnswerValidation) Votre réponse:");
@@ -104,6 +104,7 @@ public class ChoiceQuestion : MonoBehaviour {
 
 			go.GetComponentInChildren<Image>().GetComponent<Image>().color = outcolor;
 	}
-	
+
+
 
 }

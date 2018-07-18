@@ -248,3 +248,13 @@ public class ChoiceQuestionEvent : GameEvent
     public GameObject self;
     public ChoiceQuestionEvent(GameObject me){ self = me; }
 }
+
+public class RequestShowPartEvent : GameEvent {
+	public int partId;
+	public RequestShowPartEvent(int id){ partId = id; }
+}
+
+public class RequestUnlockNextPartsEvent : GameEvent {
+	public int currentPartId;
+	public RequestUnlockNextPartsEvent(int id){ currentPartId = id; }
+}
