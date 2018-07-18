@@ -18,7 +18,8 @@ public class ChoiceQuestionTimerConditional : ChoiceQuestionTimer {
 	}
 
 	public override void endTimer(){
-		base.endTimer();
+		GameObject.Find("StartQuestionButton").SetActive(false);
+		GameObject.Find("TimerArea").transform.GetChild(2).gameObject.SetActive(true);
 		EventManager.instance.Raise(new RequestUnlockNextPartsEvent(transform.GetSiblingIndex()));
 	}
 

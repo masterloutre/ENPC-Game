@@ -19,50 +19,16 @@ public class CaseScenarioPart : MonoBehaviour {
 
 
     void Awake() {
-        //id = Array.IndexOf(transform.parent.GetComponentsInChildren<CaseScenarioPart>(), this);
         id = transform.GetSiblingIndex();
-        //EventManager.instance.AddListener<ChoiceQuestionEvent>(unseal);
+
     }
     private void OnDestroy()
     {
-        //EventManager.instance.RemoveListener<ChoiceQuestionEvent>(unseal);
     }
 
-    public void init() {
-        print("Starting CaseScenarioPart: " + id);
+    public void createIcon() {
         icon = new CaseScenarioPartIcon(this, iconPrefab);
-
     }
-
-    public void locked(){
-        foreach (int val in chain)
-        {
-            if (transform.parent.GetChild(val).GetComponent<CaseScenarioPart>().icon != null)
-            {
-                transform.parent.GetChild(val).GetComponent<CaseScenarioPart>().icon.hide();
-            }
-            else
-            {
-                print("erreur");
-            }
-        }
-    }
-/*
-    public void unlock(ChoiceQuestionEvent e)
-    {
-        if (e.self == gameObject)
-        {
-            if (chain.Length != 0)
-            {
-                foreach (int val in chain)
-                {
-                    transform.parent.GetChild(val).GetComponent<CaseScenarioPart>().icon.show();
-                }
-            }
-        }
-    }
-
-*/
 
 public void unseal(){
   icon.show();
@@ -75,10 +41,12 @@ public void seal(){
 
 public void hide(){
   this.gameObject.SetActive(false);
+  icon.unglow();
 }
 
 public void show(){
   this.gameObject.SetActive(true);
+  icon.glow();
 }
 
     // override

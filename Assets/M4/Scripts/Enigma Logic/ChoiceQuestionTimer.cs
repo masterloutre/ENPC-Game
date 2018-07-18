@@ -33,7 +33,7 @@ public class ChoiceQuestionTimer : ChoiceQuestion {
 		updateTimer();
 	}
 
-	void setTimerComponent(){
+	public void setTimerComponent(){
 		timer = gameObject.GetComponentInChildren<Timer>(true);
 		timer.gameObject.SetActive(true);
 		timer.timeLimit = time;

@@ -22,33 +22,15 @@ public class CaseScenarioManager : MonoBehaviour
     }
     void Start()
     {
-
         foreach(CaseScenarioPart part in partList)
         {
-            part.init();
-            /*
-            if(part.id != 0)
-            {
-
-            part.seal();
-            }
-            */
-           part.seal();
-           //part.hide();
-
-
+          part.createIcon();
+          part.seal();
         }
       setActiveUntilConditionalFrom(0);
       partList[activePartIndex].show();
-        /*
-        foreach (CaseScenarioPart part in partList)
-        {
-            part.locked();
-
-        }
-        */
-
     }
+
     void unsealParts(RequestUnlockNextPartsEvent e)
     {
       if(e.currentPartId >= partList.Length){
@@ -71,4 +53,6 @@ public class CaseScenarioManager : MonoBehaviour
       activePartIndex = e.partId;
       partList[activePartIndex].show();
     }
+
+    
 }
