@@ -15,6 +15,7 @@ public class ChoiceQuestion : MonoBehaviour {
 	public List<Answer> answerList;
 	int userChoice = -1;
 	public int professionalSituationId;
+	
 
     // #64E8FF pour du bleu cyan
   public Color normalColor, selectedColor; //hexa
