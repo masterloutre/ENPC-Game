@@ -87,11 +87,18 @@ public class Score {
 		return (int)Math.Round(globalSuccess * maxNumberPoints / 100.0);
 	}
 
+
+
 	public string ToString(){
 		string s = "Score :"
 		+ "\nsuccess : " + enigmaSuccess
-		+ "\ncertainty : " + certaintyLevel;
+		+ "\ncertainty : " + certaintyLevel
+		+ "\nEnigma questions : ";
 		foreach(KeyValuePair<int, float> percent in enigmaPointsByProfessionalSituation){
+			s += "\nFor pro situation " + percent.Key + ", Success percentage is : " + percent.Value;
+		}
+		s += "\nMethod questions : ";
+		foreach(KeyValuePair<int, float> percent in methodPointsByProfessionalSituation){
 			s += "\nFor pro situation " + percent.Key + ", Success percentage is : " + percent.Value;
 		}
 		s += "\n\nGlobal score is : " + getGlobalScore() + " on " +  maxNumberPoints;

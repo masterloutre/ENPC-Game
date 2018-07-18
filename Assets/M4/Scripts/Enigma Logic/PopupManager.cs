@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 
 
-public enum PopupState { NONE, CERTAINTY, FAILURE, SUCCESS, METHOD };
+public enum PopupState { NONE, CERTAINTY, SUCCESSORNOT, METHOD };
 
 
 /*
@@ -15,18 +15,11 @@ public enum PopupState { NONE, CERTAINTY, FAILURE, SUCCESS, METHOD };
 */
 public class PopupManager : MonoBehaviour
 {
-    int certitudelvl; // Niveau de certitude
-
-    public string methodeUserInput { get; private set;}
-    public float certitudeUserInput { get; private set;}
     PopupState state; // Étape en cours, peut valoir : "none", "Certitude", "Justification", "Correction", "Victoire", FAILURE
-
-
     //private ChoiceQuestion methodquestions,justifyquestions;
     private GameObject sure, victory, defeat, method, validationButton; // Écrans des étapes
     private List<ChoiceQuestion> questionList;
     int currentMethodQuestionIndex = 0;
-
     private ValidationMethod validator;
     private Score enigmaScore;
 
@@ -55,17 +48,6 @@ public class PopupManager : MonoBehaviour
         defeat.SetActive(false);
         method.SetActive(false);
         validationButton.SetActive(false);
-
-
-        certitudelvl = -1;
-        methodeUserInput = "";
-        certitudeUserInput = 0F;
-        state = PopupState.NONE;
-
-        // pour créer dynamiquement des boutons custom
-        //methodquestions = method.GetComponent<ChoiceQuestion>();
-        //justifyquestions = justify.GetComponent<ChoiceQuestion>();
-
 
         validator = gameObject.GetComponent<PopupValidation>();
 
@@ -103,12 +85,8 @@ public class PopupManager : MonoBehaviour
         {
             case PopupState.CERTAINTY:
                 {
-                    certitudeUserInput = GameObject.Find("Slider").GetComponent<Slider>().value;
-                    if (enigmaScore.enigmaSuccess){
-                        updateState(PopupState.SUCCESS);
-                    } else {
-                        updateState(PopupState.FAILURE);
-                    }
+                    enigmaScore.certaintyLevel = GameObject.Find("Slider").GetComponent<Slider>().value;
+                    updateState(PopupState.SUCCESSORNOT);
                 }
                 break;
             case PopupState.METHOD:
@@ -124,16 +102,11 @@ public class PopupManager : MonoBehaviour
                     }
                 }
                 break;
-            case PopupState.SUCCESS:
+            case PopupState.SUCCESSORNOT:
                 {
                     updateState(PopupState.METHOD);
-                }break;
-
-            case PopupState.FAILURE:
-                {
-                    updateState(PopupState.METHOD);
-                }break;
-
+                }
+                break;
             default:
                 {
                     return;
@@ -153,49 +126,39 @@ public class PopupManager : MonoBehaviour
     }
     public void displayScreen()
     {
-        EventManager.instance.Raise(new RequestDisableEnigmaUIEvent());
-        validationButton.SetActive(true);
         switch (state)
         {
             case PopupState.CERTAINTY:
                 {
+                    EventManager.instance.Raise(new RequestDisableEnigmaUIEvent());
                     method.SetActive(false);
                     victory.SetActive(false);
                     defeat.SetActive(false);
                     sure.SetActive(true);
-
-                    certitudelvl = 0;
-
+                    validationButton.SetActive(true);
                 }
                 break;
 
-            case PopupState.SUCCESS:
+            case PopupState.SUCCESSORNOT:
                 {
-                    sure.SetActive(false);
+                  sure.SetActive(false);
+                  if(enigmaScore.enigmaSuccess){
                     victory.SetActive(true);
-                }
-                break;
-            case PopupState.FAILURE:
-                {
-                    sure.SetActive(false);
+                  } else {
                     defeat.SetActive(true);
-
+                  }
                 }
                 break;
-
             case PopupState.METHOD:
                 {
                     victory.SetActive(false);
                     defeat.SetActive(false);
                     method.SetActive(true);
-                    certitudelvl = -1;
-
                 }
                 break;
             default:
                 {
-                    print("REEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
-                    return;
+                  return;
                 }
         }
     }
@@ -209,6 +172,10 @@ public class PopupManager : MonoBehaviour
       print(enigmaScore.ToString());
       GameObject.Find("Answer Popup").SetActive(false);
       EventManager.instance.Raise(new PopUpQuestionsOverEvent());
+    }
+
+    public Score getScore(){
+      return enigmaScore;
     }
 
 
