@@ -25,6 +25,7 @@ public class PopupManager : MonoBehaviour
     //private ChoiceQuestion methodquestions,justifyquestions;
     private GameObject sure, victory, defeat, method, validationButton; // Écrans des étapes
     private List<ChoiceQuestion> questionList;
+    int currentMethodQuestionIndex = 0;
 
     private ValidationMethod validator;
     private Score enigmaScore;
@@ -40,6 +41,14 @@ public class PopupManager : MonoBehaviour
         defeat = GameObject.Find("Défaite");
         method = GameObject.Find("Méthode");
         validationButton = GameObject.Find("ValidationButton");
+
+        questionList = new List<ChoiceQuestion>();
+        foreach(ChoiceQuestion question in GameObject.Find("Méthode").GetComponentsInChildren<ChoiceQuestion>()){
+          questionList.Add(question);
+          question.gameObject.SetActive(false);
+          print("question added to list :" + question.text);
+        }
+        questionList[0].gameObject.SetActive(true);
 
         sure.SetActive(false);
         victory.SetActive(false);
@@ -57,10 +66,7 @@ public class PopupManager : MonoBehaviour
         //methodquestions = method.GetComponent<ChoiceQuestion>();
         //justifyquestions = justify.GetComponent<ChoiceQuestion>();
 
-        questionList = new List<ChoiceQuestion>();
-        foreach(ChoiceQuestion question in gameObject.GetComponentsInChildren<ChoiceQuestion>()){
-          questionList.Add(question);
-        }
+
         validator = gameObject.GetComponent<PopupValidation>();
 
     }
@@ -107,9 +113,15 @@ public class PopupManager : MonoBehaviour
                 break;
             case PopupState.METHOD:
                 {
-                    // pour ne pas confondre answer list de popup manager avec answerlist de casestudy
-                    enigmaScore = validator.fillScore(enigmaScore);
-                    endPopUpQuestionsSequence();
+                  print("GO : question index " + currentMethodQuestionIndex + ", question count : " + questionList.Count );
+                    if(currentMethodQuestionIndex < questionList.Count -1){
+                      questionList[currentMethodQuestionIndex].gameObject.SetActive(false);
+                      currentMethodQuestionIndex ++;
+                      questionList[currentMethodQuestionIndex].gameObject.SetActive(true);
+                    } else {
+                      enigmaScore = validator.fillScore(enigmaScore);
+                      endPopUpQuestionsSequence();
+                    }
                 }
                 break;
             case PopupState.SUCCESS:
