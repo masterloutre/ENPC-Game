@@ -13,27 +13,25 @@ using System;
 public class ChoiceQuestion : MonoBehaviour {
 	public string text;
 	public List<Answer> answerList;
-	int userChoice;
+	int userChoice = -1;
 	public int professionalSituationId;
 
+
     // #64E8FF pour du bleu cyan
-   string normalColor, selectedColor; //hexa
+  public Color normalColor, selectedColor; //hexa
 
 	// Use this for initialization
 	public void Start () {
 		professionalSituationId = 0;
-		normalColor = "";
-		selectedColor = "";
-        userChoice = -1;
-        print("Start:" + gameObject.name);
-        gameObject.transform.Find("QuestionText").GetComponent<Text>().text = this.text;
-        createAnswerGameObject();
-    }
+		normalColor = new Color(1F, 1F, 1F, 1F);
+		selectedColor = new Color(0.58F, 0.84F, 0.87F, 1F);;
+    gameObject.transform.Find("QuestionText").GetComponent<Text>().text = this.text;
+    createAnswerGameObject();
+  }
 
 
 //crée les gameObject des réponse et leur assigne un script au click
 	public void createAnswerGameObject(){
-        print(gameObject.name);
 		GameObject answerModel = gameObject.transform.Find("AnswerList").Find("Answer").gameObject;
         //GameObject answerModel = gameObject.transform.Find("Answer").gameObject
         foreach (Answer answer in answerList){
@@ -70,10 +68,11 @@ public class ChoiceQuestion : MonoBehaviour {
 
         try
         {
-            print("(getAnswerValidation) Votre réponse:");
-            print("Texte: " + answerList[userChoice].text);
-            print("Numéro du choix: " + userChoice);
-            print("Valeur de point accordé(%) : " + answerList[userChoice].percent);
+		        print("(getAnswerValidation) QUESTION : "+ text+ "\nVotre réponse:"+
+						"\nTexte: " + answerList[userChoice].text +
+						"\nNuméro du choix: " + userChoice +
+						"\nValeur de point accordé(%) : " + answerList[userChoice].percent
+						);
             return answerList[userChoice].percent;
 		} catch( Exception e){
 			print(e.Message);
@@ -85,12 +84,14 @@ public class ChoiceQuestion : MonoBehaviour {
 	// Colorie en bleu clair une réponse
 	public void colorChange(GameObject go)
 	{
+		/*
 			print("Coloring : " + go.name);
 			Color outcolor;
 			ColorUtility.TryParseHtmlString(selectedColor, out outcolor);
-			go.GetComponentInChildren<Text>().GetComponent<Text>().color = outcolor;
+			*/
+			go.GetComponentInChildren<Text>().GetComponent<Text>().color = selectedColor;
 
-			go.GetComponentInChildren<Image>().GetComponent<Image>().color = outcolor;
+			go.GetComponentInChildren<Image>().GetComponent<Image>().color = selectedColor;
 
 
 	}
@@ -98,13 +99,14 @@ public class ChoiceQuestion : MonoBehaviour {
 	// Colorie en blanc une réponse, sauf si elle est sélectionné comme réponse finale par l'user
 	public void colorBack(GameObject go)
 	{
+		/*
 			Color outcolor;
 			ColorUtility.TryParseHtmlString(normalColor, out outcolor);
-			go.GetComponentInChildren<Text>().GetComponent<Text>().color = outcolor;
+			*/
+			go.GetComponentInChildren<Text>().GetComponent<Text>().color = normalColor;
 
-			go.GetComponentInChildren<Image>().GetComponent<Image>().color = outcolor;
+			go.GetComponentInChildren<Image>().GetComponent<Image>().color = normalColor;
 	}
-
 
 
 }

@@ -34,7 +34,7 @@ public class EnigmaSceneManager : MonoBehaviour
       EventManager.instance.RemoveListener<PopUpQuestionsOverEvent>(PopUpQuestionsHaveEnded);
   }
 
-    // Lance la phase de Certitude et prévient la création du résultat
+    // prévient la création du résultat
 	public void enigmaSubmitted(){
         print("ENIGMA SUBMITTED");
         EventManager.instance.Raise(new EnigmaSubmittedEvent());
@@ -69,8 +69,7 @@ public class EnigmaSceneManager : MonoBehaviour
       score.help = false;
         if (popm != null)
         {
-            popm.setEnigmaSuccess(score.enigmaSuccess);
-            popm.updateState("Certitude");
+            popm.beginPopUpQuestionsSequence(score);
         }
         else
         {
@@ -87,8 +86,7 @@ public class EnigmaSceneManager : MonoBehaviour
     public void PopUpQuestionsHaveEnded(PopUpQuestionsOverEvent e){
         if (popm != null)
         {
-            score.certaintyLevel = popm.certitudeUserInput;
-            score.addMethodSuccess(0, 0);
+            score = popm.getScore();
         }
         else
         {

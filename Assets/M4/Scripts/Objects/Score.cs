@@ -56,30 +56,31 @@ public class Score {
     Debug.Log("max delta certainty = " + deltaMax.ToString());
     float delta = (float)Math.Round((100.0 - certaintyLevel) * deltaMax / 100.0);
     float result = score + delta;
-    return (result < 0)? 0 : (result > 100)? 100 : result;
+    return constraintPercent(result);
   }
 
 	public float getProSituationSuccess(int id){
 		try{
-			float success = computeScoreFromCertainty(enigmaPointsByProfessionalSituation[id]) + methodPointsByProfessionalSituation[id];
-			return (success < 0)?0: (success > 100)? 100: success;
+			float success = computeScoreFromCertainty(enigmaPointsByProfessionalSituation[id])*0.5F + methodPointsByProfessionalSituation[id]*0.5F;
+			return constraintPercent(success);
 		} catch (Exception e){
 			float success = computeScoreFromCertainty(enigmaPointsByProfessionalSituation[id]);
-			return (success < 0)?0: (success > 100)? 100: success;
-		}
+			return constraintPercent(success);
+			}
 	}
 
 	//Moyenne des score des situations pro repassé en nombre de points (pas en %)
 	public float getGlobalSuccess () {
 		float success = 0;
 		float number = 0;
-		foreach( KeyValuePair<int, float> proSit in enigmaPointsByProfessionalSituation){
-			success += getProSituationSuccess(proSit.Key);
-			number += 1;
+		if(enigmaPointsByProfessionalSituation.Count > 0){
+			foreach( KeyValuePair<int, float> proSit in enigmaPointsByProfessionalSituation){
+				success += getProSituationSuccess(proSit.Key);
+				number += 1;
+			}
+			success = success / number;
 		}
-		success = success / number;
-	 	success = (success < 0)?0: (success > 100)? 100: success;
-		return success;
+		return constraintPercent(success);
 	}
 
 	public int getGlobalScore() {
@@ -87,11 +88,21 @@ public class Score {
 		return (int)Math.Round(globalSuccess * maxNumberPoints / 100.0);
 	}
 
+
+	float constraintPercent(float value){
+		return (value < 0)?0: (value > 100)? 100: value;
+	}
+
 	public string ToString(){
 		string s = "Score :"
 		+ "\nsuccess : " + enigmaSuccess
-		+ "\ncertainty : " + certaintyLevel;
+		+ "\ncertainty : " + certaintyLevel
+		+ "\nEnigma questions : ";
 		foreach(KeyValuePair<int, float> percent in enigmaPointsByProfessionalSituation){
+			s += "\nFor pro situation " + percent.Key + ", Success percentage is : " + percent.Value;
+		}
+		s += "\nMethod questions : ";
+		foreach(KeyValuePair<int, float> percent in methodPointsByProfessionalSituation){
 			s += "\nFor pro situation " + percent.Key + ", Success percentage is : " + percent.Value;
 		}
 		s += "\n\nGlobal score is : " + getGlobalScore() + " on " +  maxNumberPoints;

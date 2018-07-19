@@ -2,6 +2,11 @@
 using UnityEngine.Networking;
 using System;
 using UnityEngine.UI;
+using System.Collections.Generic;
+
+
+public enum PopupState { NONE, CERTAINTY, SUCCESSORNOT, METHOD };
+
 
 /*
  * Pour utiliser PopupManager, vous devez créer un gameobject nommé "Answer Popup" dans le Canvas.
@@ -10,16 +15,13 @@ using UnityEngine.UI;
 */
 public class PopupManager : MonoBehaviour
 {
-    bool enigmaSuccess;
-    int certitudelvl; // Niveau de certitude
-
-    public string methodeUserInput { get; private set;}
-    public float certitudeUserInput { get; private set;}
-    string state; // Étape en cours, peut valoir : "none", "Certitude", "Justification", "Correction", "Victoire", "Défaite"
-
-
-    private ChoiceQuestion correctquestions,justifyquestions;
-    private GameObject sure, justify, victory, defeat, correct, validationButton; // Écrans des étapes
+    PopupState state; // Étape en cours, peut valoir : "none", "Certitude", "Justification", "Correction", "Victoire", FAILURE
+    //private ChoiceQuestion methodquestions,justifyquestions;
+    private GameObject sure, victory, defeat, method, validationButton; // Écrans des étapes
+    private List<ChoiceQuestion> questionList;
+    int currentMethodQuestionIndex = 0;
+    private ValidationMethod validator;
+    private Score enigmaScore;
 
 
 
@@ -28,29 +30,26 @@ public class PopupManager : MonoBehaviour
         // INSTANCIATION des modèles, masqués par défaut
 
         sure = GameObject.Find("Certitude");
-        justify = GameObject.Find("Justification");
         victory = GameObject.Find("Victoire");
         defeat = GameObject.Find("Défaite");
-        correct = GameObject.Find("Correction");
+        method = GameObject.Find("Méthode");
         validationButton = GameObject.Find("ValidationButton");
 
+        questionList = new List<ChoiceQuestion>();
+        foreach(ChoiceQuestion question in GameObject.Find("Méthode").GetComponentsInChildren<ChoiceQuestion>()){
+          questionList.Add(question);
+          question.gameObject.SetActive(false);
+          print("question added to list :" + question.text);
+        }
+        questionList[0].gameObject.SetActive(true);
+
         sure.SetActive(false);
-        justify.SetActive(false);
         victory.SetActive(false);
         defeat.SetActive(false);
-        correct.SetActive(false);
+        method.SetActive(false);
         validationButton.SetActive(false);
-        
 
-        certitudelvl = -1;
-        methodeUserInput = "";
-        certitudeUserInput = 0F;
-        state = "none";
-
-        // pour créer dynamiquement des boutons custom
-        correctquestions = correct.GetComponent<ChoiceQuestion>();
-        justifyquestions = justify.GetComponent<ChoiceQuestion>();
-        enigmaSuccess = false;
+        validator = gameObject.GetComponent<PopupValidation>();
 
     }
     public void Start()
@@ -67,19 +66,14 @@ public class PopupManager : MonoBehaviour
     private void setValidationButton()
     {
         validationButton.GetComponent<Button>().onClick.AddListener(submit);
-        
+
     }
-    public string getState()
+    public PopupState getState()
     {
         return state;
     }
-    public void setEnigmaSuccess(bool success)
-    {
-        enigmaSuccess = success;
-    }
-    public bool getEnigmaSuccess()
-    {
-        return enigmaSuccess;
+    public void setScore(Score score){
+        enigmaScore = score;
     }
 
 
@@ -89,42 +83,30 @@ public class PopupManager : MonoBehaviour
     {
         switch (state)
         {
-            case "Certitude":
+            case PopupState.CERTAINTY:
                 {
-                    certitudeUserInput = GameObject.Find("Slider").GetComponent<Slider>().value;
-                    if (enigmaSuccess){
-                        updateState("Victoire");
+                    enigmaScore.certaintyLevel = GameObject.Find("Slider").GetComponent<Slider>().value;
+                    updateState(PopupState.SUCCESSORNOT);
+                }
+                break;
+            case PopupState.METHOD:
+                {
+                  print("GO : question index " + currentMethodQuestionIndex + ", question count : " + questionList.Count );
+                    if(currentMethodQuestionIndex < questionList.Count -1){
+                      questionList[currentMethodQuestionIndex].gameObject.SetActive(false);
+                      currentMethodQuestionIndex ++;
+                      questionList[currentMethodQuestionIndex].gameObject.SetActive(true);
                     } else {
-                        updateState("Défaite");
+                      enigmaScore = validator.fillScore(enigmaScore);
+                      endPopUpQuestionsSequence();
                     }
                 }
                 break;
-            case "Correction":
+            case PopupState.SUCCESSORNOT:
                 {
-                    // pour ne pas confondre answer list de popup manager avec answerlist de casestudy
-                    print(correctquestions.getUserChoice());
-                    methodeUserInput = GameObject.Find("Answer Popup").transform.Find("Correction").transform.Find("AnswerList").GetChild(correctquestions.getUserChoice()).GetComponentInChildren<Text>().text;
-                    endPopUpQuestionsSequence();
+                    updateState(PopupState.METHOD);
                 }
                 break;
-            case "Justification":
-                {
-                    // pour ne pas confondre answer list de popup manager avec answerlist de casestudy
-                    print(justifyquestions.getUserChoice());
-                    methodeUserInput = GameObject.Find("Answer Popup").transform.Find("Justification").transform.Find("AnswerList").GetChild(justifyquestions.getUserChoice()).GetComponentInChildren<Text>().text;
-                    endPopUpQuestionsSequence();
-                }break;
-
-            case "Victoire":
-                {
-                    updateState("Justification");
-                }break;
-
-            case "Défaite":
-                {
-                    updateState("Correction");
-                }break;
-
             default:
                 {
                     return;
@@ -133,80 +115,67 @@ public class PopupManager : MonoBehaviour
 
     }
     // méthode d'affichage
-    public void updateState(string value)
+    public void updateState(PopupState newState)
     {
-        print("CALLLING UPDATE STATE (" + value + ")");
-        if (value == "Certitude" || value == "Justification" || value == "Victoire" || value == "Défaite" || value == "Correction")
+        print("CALLLING UPDATE STATE (" + newState+ ")");
+        if (newState != null)
         {
-            state = value;
+            state = newState;
             displayScreen();
-        }
-        else
-        {
         }
     }
     public void displayScreen()
     {
-        EventManager.instance.Raise(new RequestDisableEnigmaUIEvent());
-        validationButton.SetActive(true);
         switch (state)
         {
-            case "Certitude":
+            case PopupState.CERTAINTY:
                 {
-                    correct.SetActive(false);
+                    EventManager.instance.Raise(new RequestDisableEnigmaUIEvent());
+                    method.SetActive(false);
                     victory.SetActive(false);
                     defeat.SetActive(false);
-                    justify.SetActive(false);
                     sure.SetActive(true);
-
-                    certitudelvl = 0;
-
+                    validationButton.SetActive(true);
                 }
                 break;
 
-            case "Victoire":
+            case PopupState.SUCCESSORNOT:
                 {
-                    sure.SetActive(false);
+                  sure.SetActive(false);
+                  if(enigmaScore.enigmaSuccess){
                     victory.SetActive(true);
-                }
-                break;
-            case "Défaite":
-                {
-                    sure.SetActive(false);
+                  } else {
                     defeat.SetActive(true);
-
+                  }
                 }
                 break;
-
-            case "Justification":
+            case PopupState.METHOD:
                 {
                     victory.SetActive(false);
-                    justify.SetActive(true);
-                    certitudelvl = -1;
-
-                }
-                break;
-            case "Correction":
-                {
                     defeat.SetActive(false);
-                    correct.SetActive(true);
-                    certitudelvl = -1;
-
+                    method.SetActive(true);
                 }
                 break;
-
             default:
                 {
-                    print("REEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
-                    return;
+                  return;
                 }
         }
     }
 
+    public void beginPopUpQuestionsSequence(Score score){
+      enigmaScore = score;
+      updateState(PopupState.CERTAINTY);
+    }
 
     public void endPopUpQuestionsSequence(){
+      print(enigmaScore.ToString());
       GameObject.Find("Answer Popup").SetActive(false);
       EventManager.instance.Raise(new PopUpQuestionsOverEvent());
+    }
+
+    public Score getScore(){
+      return enigmaScore;
     }
 
 
