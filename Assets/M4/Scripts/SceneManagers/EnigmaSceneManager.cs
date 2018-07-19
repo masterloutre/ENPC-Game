@@ -9,13 +9,16 @@ public class EnigmaSceneManager : MonoBehaviour
     public ValidationMethod validator;
     private PopupManager popm;
     public Score score {get; private set;}
+    public bool hasAPopup = true;
 
 
 	void Awake () {
         score = new Score();
         // RÉFÉRENCES des managers stockés
         validator = gameObject.GetComponent<ValidationMethod>();
-        popm = gameObject.GetComponent<PopupManager>();
+        if(hasAPopup){
+          popm = gameObject.GetComponent<PopupManager>();
+        }
         // LISTENERS
         EventManager.instance.AddListener<GOButtonPressedEvent> (submitResult); // En réponse à la question || EnigmaUIManager.GOButtonPressed()
         //EventManager.instance.AddListener<QueryEnigmaScoreEvent> (sendScore); // ?
@@ -67,13 +70,14 @@ public class EnigmaSceneManager : MonoBehaviour
       score = validator.fillScore(score);
       score.time = getTime();
       score.help = false;
-        if (popm != null)
+        if (hasAPopup && popm != null)
         {
             popm.beginPopUpQuestionsSequence(score);
         }
         else
         {
-            EventManager.instance.Raise(new PopUpQuestionsOverEvent());
+          score.certaintyLevel = 100;
+          enigmaSubmitted();
         }
 
     }
@@ -84,15 +88,7 @@ public class EnigmaSceneManager : MonoBehaviour
     }
 
     public void PopUpQuestionsHaveEnded(PopUpQuestionsOverEvent e){
-        if (popm != null)
-        {
-            score = popm.getScore();
-        }
-        else
-        {
-            score.certaintyLevel = 100;
-            score.addMethodSuccess(0, 0);
-        }
+      score = popm.getScore();
       //certitude = popm.certitudeUserInput;
       //method = popm.methodeUserInput;
       //traité dans EnigmaSequenceManager
