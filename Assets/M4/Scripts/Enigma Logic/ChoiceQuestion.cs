@@ -112,9 +112,10 @@ public class ChoiceQuestion : MonoBehaviour {
 
 	public void setImage(){
 		try{
-			Image imageComponent = GameObject.Find("QuestionImage").GetComponentInChildren<Image>();
+			Image imageComponent = gameObject.transform.Find("QuestionImage").gameObject.GetComponentInChildren<Image>();
 			if(img == null){
 					Destroy(imageComponent.gameObject);
+					//imageComponent.gameObject.GetComponent<RectTransform>().SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, 0);
 			} else if (img != null){
 				Sprite sp = Sprite.Create(img,new Rect(0,0,img.width,img.height),new Vector2(0.5f,0.5f));
 				imageComponent.sprite = sp;

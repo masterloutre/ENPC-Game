@@ -32,6 +32,7 @@ public class ChoiceQuestionTimerConditional : ChoiceQuestionTimer {
 	public void forceTimeOut(){
 		time = 0;
 		endTimer();
+		gameObject.transform.Find("PassQuestionButton").gameObject.SetActive(false);
 	}
 
 }

@@ -11,6 +11,7 @@ public class ChoiceQuestionTimer : ChoiceQuestion {
 	private bool timerStarted;
 	GameObject questionTextGO;
 	GameObject answerListGO;
+	GameObject imageGO;
 	public Timer timer;
 
 
@@ -22,10 +23,17 @@ public class ChoiceQuestionTimer : ChoiceQuestion {
 		timerStarted = false;
 		questionTextGO = gameObject.transform.Find("QuestionText").gameObject;
 		answerListGO = gameObject.transform.Find("AnswerList").gameObject;
+		if(img != null){
+			imageGO = gameObject.transform.Find("QuestionImage").gameObject;
+		}
+
 
 		if(time > 0){
 			questionTextGO.SetActive(false);
 			answerListGO.SetActive(false);
+			if(img != null){
+				imageGO.SetActive(false);
+			}
 		} else {
 			gameObject.transform.Find("TimerArea").Find("StartQuestionButton").gameObject.SetActive(false);
 		}
@@ -55,6 +63,9 @@ public class ChoiceQuestionTimer : ChoiceQuestion {
 		gameObject.transform.Find("TimerArea").Find("StartQuestionButton").gameObject.SetActive(false);
 		questionTextGO.SetActive(true);
 		answerListGO.SetActive(true);
+		if(img != null){
+			imageGO.SetActive(true);
+		}
 		timerStarted = true;
 		setTimerComponent();
 	}
@@ -63,6 +74,9 @@ public class ChoiceQuestionTimer : ChoiceQuestion {
 		timer.gameObject.SetActive(false);
 		questionTextGO.SetActive(false);
 		answerListGO.SetActive(false);
+		if(img != null){
+			imageGO.SetActive(false);
+		}
 		timerStarted = false;
 		gameObject.transform.Find("TimerArea").GetChild(2).gameObject.SetActive(true);
 	}
