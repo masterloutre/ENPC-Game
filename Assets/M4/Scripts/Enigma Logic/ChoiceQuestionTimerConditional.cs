@@ -8,7 +8,7 @@ using UnityEngine;
 */
 public class ChoiceQuestionTimerConditional : ChoiceQuestionTimer {
 
-
+/*
 	void Start(){
 		base.Start();
 	}
@@ -16,10 +16,16 @@ public class ChoiceQuestionTimerConditional : ChoiceQuestionTimer {
 	void Update(){
 		base.Update();
 	}
-
+*/
 	public override void endTimer(){
-		GameObject.Find("StartQuestionButton").SetActive(false);
-		GameObject.Find("TimerArea").transform.GetChild(2).gameObject.SetActive(true);
+
+		if(timer != null){
+			base.endTimer();
+		} else {
+			gameObject.transform.Find("TimerArea").GetChild(2).gameObject.SetActive(true);
+			gameObject.transform.Find("TimerArea").GetChild(0).gameObject.SetActive(false);
+		}
+
 		EventManager.instance.Raise(new RequestUnlockNextPartsEvent(transform.GetSiblingIndex()));
 	}
 

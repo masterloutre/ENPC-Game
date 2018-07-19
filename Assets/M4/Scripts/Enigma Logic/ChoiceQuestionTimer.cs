@@ -11,7 +11,7 @@ public class ChoiceQuestionTimer : ChoiceQuestion {
 	private bool timerStarted;
 	GameObject questionTextGO;
 	GameObject answerListGO;
-	Timer timer;
+	public Timer timer;
 
 
 	// Use this for initialization
@@ -20,11 +20,14 @@ public class ChoiceQuestionTimer : ChoiceQuestion {
 		base.Start();
 		//Le timer n'a jamais démarré
 		timerStarted = false;
-		questionTextGO = GameObject.Find("QuestionText");
-		answerListGO = GameObject.Find("AnswerList");
+		questionTextGO = gameObject.transform.Find("QuestionText").gameObject;
+		answerListGO = gameObject.transform.Find("AnswerList").gameObject;
+
 		if(time > 0){
 			questionTextGO.SetActive(false);
 			answerListGO.SetActive(false);
+		} else {
+			gameObject.transform.Find("TimerArea").Find("StartQuestionButton").gameObject.SetActive(false);
 		}
 	}
 
@@ -46,9 +49,10 @@ public class ChoiceQuestionTimer : ChoiceQuestion {
 				endTimer();
 			}
 		}
+
 	}
  	public void startTimer(){
-		GameObject.Find("StartQuestionButton").SetActive(false);
+		gameObject.transform.Find("TimerArea").Find("StartQuestionButton").gameObject.SetActive(false);
 		questionTextGO.SetActive(true);
 		answerListGO.SetActive(true);
 		timerStarted = true;
@@ -60,7 +64,6 @@ public class ChoiceQuestionTimer : ChoiceQuestion {
 		questionTextGO.SetActive(false);
 		answerListGO.SetActive(false);
 		timerStarted = false;
-		print(GameObject.Find("TimerArea").transform.GetChild(2).gameObject.name);
-		GameObject.Find("TimerArea").transform.GetChild(2).gameObject.SetActive(true);
+		gameObject.transform.Find("TimerArea").GetChild(2).gameObject.SetActive(true);
 	}
 }

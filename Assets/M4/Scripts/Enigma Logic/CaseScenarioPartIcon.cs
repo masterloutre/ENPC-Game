@@ -20,7 +20,6 @@ public class CaseScenarioPartIcon {
 	}
   public void hide()
     {
-        Debug.Log("Hiding ICON" + scenarioPart);
         iconGO.SetActive(false);
     }
     public void show()
@@ -52,7 +51,6 @@ public class CaseScenarioPartIcon {
 
 	public void glow(){
 		Outline outline = iconGO.transform.GetChild(1).gameObject.AddComponent<Outline>();
-		Debug.Log("Outline name : " + outline);
 		outline.effectColor = new Color(0F, 1F, 1F, 1F);
 		outline.effectDistance = new Vector2(3F, 3F);
 

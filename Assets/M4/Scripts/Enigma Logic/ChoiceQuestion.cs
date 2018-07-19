@@ -12,6 +12,7 @@ using System;
 [System.Serializable]
 public class ChoiceQuestion : MonoBehaviour {
 	public string text;
+	public Texture2D img;
 	public List<Answer> answerList;
 	int userChoice = -1;
 	public int professionalSituationId;
@@ -27,6 +28,7 @@ public class ChoiceQuestion : MonoBehaviour {
 		selectedColor = new Color(0.58F, 0.84F, 0.87F, 1F);;
     gameObject.transform.Find("QuestionText").GetComponent<Text>().text = this.text;
     createAnswerGameObject();
+		setImage();
   }
 
 
@@ -106,6 +108,22 @@ public class ChoiceQuestion : MonoBehaviour {
 			go.GetComponentInChildren<Text>().GetComponent<Text>().color = normalColor;
 
 			go.GetComponentInChildren<Image>().GetComponent<Image>().color = normalColor;
+	}
+
+	public void setImage(){
+		try{
+			Image imageComponent = GameObject.Find("QuestionImage").GetComponentInChildren<Image>();
+			if(img == null){
+					Destroy(imageComponent.gameObject);
+			} else if (img != null){
+				Sprite sp = Sprite.Create(img,new Rect(0,0,img.width,img.height),new Vector2(0.5f,0.5f));
+				imageComponent.sprite = sp;
+				imageComponent.preserveAspect = true;
+			}
+		} catch (NullReferenceException e){
+			print("Caught : " + e.Message + "IT'S OKAY DO NOTHING");
+		}
+
 	}
 
 

@@ -39,7 +39,6 @@ public class PopupManager : MonoBehaviour
         foreach(ChoiceQuestion question in GameObject.Find("Méthode").GetComponentsInChildren<ChoiceQuestion>()){
           questionList.Add(question);
           question.gameObject.SetActive(false);
-          print("question added to list :" + question.text);
         }
         questionList[0].gameObject.SetActive(true);
 
