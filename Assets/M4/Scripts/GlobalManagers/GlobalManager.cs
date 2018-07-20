@@ -84,16 +84,12 @@ public class GlobalManager : MonoBehaviour
 		yield return StartCoroutine (enigmaManager.instanciateEnigmas ());
 		if (startAtLandingPage) {
 			yield return StartCoroutine (sceneLoader.loadLandingPage ());
-            if (gameSessionId == 0)
-            {
-                Debug.Log("Le jeu n'est pas autorisé");
 
-            }
-            else
-            {
-                GameObject.Find("access_disabled").SetActive(false);
-            }
 		}
+    if (gameSessionId == 0)
+    {
+      	yield return StartCoroutine (sceneLoader.loadPopUp("SessionNotAllowedPopUp"));
+    }
 	}
 
     // Récupère l'ID de la session en cours
@@ -110,12 +106,10 @@ public class GlobalManager : MonoBehaviour
 		else {
 			if (!Int32.TryParse(getRequest.downloadHandler.text, out this.gameSessionId))
 			{
-                print("Game Session ID Parsing failed: "+ getRequest.downloadHandler.text);
+        print("Game Session ID Parsing failed: "+ getRequest.downloadHandler.text);
 				this.gameSessionId = 0;
 			}
 		}
-        // analyse de la valeur
-        isOnline= (this.gameSessionId == 0) ? false : true;
 	}
 
 
@@ -135,6 +129,7 @@ public class GlobalManager : MonoBehaviour
             print(e.currentSceneName + "|" + e.choiceId);
 			currentEvaluatedSkill = enigmaManager.getSkills () [e.choiceId];
 			StartCoroutine (sceneLoader.loadEnigmaSequence (enigmaManager.getSkills()[e.choiceId]));
+
 		}
 	}
 	void previousScene(RequestPreviousSceneEvent e){
