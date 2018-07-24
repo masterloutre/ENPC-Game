@@ -57,9 +57,7 @@ public class PopupValidation : MonoBehaviour, ValidationMethod
       getQuestionsValidation();
       foreach(KeyValuePair<ChoiceQuestion, float> question in successByQuestion){
         score.addMethodSuccess(question.Key.professionalSituationId, question.Value);
-        print("ADDED : A la situation pro n°"+ question.Key.professionalSituationId+", vous avez obtenu "+ question.Value+"%" );
       }
-      score.enigmaSuccess = answerIsRight();
       return score;
 
     }

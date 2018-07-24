@@ -9,15 +9,15 @@ public class Score {
 	public float certaintyLevel {get; set;}
 	public float time {get; set;}
 	public bool help {get; set;}
-	public Dictionary<int, float> methodPointsByProfessionalSituation {get; private set;}
-	public Dictionary<int, float> enigmaPointsByProfessionalSituation {get; private set;}
+	public Dictionary<int, List<float>> methodPointsByProfessionalSituation {get; private set;}
+	public Dictionary<int, List<float>> enigmaPointsByProfessionalSituation {get; private set;}
 
 	public Score(float _max){
 		maxNumberPoints = _max;
 		enigmaSuccess = false;
 		certaintyLevel = 0;
-		methodPointsByProfessionalSituation = new Dictionary<int, float>();
-		enigmaPointsByProfessionalSituation = new Dictionary<int, float>();
+		methodPointsByProfessionalSituation = new Dictionary<int, List<float>>();
+		enigmaPointsByProfessionalSituation = new Dictionary<int, List<float>>();
 	}
 
 	public Score() : this(0) {
@@ -27,12 +27,17 @@ public class Score {
 	public void addEnigmaSuccess(int id, float percent){
 				try
 		{
-		    enigmaPointsByProfessionalSituation.Add(id, percent);
+			List<float> percentList = enigmaPointsByProfessionalSituation[id]; //va envoyer une exception si l'id n'est pas valable
+			percentList.Add(percent);
+			Debug.Log("ADDED ENIGMA SCORE : A la situation pro n°"+ id+", vous avez obtenu "+ percent+"%" );
 		}
-		catch (ArgumentException)
+		catch (KeyNotFoundException e)
 		{
-		    Console.WriteLine("An element with Key = " + id + " already exists.");
-				enigmaPointsByProfessionalSituation[id] += percent;
+			Debug.Log("No enigma score for situation " + id + " yet" );
+			List<float> percentList = new List<float>();
+			percentList.Add(percent);
+			enigmaPointsByProfessionalSituation[id] = percentList;
+			Debug.Log("ADDED ENIGMA SCORE : A la situation pro n°"+ id+", vous avez obtenu "+ percent+"%" );
 		}
 
 	}
@@ -40,12 +45,17 @@ public class Score {
 	public void addMethodSuccess(int id, float percent){
 				try
 		{
-				methodPointsByProfessionalSituation.Add(id, percent);
+			List<float> percentList = methodPointsByProfessionalSituation[id];
+			percentList.Add(percent);
+			Debug.Log("ADDED METHOD SCORE : A la situation pro n°"+ id+", vous avez obtenu "+ percent+"%" );
 		}
-		catch (ArgumentException)
+		catch (KeyNotFoundException e)
 		{
-				Console.WriteLine("An element with Key = " + id + " already exists.");
-				methodPointsByProfessionalSituation[id] += percent;
+			Debug.Log("No method score for situation " + id + " yet" );
+			List<float> percentList = new List<float>();
+			percentList.Add(percent);
+			methodPointsByProfessionalSituation[id] = percentList;
+			Debug.Log("ADDED METHOD SCORE : A la situation pro n°"+ id+", vous avez obtenu "+ percent+"%" );
 		}
 	}
 
@@ -59,14 +69,33 @@ public class Score {
     return constraintPercent(result);
   }
 
+	public float listAverage(List<float> numberList){
+		float result = 0F;
+		int numberCount = 0;
+		foreach(float number in numberList){
+			result += number;
+			numberCount ++;
+		}
+		if(numberCount == 0){
+			return 0;
+		}
+		return (result / (float)numberCount);
+	}
+
 	public float getProSituationSuccess(int id){
 		try{
-			float success = computeScoreFromCertainty(enigmaPointsByProfessionalSituation[id])*0.5F + methodPointsByProfessionalSituation[id]*0.5F;
+			float success = computeScoreFromCertainty(listAverage(enigmaPointsByProfessionalSituation[id]))*0.5F + listAverage(methodPointsByProfessionalSituation[id])*0.5F;
 			return constraintPercent(success);
-		} catch (Exception e){
-			float success = computeScoreFromCertainty(enigmaPointsByProfessionalSituation[id]);
-			return constraintPercent(success);
+		} catch (Exception e1){
+			try{
+				Debug.Log("there was a problem with either enigma points and method points");
+				float success = computeScoreFromCertainty(listAverage(enigmaPointsByProfessionalSituation[id]));
+				return constraintPercent(success);
+			} catch(Exception e2){
+				 Debug.Log("there was a problem with both enigma points and method points");
+				 return 0;
 			}
+		}
 	}
 
 	//Moyenne des score des situations pro repassé en nombre de points (pas en %)
@@ -74,7 +103,7 @@ public class Score {
 		float success = 0;
 		float number = 0;
 		if(enigmaPointsByProfessionalSituation.Count > 0){
-			foreach( KeyValuePair<int, float> proSit in enigmaPointsByProfessionalSituation){
+			foreach( KeyValuePair<int, List<float>> proSit in enigmaPointsByProfessionalSituation){
 				success += getProSituationSuccess(proSit.Key);
 				number += 1;
 			}
@@ -98,13 +127,15 @@ public class Score {
 		+ "\nsuccess : " + enigmaSuccess
 		+ "\ncertainty : " + certaintyLevel
 		+ "\nEnigma questions : ";
-		foreach(KeyValuePair<int, float> percent in enigmaPointsByProfessionalSituation){
-			s += "\nFor pro situation " + percent.Key + ", Success percentage is : " + percent.Value;
+		foreach(KeyValuePair<int, List<float>> percent in enigmaPointsByProfessionalSituation){
+			s += "\nFor pro situation " + percent.Key + ", Success percentage is : " + listAverage(percent.Value);
+			s += "\nWith certainty , Success percentage is : " + computeScoreFromCertainty(listAverage(percent.Value));
 		}
 		s += "\nMethod questions : ";
-		foreach(KeyValuePair<int, float> percent in methodPointsByProfessionalSituation){
-			s += "\nFor pro situation " + percent.Key + ", Success percentage is : " + percent.Value;
+		foreach(KeyValuePair<int, List<float>> percent in methodPointsByProfessionalSituation){
+			s += "\nFor pro situation " + percent.Key + ", Success percentage is : " + listAverage(percent.Value);
 		}
+		s += "\n\nGlobal success is : " + getGlobalSuccess() + " on 100";
 		s += "\n\nGlobal score is : " + getGlobalScore() + " on " +  maxNumberPoints;
 
 		return s;

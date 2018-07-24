@@ -29,6 +29,7 @@ public class GlobalManager : MonoBehaviour
 		//get { return "http://localhost/enpc-web-interface"; }
 		//VERSION LOU
 		get { return "http://localhost:8888"; }
+    //get { return "http://millenaire4.enpc.fr";}
 	}
 
 	//récupère les références au PlayerManager, au SceneLoader, à l'EnigmaManager
@@ -101,7 +102,6 @@ public class GlobalManager : MonoBehaviour
 		if(getRequest.isNetworkError || getRequest.isHttpError) {
 			Debug.Log(getRequest.error);
 			Debug.Log(getRequest.downloadHandler.text);
-
 		}
 		else {
 			if (!Int32.TryParse(getRequest.downloadHandler.text, out this.gameSessionId))

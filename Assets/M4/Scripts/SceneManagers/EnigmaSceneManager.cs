@@ -20,7 +20,7 @@ public class EnigmaSceneManager : MonoBehaviour
           popm = gameObject.GetComponent<PopupManager>();
         }
         // LISTENERS
-        EventManager.instance.AddListener<GOButtonPressedEvent> (submitResult); // En réponse à la question || EnigmaUIManager.GOButtonPressed()
+        EventManager.instance.AddListener<GOButtonPressedEvent> (submitEnigmaResult); // En réponse à la question || EnigmaUIManager.GOButtonPressed()
         //EventManager.instance.AddListener<QueryEnigmaScoreEvent> (sendScore); // ?
         EventManager.instance.AddListener<QueryScoreEvent> (sendScore); // Demande la réussite de la question || EnigmaSequenceManager.getEnigmaScore(EnigmaSubmittedEvent)
         //EventManager.instance.AddListener<ValidationScreenEvent>(yourResult); // En réponse à un Popup || PopupManager.submit()
@@ -30,7 +30,7 @@ public class EnigmaSceneManager : MonoBehaviour
   // SUPPRESSION des listeners une fois terminé
   void OnDestroy () {
 	    validator = null;
-	    EventManager.instance.RemoveListener<GOButtonPressedEvent> (submitResult);
+	    EventManager.instance.RemoveListener<GOButtonPressedEvent> (submitEnigmaResult);
 	    //EventManager.instance.RemoveListener<QueryEnigmaScoreEvent> (sendScore);
       EventManager.instance.RemoveListener<QueryScoreEvent>(sendScore);
       //EventManager.instance.RemoveListener<ValidationScreenEvent> (yourResult);
@@ -40,6 +40,7 @@ public class EnigmaSceneManager : MonoBehaviour
     // prévient la création du résultat
 	public void enigmaSubmitted(){
         print("ENIGMA SUBMITTED");
+        print(score.ToString());
         EventManager.instance.Raise(new EnigmaSubmittedEvent());
 	}
 
@@ -62,7 +63,7 @@ public class EnigmaSceneManager : MonoBehaviour
     */
 
     // Lance la correction de la question et prévient l'affichage de la certitude
-    public void submitResult(GOButtonPressedEvent e)
+    public void submitEnigmaResult(GOButtonPressedEvent e)
     {
       Debug.Log("GO submit result");
       //score.enigmaSuccess = validator.answerIsRight();

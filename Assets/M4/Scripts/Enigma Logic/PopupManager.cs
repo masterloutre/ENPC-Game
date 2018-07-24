@@ -168,7 +168,6 @@ public class PopupManager : MonoBehaviour
     }
 
     public void endPopUpQuestionsSequence(){
-      print(enigmaScore.ToString());
       GameObject.Find("Answer Popup").SetActive(false);
       EventManager.instance.Raise(new PopUpQuestionsOverEvent());
     }
