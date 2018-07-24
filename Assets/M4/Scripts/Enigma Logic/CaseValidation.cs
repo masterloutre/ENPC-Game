@@ -20,7 +20,7 @@ public class CaseValidation : MonoBehaviour, ValidationMethod
 
     public void Start()
     {
-        
+
 
     }
     // rempli le dico avec toute les questions et tous les points (%) associés au réponses choisies à ces questions
@@ -32,23 +32,18 @@ public class CaseValidation : MonoBehaviour, ValidationMethod
         }
       }
     }
-    
+
     public bool answerIsRight(){
       float result = 0;
         // évite la division par 0 en dessous
-        if (successByQuestion.Count == 0)
-        {
-            print("--------------------------------ERREUR : AnswerIsRight - NO QUESTION ANSWERED ------------------------------");
+        if (successByQuestion.Count == 0){
             return false;
         }
-        print("Calcul de la moyenne ...");
       foreach(KeyValuePair<ChoiceQuestion, float> question in successByQuestion){
         result += question.Value;
       }
       result = result/successByQuestion.Count;
-      print("Moyenne : " + result);
       result = (result < 0)? 0: (result > 100)? 100: result;
-
       return (result >= 50);
     }
 
@@ -58,18 +53,12 @@ public class CaseValidation : MonoBehaviour, ValidationMethod
       getQuestionsValidation();
       foreach(KeyValuePair<ChoiceQuestion, float> question in successByQuestion){
         score.addEnigmaSuccess(question.Key.professionalSituationId, question.Value);
-        print("A la situation pro n°"+ question.Key.professionalSituationId+", vous avez obtenu "+ question.Value+"%" );
       }
       score.enigmaSuccess = answerIsRight();
-      if(score.enigmaSuccess){
-        print("VOUS AVEZ REUSSI !!!");
-      } else {
-        print("VOUS AVEZ ECHOUE !!!");
-      }
       return score;
 
     }
-   
+
 
 
 
@@ -78,4 +67,3 @@ public class CaseValidation : MonoBehaviour, ValidationMethod
 
 
 }
-

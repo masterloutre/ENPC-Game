@@ -168,8 +168,6 @@ public class EnigmaSequenceManager : MonoBehaviour
 
 	//Récupère le score de l'énigme courante et envoie une demande de sauvegarde
 	public void getEnigmaScore(EnigmaSubmittedEvent e){
-    print("EnigmaSubmittedEvent is being processed");
-
 		//on récupère le succès qui est traité dans EnigmaSceneManager
 
     QueryScoreEvent query = new QueryScoreEvent();
@@ -179,7 +177,6 @@ public class EnigmaSequenceManager : MonoBehaviour
     //après ces deux lignes, l'objet query a été updaté dans EnigmaSceneManager.sendScore();
 		currentEnigmaScore = query.score;
     currentEnigmaScore.maxNumberPoints = enigmaList[currentEnigmaId].maxScore;
-		print("ENIGMA SCORE : " + query.score);
 		if (currentEnigmaScore.enigmaSuccess) {
 			print("ENIGMA VALIDATED !!!!!!!!!!!!!");
 

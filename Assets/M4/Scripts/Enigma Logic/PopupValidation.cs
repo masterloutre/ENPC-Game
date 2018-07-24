@@ -38,14 +38,12 @@ public class PopupValidation : MonoBehaviour, ValidationMethod
         // évite la division par 0 en dessous
         if (successByQuestion.Count == 0)
         {
-            print("--------------------------------ERREUR : AnswerIsRight - NO QUESTION ANSWERED ------------------------------");
             return false;
         }
       foreach(KeyValuePair<ChoiceQuestion, float> question in successByQuestion){
         result += question.Value;
       }
       result = result/successByQuestion.Count;
-      print("Moyenne : " + result);
       result = (result < 0)? 0: (result > 100)? 100: result;
 
       return (result >= 50);

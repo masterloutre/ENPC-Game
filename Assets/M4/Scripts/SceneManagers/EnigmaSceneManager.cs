@@ -40,7 +40,6 @@ public class EnigmaSceneManager : MonoBehaviour
     // prévient la création du résultat
 	public void enigmaSubmitted(){
         print("ENIGMA SUBMITTED");
-        print(score.ToString());
         EventManager.instance.Raise(new EnigmaSubmittedEvent());
 	}
 
@@ -65,9 +64,7 @@ public class EnigmaSceneManager : MonoBehaviour
     // Lance la correction de la question et prévient l'affichage de la certitude
     public void submitEnigmaResult(GOButtonPressedEvent e)
     {
-      Debug.Log("GO submit result");
-      //score.enigmaSuccess = validator.answerIsRight();
-      //score.addEnigmaSuccess(0,validator.score());
+      Debug.Log("----> GO -> submitEnigmaResult, EnigmaSceneManager");
       score = validator.fillScore(score);
       score.time = getTime();
       score.help = false;

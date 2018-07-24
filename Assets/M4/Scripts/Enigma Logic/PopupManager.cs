@@ -57,7 +57,7 @@ public class PopupManager : MonoBehaviour
     }
     void OnDisable()
     {
-        Debug.Log("PrintOnDisable: script PopupManager was disabled");
+        //Debug.Log("PrintOnDisable: script PopupManager was disabled");
 
     }
 
@@ -90,7 +90,6 @@ public class PopupManager : MonoBehaviour
                 break;
             case PopupState.METHOD:
                 {
-                  print("GO : question index " + currentMethodQuestionIndex + ", question count : " + questionList.Count );
                     if(currentMethodQuestionIndex < questionList.Count -1){
                       questionList[currentMethodQuestionIndex].gameObject.SetActive(false);
                       currentMethodQuestionIndex ++;
@@ -116,7 +115,6 @@ public class PopupManager : MonoBehaviour
     // méthode d'affichage
     public void updateState(PopupState newState)
     {
-        print("CALLLING UPDATE STATE (" + newState+ ")");
         if (newState != null)
         {
             state = newState;

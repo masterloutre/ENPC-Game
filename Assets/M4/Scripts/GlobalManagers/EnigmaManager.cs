@@ -64,10 +64,8 @@ public class EnigmaManager : MonoBehaviour
 	}
 
   public void removeEnigma (EnigmaData enigma){
-
     enigmas.Remove(enigma);
     computeSkillList();
-    Debug.Log("Removed Enigma " + enigma.nom);
   }
 
 

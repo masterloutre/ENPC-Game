@@ -33,7 +33,6 @@ public class Score {
 		}
 		catch (KeyNotFoundException e)
 		{
-			Debug.Log("No enigma score for situation " + id + " yet" );
 			List<float> percentList = new List<float>();
 			percentList.Add(percent);
 			enigmaPointsByProfessionalSituation[id] = percentList;
@@ -51,7 +50,6 @@ public class Score {
 		}
 		catch (KeyNotFoundException e)
 		{
-			Debug.Log("No method score for situation " + id + " yet" );
 			List<float> percentList = new List<float>();
 			percentList.Add(percent);
 			methodPointsByProfessionalSituation[id] = percentList;
@@ -88,11 +86,9 @@ public class Score {
 			return constraintPercent(success);
 		} catch (Exception e1){
 			try{
-				Debug.Log("there was a problem with either enigma points and method points");
 				float success = computeScoreFromCertainty(listAverage(enigmaPointsByProfessionalSituation[id]));
 				return constraintPercent(success);
 			} catch(Exception e2){
-				 Debug.Log("there was a problem with both enigma points and method points");
 				 return 0;
 			}
 		}
@@ -123,6 +119,7 @@ public class Score {
 	}
 
 	public string ToString(){
+		Debug.Log("-------Start Computing Score to Print------");
 		string s = "Score :"
 		+ "\nsuccess : " + enigmaSuccess
 		+ "\ncertainty : " + certaintyLevel

@@ -55,7 +55,6 @@ public class ChoiceQuestion : MonoBehaviour {
         // now it's fixed
 
         GameObject answerGOList = gameObject.transform.Find("AnswerList").gameObject;
-		print("(SetUserChoice) Vous avez sélectionné la réponse numéro: "+id);
 		if(userChoice != -1){
 			colorBack(answerGOList.transform.GetChild(userChoice).gameObject);
 		}

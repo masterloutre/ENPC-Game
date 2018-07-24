@@ -28,8 +28,8 @@ public class GlobalManager : MonoBehaviour
 		//VERSION KEN
 		//get { return "http://localhost/enpc-web-interface"; }
 		//VERSION LOU
-		//get { return "http://localhost:8888"; }
-    get { return "http://millenaire4.enpc.fr";}
+		get { return "http://localhost:8888"; }
+    //get { return "http://millenaire4.enpc.fr";}
 	}
 
 	//récupère les références au PlayerManager, au SceneLoader, à l'EnigmaManager
@@ -126,10 +126,8 @@ public class GlobalManager : MonoBehaviour
 			StartCoroutine(sceneLoader.loadSkillsMenu ());
 			//StartCoroutine(sl.loadEnigma (4));
 		} else if (e.currentSceneName == "SelectionScene"){
-            print(e.currentSceneName + "|" + e.choiceId);
 			currentEvaluatedSkill = enigmaManager.getSkills () [e.choiceId];
 			StartCoroutine (sceneLoader.loadEnigmaSequence (enigmaManager.getSkills()[e.choiceId]));
-
 		}
 	}
 	void previousScene(RequestPreviousSceneEvent e){

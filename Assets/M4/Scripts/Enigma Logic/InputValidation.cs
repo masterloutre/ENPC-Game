@@ -32,13 +32,9 @@ public class InputValidation : MonoBehaviour, ValidationMethod
 	}
 
 	public Score fillScore(Score score){
-		score.enigmaSuccess = answerIsRight();
-		score.addEnigmaSuccess(0, (answerIsRight()) ? 100F : 0F);
-		if(answerIsRight()){
-			print("RIGHT !!!");
-		} else {
-			print("WRONNNNNNNG");
-		}
+		bool success = answerIsRight();
+		score.enigmaSuccess = success;
+		score.addEnigmaSuccess(0, (success) ? 100F : 0F);
 		return score;
 	}
 
@@ -50,8 +46,6 @@ public class InputValidation : MonoBehaviour, ValidationMethod
 			setParam (expCorrect);
 
 			float error = (float)(studentAnswer - expCorrect.Value);
-
-
 			if (Mathf.Abs (error) <= marginError) {
 				Debug.Log ("Bonne réponse : ");
 				return true;
