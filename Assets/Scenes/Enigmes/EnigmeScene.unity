@@ -1339,6 +1339,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   timerOnScreen: {fileID: 1483196127}
   timeLimit: 300
+  reverse: 0
 --- !u!1 &133221181
 GameObject:
   m_ObjectHideFlags: 0

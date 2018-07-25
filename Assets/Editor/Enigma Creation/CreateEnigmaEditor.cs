@@ -2,14 +2,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using UnityEngine.SceneManagement;
+using System;
+using UnityEditor.SceneManagement;
 
 public abstract class CreateEnigmaEditor : EditorWindow
 {
+  bool hasAPopup = true;
+  EnigmaSceneManager sceneManager;
 
   static void Init()
   {
     EditorWindow window = EditorWindow.CreateInstance<CreateEnigmaEditor>();
     window.Show();
+  }
+
+  public void Awake(){
+    EditorSceneManager.sceneOpened  += onSceneOpened;
+    Debug.Log("event added");
+    sceneManager = GameObject.Find("Managers").GetComponentInChildren<EnigmaSceneManager>();
+  }
+
+  public void OnDestroy(){
+    EditorSceneManager.sceneOpened  -= onSceneOpened;
   }
 
 	Rect placeAtCenter(Vector2 popupContentSize){
@@ -33,17 +48,35 @@ public abstract class CreateEnigmaEditor : EditorWindow
 	}
 
   public virtual void showPopupContentAtCenter(EditorWindow popupWindow){
-    
+
     popupWindow.position = new Rect(Screen.width / 2, Screen.height / 2, 250, 150);
     popupWindow.ShowPopup();
     }
 
   public virtual void OnGUI()
   {
+  }
 
-    {
-      GUILayout.Label("Creation d'énigme", EditorStyles.boldLabel);
+  public void OnFocus(){
+    sceneManager = GameObject.Find("Managers").GetComponentInChildren<EnigmaSceneManager>();
+  }
 
+  public virtual void generalSettingsGUI(){
+    EditorGUILayout.BeginHorizontal();
+    bool popupCurrentlyExists = (GameObject.Find("Answer Popup") != null)? true: false;
+    if(sceneManager == null){
+      GUILayout.Label("Erreur : Il n'y a pas de component EnigmaSceneManager dans la scène", EditorStyles.boldLabel);
+    } else {
+      hasAPopup = popupCurrentlyExists;
+      hasAPopup = EditorGUILayout.Toggle("Activer Le Popup", hasAPopup);
+      if((hasAPopup && !popupCurrentlyExists) || (!hasAPopup && popupCurrentlyExists)){
+        sceneManager.activatePopup(hasAPopup);
+      }
     }
+    EditorGUILayout.EndHorizontal();
+  }
+
+  private void onSceneOpened(Scene scene, OpenSceneMode mode){
+    sceneManager = GameObject.Find("Managers").GetComponentInChildren<EnigmaSceneManager>();
   }
 }

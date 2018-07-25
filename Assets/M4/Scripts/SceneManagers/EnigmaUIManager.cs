@@ -14,8 +14,8 @@ public class EnigmaUIManager : MonoBehaviour
 
 	void Awake ()
     {
-        // Récupère les données de l'énigme en cours
-        QueryCurrentEnigmaDataEvent query = new QueryCurrentEnigmaDataEvent ();
+    // Récupère les données de l'énigme en cours
+    QueryCurrentEnigmaDataEvent query = new QueryCurrentEnigmaDataEvent ();
 		EventManager.instance.Raise (query);
 		enigma = query.enigmaData;
 		EventManager.instance.AddListener<RequestDisableEnigmaUIEvent>(disableUI);

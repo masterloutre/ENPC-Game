@@ -17,7 +17,7 @@ public class CreateQCMEnigmaEditor : CreateEnigmaEditor
   {
     GUILayout.Label("Creation d'énigme de type QCM", EditorStyles.boldLabel);
 
-		if (GUILayout.Button("Créer une énigme", GUILayout.Width(250))) {
+		if (GUILayout.Button("Créer une énigme QCM", GUILayout.Width(250))) {
 				showPopupContentAtCenter(new CreateEnigmaPopup(EnigmaType.QCM));
     }
     if (GUILayout.Button("Ajouter une légende", GUILayout.Width(250))) {
@@ -35,5 +35,7 @@ public class CreateQCMEnigmaEditor : CreateEnigmaEditor
     if (GUILayout.Button("Modifier les questions de méthode", GUILayout.Width(250))) {
         showPopupContentAtCenter(new SetMethodQuestionsPopup());
     }
+
+    generalSettingsGUI();
   }
 }

@@ -13,6 +13,7 @@ TagManager:
   - Input Text
   - ScenarioPart
   - CaseStudyAnswer
+  - Answer Popup
   layers:
   - Default
   - TransparentFX

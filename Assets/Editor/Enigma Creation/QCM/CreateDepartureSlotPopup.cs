@@ -17,8 +17,9 @@ public class CreateDepartureSlotPopup : PopupWindowContent
 	int id = 0;
 	float value = 0;
 	string unit = "cm";
-	string legend = "";
+	string text = "";
 	bool jump = false;
+	bool legend = true;
 
 
 		//taille du popup
@@ -30,14 +31,14 @@ public class CreateDepartureSlotPopup : PopupWindowContent
     public override void OnGUI(Rect rect){
         GUILayout.Label("Ajouter un slot de départ", EditorStyles.boldLabel);
 				name = EditorGUILayout.TextField("Nom de l'object", name);
-
 				id =  EditorGUILayout.IntField("Identifiant", id);
-
-				value = EditorGUILayout.FloatField("Valeur", value);
-				unit = EditorGUILayout.TextField("Unité", unit);
-				legend = EditorGUILayout.TextField("Texte de légende", legend);
-				jump = EditorGUILayout.Toggle("Aller à la ligne", jump);
-
+				legend = EditorGUILayout.Toggle("Ajouter une valeur", legend);
+				if(legend){
+					value = EditorGUILayout.FloatField("Valeur", value);
+					unit = EditorGUILayout.TextField("Unité", unit);
+					text = EditorGUILayout.TextField("Texte de légende", text);
+					jump = EditorGUILayout.Toggle("Aller à la ligne", jump);
+				}
 				//bouton OK
 				if (GUILayout.Button("OK", GUILayout.Width(200))) {
 		      createLegendGameObject();
@@ -53,11 +54,16 @@ public class CreateDepartureSlotPopup : PopupWindowContent
 
 			//remplissage du component InteractiveValue
 			InteractiveValue iv = slotGO.GetComponentInChildren<InteractiveValue>();
-			iv.valeur = value;
-			iv.unité = unit;
-			iv.légende = legend;
-			iv.nomDeVariable = ' ';
-			iv.valeurÀLaLigne = jump;
+			if(legend){
+				iv.valeur = value;
+				iv.unité = unit;
+				iv.légende = text;
+				iv.nomDeVariable = ' ';
+				iv.valeurÀLaLigne = jump;
+			} else {
+				GameObject.DestroyImmediate(iv.gameObject);
+			}
+
 
 			//remplissage du component item
 			Item item = slotGO.GetComponentInChildren<Item>();

@@ -3588,9 +3588,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1087013165}
   - component: {fileID: 1087013168}
-  - component: {fileID: 1087013167}
   - component: {fileID: 1087013166}
-  - component: {fileID: 1087013169}
   m_Layer: 0
   m_Name: EnigmaSceneManager
   m_TagString: Untagged
@@ -3624,17 +3622,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   formula: 421-a
   marginError: 0
---- !u!114 &1087013167
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1087013164}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 74e15aab8ccb2e64ca7c0eb589e9d0b6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1087013168
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3647,17 +3634,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hasAPopup: 1
---- !u!114 &1087013169
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1087013164}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cad6f0cb0d11340368a498f5f94e17cc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1124294385
 GameObject:
   m_ObjectHideFlags: 0

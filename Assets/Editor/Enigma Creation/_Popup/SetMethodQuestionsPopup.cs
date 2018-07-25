@@ -35,18 +35,27 @@ public class SetMethodQuestionsPopup : PopupWindowContent
 			foreach(ChoiceQuestion question in questionList){
 				displayQuestionEditor(question);
 			}
+			if(questionList.Count == 0){
+				GUILayout.Label("Le popUp n'est pas activé.\nVous ne pouvez pas voir les questions de méthode", EditorStyles.boldLabel);
+
+			}
 
 
 			EditorGUILayout.EndScrollView();
     }
 
 		public override void OnOpen(){
+			try {
+				GameObject popUpGroup = GameObject.Find("Answer Popup");
+				foreach(ChoiceQuestion question in popUpGroup.GetComponentsInChildren<ChoiceQuestion>()){
+					questionList.Add(question);
+					EditorUtility.SetDirty(question);
+				}
+			} catch (Exception e) {
 
-			GameObject popUpGroup = GameObject.Find("Answer Popup");
-			foreach(ChoiceQuestion question in popUpGroup.GetComponentsInChildren<ChoiceQuestion>()){
-				questionList.Add(question);
-				EditorUtility.SetDirty(question);
 			}
+
+
 
 			//test = popUpGroup.GetComponentsInChildren<ChoiceQuestion>()[0];
 		}

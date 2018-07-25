@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 
 
-public enum PopupState { NONE, CERTAINTY, SUCCESSORNOT, METHOD };
+public enum PopupState { ACTIVATED, CERTAINTY, SUCCESSORNOT, METHOD, DEACTIVATED};
 
 
 /*
@@ -15,8 +15,7 @@ public enum PopupState { NONE, CERTAINTY, SUCCESSORNOT, METHOD };
 */
 public class PopupManager : MonoBehaviour
 {
-    PopupState state; // Étape en cours, peut valoir : "none", "Certitude", "Justification", "Correction", "Victoire", FAILURE
-    //private ChoiceQuestion methodquestions,justifyquestions;
+    PopupState state = PopupState.ACTIVATED;
     private GameObject sure, victory, defeat, method, validationButton; // Écrans des étapes
     private List<ChoiceQuestion> questionList;
     int currentMethodQuestionIndex = 0;
@@ -28,7 +27,6 @@ public class PopupManager : MonoBehaviour
     public void Awake()
     {
         // INSTANCIATION des modèles, masqués par défaut
-
         sure = GameObject.Find("Certitude");
         victory = GameObject.Find("Victoire");
         defeat = GameObject.Find("Défaite");
@@ -153,6 +151,16 @@ public class PopupManager : MonoBehaviour
                     method.SetActive(true);
                 }
                 break;
+            case PopupState.DEACTIVATED:
+              {
+                gameObject.SetActive(false);
+              }
+              break;
+            case PopupState.ACTIVATED:
+              {
+                gameObject.SetActive(true);
+              }
+              break;
             default:
                 {
                   return;
@@ -166,7 +174,7 @@ public class PopupManager : MonoBehaviour
     }
 
     public void endPopUpQuestionsSequence(){
-      GameObject.Find("Answer Popup").SetActive(false);
+      gameObject.SetActive(false);
       EventManager.instance.Raise(new PopUpQuestionsOverEvent());
     }
 

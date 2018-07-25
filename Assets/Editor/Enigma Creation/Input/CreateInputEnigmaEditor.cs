@@ -17,7 +17,7 @@ public class CreateInputEnigmaEditor : CreateEnigmaEditor
   {
     GUILayout.Label("Creation d'énigme de type input", EditorStyles.boldLabel);
 
-		if (GUILayout.Button("Créer une énigme", GUILayout.Width(250))) {
+		if (GUILayout.Button("Créer une énigme INPUT", GUILayout.Width(250))) {
 				showPopupContentAtCenter(new CreateEnigmaPopup(EnigmaType.INPUT));
     }
     if (GUILayout.Button("Ajouter une légende", GUILayout.Width(250))) {
@@ -35,5 +35,6 @@ public class CreateInputEnigmaEditor : CreateEnigmaEditor
     if (GUILayout.Button("Modifier les questions de méthode", GUILayout.Width(250))) {
         showPopupContentAtCenter(new SetMethodQuestionsPopup());
     }
+    generalSettingsGUI();
   }
 }

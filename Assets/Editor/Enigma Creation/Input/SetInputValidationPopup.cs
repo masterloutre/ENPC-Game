@@ -18,17 +18,18 @@ public class SetInputValidationPopup : PopupWindowContent
 
 		//taille du popup
     public override Vector2 GetWindowSize(){
-        return new Vector2(300, 250);
+        return new Vector2(500, 250);
     }
 
 		///affichage des champs et bouttons et assignement des variables
     public override void OnGUI(Rect rect){
-
+				EditorGUIUtility.labelWidth = 300;
         GUILayout.Label("Configurer le calcul du résultat.", EditorStyles.boldLabel);
-				GUILayout.Label("Variables actuellement disponibles dans la scène");
+				GUILayout.Label("Variables actuellement disponibles dans la scène : " + paramList.Count);
 				foreach(InteractiveValue param in paramList){
 					GUILayout.Label(param.variableName + " = " + param.value + param.unit);
 				}
+				GUILayout.Label("ATTENTION si vous avez un doublon cela peut fausser le calcul du résultat!!!", EditorStyles.boldLabel);
 				validator.formula = EditorGUILayout.TextField("Formule de calcul du resultat", validator.formula);
 				GUILayout.Label("Vous pouvez également rentrer directement le resultat", EditorStyles.boldLabel);
 				validator.marginError = EditorGUILayout.DoubleField("Marge d'erreur", validator.marginError);

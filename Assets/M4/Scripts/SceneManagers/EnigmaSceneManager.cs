@@ -16,9 +16,8 @@ public class EnigmaSceneManager : MonoBehaviour
         score = new Score();
         // RÉFÉRENCES des managers stockés
         validator = gameObject.GetComponent<ValidationMethod>();
-        if(hasAPopup){
-          popm = gameObject.GetComponent<PopupManager>();
-        }
+        popm = GameObject.Find("Responsive Canvas").GetComponentInChildren<PopupManager>(true);
+        activatePopup(hasAPopup);
         // LISTENERS
         EventManager.instance.AddListener<GOButtonPressedEvent> (submitEnigmaResult); // En réponse à la question || EnigmaUIManager.GOButtonPressed()
         //EventManager.instance.AddListener<QueryEnigmaScoreEvent> (sendScore); // ?
@@ -77,7 +76,6 @@ public class EnigmaSceneManager : MonoBehaviour
           score.certaintyLevel = 100;
           enigmaSubmitted();
         }
-
     }
 
     //event lancé par EnigmaSequenceManager.getEnigmaScore
@@ -91,6 +89,18 @@ public class EnigmaSceneManager : MonoBehaviour
       //method = popm.methodeUserInput;
       //traité dans EnigmaSequenceManager
       enigmaSubmitted();
+    }
+
+    public void activatePopup(bool yes){
+      if(popm == null){
+        popm = GameObject.Find("Responsive Canvas").GetComponentInChildren<PopupManager>(true);
+      }
+      if(yes){
+        popm.updateState(PopupState.ACTIVATED);
+      } else {
+        popm.updateState(PopupState.DEACTIVATED);
+      }
+      hasAPopup = yes;
     }
 
 
