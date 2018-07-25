@@ -33,7 +33,10 @@ public class SetMethodQuestionsPopup : PopupWindowContent
 			//test.text = EditorGUILayout.TextField("test ",test.text);
 
 			foreach(ChoiceQuestion question in questionList){
-				displayQuestionEditor(question);
+				EditorGUILayout.BeginVertical();
+				Editor editor = Editor.CreateEditor(question, typeof(ChoiceQuestionEditor));
+				editor.OnInspectorGUI();
+				EditorGUILayout.EndVertical();
 			}
 			if(questionList.Count == 0){
 				GUILayout.Label("Le popUp n'est pas activé.\nVous ne pouvez pas voir les questions de méthode", EditorStyles.boldLabel);
@@ -65,7 +68,7 @@ public class SetMethodQuestionsPopup : PopupWindowContent
 			GUILayout.BeginVertical("box");
 			Editor editor = Editor.CreateEditor((UnityEngine.Object)question);
 			editor.DrawDefaultInspector();
-			/*
+
 			GUILayout.Label("Ennoncé de la question", EditorStyles.boldLabel);
 			question.text = EditorGUILayout.TextArea(question.text,  GUILayout.Height(50));
 			question.professionalSituationId = EditorGUILayout.IntField("Identifiant de la situation professionnelle", question.professionalSituationId);
@@ -92,7 +95,7 @@ public class SetMethodQuestionsPopup : PopupWindowContent
 			if (GUILayout.Button("Supprimer une réponse", GUILayout.Width(200))) {
 	      deleteAnswer(question, selectedIndex);
 	    }
-*/
+
 			GUILayout.EndVertical();
 		}
 

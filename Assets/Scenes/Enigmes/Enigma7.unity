@@ -2880,6 +2880,41 @@ Prefab:
       propertyPath: text
       value: Coucou la question
       objectReference: {fileID: 0}
+    - target: {fileID: 114405958038090436, guid: ab9c2616c4bc84d18908f23fb19b84e9,
+        type: 2}
+      propertyPath: answerList.Array.data[0].text
+      value: Hello
+      objectReference: {fileID: 0}
+    - target: {fileID: 114405958038090436, guid: ab9c2616c4bc84d18908f23fb19b84e9,
+        type: 2}
+      propertyPath: answerList.Array.data[0].percent
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 114405958038090436, guid: ab9c2616c4bc84d18908f23fb19b84e9,
+        type: 2}
+      propertyPath: answerList.Array.data[1].text
+      value: plic plouc
+      objectReference: {fileID: 0}
+    - target: {fileID: 114405958038090436, guid: ab9c2616c4bc84d18908f23fb19b84e9,
+        type: 2}
+      propertyPath: answerList.Array.data[1].percent
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 114957483308658644, guid: ab9c2616c4bc84d18908f23fb19b84e9,
+        type: 2}
+      propertyPath: answerList.Array.data[0].text
+      value: Koala
+      objectReference: {fileID: 0}
+    - target: {fileID: 114957483308658644, guid: ab9c2616c4bc84d18908f23fb19b84e9,
+        type: 2}
+      propertyPath: answerList.Array.data[0].percent
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 114405958038090436, guid: ab9c2616c4bc84d18908f23fb19b84e9,
+        type: 2}
+      propertyPath: professionalSituationId
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ab9c2616c4bc84d18908f23fb19b84e9, type: 2}
   m_IsPrefabParent: 0
