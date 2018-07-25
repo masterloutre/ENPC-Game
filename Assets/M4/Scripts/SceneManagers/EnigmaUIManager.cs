@@ -10,14 +10,14 @@ using UnityEngine.UI;
 public class EnigmaUIManager : MonoBehaviour
 {
 
-	EnigmaData enigma; // Données de l'énigme en cours
+	Enigma enigma; // Données de l'énigme en cours
 
 	void Awake ()
     {
     // Récupère les données de l'énigme en cours
     QueryCurrentEnigmaDataEvent query = new QueryCurrentEnigmaDataEvent ();
 		EventManager.instance.Raise (query);
-		enigma = query.enigmaData;
+		enigma = query.enigma;
 		EventManager.instance.AddListener<RequestDisableEnigmaUIEvent>(disableUI);
 	}
 
@@ -32,11 +32,13 @@ public class EnigmaUIManager : MonoBehaviour
 
     // Initialise le prefab avec les données
     void fillEnigmaData(){
-		GameObject.Find ("Enigma Data/Enigma Title").GetComponent<Text>().text = enigma.nom;
+		GameObject.Find ("Enigma Data/Enigma Title").GetComponent<Text>().text = enigma.name;
 		EnigmaType type = (EnigmaType)enigma.type;
-		GameObject.Find ("Enigma Data/Enigma Type").GetComponent<Text>().text = "Type d'énigme : " + type;
-		EnigmaDifficulty difficulty = (EnigmaDifficulty)enigma.difficulte;
-		GameObject.Find ("Enigma Data/Enigma Difficulty").GetComponent<Text>().text = "Difficulté de l'énigme : " + difficulty;
+		GameObject.Find ("Enigma Data/Enigma Type").GetComponent<Text>().text = "Type : " + type;
+		EnigmaDifficulty difficulty = (EnigmaDifficulty)enigma.difficulty;
+		GameObject.Find ("Enigma Data/Enigma Difficulty").GetComponent<Text>().text = "Difficulté : " + difficulty;
+		GameObject.Find ("Enigma Data/Enigma Skill").GetComponent<Text>().text = enigma.skill.name;
+
 	}
 
 	//EVENTS BUTTONS//

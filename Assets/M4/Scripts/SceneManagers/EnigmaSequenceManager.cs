@@ -163,7 +163,7 @@ public class EnigmaSequenceManager : MonoBehaviour
 
 	//Envoie les informations de l'énigme courante
 	public void sendCurrentEnigmaData(QueryCurrentEnigmaDataEvent e){
-		e.enigmaData = enigmaDataList [currentEnigmaId];
+		e.enigma = enigmaList [currentEnigmaId];
 	}
 
 	//Récupère le score de l'énigme courante et envoie une demande de sauvegarde

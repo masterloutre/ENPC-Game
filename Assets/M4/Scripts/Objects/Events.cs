@@ -95,11 +95,8 @@ public class RequestPreviousEnigmaEvent : GameEvent
 
 public class QueryCurrentEnigmaDataEvent : GameEvent
 {
-    public EnigmaData enigmaData;
-    public QueryCurrentEnigmaDataEvent()
-    {
-        enigmaData = null;
-    }
+    public Enigma enigma = null;
+    public QueryCurrentEnigmaDataEvent(){}
 }
 
 
