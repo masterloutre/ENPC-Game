@@ -13,7 +13,7 @@ using System;
 public class ChoiceQuestion : MonoBehaviour {
 	public string text;
 	public Texture2D img;
-	public List<Answer> answerList;
+	public List<Answer> answerList = new List<Answer>();
 	int userChoice = -1;
 	public int professionalSituationId;
 
@@ -36,8 +36,9 @@ public class ChoiceQuestion : MonoBehaviour {
 	public void createAnswerGameObject(){
 		GameObject answerModel = gameObject.transform.Find("AnswerList").Find("Answer").gameObject;
         //GameObject answerModel = gameObject.transform.Find("Answer").gameObject
-        foreach (Answer answer in answerList){
+    foreach (Answer answer in answerList){
 			GameObject answerGameObject = GameObject.Instantiate(answerModel, answerModel.transform.parent);
+			Debug.Log("Answer : " + answer.text);
 			answerGameObject.GetComponentInChildren<Text>().text = answer.text;
 			answerGameObject.GetComponent<Button>().onClick.AddListener( delegate { setUserChoice(answerGameObject.transform.GetSiblingIndex());});
 		}

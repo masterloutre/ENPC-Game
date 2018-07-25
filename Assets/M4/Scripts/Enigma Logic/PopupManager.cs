@@ -27,11 +27,20 @@ public class PopupManager : MonoBehaviour
     public void Awake()
     {
         // INSTANCIATION des modèles, masqués par défaut
-        sure = GameObject.Find("Certitude");
-        victory = GameObject.Find("Victoire");
-        defeat = GameObject.Find("Défaite");
-        method = GameObject.Find("Méthode");
-        validationButton = GameObject.Find("ValidationButton");
+        /*
+        Transform[] tranformList = gameObject.GetComponentsInChildren<Transform>();
+        foreach (Transform child in tranformList )
+        {
+          if (child != transformList[0]){
+            child.gameObject.SetActive(true);
+          }
+        }
+        */
+        sure = gameObject.transform.Find("Certitude").gameObject;
+        victory = gameObject.transform.Find("Victoire").gameObject;
+        defeat = gameObject.transform.Find("Défaite").gameObject;
+        method = gameObject.transform.Find("Méthode").gameObject;
+        validationButton = gameObject.transform.Find("ValidationButton").gameObject;
 
         questionList = new List<ChoiceQuestion>();
         foreach(ChoiceQuestion question in GameObject.Find("Méthode").GetComponentsInChildren<ChoiceQuestion>()){

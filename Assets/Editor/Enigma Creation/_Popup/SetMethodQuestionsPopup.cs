@@ -63,18 +63,24 @@ public class SetMethodQuestionsPopup : PopupWindowContent
 		public void displayQuestionEditor(ChoiceQuestion question){
 
 			GUILayout.BeginVertical("box");
+			Editor editor = Editor.CreateEditor((UnityEngine.Object)question);
+			editor.DrawDefaultInspector();
+			/*
 			GUILayout.Label("Ennoncé de la question", EditorStyles.boldLabel);
 			question.text = EditorGUILayout.TextArea(question.text,  GUILayout.Height(50));
 			question.professionalSituationId = EditorGUILayout.IntField("Identifiant de la situation professionnelle", question.professionalSituationId);
 			foreach(Answer answer in question.answerList){
 				GUILayout.BeginVertical("box");
 
+
 				answer.text = EditorGUILayout.TextField("Réponse", answer.text);
 				answer.percent = EditorGUILayout.FloatField("Pourcentage de réussite associé à la réponse", answer.percent);
-				/*
-				Editor editor = Editor.CreateEditor(answer);
-				editor.OnInspectorGUI();
-				*/
+
+				//Editor editor = Editor.CreateEditor((UnityEngine.Object)answer);
+				//Debug.Log("editor : " +editor);
+				//editor.OnInspectorGUI();
+				//editor.DrawDefaultInspector();
+
 				GUILayout.EndVertical();
 			}
 			if (GUILayout.Button("Ajouter une réponse", GUILayout.Width(200))) {
@@ -86,7 +92,7 @@ public class SetMethodQuestionsPopup : PopupWindowContent
 			if (GUILayout.Button("Supprimer une réponse", GUILayout.Width(200))) {
 	      deleteAnswer(question, selectedIndex);
 	    }
-
+*/
 			GUILayout.EndVertical();
 		}
 
