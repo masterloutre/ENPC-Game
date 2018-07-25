@@ -26,6 +26,9 @@ public class CreateQCMEnigmaEditor : CreateEnigmaEditor
     if (GUILayout.Button("Ajouter un schéma", GUILayout.Width(250))) {
         showPopupContentAtCenter(new CreateDiagramPopup());
     }
+    if (GUILayout.Button("Ajouter un énoncé", GUILayout.Width(250))) {
+        showPopupContentAtCenter(new CreateTextPopup());
+    }
     if (GUILayout.Button("Ajouter un slot de départ", GUILayout.Width(250))) {
         showPopupContentAtCenter(new CreateDepartureSlotPopup());
     }

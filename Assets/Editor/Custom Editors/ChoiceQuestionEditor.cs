@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEditor;
+
+
 [CustomEditor(typeof(ChoiceQuestion))]
 [CanEditMultipleObjects]
 public class ChoiceQuestionEditor : Editor
@@ -11,10 +13,12 @@ public class ChoiceQuestionEditor : Editor
 
     void OnEnable()
     {
+      
         text = serializedObject.FindProperty("text");
         proSitId = serializedObject.FindProperty("professionalSituationId");
         answerList = serializedObject.FindProperty("answerList");
         img = serializedObject.FindProperty("img");
+
 
     }
     public override void OnInspectorGUI()

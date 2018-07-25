@@ -2512,6 +2512,11 @@ Prefab:
       propertyPath: answerList.Array.size
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 114957483308658644, guid: ab9c2616c4bc84d18908f23fb19b84e9,
+        type: 2}
+      propertyPath: answerList.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 224434367082828564, guid: ab9c2616c4bc84d18908f23fb19b84e9,
         type: 2}
       propertyPath: m_LocalPosition.x
@@ -2645,7 +2650,7 @@ Prefab:
     - target: {fileID: 224540331867352166, guid: ab9c2616c4bc84d18908f23fb19b84e9,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 335
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224540331867352166, guid: ab9c2616c4bc84d18908f23fb19b84e9,
         type: 2}
@@ -2655,7 +2660,7 @@ Prefab:
     - target: {fileID: 224540331867352166, guid: ab9c2616c4bc84d18908f23fb19b84e9,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: 670
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224540331867352166, guid: ab9c2616c4bc84d18908f23fb19b84e9,
         type: 2}
@@ -2705,7 +2710,7 @@ Prefab:
     - target: {fileID: 224330925780055390, guid: ab9c2616c4bc84d18908f23fb19b84e9,
         type: 2}
       propertyPath: m_AnchoredPosition.x
-      value: 335
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224330925780055390, guid: ab9c2616c4bc84d18908f23fb19b84e9,
         type: 2}
@@ -2715,7 +2720,7 @@ Prefab:
     - target: {fileID: 224330925780055390, guid: ab9c2616c4bc84d18908f23fb19b84e9,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: 670
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224330925780055390, guid: ab9c2616c4bc84d18908f23fb19b84e9,
         type: 2}
@@ -2883,7 +2888,7 @@ Prefab:
     - target: {fileID: 114405958038090436, guid: ab9c2616c4bc84d18908f23fb19b84e9,
         type: 2}
       propertyPath: answerList.Array.data[0].text
-      value: Hello
+      value: "R\xE9ponse 1"
       objectReference: {fileID: 0}
     - target: {fileID: 114405958038090436, guid: ab9c2616c4bc84d18908f23fb19b84e9,
         type: 2}
@@ -2908,12 +2913,22 @@ Prefab:
     - target: {fileID: 114957483308658644, guid: ab9c2616c4bc84d18908f23fb19b84e9,
         type: 2}
       propertyPath: answerList.Array.data[0].percent
-      value: 100
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 114405958038090436, guid: ab9c2616c4bc84d18908f23fb19b84e9,
         type: 2}
       propertyPath: professionalSituationId
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114957483308658644, guid: ab9c2616c4bc84d18908f23fb19b84e9,
+        type: 2}
+      propertyPath: answerList.Array.data[1].text
+      value: Lapin
+      objectReference: {fileID: 0}
+    - target: {fileID: 114957483308658644, guid: ab9c2616c4bc84d18908f23fb19b84e9,
+        type: 2}
+      propertyPath: answerList.Array.data[1].percent
+      value: 100
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: ab9c2616c4bc84d18908f23fb19b84e9, type: 2}

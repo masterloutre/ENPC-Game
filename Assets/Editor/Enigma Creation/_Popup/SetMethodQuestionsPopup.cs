@@ -14,6 +14,7 @@ using UnityEngine.UI;
 public class SetMethodQuestionsPopup : PopupWindowContent
 {
 	List<ChoiceQuestion> questionList = new List<ChoiceQuestion>();
+	List<Editor> questionEditorList = new List<Editor>();
 	Vector2 scrollPos;
 	int selectedIndex = 0;
 	//ChoiceQuestion test;
@@ -32,15 +33,14 @@ public class SetMethodQuestionsPopup : PopupWindowContent
 			scrollPos = EditorGUILayout.BeginScrollView(scrollPos, GUILayout.Width(500), GUILayout.Height(300));
 			//test.text = EditorGUILayout.TextField("test ",test.text);
 
-			foreach(ChoiceQuestion question in questionList){
+			foreach(ChoiceQuestionEditor questionEditor in questionEditorList){
 				EditorGUILayout.BeginVertical();
-				Editor editor = Editor.CreateEditor(question, typeof(ChoiceQuestionEditor));
-				editor.OnInspectorGUI();
+				questionEditor.OnInspectorGUI();
+				//Editor.DestroyImmediate(editor);
 				EditorGUILayout.EndVertical();
 			}
 			if(questionList.Count == 0){
 				GUILayout.Label("Le popUp n'est pas activé.\nVous ne pouvez pas voir les questions de méthode", EditorStyles.boldLabel);
-
 			}
 
 
@@ -52,15 +52,19 @@ public class SetMethodQuestionsPopup : PopupWindowContent
 				GameObject popUpGroup = GameObject.Find("Answer Popup");
 				foreach(ChoiceQuestion question in popUpGroup.GetComponentsInChildren<ChoiceQuestion>()){
 					questionList.Add(question);
+					questionEditorList.Add(Editor.CreateEditor(question, typeof(ChoiceQuestionEditor)));
 					EditorUtility.SetDirty(question);
 				}
 			} catch (Exception e) {
 
 			}
-
-
-
 			//test = popUpGroup.GetComponentsInChildren<ChoiceQuestion>()[0];
+		}
+
+		public override void OnClose(){
+			foreach(ChoiceQuestionEditor questionEditor in questionEditorList){
+				Editor.DestroyImmediate(questionEditor);
+			}
 		}
 
 		public void displayQuestionEditor(ChoiceQuestion question){
