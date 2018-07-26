@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using System.Collections.Generic;
 
 
-public enum PopupState { ACTIVATED, CERTAINTY, SUCCESSORNOT, METHOD, DEACTIVATED};
+public enum PopupState { ACTIVATED, CERTAINTY, FEEDBACK, METHOD, DEACTIVATED};
 
 
 /*
@@ -16,6 +16,7 @@ public enum PopupState { ACTIVATED, CERTAINTY, SUCCESSORNOT, METHOD, DEACTIVATED
 public class PopupManager : MonoBehaviour
 {
     PopupState state = PopupState.ACTIVATED;
+    public bool onlyFeedBack = false;
     private GameObject sure, victory, defeat, method, validationButton; // Écrans des étapes
     private List<ChoiceQuestion> questionList;
     int currentMethodQuestionIndex = 0;
@@ -92,7 +93,7 @@ public class PopupManager : MonoBehaviour
             case PopupState.CERTAINTY:
                 {
                     enigmaScore.certaintyLevel = GameObject.Find("Slider").GetComponent<Slider>().value;
-                    updateState(PopupState.SUCCESSORNOT);
+                    updateState(PopupState.FEEDBACK);
                 }
                 break;
             case PopupState.METHOD:
@@ -107,9 +108,16 @@ public class PopupManager : MonoBehaviour
                     }
                 }
                 break;
-            case PopupState.SUCCESSORNOT:
+            case PopupState.FEEDBACK:
                 {
+                  if(onlyFeedBack){
+                    enigmaScore.certaintyLevel = 100;
+                    endPopUpQuestionsSequence();
+                  }
+                  else {
                     updateState(PopupState.METHOD);
+                  }
+
                 }
                 break;
             default:
@@ -143,7 +151,7 @@ public class PopupManager : MonoBehaviour
                 }
                 break;
 
-            case PopupState.SUCCESSORNOT:
+            case PopupState.FEEDBACK:
                 {
                   sure.SetActive(false);
                   if(enigmaScore.enigmaSuccess){
@@ -151,6 +159,7 @@ public class PopupManager : MonoBehaviour
                   } else {
                     defeat.SetActive(true);
                   }
+                  validationButton.SetActive(true);
                 }
                 break;
             case PopupState.METHOD:
@@ -179,7 +188,11 @@ public class PopupManager : MonoBehaviour
 
     public void beginPopUpQuestionsSequence(Score score){
       enigmaScore = score;
-      updateState(PopupState.CERTAINTY);
+      if(onlyFeedBack){
+        updateState(PopupState.FEEDBACK);
+      } else {
+        updateState(PopupState.CERTAINTY);
+      }
     }
 
     public void endPopUpQuestionsSequence(){

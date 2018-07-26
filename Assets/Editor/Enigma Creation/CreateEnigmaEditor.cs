@@ -10,6 +10,9 @@ public abstract class CreateEnigmaEditor : EditorWindow
 {
   bool hasAPopup = true;
   EnigmaSceneManager sceneManager;
+  PopupManager popupManager;
+  Editor popupEditor = null;
+  bool showPopup = true;
 
   static void Init()
   {
@@ -58,10 +61,26 @@ public abstract class CreateEnigmaEditor : EditorWindow
 
   public void OnFocus(){
     sceneManager = GameObject.Find("Managers").GetComponentInChildren<EnigmaSceneManager>();
+    createPopupEditor();
   }
 
   public virtual void generalSettingsGUI(){
-    EditorGUILayout.BeginHorizontal();
+    EditorGUIUtility.labelWidth = 200;
+    EditorGUILayout.BeginVertical("box");
+    EditorGUILayout.LabelField("Popup",  EditorStyles.boldLabel);
+    if(popupEditor != null && popupEditor.target != null){
+      popupEditor.OnInspectorGUI();
+      GameObject popup = ((PopupManager)popupEditor.target).gameObject;
+      showPopup = popup.activeInHierarchy;
+      showPopup = EditorGUILayout.Toggle("Afficher Le Popup", showPopup);
+      popup.SetActive(showPopup);
+
+    } else {
+      GUILayout.Label("Erreur : Il n'y a pas de component PopupManager dans la scène ou bien le jeu est en mode play", EditorStyles.boldLabel);
+    }
+
+
+    /*
     bool popupCurrentlyExists = (GameObject.Find("Answer Popup") != null)? true: false;
     if(sceneManager == null){
       GUILayout.Label("Erreur : Il n'y a pas de component EnigmaSceneManager dans la scène", EditorStyles.boldLabel);
@@ -72,10 +91,22 @@ public abstract class CreateEnigmaEditor : EditorWindow
         sceneManager.activatePopup(hasAPopup);
       }
     }
-    EditorGUILayout.EndHorizontal();
+    */
+
+    EditorGUILayout.EndVertical();
+
   }
 
   private void onSceneOpened(Scene scene, OpenSceneMode mode){
     sceneManager = GameObject.Find("Managers").GetComponentInChildren<EnigmaSceneManager>();
+    createPopupEditor();
+  }
+
+  private void createPopupEditor(){
+    if(popupEditor != null){
+      Editor.DestroyImmediate(popupEditor);
+    }
+    PopupManager popupManager = GameObject.Find("Responsive Canvas").GetComponentInChildren<PopupManager>(true);
+    popupEditor = Editor.CreateEditor(popupManager);
   }
 }

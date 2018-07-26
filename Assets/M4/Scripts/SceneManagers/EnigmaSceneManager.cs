@@ -10,6 +10,7 @@ public class EnigmaSceneManager : MonoBehaviour
     private PopupManager popm;
     public Score score {get; private set;}
     public bool hasAPopup = true;
+    public bool methodQuestions = true;
 
 
 	void Awake () {
@@ -86,9 +87,6 @@ public class EnigmaSceneManager : MonoBehaviour
 
     public void PopUpQuestionsHaveEnded(PopUpQuestionsOverEvent e){
       score = popm.getScore();
-      //certitude = popm.certitudeUserInput;
-      //method = popm.methodeUserInput;
-      //traité dans EnigmaSequenceManager
       enigmaSubmitted();
     }
 
