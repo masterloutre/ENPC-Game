@@ -13,7 +13,7 @@ using UnityEngine.UI;
  */
 public class SetMethodQuestionsPopup : PopupWindowContent
 {
-	List<ChoiceQuestion> questionList = new List<ChoiceQuestion>();
+	GameObject popupGO = null;
 	List<Editor> questionEditorList = new List<Editor>();
 	Vector2 scrollPos;
 	int selectedIndex = 0;
@@ -30,18 +30,36 @@ public class SetMethodQuestionsPopup : PopupWindowContent
 			EditorGUIUtility.labelWidth = 300;
 			//ActiveEditorTracker.sharedTracker.isLocked = false;
       GUILayout.Label("Configurer les questions de méthode.", EditorStyles.boldLabel);
+			if (GUILayout.Button("Ajouter une question", GUILayout.Width(200))) {
+				CreateQuestion();
+			}
 			scrollPos = EditorGUILayout.BeginScrollView(scrollPos, GUILayout.Width(500), GUILayout.Height(300));
 			//test.text = EditorGUILayout.TextField("test ",test.text);
-
+			/*
 			foreach(ChoiceQuestionEditor questionEditor in questionEditorList){
 				EditorGUILayout.BeginVertical();
 				questionEditor.OnInspectorGUI();
-				//Editor.DestroyImmediate(editor);
+				if (GUILayout.Button("Supprimer", GUILayout.Width(100))) {
+					DeleteTargetQuestion(questionEditor);
+				}
 				EditorGUILayout.EndVertical();
 			}
-			if(questionList.Count == 0){
+			*/
+			for(int i = 0; i < questionEditorList.Count; i++){
+				EditorGUILayout.BeginVertical();
+				questionEditorList[i].OnInspectorGUI();
+				if (GUILayout.Button("Supprimer", GUILayout.Width(100))) {
+					DeleteTargetQuestion(questionEditorList[i]);
+					i--;
+				}
+				EditorGUILayout.EndVertical();
+			}
+
+
+			if(popupGO == null){
 				GUILayout.Label("Le popUp n'est pas activé.\nVous ne pouvez pas voir les questions de méthode", EditorStyles.boldLabel);
 			}
+
 
 
 			EditorGUILayout.EndScrollView();
@@ -49,9 +67,8 @@ public class SetMethodQuestionsPopup : PopupWindowContent
 
 		public override void OnOpen(){
 			try {
-				GameObject popUpGroup = GameObject.Find("Answer Popup");
-				foreach(ChoiceQuestion question in popUpGroup.GetComponentsInChildren<ChoiceQuestion>()){
-					questionList.Add(question);
+				popupGO = GameObject.Find("Answer Popup");
+				foreach(ChoiceQuestion question in popupGO.GetComponentsInChildren<ChoiceQuestion>()){
 					questionEditorList.Add(Editor.CreateEditor(question, typeof(ChoiceQuestionEditor)));
 					EditorUtility.SetDirty(question);
 				}
@@ -65,6 +82,24 @@ public class SetMethodQuestionsPopup : PopupWindowContent
 			foreach(ChoiceQuestionEditor questionEditor in questionEditorList){
 				Editor.DestroyImmediate(questionEditor);
 			}
+		}
+
+		public void DeleteTargetQuestion(Editor questionEditor){
+			ChoiceQuestion question = (ChoiceQuestion)questionEditor.target;
+			questionEditorList.Remove(questionEditor);
+			Editor.DestroyImmediate(questionEditor);
+			GameObject.DestroyImmediate(question.gameObject);
+		}
+
+		public void CreateQuestion(){
+			Transform parent = popupGO.transform.Find("Méthode");
+			if(parent == null){
+				Debug.Log("Pas de Méthode popup trouvé");
+				return;
+			}
+			GameObject questionGO = (GameObject)PrefabUtility.InstantiatePrefab(AssetDatabase.LoadAssetAtPath("Assets/M4/Prefabs/Enigmas/EndQuestionsPanel/elements/MethodQuestion.prefab", typeof(GameObject)));
+			questionGO.transform.SetParent(parent, false);
+			questionEditorList.Add(Editor.CreateEditor(questionGO.GetComponent<ChoiceQuestion>(), typeof(ChoiceQuestionEditor)));
 		}
 
 /*
