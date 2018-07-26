@@ -35,6 +35,9 @@ public class CreateQCMEnigmaEditor : CreateEnigmaEditor
     if (GUILayout.Button("Ajouter un slot d'arrivée", GUILayout.Width(250))) {
         showPopupContentAtCenter(new CreateDestinationSlotPopup());
     }
+    if (GUILayout.Button("Modifier un slot", GUILayout.Width(250))) {
+        showPopupContentAtCenter(new EditSlotPopup());
+    }
     if (GUILayout.Button("Modifier les questions de méthode", GUILayout.Width(250))) {
         showPopupContentAtCenter(new SetMethodQuestionsPopup());
     }

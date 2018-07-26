@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 224975130319630368}
   - component: {fileID: 222643859007521008}
   - component: {fileID: 114384915146904722}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Title
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39,7 +39,7 @@ GameObject:
   - component: {fileID: 222548860630379568}
   - component: {fileID: 114796539657444724}
   - component: {fileID: 114144281035925378}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: ValidationButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54,7 +54,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 224108106046547020}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Fond Popup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -71,7 +71,7 @@ GameObject:
   - component: {fileID: 224510380883000764}
   - component: {fileID: 222885652133970898}
   - component: {fileID: 114618913203316778}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Feedback
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -89,7 +89,7 @@ GameObject:
   - component: {fileID: 222402869003130176}
   - component: {fileID: 114065587756430074}
   - component: {fileID: 114769217189291886}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: close_button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -104,7 +104,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 224464875206148216}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: "D\xE9faite"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -121,7 +121,7 @@ GameObject:
   - component: {fileID: 224202629797181884}
   - component: {fileID: 222389788833713094}
   - component: {fileID: 114932331318265824}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Feedback
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -138,7 +138,7 @@ GameObject:
   - component: {fileID: 224176423290793026}
   - component: {fileID: 222897992685368990}
   - component: {fileID: 114896070878006914}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Title
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -156,7 +156,7 @@ GameObject:
   - component: {fileID: 222391612474218906}
   - component: {fileID: 114435903423037834}
   - component: {fileID: 114496929414633706}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Rectangle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -173,7 +173,7 @@ GameObject:
   - component: {fileID: 224124611699193078}
   - component: {fileID: 222406942967572402}
   - component: {fileID: 114133297585412462}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: BorderPefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -191,7 +191,7 @@ GameObject:
   - component: {fileID: 222993702135874340}
   - component: {fileID: 114119753667915466}
   - component: {fileID: 114068354051914050}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: close_button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -206,7 +206,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 224160767260292522}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Certitude
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -224,7 +224,7 @@ GameObject:
   - component: {fileID: 222147495631007112}
   - component: {fileID: 114509268668470072}
   - component: {fileID: 114860853029260018}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: QuestionImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -241,7 +241,7 @@ GameObject:
   - component: {fileID: 224530063933298664}
   - component: {fileID: 222398065601579802}
   - component: {fileID: 114049285171262128}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -256,7 +256,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 224383819893545850}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Fond Popup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -273,7 +273,7 @@ GameObject:
   - component: {fileID: 224976295073410520}
   - component: {fileID: 114957483308658644}
   - component: {fileID: 114633032243361466}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: MethodQuestion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -290,7 +290,7 @@ GameObject:
   - component: {fileID: 224480309319664608}
   - component: {fileID: 114405958038090436}
   - component: {fileID: 114264649221558942}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: MethodQuestion (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -308,7 +308,7 @@ GameObject:
   - component: {fileID: 114495615716027974}
   - component: {fileID: 114944829356153798}
   - component: {fileID: 114316247607861572}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Answer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -325,7 +325,7 @@ GameObject:
   - component: {fileID: 224115927084989638}
   - component: {fileID: 222907501381248400}
   - component: {fileID: 114470301619799756}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: percent_symbol
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -340,7 +340,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 224475747816952790}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Fond Popup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -358,7 +358,7 @@ GameObject:
   - component: {fileID: 222444275115036514}
   - component: {fileID: 114834975713107406}
   - component: {fileID: 114581975153189008}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: close_button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -373,7 +373,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 224691599937930418}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -390,13 +390,13 @@ GameObject:
   - component: {fileID: 224434367082828564}
   - component: {fileID: 114351885316674636}
   - component: {fileID: 114984871943322036}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Answer Popup
   m_TagString: Answer Popup
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1412115725107620
 GameObject:
   m_ObjectHideFlags: 1
@@ -407,7 +407,7 @@ GameObject:
   - component: {fileID: 224435038591956646}
   - component: {fileID: 222980898298454324}
   - component: {fileID: 114498673224748746}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Handle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -424,7 +424,7 @@ GameObject:
   - component: {fileID: 224783600135235744}
   - component: {fileID: 222930243612508828}
   - component: {fileID: 114013178485519148}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: BorderPefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -439,7 +439,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 224311456739979798}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Fond Popup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -457,7 +457,7 @@ GameObject:
   - component: {fileID: 114641450208837522}
   - component: {fileID: 114156116402635530}
   - component: {fileID: 114928877454989850}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: AnswerList
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -475,7 +475,7 @@ GameObject:
   - component: {fileID: 222866617167293450}
   - component: {fileID: 114678473524077860}
   - component: {fileID: 114300095795626510}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: QuestionText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -493,7 +493,7 @@ GameObject:
   - component: {fileID: 114464920255086498}
   - component: {fileID: 114315093137522434}
   - component: {fileID: 114338507148387704}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Answer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -508,7 +508,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 224249385374624568}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Handle Slide Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -525,7 +525,7 @@ GameObject:
   - component: {fileID: 224532446478232020}
   - component: {fileID: 222305561747885918}
   - component: {fileID: 114692411754117288}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: AnswerText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -543,7 +543,7 @@ GameObject:
   - component: {fileID: 222499999401987424}
   - component: {fileID: 114419264751486002}
   - component: {fileID: 114568251779597228}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: QuestionImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -560,7 +560,7 @@ GameObject:
   - component: {fileID: 224159051730710652}
   - component: {fileID: 222872335656697558}
   - component: {fileID: 114814519876521420}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Title
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -578,7 +578,7 @@ GameObject:
   - component: {fileID: 114507383103748740}
   - component: {fileID: 114005472120705502}
   - component: {fileID: 114553374390990432}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: AnswerList
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -595,7 +595,7 @@ GameObject:
   - component: {fileID: 224796520593088100}
   - component: {fileID: 222689701884652884}
   - component: {fileID: 114948399570910186}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: AnswerFrame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -612,7 +612,7 @@ GameObject:
   - component: {fileID: 224731256988715314}
   - component: {fileID: 222262295672879886}
   - component: {fileID: 114654341296777328}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: AnswerFrame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -627,7 +627,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 224786945551328188}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Victoire
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -642,7 +642,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 224167028671595940}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -660,7 +660,7 @@ GameObject:
   - component: {fileID: 222243871845405554}
   - component: {fileID: 114675505388382588}
   - component: {fileID: 114953223843287276}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Rectangle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -675,7 +675,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 224356601784790698}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -693,7 +693,7 @@ GameObject:
   - component: {fileID: 222902851317730510}
   - component: {fileID: 114042597065055754}
   - component: {fileID: 114292838342458588}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Rectangle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -710,7 +710,7 @@ GameObject:
   - component: {fileID: 224620019169321502}
   - component: {fileID: 114845707182262582}
   - component: {fileID: 114843844035444270}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -728,7 +728,7 @@ GameObject:
   - component: {fileID: 222190170558326812}
   - component: {fileID: 114899201152854482}
   - component: {fileID: 114968702625116138}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Rectangle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -746,7 +746,7 @@ GameObject:
   - component: {fileID: 222501082665305426}
   - component: {fileID: 114433174568171038}
   - component: {fileID: 114406464032138780}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: QuestionText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -763,7 +763,7 @@ GameObject:
   - component: {fileID: 224072605161596904}
   - component: {fileID: 222324111722251398}
   - component: {fileID: 114767791247349292}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: BorderPefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -780,7 +780,7 @@ GameObject:
   - component: {fileID: 224388570001845436}
   - component: {fileID: 222985554548289588}
   - component: {fileID: 114302147127661510}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: AnswerText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -797,7 +797,7 @@ GameObject:
   - component: {fileID: 224218162780551188}
   - component: {fileID: 222100463917318258}
   - component: {fileID: 114003738337351510}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: BorderPefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -814,7 +814,7 @@ GameObject:
   - component: {fileID: 224959709500538472}
   - component: {fileID: 222056040841965296}
   - component: {fileID: 114267905832607544}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: QuestionText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -831,7 +831,7 @@ GameObject:
   - component: {fileID: 224556225799003054}
   - component: {fileID: 222315633578984778}
   - component: {fileID: 114924110071792854}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Title
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -849,7 +849,7 @@ GameObject:
   - component: {fileID: 222457096735620062}
   - component: {fileID: 114791065586270362}
   - component: {fileID: 114788494107994340}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: close_button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -866,7 +866,7 @@ GameObject:
   - component: {fileID: 224648237965939862}
   - component: {fileID: 222108158586164178}
   - component: {fileID: 114753813608444474}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: NumberDisplay
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -881,7 +881,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 224647796557601402}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: "M\xE9thode"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -898,7 +898,7 @@ GameObject:
   - component: {fileID: 224820382105862124}
   - component: {fileID: 222699460745584442}
   - component: {fileID: 114273547097054976}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3151,10 +3151,10 @@ RectTransform:
   m_Father: {fileID: 224976295073410520}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 335, y: -82.359375}
+  m_SizeDelta: {x: 670, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224159051730710652
 RectTransform:
@@ -3281,10 +3281,10 @@ RectTransform:
   m_Father: {fileID: 224480309319664608}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 335, y: -82.359375}
+  m_SizeDelta: {x: 670, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224249385374624568
 RectTransform:
@@ -3456,8 +3456,8 @@ RectTransform:
   m_Father: {fileID: 224249385374624568}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.49, y: 0}
+  m_AnchorMax: {x: 0.49, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -3539,10 +3539,10 @@ RectTransform:
   m_Father: {fileID: 224330925780055390}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 335, y: -101.32031}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224510380883000764
 RectTransform:
@@ -3577,10 +3577,10 @@ RectTransform:
   m_Father: {fileID: 224540331867352166}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 335, y: -101.32031}
+  m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224530063933298664
 RectTransform:
@@ -3916,7 +3916,7 @@ RectTransform:
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0.49, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -3970,10 +3970,10 @@ RectTransform:
   m_Father: {fileID: 224480309319664608}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 335, y: -8.679686}
+  m_SizeDelta: {x: 670, y: 17.359371}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224959709500538472
 RectTransform:
@@ -4007,10 +4007,10 @@ RectTransform:
   m_Father: {fileID: 224976295073410520}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 335, y: -8.679686}
+  m_SizeDelta: {x: 670, y: 17.359371}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!224 &224975130319630368
 RectTransform:

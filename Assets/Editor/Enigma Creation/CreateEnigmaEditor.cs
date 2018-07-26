@@ -19,7 +19,6 @@ public abstract class CreateEnigmaEditor : EditorWindow
 
   public void Awake(){
     EditorSceneManager.sceneOpened  += onSceneOpened;
-    Debug.Log("event added");
     sceneManager = GameObject.Find("Managers").GetComponentInChildren<EnigmaSceneManager>();
   }
 

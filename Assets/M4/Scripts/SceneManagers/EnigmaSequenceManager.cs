@@ -177,13 +177,6 @@ public class EnigmaSequenceManager : MonoBehaviour
     //après ces deux lignes, l'objet query a été updaté dans EnigmaSceneManager.sendScore();
 		currentEnigmaScore = query.score;
     currentEnigmaScore.maxNumberPoints = enigmaList[currentEnigmaId].maxScore;
-		if (currentEnigmaScore.enigmaSuccess) {
-			print("ENIGMA VALIDATED !!!!!!!!!!!!!");
-
-		} else {
-			print("RESULT FALSE !!!!!!!!!!");
-		}
-    print(currentEnigmaScore.ToString());
     EventManager.instance.Raise (new RequestSaveScoreEvent (new ScoreData(enigmaList[currentEnigmaId].dbId, -1, currentEnigmaScore)));
     loadNextEnigma(null);
 

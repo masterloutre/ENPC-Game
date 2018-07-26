@@ -11,7 +11,7 @@ using UnityEngine.UI;
  * La partie éditée est celle qui a été selectionnées par l'utilisateur
  * @type {[type]}
  */
-public class EditScenarioPartPopup : PopupWindowContent
+public class EditSlotPopup : PopupWindowContent
 {
 	Editor editor = null;
 	Vector2 scrollPos;
@@ -25,24 +25,16 @@ public class EditScenarioPartPopup : PopupWindowContent
 		//crée un éditeur en fonction du l'object selectionné.
 		public override void OnOpen(){
 			GameObject selectedGO = Selection.activeGameObject;
-			if(selectedGO == null || selectedGO.GetComponent<CaseScenarioPart>() == null){
+			if(selectedGO == null){
 				editor = null;
 				return;
 			}
-			ChoiceQuestion question = selectedGO.GetComponent<ChoiceQuestion>();
-			if(question){
-				editor = Editor.CreateEditor(question);
-				return;
-			}
-			Image image = selectedGO.GetComponent<Image>();
-			if(image){
-				editor = Editor.CreateEditor(image);
-				return;
-			}
-			Text text = selectedGO.GetComponent<Text>();
-			if(text){
-				editor = Editor.CreateEditor(text);
-				return;
+			ItemSlot slot = selectedGO.GetComponentInChildren<ItemSlot>(true);
+			Item item = selectedGO.GetComponentInChildren<Item>(true);
+			if(slot != null){
+				editor = Editor.CreateEditor(slot);
+			} else if (item != null){
+				editor = Editor.CreateEditor(item);
 			}
 		}
 
@@ -54,10 +46,10 @@ public class EditScenarioPartPopup : PopupWindowContent
 		//affiche l'éditeur
     public override void OnGUI(Rect rect){
 			if(editor == null){
-				GUILayout.Label("Vous n'avez pas selectionné de partie de scénarion à modifier.\nVeuillez selectionner une partie.", EditorStyles.boldLabel);
+				GUILayout.Label("Vous n'avez pas selectionné de slot à modifier.\nVeuillez selectionner un slot (départ ou destination).", EditorStyles.boldLabel);
 				return;
 			}
-			GUILayout.Label("Modifier une partie de scénario : " + Selection.activeGameObject.name , EditorStyles.boldLabel);
+			GUILayout.Label("Modifier un Slot : " + Selection.activeGameObject.name, EditorStyles.boldLabel);
 			scrollPos = EditorGUILayout.BeginScrollView(scrollPos, GUILayout.Width(500), GUILayout.Height(300));
 			editor.OnInspectorGUI();
 			EditorGUILayout.EndScrollView();

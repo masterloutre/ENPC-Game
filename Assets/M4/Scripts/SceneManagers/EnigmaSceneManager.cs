@@ -39,6 +39,7 @@ public class EnigmaSceneManager : MonoBehaviour
     // prévient la création du résultat
 	public void enigmaSubmitted(){
         print("ENIGMA SUBMITTED");
+        print(score.ToString());
         EventManager.instance.Raise(new EnigmaSubmittedEvent());
 	}
 

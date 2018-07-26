@@ -56,4 +56,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Enigmes/Enigma8.unity
     guid: f186d133b83134cd3ba39a05207bc53c
+  - enabled: 1
+    path: Assets/Scenes/Enigmes/Enigma9.unity
+    guid: 063afccaa8d2045ad9eebdb87328869f
   m_configObjects: {}
