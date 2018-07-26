@@ -14,17 +14,17 @@ using System.Linq;
  * @type {[type]}
  */
 public class CreateEnigmaPopup : PopupWindowContent
-{    
+{
     //type d'énigme
     EnigmaType type;
     //index unity de l'énigme (doit correspondre à l'index entré dans la bdd)
     int id = 0;
-    
-    
+
+
     public CreateEnigmaPopup(EnigmaType _type){
       type = _type;
     }
-  
+
     //taille de la fenetre de pop up
     public override Vector2 GetWindowSize()  {
         return new Vector2(500, 400);
@@ -39,17 +39,18 @@ public class CreateEnigmaPopup : PopupWindowContent
         if (GUILayout.Button("Créer l'énigme", GUILayout.Width(200))) {
 		      createEnigmaScene();
 		    }
-      
+
     }
-    
+
     //création de la scène d'énigme
     public void createEnigmaScene(){
+      EditorSceneManager.SaveOpenScenes();
       //chemin du template (en fct du type d'énigme)
       string path = "Assets/Scenes/Templates Enigmes/Enigme "+type+".unity";
       //chemin de l'énigme crée (en fct de l'ID renseigné)
       string newPath = "Assets/Scenes/Enigmes/Enigma" + id+ ".unity";
       //copy du template au nouveau chemin
-      AssetDatabase.CopyAsset(path, newPath);  
+      AssetDatabase.CopyAsset(path, newPath);
       //Ajout de la nouvelle scène au build settings
       List<EditorBuildSettingsScene> buildList = new List<EditorBuildSettingsScene>(EditorBuildSettings.scenes);
       buildList.Add(new EditorBuildSettingsScene(newPath, true));

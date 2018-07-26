@@ -9,11 +9,9 @@ using System;
 public class CaseScenarioPart : MonoBehaviour {
     public int id { get; private set; }
     public GameObject iconPrefab;
-    public bool indiquerNumeroPartie;
+    public bool indiquerNumeroPartie = true;
 
     public CaseScenarioPartIcon icon;
-    public bool conditional = false;
-    public int[] chain;
 
 
 

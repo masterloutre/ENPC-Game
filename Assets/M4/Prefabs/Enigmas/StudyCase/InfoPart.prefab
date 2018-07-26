@@ -61,9 +61,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Soit F la transformation entre la configuration de r \u0301ef \u0301erence
-    ( \u0301etat naturel) et la configuration retourn \u0301ee (correspondant `a la
-    configuration juste avant le saut).\r"
+  m_Text: 
 --- !u!114 &114925316080922046
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -76,7 +74,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   iconPrefab: {fileID: 1688381101459542, guid: cc7bb44a8fd54471ea7d1fd213f6ae87, type: 2}
-  indiquerNumeroPartie: 0
+  indiquerNumeroPartie: 1
 --- !u!222 &222385291520154910
 CanvasRenderer:
   m_ObjectHideFlags: 1

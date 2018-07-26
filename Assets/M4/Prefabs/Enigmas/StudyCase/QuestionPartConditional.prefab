@@ -493,8 +493,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   iconPrefab: {fileID: 1688381101459542, guid: e489aaad1d207467990b5016e9ded560, type: 2}
-  indiquerNumeroPartie: 0
-  conditional: 0
+  indiquerNumeroPartie: 1
   chain: 
 --- !u!114 &114409003168306914
 MonoBehaviour:
@@ -528,7 +527,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Passer \xE0 la suite"
+  m_Text: 'Montrer la suite  '
 --- !u!114 &114479583138148292
 MonoBehaviour:
   m_ObjectHideFlags: 1
