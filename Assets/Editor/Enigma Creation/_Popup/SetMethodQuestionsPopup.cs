@@ -67,6 +67,7 @@ public class SetMethodQuestionsPopup : PopupWindowContent
 			}
 		}
 
+/*
 		public void displayQuestionEditor(ChoiceQuestion question){
 
 			GUILayout.BeginVertical("box");
@@ -83,11 +84,6 @@ public class SetMethodQuestionsPopup : PopupWindowContent
 				answer.text = EditorGUILayout.TextField("Réponse", answer.text);
 				answer.percent = EditorGUILayout.FloatField("Pourcentage de réussite associé à la réponse", answer.percent);
 
-				//Editor editor = Editor.CreateEditor((UnityEngine.Object)answer);
-				//Debug.Log("editor : " +editor);
-				//editor.OnInspectorGUI();
-				//editor.DrawDefaultInspector();
-
 				GUILayout.EndVertical();
 			}
 			if (GUILayout.Button("Ajouter une réponse", GUILayout.Width(200))) {
@@ -102,7 +98,7 @@ public class SetMethodQuestionsPopup : PopupWindowContent
 
 			GUILayout.EndVertical();
 		}
-
+*/
 		public void addAnswer(ChoiceQuestion question){
 			question.answerList.Add(new Answer());
 		}
