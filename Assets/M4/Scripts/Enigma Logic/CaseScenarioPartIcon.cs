@@ -45,7 +45,6 @@ public class CaseScenarioPartIcon {
 				separator = " ";
 			}
 			iconGO.GetComponentInChildren<Text>().text += separator + (scenarioPart.id+1).ToString();
-            Debug.Log(iconGO.GetComponentInChildren<Text>().text);
         }
 	}
 

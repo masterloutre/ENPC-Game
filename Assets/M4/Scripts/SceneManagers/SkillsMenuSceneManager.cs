@@ -43,20 +43,17 @@ public class SkillsMenuSceneManager : MenuSceneManager {
 			GameObject.FindGameObjectWithTag ("Skill Panel").transform.Find("content").gameObject.SetActive(false);
 		} else {
 			GameObject skillPanelGO = GameObject.FindGameObjectWithTag ("Skill Panel").transform.Find("content").gameObject;
-			Vector3 wolrdPosition = skillPanelGO.transform.position;
-			float offsetX = 250;
-			float offsetY = 120;
 
 	        // Itération sur la liste de skills
 			for (int i = 0; i < skillList.Count; i++) {
-				GameObject skillGO = Instantiate(skillPrefab, wolrdPosition + new Vector3(i%2 * offsetX - offsetX/2, i/2 * (-offsetY) ,0), Quaternion.identity, skillPanelGO.transform);
+				GameObject skillGO = Instantiate(skillPrefab, skillPanelGO.transform);
 				skillGO.transform.GetChild (1).gameObject.GetComponent<Text>().text = skillList [i].name;
-				//int skillId = skillList[i].id;
 				int skillId = i;
 				skillGO.GetComponent<Button> ().onClick.AddListener (delegate {chooseSkill(skillId); });
-                // 2 en 1 : ajoute un script zoom et le paramètre à 1.2
-                skillGO.AddComponent<ZoomOnHover>().coeffHover = 1.2f ;
-            }
+        //ajoute un script zoom et le paramètre à 1.2 --> MAINTENANT FAIT DANS LE PREFAB DANS L'EDITEUR
+        //skillGO.AddComponent<ZoomOnHover>().coeffHover = 1.2f ;
+      }
+
 		}
 
 	}

@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 114109188558176136}
   - component: {fileID: 114273088253027248}
   m_Layer: 0
-  m_Name: Skill
+  m_Name: RandomEnigmasButton
   m_TagString: Skill
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
