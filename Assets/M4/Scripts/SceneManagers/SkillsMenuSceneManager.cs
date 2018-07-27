@@ -40,6 +40,7 @@ public class SkillsMenuSceneManager : MenuSceneManager {
 
 		if (skillList.Count == 0 ){
 			NoSkillText.SetActive(true);
+			GameObject.FindGameObjectWithTag ("Skill Panel").transform.Find("content").gameObject.SetActive(false);
 		} else {
 			GameObject skillPanelGO = GameObject.FindGameObjectWithTag ("Skill Panel").transform.Find("content").gameObject;
 			Vector3 wolrdPosition = skillPanelGO.transform.position;

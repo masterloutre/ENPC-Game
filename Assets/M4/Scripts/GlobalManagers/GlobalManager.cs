@@ -126,8 +126,13 @@ public class GlobalManager : MonoBehaviour
 			StartCoroutine(sceneLoader.loadSkillsMenu ());
 			//StartCoroutine(sl.loadEnigma (4));
 		} else if (e.currentSceneName == "SelectionScene"){
-			currentEvaluatedSkill = enigmaManager.getSkills () [e.choiceId];
-			StartCoroutine (sceneLoader.loadEnigmaSequence (enigmaManager.getSkills()[e.choiceId]));
+      try{
+        currentEvaluatedSkill = enigmaManager.getSkills () [e.choiceId];
+      } catch( Exception ){
+        currentEvaluatedSkill = null;
+      }
+      StartCoroutine (sceneLoader.loadEnigmaSequence (currentEvaluatedSkill));
+
 		}
 	}
 	void previousScene(RequestPreviousSceneEvent e){
