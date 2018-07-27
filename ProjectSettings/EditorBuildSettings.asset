@@ -36,23 +36,11 @@ EditorBuildSettings:
     path: Assets/Scenes/PopUps/EndOfEnigmaSequencePopUp.unity
     guid: 6ca2eae2ccbb14381a0a81bcacc18af3
   - enabled: 1
-    path: 
-    guid: cc57fb1a6533e4e5c8803b93f3ed2cbe
-  - enabled: 1
-    path: 
-    guid: 3b9b6af69352f425b86c733adcc717f5
-  - enabled: 1
-    path: 
-    guid: cdd0984a477de445a83694b2ce33d751
-  - enabled: 1
     path: Assets/Scenes/PopUps/SessionNotAllowedPopUp.unity
     guid: 134ab1a53ad5549398fc71e88753feb0
   - enabled: 1
     path: Assets/Scenes/Enigmes/Enigma7.unity
     guid: 4a7a9e2281b754f93b1d320420bc2179
-  - enabled: 1
-    path: Assets/__DELETED_GUID_Trash/f4046da07a9a44ae8970fd40a6c4f92b
-    guid: f4046da07a9a44ae8970fd40a6c4f92b
   - enabled: 1
     path: Assets/Scenes/Enigmes/Enigma8.unity
     guid: f186d133b83134cd3ba39a05207bc53c

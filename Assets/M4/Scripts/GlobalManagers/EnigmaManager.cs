@@ -17,6 +17,7 @@ public class EnigmaManager : MonoBehaviour
     public IEnumerator instanciateEnigmas(){
 		this.enigmas = new List<EnigmaData> ();
 		yield return StartCoroutine (getEnigmaData());
+    checkEnigmaScenesValidity();
 		computeSkillList ();
 		yield break;
 	}
@@ -67,6 +68,16 @@ public class EnigmaManager : MonoBehaviour
     enigmas.Remove(enigma);
     computeSkillList();
   }
+
+  public void checkEnigmaScenesValidity(){
+    for(int i = 0; i < enigmas.Count; i++){
+      if(SceneUtility.GetBuildIndexByScenePath("Enigma" + enigmas[i].index_unity) < 0){
+        enigmas.RemoveAt(i);
+        i--;
+      }
+    }
+  }
+
 
 
     /*
