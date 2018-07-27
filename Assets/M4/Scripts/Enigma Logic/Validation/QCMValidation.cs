@@ -21,6 +21,10 @@ public class QCMValidation : MonoBehaviour, ValidationMethod
 		//}
 	}
 
+	public string getScoreFeedback(){
+		return "";
+	}
+
 	public Score fillScore(Score score){
 		bool success = answerIsRight();
 		score.enigmaSuccess = success;

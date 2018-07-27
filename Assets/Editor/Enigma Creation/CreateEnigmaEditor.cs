@@ -66,6 +66,7 @@ public abstract class CreateEnigmaEditor : EditorWindow
 
   public virtual void generalSettingsGUI(){
     EditorGUIUtility.labelWidth = 200;
+
     EditorGUILayout.BeginVertical("box");
     EditorGUILayout.LabelField("Popup",  EditorStyles.boldLabel);
     if(popupEditor != null && popupEditor.target != null){
@@ -92,7 +93,12 @@ public abstract class CreateEnigmaEditor : EditorWindow
       }
     }
     */
-
+    if (GUILayout.Button("Modifier les questions de méthode", GUILayout.Width(250))) {
+        showPopupContentAtCenter(new SetMethodQuestionsPopup());
+    }
+    if (GUILayout.Button("Modifier les feedbacks", GUILayout.Width(250))) {
+        showPopupContentAtCenter(new SetFeedBackPopup());
+    }
     EditorGUILayout.EndVertical();
 
   }

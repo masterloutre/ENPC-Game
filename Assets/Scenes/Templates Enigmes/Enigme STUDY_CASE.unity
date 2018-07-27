@@ -1776,7 +1776,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 458bd9b75d11e4f55ba7da505a657cc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hasAPopup: 0
+  hasAPopup: 1
+  methodQuestions: 1
 --- !u!114 &1087013169
 MonoBehaviour:
   m_ObjectHideFlags: 0

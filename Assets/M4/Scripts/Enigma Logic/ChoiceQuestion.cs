@@ -38,7 +38,6 @@ public class ChoiceQuestion : MonoBehaviour {
         //GameObject answerModel = gameObject.transform.Find("Answer").gameObject
     foreach (Answer answer in answerList){
 			GameObject answerGameObject = GameObject.Instantiate(answerModel, answerModel.transform.parent);
-			Debug.Log("Answer : " + answer.text);
 			answerGameObject.GetComponentInChildren<Text>().text = answer.text;
 			answerGameObject.GetComponent<Button>().onClick.AddListener( delegate { setUserChoice(answerGameObject.transform.GetSiblingIndex());});
 		}

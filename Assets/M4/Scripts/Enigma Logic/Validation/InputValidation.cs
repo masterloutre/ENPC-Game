@@ -9,15 +9,11 @@ public class InputValidation : MonoBehaviour, ValidationMethod
 	public double marginError;
 	ExpressionParser parser;
 	Dictionary<char,double> paramList;
+	bool success = false;
 
-	/*
-	public InputValidation(InputValidation validator){
-		formula = validator.formula;
-		marginError = validator.marginError;
-		parser = validator.parser;
-		paramList = validator.paramList;
+	public string getScoreFeedback(){
+		return "";
 	}
-	*/
 
 	void Start ()
 	{
@@ -32,7 +28,7 @@ public class InputValidation : MonoBehaviour, ValidationMethod
 	}
 
 	public Score fillScore(Score score){
-		bool success = answerIsRight();
+		answerIsRight();
 		score.enigmaSuccess = success;
 		score.addEnigmaSuccess(0, (success) ? 100F : 0F);
 		return score;
@@ -48,14 +44,15 @@ public class InputValidation : MonoBehaviour, ValidationMethod
 			float error = (float)(studentAnswer - expCorrect.Value);
 			if (Mathf.Abs (error) <= marginError) {
 				Debug.Log ("Bonne réponse : ");
-				return true;
+				success = true;
 			}
 			else {
 				Debug.Log ("Mauvaise réponse : "+studentAnswer+" " + expCorrect.Value);
-				return false;
+				success = false;
 			}
 		}
-		return false;
+		success = false;
+		return success;
 	}
 
 	void setParam(Expression expCorrect){ //set param in alphabetical order

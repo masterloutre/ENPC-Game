@@ -22,6 +22,7 @@ public class PopupManager : MonoBehaviour
     int currentMethodQuestionIndex = 0;
     private ValidationMethod validator;
     private Score enigmaScore;
+    string scoreFeedback;
 
 
 
@@ -48,7 +49,9 @@ public class PopupManager : MonoBehaviour
           questionList.Add(question);
           question.gameObject.SetActive(false);
         }
-        questionList[0].gameObject.SetActive(true);
+        if(questionList.Count > 0){
+          questionList[0].gameObject.SetActive(true);
+        }
 
         sure.SetActive(false);
         victory.SetActive(false);
@@ -65,7 +68,7 @@ public class PopupManager : MonoBehaviour
     }
     void OnDisable()
     {
-        //Debug.Log("PrintOnDisable: script PopupManager was disabled");
+        Debug.Log("PrintOnDisable: script PopupManager was disabled");
 
     }
 
@@ -204,6 +207,11 @@ public class PopupManager : MonoBehaviour
       return enigmaScore;
     }
 
+    public void setScoreFeedback(string feedback){
+      scoreFeedback = feedback;
+      gameObject.transform.Find("Victoire").Find("Feedback").gameObject.GetComponent<Text>().text += scoreFeedback;
+      gameObject.transform.Find("Défaite").Find("Feedback").gameObject.GetComponent<Text>().text += scoreFeedback;
+    }
 
 
 }

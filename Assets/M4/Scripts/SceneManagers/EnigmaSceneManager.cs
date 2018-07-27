@@ -71,6 +71,7 @@ public class EnigmaSceneManager : MonoBehaviour
       score.help = false;
         if (hasAPopup && popm != null)
         {
+            popm.setScoreFeedback(validator.getScoreFeedback());
             popm.beginPopUpQuestionsSequence(score);
         }
         else
