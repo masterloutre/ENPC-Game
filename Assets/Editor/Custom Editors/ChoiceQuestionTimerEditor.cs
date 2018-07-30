@@ -4,22 +4,14 @@ using UnityEditor;
 
 [CustomEditor(typeof(ChoiceQuestionTimer))]
 [CanEditMultipleObjects]
-public class ChoiceQuestionTimerEditor : Editor
+public class ChoiceQuestionTimerEditor : ChoiceQuestionEditor
 {
-    SerializedProperty text;
-    SerializedProperty img;
-    SerializedProperty answerList;
-    SerializedProperty proSitId;
+    public SerializedProperty time;
 
-    void OnEnable()
+    public void OnEnable()
     {
-
-        text = serializedObject.FindProperty("text");
-        proSitId = serializedObject.FindProperty("professionalSituationId");
-        answerList = serializedObject.FindProperty("answerList");
-        img = serializedObject.FindProperty("img");
-
-
+        base.OnEnable();
+        time = serializedObject.FindProperty("time");
     }
     public override void OnInspectorGUI()
     {
@@ -38,6 +30,8 @@ public class ChoiceQuestionTimerEditor : Editor
         label.text = "Identifiant de la situation professionnelle";
         label.tooltip = "";
         EditorGUILayout.PropertyField(proSitId, label);
+        label.text = "Timer (secondes)";
+        EditorGUILayout.PropertyField(time, label);
         EditorGUILayout.BeginVertical("box");
         EditorGUILayout.LabelField("Réponses",  EditorStyles.boldLabel);
         EditorGUILayout.PropertyField(answerList, true);
@@ -45,41 +39,4 @@ public class ChoiceQuestionTimerEditor : Editor
         EditorGUILayout.Space ();
         serializedObject.ApplyModifiedProperties();
     }
-/*
-    public void displayQuestionEditor(ChoiceQuestion question){
-
-			GUILayout.BeginVertical("box");
-			Editor editor = Editor.CreateEditor((UnityEngine.Object)question);
-			editor.DrawDefaultInspector();
-
-			GUILayout.Label("Ennoncé de la question", EditorStyles.boldLabel);
-			question.text = EditorGUILayout.TextArea(question.text,  GUILayout.Height(50));
-			question.professionalSituationId = EditorGUILayout.IntField("Identifiant de la situation professionnelle", question.professionalSituationId);
-			foreach(Answer answer in question.answerList){
-				GUILayout.BeginVertical("box");
-
-
-				answer.text = EditorGUILayout.TextField("Réponse", answer.text);
-				answer.percent = EditorGUILayout.FloatField("Pourcentage de réussite associé à la réponse", answer.percent);
-
-				//Editor editor = Editor.CreateEditor((UnityEngine.Object)answer);
-				//Debug.Log("editor : " +editor);
-				//editor.OnInspectorGUI();
-				//editor.DrawDefaultInspector();
-
-				GUILayout.EndVertical();
-			}
-			if (GUILayout.Button("Ajouter une réponse", GUILayout.Width(200))) {
-	      addAnswer(question);
-	    }
-
-
-			deleteAnswerPopup(question);
-			if (GUILayout.Button("Supprimer une réponse", GUILayout.Width(200))) {
-	      deleteAnswer(question, selectedIndex);
-	    }
-
-			GUILayout.EndVertical();
-		}
-    */
 }

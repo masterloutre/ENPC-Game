@@ -1,25 +1,19 @@
 using UnityEngine;
 using UnityEditor;
 
-
-[CustomEditor(typeof(ChoiceQuestion))]
+[CustomEditor(typeof(ChoiceQuestionTimerConditional))]
 [CanEditMultipleObjects]
-public class ChoiceQuestionEditor : Editor
+public class ChoiceQuestionTimerConditionalEditor : ChoiceQuestionTimerEditor
 {
-    public SerializedProperty text;
-    public SerializedProperty img;
-    public SerializedProperty answerList;
-    public SerializedProperty proSitId;
 
-    public void OnEnable()
+    void OnEnable()
     {
-        text = serializedObject.FindProperty("text");
-        proSitId = serializedObject.FindProperty("professionalSituationId");
-        answerList = serializedObject.FindProperty("answerList");
-        img = serializedObject.FindProperty("img");
+        base.OnEnable();
     }
     public override void OnInspectorGUI()
     {
+        base.OnInspectorGUI();
+        /*
         serializedObject.Update();
 
         GUIContent label = new GUIContent();
@@ -35,11 +29,16 @@ public class ChoiceQuestionEditor : Editor
         label.text = "Identifiant de la situation professionnelle";
         label.tooltip = "";
         EditorGUILayout.PropertyField(proSitId, label);
+        label.text = "Timer (secondes)";
+        EditorGUILayout.PropertyField(time, label);
+
         EditorGUILayout.BeginVertical("box");
         EditorGUILayout.LabelField("Réponses",  EditorStyles.boldLabel);
         EditorGUILayout.PropertyField(answerList, true);
         EditorGUILayout.EndVertical();
+
         EditorGUILayout.Space ();
         serializedObject.ApplyModifiedProperties();
+        */
     }
 }
