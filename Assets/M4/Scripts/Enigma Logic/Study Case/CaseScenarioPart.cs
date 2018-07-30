@@ -9,7 +9,7 @@ using System;
 public class CaseScenarioPart : MonoBehaviour {
     public int id { get; private set; }
     public GameObject iconPrefab;
-    public bool indiquerNumeroPartie = true;
+    public bool indiquerNumeroPartie = false;
 
     public CaseScenarioPartIcon icon;
 
@@ -18,7 +18,6 @@ public class CaseScenarioPart : MonoBehaviour {
 
     void Awake() {
         id = transform.GetSiblingIndex();
-
     }
     private void OnDestroy()
     {
@@ -45,6 +44,10 @@ public void hide(){
 public void show(){
   this.gameObject.SetActive(true);
   icon.glow();
+}
+
+public void writeInIcon(string s){
+  icon.writeIn(s);
 }
 
     // override

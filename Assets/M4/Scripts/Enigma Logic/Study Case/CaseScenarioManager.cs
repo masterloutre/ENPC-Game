@@ -27,6 +27,7 @@ public class CaseScenarioManager : MonoBehaviour
           part.createIcon();
           part.seal();
         }
+      writeQuestionNumbers();
       setActiveUntilConditionalFrom(0);
       partList[activePartIndex].show();
     }
@@ -54,5 +55,15 @@ public class CaseScenarioManager : MonoBehaviour
       partList[activePartIndex].show();
     }
 
-    
+    void writeQuestionNumbers(){
+      int count = 1;
+      foreach(CaseScenarioPart part in partList){
+        if(part.gameObject.GetComponent<ChoiceQuestion>() != null){
+          part.writeInIcon(" " + count.ToString());
+          count ++;
+        }
+      }
+    }
+
+
 }

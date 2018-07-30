@@ -7,7 +7,7 @@ using System;
 public class CaseScenarioPartIcon {
 	private GameObject prefab;
 	private CaseScenarioPart scenarioPart;
-    private GameObject iconGO;
+  private GameObject iconGO;
 	// Use this for initialization
 
 	public CaseScenarioPartIcon(CaseScenarioPart _scenarioPart, GameObject _prefab){
@@ -22,10 +22,14 @@ public class CaseScenarioPartIcon {
     {
         iconGO.SetActive(false);
     }
-    public void show()
-    {
-        iconGO.SetActive(true);
-    }
+  public void show()
+  {
+      iconGO.SetActive(true);
+  }
+
+	public void writeIn(string s){
+	  iconGO.GetComponentInChildren<Text>().text += s;
+	}
 
 
 	public void createGameObject(){
@@ -39,13 +43,15 @@ public class CaseScenarioPartIcon {
 		//iconGO.GetComponentInChildren<UnityEngine.UI.Button>().onClick.AddListener (activateScenarioPart);
         iconGO.GetComponentInChildren<UnityEngine.UI.Button>().onClick.AddListener(delegate { EventManager.instance.Raise(new RequestShowPartEvent(scenarioPart.id)); });
 
-        if (scenarioPart.indiquerNumeroPartie){
+			/*
+			  if (scenarioPart.indiquerNumeroPartie){
 			string separator = "";
 			if(prefab.name != "PartIcon"){
 				separator = " ";
 			}
 			iconGO.GetComponentInChildren<Text>().text += separator + (scenarioPart.id+1).ToString();
         }
+				*/
 	}
 
 	public void glow(){
