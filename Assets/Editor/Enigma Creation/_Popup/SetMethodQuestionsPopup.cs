@@ -67,7 +67,7 @@ public class SetMethodQuestionsPopup : PopupWindowContent
 
 		public override void OnOpen(){
 			try {
-				popupGO = GameObject.Find("Answer Popup");
+				popupGO = GameObject.Find("Responsive Canvas").GetComponentInChildren<PopupManager>(true).gameObject;
 				foreach(ChoiceQuestion question in popupGO.GetComponentsInChildren<ChoiceQuestion>()){
 					questionEditorList.Add(Editor.CreateEditor(question, typeof(ChoiceQuestionEditor)));
 					EditorUtility.SetDirty(question);

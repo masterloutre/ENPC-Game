@@ -2,9 +2,9 @@ using UnityEngine;
 using UnityEditor;
 
 
-[CustomEditor(typeof(ChoiceQuestion))]
+[CustomEditor(typeof(ChoiceQuestionTimer))]
 [CanEditMultipleObjects]
-public class ChoiceQuestionEditor : Editor
+public class ChoiceQuestionTimerEditor : Editor
 {
     SerializedProperty text;
     SerializedProperty img;

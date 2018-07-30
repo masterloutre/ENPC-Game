@@ -38,7 +38,7 @@ GameObject:
   m_Component:
   - component: {fileID: 224285862527594298}
   m_Layer: 5
-  m_Name: "Bonne r\xE9ponse anim"
+  m_Name: "Bonne re\u0301ponse anim"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

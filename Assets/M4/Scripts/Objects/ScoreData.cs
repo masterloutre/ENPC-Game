@@ -35,7 +35,7 @@ public class ScoreData
 	}
 
 	public ScoreData(int _id_enigme, int _id_etudiant, Score score)
-		: this(_id_enigme, _id_etudiant, (int)score.getGlobalScore(), 1, score.time, score.help){
+		: this(_id_enigme, _id_etudiant, (int)score.getGlobalSuccess(), 1, score.time, score.help){
 
 	}
 

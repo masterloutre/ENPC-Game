@@ -6,13 +6,10 @@ using UnityEngine.SceneManagement;
 using System;
 using UnityEditor.SceneManagement;
 
+[InitializeOnLoad]
 public class PopupEditorWindow : CreateEnigmaEditor
 {
-  bool hasAPopup = true;
-  EnigmaSceneManager sceneManager;
-  PopupManager popupManager;
   Editor popupEditor = null;
-  bool showPopup = true;
 
   [MenuItem("Creation Enigme/Popup feedback et méthode")]
   static void Init()
@@ -22,46 +19,26 @@ public class PopupEditorWindow : CreateEnigmaEditor
   }
 
   public void Awake(){
-    EditorSceneManager.sceneOpened  += onSceneOpened;
-    sceneManager = GameObject.Find("Managers").GetComponentInChildren<EnigmaSceneManager>();
+    createPopupEditor();
   }
 
   public void OnDestroy(){
-    EditorSceneManager.sceneOpened  -= onSceneOpened;
+    Editor.DestroyImmediate(popupEditor);
   }
 
-  public void OnFocus(){
-    sceneManager = GameObject.Find("Managers").GetComponentInChildren<EnigmaSceneManager>();
+  void OnHierarchyChange()  {
     createPopupEditor();
   }
+
 
   public void OnGUI(){
     EditorGUIUtility.labelWidth = 200;
     EditorGUILayout.LabelField("Popup",  EditorStyles.boldLabel);
-    if(popupEditor != null && popupEditor.target != null){
+    if(popupEditor != null){
       popupEditor.OnInspectorGUI();
-      GameObject popup = ((PopupManager)popupEditor.target).gameObject;
-      showPopup = popup.activeInHierarchy;
-      showPopup = EditorGUILayout.Toggle("Afficher Le Popup", showPopup);
-      popup.SetActive(showPopup);
-
     } else {
-      GUILayout.Label("Erreur : Il n'y a pas de component PopupManager dans la scène ou bien le jeu est en mode play", EditorStyles.boldLabel);
+      GUILayout.Label("Erreur : Il n'y a pas de component PopupManager dans la scène", EditorStyles.boldLabel);
     }
-
-
-    /*
-    bool popupCurrentlyExists = (GameObject.Find("Answer Popup") != null)? true: false;
-    if(sceneManager == null){
-      GUILayout.Label("Erreur : Il n'y a pas de component EnigmaSceneManager dans la scène", EditorStyles.boldLabel);
-    } else {
-      hasAPopup = popupCurrentlyExists;
-      hasAPopup = EditorGUILayout.Toggle("Activer Le Popup", hasAPopup);
-      if((hasAPopup && !popupCurrentlyExists) || (!hasAPopup && popupCurrentlyExists)){
-        sceneManager.activatePopup(hasAPopup);
-      }
-    }
-    */
     if (GUILayout.Button("Modifier les questions de méthode", GUILayout.Width(250))) {
         showPopupContentAtCenter(new SetMethodQuestionsPopup());
     }
@@ -70,10 +47,6 @@ public class PopupEditorWindow : CreateEnigmaEditor
     }
   }
 
-  private void onSceneOpened(Scene scene, OpenSceneMode mode){
-    sceneManager = GameObject.Find("Managers").GetComponentInChildren<EnigmaSceneManager>();
-    createPopupEditor();
-  }
 
   private void createPopupEditor(){
     if(popupEditor != null){

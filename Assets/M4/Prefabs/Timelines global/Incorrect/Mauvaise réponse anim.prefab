@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 224837218496374188}
   m_Layer: 5
-  m_Name: "Mauvaise r\xE9ponse anim"
+  m_Name: "Mauvaise re\u0301ponse anim"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
