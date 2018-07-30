@@ -21,15 +21,12 @@ public class CreateStudyCaseEnigmaEditor : CreateEnigmaEditor
     if (GUILayout.Button("Créer une énigme Cas d'étude", GUILayout.Width(250))) {
         showPopupContentAtCenter(new CreateEnigmaPopup(EnigmaType.STUDY_CASE));
     }
-    if (GUILayout.Button("Ajouter une légende", GUILayout.Width(250))) {
-        showPopupContentAtCenter(new CreateLegendPopup());
-    }
-    if (GUILayout.Button("Ajouter un schéma", GUILayout.Width(250))) {
-        showPopupContentAtCenter(new CreateDiagramPopup());
-    }
-    if (GUILayout.Button("Ajouter un énoncé", GUILayout.Width(250))) {
-        showPopupContentAtCenter(new CreateTextPopup());
-    }
+    scrollPos = EditorGUILayout.BeginScrollView(scrollPos,  GUILayout.Width(this.position.width), GUILayout.Height(this.position.height - 40));
+    //éléments généraux
+    base.OnGUI();
+    //éléments particuliers
+    EditorGUILayout.BeginVertical("box");
+    GUILayout.Label("Type Cas d'étude");
     if (GUILayout.Button("Ajouter un partie de scénario", GUILayout.Width(250))) {
         showPopupContentAtCenter(new CreateScenarioPartPopup());
     }
@@ -39,7 +36,8 @@ public class CreateStudyCaseEnigmaEditor : CreateEnigmaEditor
     if (GUILayout.Button("Modifier les questions de méthode", GUILayout.Width(250))) {
         showPopupContentAtCenter(new SetMethodQuestionsPopup());
     }
+    EditorGUILayout.EndVertical();
+    EditorGUILayout.EndScrollView();
 
-    generalSettingsGUI();
   }
 }

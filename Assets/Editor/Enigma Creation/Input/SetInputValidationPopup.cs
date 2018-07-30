@@ -15,6 +15,8 @@ public class SetInputValidationPopup : PopupWindowContent
 {
 	List<InteractiveValue> paramList = new List<InteractiveValue>();
 	InputValidation validator;
+	bool enigmaTypeError = false;
+
 
 		//taille du popup
     public override Vector2 GetWindowSize(){
@@ -23,6 +25,10 @@ public class SetInputValidationPopup : PopupWindowContent
 
 		///affichage des champs et bouttons et assignement des variables
     public override void OnGUI(Rect rect){
+			if(enigmaTypeError){
+				GUILayout.Label("Attention, vous n'avez pas ouvert une énigme de type Input.", EditorStyles.boldLabel);
+				return;
+			}
 				EditorGUIUtility.labelWidth = 300;
         GUILayout.Label("Configurer le calcul du résultat.", EditorStyles.boldLabel);
 				GUILayout.Label("Variables actuellement disponibles dans la scène : " + paramList.Count);
@@ -48,7 +54,11 @@ public class SetInputValidationPopup : PopupWindowContent
 			foreach(GameObject go in paramGOList){
 				paramList.Add(go.GetComponent<InteractiveValue>());
 			}
-
+			if(GameObject.Find("Managers").GetComponentInChildren<InputValidation>() == null){
+				enigmaTypeError = true;
+			} else {
+				enigmaTypeError = false;
+			}
 		}
 
 		public void setValidator(){

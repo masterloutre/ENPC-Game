@@ -15,6 +15,7 @@ public class EditSlotPopup : PopupWindowContent
 {
 	Editor editor = null;
 	Vector2 scrollPos;
+	bool enigmaTypeError = false;
 
 
 		//taille du popup
@@ -24,6 +25,11 @@ public class EditSlotPopup : PopupWindowContent
 
 		//crée un éditeur en fonction du l'object selectionné.
 		public override void OnOpen(){
+			if(GameObject.Find("Managers").GetComponentInChildren<QCMValidation>() == null){
+				enigmaTypeError = true;
+			} else {
+				enigmaTypeError = false;
+			}
 			GameObject selectedGO = Selection.activeGameObject;
 			if(selectedGO == null){
 				editor = null;
@@ -45,6 +51,10 @@ public class EditSlotPopup : PopupWindowContent
 
 		//affiche l'éditeur
     public override void OnGUI(Rect rect){
+			if(enigmaTypeError){
+				GUILayout.Label("Attention, vous n'avez pas ouvert une énigme de type QCM.", EditorStyles.boldLabel);
+				return;
+			}
 			if(editor == null){
 				GUILayout.Label("Vous n'avez pas selectionné de slot à modifier.\nVeuillez selectionner un slot (départ ou destination).", EditorStyles.boldLabel);
 				return;

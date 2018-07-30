@@ -15,6 +15,7 @@ public class EditScenarioPartPopup : PopupWindowContent
 {
 	Editor editor = null;
 	Vector2 scrollPos;
+	bool enigmaTypeError = false;
 
 
 		//taille du popup
@@ -24,6 +25,11 @@ public class EditScenarioPartPopup : PopupWindowContent
 
 		//crée un éditeur en fonction du l'object selectionné.
 		public override void OnOpen(){
+			if(GameObject.Find("Managers").GetComponentInChildren<CaseValidation>() == null){
+				enigmaTypeError = true;
+			} else {
+				enigmaTypeError = false;
+			}
 			GameObject selectedGO = Selection.activeGameObject;
 			if(selectedGO == null || selectedGO.GetComponent<CaseScenarioPart>() == null){
 				editor = null;
@@ -53,6 +59,10 @@ public class EditScenarioPartPopup : PopupWindowContent
 
 		//affiche l'éditeur
     public override void OnGUI(Rect rect){
+			if(enigmaTypeError){
+				GUILayout.Label("Attention, vous n'avez pas ouvert une énigme de type Study Case.", EditorStyles.boldLabel);
+				return;
+			}
 			if(editor == null){
 				GUILayout.Label("Vous n'avez pas selectionné de partie de scénarion à modifier.\nVeuillez selectionner une partie.", EditorStyles.boldLabel);
 				return;
