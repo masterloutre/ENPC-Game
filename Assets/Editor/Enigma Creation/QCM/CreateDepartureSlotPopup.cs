@@ -11,9 +11,8 @@ using System;
  * Il est placé dans le groupe Departure Slots de la scène actuelle
  * @type {[type]}
  */
-public class CreateDepartureSlotPopup : PopupWindowContent
+public class CreateDepartureSlotPopup : CreateElementPopup
 {
-	string name = "DepartureSlot";
 	int id = 0;
 	float value = 0;
 	string unit = "cm";
@@ -26,6 +25,20 @@ public class CreateDepartureSlotPopup : PopupWindowContent
     public override Vector2 GetWindowSize(){
         return new Vector2(250, 250);
     }
+
+		//initialisation
+		public override void OnOpen() {
+			name = "DepartureSlot";
+			parentName = "Departure Slots";
+			if(GameObject.Find("Managers").GetComponentInChildren<QCMValidation>() == null){
+				createGO = null;
+				errorMssg = "Attention, vous n'avez pas ouvert une énigme de type QCM";
+			} else {
+				createGO = createObject;
+			}
+		}
+
+
 
 		///affichage des champs et bouttons et assignement des variables
     public override void OnGUI(Rect rect){
@@ -40,14 +53,12 @@ public class CreateDepartureSlotPopup : PopupWindowContent
 					jump = EditorGUILayout.Toggle("Aller à la ligne", jump);
 				}
 				//bouton OK
-				if (GUILayout.Button("OK", GUILayout.Width(200))) {
-		      createLegendGameObject();
-		    }
+				displayCreateButton();
 
     }
 
 		//Créer l'objet et le place dans le groupe Departure Slots
-		public void createLegendGameObject(){
+		public GameObject createObject(){
 			//création du gameObject
 			GameObject slotGO = (GameObject)PrefabUtility.InstantiatePrefab(AssetDatabase.LoadAssetAtPath("Assets/M4/Prefabs/Enigmas/qcm/Departure Slot.prefab", typeof(GameObject)));
 			slotGO.name = name;
@@ -69,11 +80,7 @@ public class CreateDepartureSlotPopup : PopupWindowContent
 			Item item = slotGO.GetComponentInChildren<Item>();
 			item.item_id = id;
 
-			//Positionnement dans la hierarchie de la scène
-			GameObject parent = GameObject.Find("Departure Slots");
-			if(parent){
-				slotGO.transform.SetParent(parent.transform, false);
-			}
+			return slotGO;
 		}
 
 }

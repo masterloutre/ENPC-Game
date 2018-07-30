@@ -11,9 +11,8 @@ using System;
  * Il est placé dans le groupe Departure Slots de la scène actuelle
  * @type {[type]}
  */
-public class CreateDestinationSlotPopup : PopupWindowContent
+public class CreateDestinationSlotPopup : CreateElementPopup
 {
-	string name = "DestinationSlot";
 	int expectedId = 0;
 
 
@@ -21,6 +20,18 @@ public class CreateDestinationSlotPopup : PopupWindowContent
     public override Vector2 GetWindowSize(){
         return new Vector2(250, 250);
     }
+
+		//initialisation
+		public override void OnOpen() {
+			name = "DestinationSlot";
+			parentName = "Destination Slots";
+			if(GameObject.Find("Managers").GetComponentInChildren<QCMValidation>() == null){
+				createGO = null;
+				errorMssg = "Attention, vous n'avez pas ouvert une énigme de type QCM";
+			} else {
+				createGO = createObject;
+			}
+		}
 
 		///affichage des champs et bouttons et assignement des variables
     public override void OnGUI(Rect rect){
@@ -30,14 +41,12 @@ public class CreateDestinationSlotPopup : PopupWindowContent
 				expectedId =  EditorGUILayout.IntField("Identifiant attendu", expectedId);
 
 				//bouton OK
-				if (GUILayout.Button("OK", GUILayout.Width(200))) {
-		      createLegendGameObject();
-		    }
+				displayCreateButton();
 
     }
 
 		//Créer l'objet et le place dans le groupe Departure Slots
-		public void createLegendGameObject(){
+		public GameObject createObject(){
 			//création du gameObject
 			GameObject slotGO = (GameObject)PrefabUtility.InstantiatePrefab(AssetDatabase.LoadAssetAtPath("Assets/M4/Prefabs/Enigmas/qcm/Destination Slot.prefab", typeof(GameObject)));
 			slotGO.name = name;
@@ -46,11 +55,7 @@ public class CreateDestinationSlotPopup : PopupWindowContent
 			ItemSlot itemSlot = slotGO.GetComponentInChildren<ItemSlot>();
 			itemSlot.expected_id = expectedId;
 
-			//Positionnement dans la hierarchie de la scène
-			GameObject parent = GameObject.Find("Destination Slots");
-			if(parent){
-				slotGO.transform.SetParent(parent.transform, false);
-			}
+			return slotGO;
 		}
 
 }

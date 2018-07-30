@@ -12,9 +12,8 @@ using UnityEngine.UI;
  * Il est placé dans le groupe Légende de la scène actuelle
  * @type {[type]}
  */
-public class CreateTextPopup : PopupWindowContent
+public class CreateTextPopup : CreateElementPopup
 {
-	string name = "EnoncéTest";
 	string text = "Text de l'énoncé";
 
 		//taille du popup
@@ -22,21 +21,25 @@ public class CreateTextPopup : PopupWindowContent
         return new Vector2(300, 250);
     }
 
+		//initialisation
+		public override void OnOpen() {
+			name = "EnoncéTest";
+			createGO = createObject;
+			parentName = "Légendes";
+		}
+
 		///affichage des champs et bouttons et assignement des variables
     public override void OnGUI(Rect rect){
         GUILayout.Label("Ajouter un schéma", EditorStyles.boldLabel);
 				name = EditorGUILayout.TextField("Nom du GameObject", name);
 				text = EditorGUILayout.TextArea(text, GUILayout.Height(50));
 				//bouton OK
-				if (GUILayout.Button("OK", GUILayout.Width(200))) {
-		      createObject();
-		    }
-
+				displayCreateButton();
     }
 
 		//Crée un GameObject à partir du prefab textElement et le place dans le groupe Légende de la scène actuellement ouverte
 		//Si plusieurs scènes d'énigmes sont ouvertes ils seront placé dans le premier groupe Schéma trouvé
-		public  void createObject(){
+		public  GameObject createObject(){
 			//création du gameObject
 			GameObject objectGO = (GameObject)PrefabUtility.InstantiatePrefab(AssetDatabase.LoadAssetAtPath("Assets/M4/Prefabs/Enigmas/textElement.prefab", typeof(GameObject)));
 
@@ -44,11 +47,7 @@ public class CreateTextPopup : PopupWindowContent
 			objectGO.name = name;
 			objectGO.GetComponent<Text>().text = text;
 
-			//Positionnement dans la hierarchie de la scène
-			GameObject parent = GameObject.Find("Légendes");
-			if(parent){
-				objectGO.transform.SetParent(parent.transform, false);
-			}
+			return objectGO;
 		}
 
 }

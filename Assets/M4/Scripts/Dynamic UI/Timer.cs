@@ -18,6 +18,7 @@ public class Timer : MonoBehaviour {
 		EventManager.instance.AddListener<QueryTimerEvent> (sendTime);
 	}
 
+/* Si actif l'affichage n'est pas bon dans les questions
 	void OnEnable(){
 		if(reverse){
 			time = timeLimit;
@@ -25,7 +26,7 @@ public class Timer : MonoBehaviour {
 			time = 0;
 		}
 	}
-
+*/
 	// Update is called once per frame
 	void Update () {
 		if(reverse){

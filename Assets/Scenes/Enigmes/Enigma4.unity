@@ -416,7 +416,7 @@ Prefab:
     - target: {fileID: 224096666601521410, guid: a8cddcd4f88044627bbfd627dd4c19d0,
         type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 224096666601521410, guid: a8cddcd4f88044627bbfd627dd4c19d0,
         type: 2}
@@ -2882,7 +2882,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1487341749}
   m_Layer: 0
-  m_Name: Diagram
+  m_Name: "Sch\xE9mas"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2953,7 +2953,7 @@ Prefab:
     - target: {fileID: 224096666601521410, guid: a8cddcd4f88044627bbfd627dd4c19d0,
         type: 2}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 224096666601521410, guid: a8cddcd4f88044627bbfd627dd4c19d0,
         type: 2}
@@ -4326,7 +4326,7 @@ Prefab:
     - target: {fileID: 224096666601521410, guid: e534e2443f248904e831281958839838,
         type: 2}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 224096666601521410, guid: e534e2443f248904e831281958839838,
         type: 2}

@@ -17,6 +17,7 @@ public class ChoiceQuestionTimer : ChoiceQuestion {
 
 	// Use this for initialization
 	public void Start () {
+		print("Start");
 		//utilise le start de la class parente
 		base.Start();
 		//Le timer n'a jamais démarré

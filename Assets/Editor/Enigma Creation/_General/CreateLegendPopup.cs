@@ -11,9 +11,8 @@ using System;
  * Il est placé dans le groupe Légende de la scène actuelle
  * @type {[type]}
  */
-public class CreateLegendPopup : PopupWindowContent
+public class CreateLegendPopup : CreateElementPopup
 {
-	string name = "LegendLongeur";
 	float value = 0;
 	string unit = "cm";
 	string legend = "longueur";
@@ -26,6 +25,13 @@ public class CreateLegendPopup : PopupWindowContent
         return new Vector2(250, 250);
     }
 
+		//initialisation
+		public override void OnOpen() {
+			name = "LegendLongeur";
+			createGO = createLegendGameObject;
+			parentName = "Légendes";
+		}
+
 		///affichage des champs et bouttons et assignement des variables
     public override void OnGUI(Rect rect){
         GUILayout.Label("Ajouter une légende", EditorStyles.boldLabel);
@@ -34,8 +40,6 @@ public class CreateLegendPopup : PopupWindowContent
 				value = EditorGUILayout.FloatField("Valeur", value);
 				unit = EditorGUILayout.TextField("Unité", unit);
 				legend = EditorGUILayout.TextField("Texte de légende", legend);
-
-			
 				jump = EditorGUILayout.Toggle("Aller à la ligne", jump);
 				//input value ou pas
 				inputValue = EditorGUILayout.Toggle("Sert au calcul du résultat", inputValue);
@@ -45,15 +49,11 @@ public class CreateLegendPopup : PopupWindowContent
 					variableName = "";
 				}
 				//bouton OK
-				if (GUILayout.Button("OK", GUILayout.Width(200))) {
-		      createLegendGameObject();
-		    }
-
+				displayCreateButton();
     }
 
 		//Crée un GameObject à partir du prefab InteractiveValue et le place dans le groupe Légendes de la scène actuellement ouverte
-		//Si plusieurs scènes d'énigmes sont ouvertes ils seront placé dans le premier groupe Légende trouvé
-		public void createLegendGameObject(){
+		public GameObject createLegendGameObject(){
 			//création du gameObject
 			GameObject legendGO = (GameObject)PrefabUtility.InstantiatePrefab(AssetDatabase.LoadAssetAtPath("Assets/M4/Prefabs/Enigmas/interactive value.prefab", typeof(GameObject)));
 			legendGO.name = name;
@@ -72,12 +72,7 @@ public class CreateLegendPopup : PopupWindowContent
 			} else {
 				legendGO.tag = "Untagged";
 			}
-
-			//Positionnement dans la hierarchie de la scène
-			GameObject parent = GameObject.Find("Légendes");
-			if(parent){
-				legendGO.transform.SetParent(parent.transform, false);
-			}
+			return legendGO;
 		}
 
 }

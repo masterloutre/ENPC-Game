@@ -13,16 +13,15 @@ public enum ScenarioPartType { NONE, TEXT, IMAGE, QUESTION};
  * Il est placé dans le groupe Scenario/Parts de la scène actuelle
  * @type {[type]}
  */
-public class CreateScenarioPartPopup : PopupWindowContent
+public class CreateScenarioPartPopup : CreateElementPopup
 {
 	Texture2D textureAsset;
-	string name = "ScenarioPartTest";
+	bool enigmaTypeError = false;
 	string text = "";
 	bool timed = false;
 	bool conditional = false;
 	ScenarioPartType type = ScenarioPartType.NONE;
 	string[] typeOptionArray;
-	delegate GameObject CreationFunction();
 
 
 		//taille du popup
@@ -30,12 +29,44 @@ public class CreateScenarioPartPopup : PopupWindowContent
         return new Vector2(300, 250);
     }
 
+		//initialisation
+		public override void OnOpen() {
+			//création de la liste d'options du dropdown des types
+			Converter<ScenarioPartType, string> stringConverter = new Converter<ScenarioPartType, string>(
+				delegate(ScenarioPartType type) { return type.ToString(); }
+			);
+			typeOptionArray = Array.ConvertAll(
+				new ScenarioPartType[4]{ScenarioPartType.NONE, ScenarioPartType.TEXT, ScenarioPartType.IMAGE, ScenarioPartType.QUESTION},
+				stringConverter
+			);
+			name = "ScenarioPart";
+			parentName = "Parts";
+			if(GameObject.Find("Managers").GetComponentInChildren<CaseValidation>() == null){
+				createGO = null;
+				enigmaTypeError = true;
+				errorMssg = "Attention, vous n'avez pas ouvert une énigme de type Study Case";
+
+			}
+
+		}
+
+		//dropdown
+		public ScenarioPartType displayDropDownType(){
+					return (ScenarioPartType)EditorGUILayout.Popup((int)type, typeOptionArray);
+		}
+
 		///affichage des champs et bouttons et assignement des variables
     public override void OnGUI(Rect rect){
-				CreationFunction createGO = null;
         GUILayout.Label("Ajouter une partie de scénario", EditorStyles.boldLabel);
 				name = EditorGUILayout.TextField("Nom du GameObject", name);
 				type = displayDropDownType();
+
+				if(enigmaTypeError){
+					createGO = null;
+					displayCreateButton();
+					return;
+				}
+
 				switch (type){
 					case ScenarioPartType.TEXT :
 						{
@@ -66,49 +97,11 @@ public class CreateScenarioPartPopup : PopupWindowContent
 						break;
 				}
 
-				//bouton OK
-				if(createGO != null){
-					validate(createGO);
-				}
-
-
+				displayCreateButton();
     }
 
-		//Crée un GameObject à partir du prefab diagram et le place dans le groupe Schémas de la scène actuellement ouverte
-		//Si plusieurs scènes d'énigmes sont ouvertes ils seront placé dans le premier groupe Schéma trouvé
-		public  GameObject createObject(){
-			//crée un sprite d'apres l'image selectionnée par l'utilisateur
-			Sprite sp = Sprite.Create(textureAsset,new Rect(0,0,textureAsset.width,textureAsset.height),new Vector2(0.5f,0.5f));
 
-			//création du gameObject
-			GameObject diagramGO = (GameObject)PrefabUtility.InstantiatePrefab(AssetDatabase.LoadAssetAtPath("Assets/M4/Prefabs/Enigmas/diagram.prefab", typeof(GameObject)));
-
-			//remplissage du game Object
-			diagramGO.name = name;
-			Image diagramImg = diagramGO.GetComponent<Image>();
-			diagramImg.sprite = sp;
-
-			//Positionnement dans la hierarchie de la scène
-			GameObject parent = GameObject.Find("Schémas");
-			if(parent){
-				diagramGO.transform.SetParent(parent.transform, false);
-			}
-			return diagramGO;
-		}
-
-		public ScenarioPartType displayDropDownType(){
-					return (ScenarioPartType)EditorGUILayout.Popup((int)type, typeOptionArray);
-		}
-
-		public override void OnOpen() {
-			Converter<ScenarioPartType, string> stringConverter = new Converter<ScenarioPartType, string>(
-				delegate(ScenarioPartType type) { return type.ToString(); }
-			);
-			typeOptionArray = Array.ConvertAll(
-				new ScenarioPartType[4]{ScenarioPartType.NONE, ScenarioPartType.TEXT, ScenarioPartType.IMAGE, ScenarioPartType.QUESTION},
-				stringConverter
-				);
-		}
+		/****CREATION DES OBJETS *****/
 
 		GameObject createImageScenarioPart(){
 			GameObject GO = (GameObject)PrefabUtility.InstantiatePrefab(AssetDatabase.LoadAssetAtPath("Assets/M4/Prefabs/Enigmas/StudyCase/FormulaPart.prefab", typeof(GameObject)));
@@ -135,20 +128,6 @@ public class CreateScenarioPartPopup : PopupWindowContent
 			GameObject GO = (GameObject)PrefabUtility.InstantiatePrefab(AssetDatabase.LoadAssetAtPath("Assets/M4/Prefabs/Enigmas/StudyCase/" + prefabName + ".prefab", typeof(GameObject)));
 			GO.name = name;
 			return GO;
-		}
-
-		 void validate(CreationFunction createGO){
-			if (GUILayout.Button("OK", GUILayout.Width(200))) {
-				GameObject GO = createGO();
-				//Positionnement dans la hierarchie de la scène
-				GameObject parent = GameObject.Find("Parts");
-				if(parent){
-					GO.transform.SetParent(parent.transform, false);
-				}
-				//Selectionner l'objet
-				Selection.activeObject = GO;
-				EditorWindow.FocusWindowIfItsOpen(typeof(SceneView));
-			}
 		}
 
 }
