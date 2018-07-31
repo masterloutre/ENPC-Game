@@ -8,7 +8,7 @@ using UnityEditor.SceneManagement;
 
 public abstract class CreateEnigmaEditor : EditorWindow
 {
-  public Vector2 scrollPos; 
+  public Vector2 scrollPos;
 
   static void Init()
   {
@@ -60,6 +60,9 @@ public abstract class CreateEnigmaEditor : EditorWindow
     }
     if (GUILayout.Button("Ajouter un énoncé", GUILayout.Width(250))) {
         showPopupContentAtCenter(new CreateTextPopup());
+    }
+    if (GUILayout.Button("Ajouter une vidéo", GUILayout.Width(250))) {
+        showPopupContentAtCenter(new CreateVideoPopup());
     }
     EditorGUILayout.EndVertical();
   }
