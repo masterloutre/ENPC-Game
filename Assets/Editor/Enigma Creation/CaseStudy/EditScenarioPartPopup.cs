@@ -68,7 +68,7 @@ public class EditScenarioPartPopup : PopupWindowContent
 				return;
 			}
 			GUILayout.Label("Modifier une partie de scénario : " + Selection.activeGameObject.name , EditorStyles.boldLabel);
-			scrollPos = EditorGUILayout.BeginScrollView(scrollPos, GUILayout.Width(500), GUILayout.Height(300));
+			scrollPos = EditorGUILayout.BeginScrollView(scrollPos, GUILayout.Width(500), GUILayout.Height(400));
 			editor.OnInspectorGUI();
 			EditorGUILayout.EndScrollView();
     }

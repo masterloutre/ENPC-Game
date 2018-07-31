@@ -64,7 +64,7 @@ public class CaseValidation : MonoBehaviour, ValidationMethod
       int count = 0;
       foreach(KeyValuePair<ChoiceQuestion, float> question in successByQuestion){
         count ++;
-        feedback += "Question : " + question.Key.text + "\nRéussite : " + question.Value + "%\n\n";
+        feedback += "Question "+ count + " : " + question.Key.text + "\nRéussite : " + question.Value + "%\n\n";
       }
       return feedback;
     }

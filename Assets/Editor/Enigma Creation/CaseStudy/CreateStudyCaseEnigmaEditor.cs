@@ -33,9 +33,6 @@ public class CreateStudyCaseEnigmaEditor : CreateEnigmaEditor
     if (GUILayout.Button("Modifier un partie de scénario", GUILayout.Width(250))) {
         showPopupContentAtCenter(new EditScenarioPartPopup());
     }
-    if (GUILayout.Button("Modifier les questions de méthode", GUILayout.Width(250))) {
-        showPopupContentAtCenter(new SetMethodQuestionsPopup());
-    }
     EditorGUILayout.EndVertical();
     EditorGUILayout.EndScrollView();
 
