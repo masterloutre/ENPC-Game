@@ -104,7 +104,7 @@ public class CreateScenarioPartPopup : CreateElementPopup
 		/****CREATION DES OBJETS *****/
 
 		GameObject createImageScenarioPart(){
-			GameObject GO = (GameObject)PrefabUtility.InstantiatePrefab(AssetDatabase.LoadAssetAtPath("Assets/M4/Prefabs/Enigmas/StudyCase/FormulaPart.prefab", typeof(GameObject)));
+			GameObject GO = (GameObject)PrefabUtility.InstantiatePrefab(AssetDatabase.LoadAssetAtPath(pathToPrefabs + "Enigmas/StudyCase/ScenarioParts/FormulaPart.prefab", typeof(GameObject)));
 			GO.name = name;
 			if(textureAsset != null){
 				Sprite sp = Sprite.Create(textureAsset,new Rect(0,0,textureAsset.width,textureAsset.height),new Vector2(0.5f,0.5f));
@@ -114,7 +114,7 @@ public class CreateScenarioPartPopup : CreateElementPopup
 		}
 
 		GameObject createTextScenarioPart(){
-			GameObject GO = (GameObject)PrefabUtility.InstantiatePrefab(AssetDatabase.LoadAssetAtPath("Assets/M4/Prefabs/Enigmas/StudyCase/InfoPart.prefab", typeof(GameObject)));
+			GameObject GO = (GameObject)PrefabUtility.InstantiatePrefab(AssetDatabase.LoadAssetAtPath(pathToPrefabs + "Enigmas/StudyCase/ScenarioParts/TextPart.prefab", typeof(GameObject)));
 			GO.name = name;
 			GO.GetComponent<Text>().text = text;
 			return GO;
@@ -125,7 +125,7 @@ public class CreateScenarioPartPopup : CreateElementPopup
 			if(timed && conditional){ prefabName = "QuestionPartConditional"; }
 			else if (timed) { prefabName = "QuestionPartTimer"; }
 			else { prefabName = "QuestionPart"; }
-			GameObject GO = (GameObject)PrefabUtility.InstantiatePrefab(AssetDatabase.LoadAssetAtPath("Assets/M4/Prefabs/Enigmas/StudyCase/" + prefabName + ".prefab", typeof(GameObject)));
+			GameObject GO = (GameObject)PrefabUtility.InstantiatePrefab(AssetDatabase.LoadAssetAtPath(pathToPrefabs + "Enigmas/StudyCase/ScenarioParts/" + prefabName + ".prefab", typeof(GameObject)));
 			GO.name = name;
 			return GO;
 		}

@@ -60,7 +60,7 @@ public class CreateDepartureSlotPopup : CreateElementPopup
 		//Créer l'objet et le place dans le groupe Departure Slots
 		public GameObject createObject(){
 			//création du gameObject
-			GameObject slotGO = (GameObject)PrefabUtility.InstantiatePrefab(AssetDatabase.LoadAssetAtPath("Assets/M4/Prefabs/Enigmas/qcm/Departure Slot.prefab", typeof(GameObject)));
+			GameObject slotGO = (GameObject)PrefabUtility.InstantiatePrefab(AssetDatabase.LoadAssetAtPath(pathToPrefabs + "Enigmas/QCM/Departure Slot.prefab", typeof(GameObject)));
 			slotGO.name = name;
 
 			//remplissage du component InteractiveValue

@@ -34,13 +34,18 @@ public class CreateDiagramPopup : CreateElementPopup
 			name = EditorGUILayout.TextField("Nom du GameObject", name);
 			textureAsset = (Texture2D)EditorGUILayout.ObjectField("selectionez une image", textureAsset, typeof(Texture2D), true);
 			//bouton OK
-			if(textureAsset != null){ displayCreateButton(); }
+			if(textureAsset != null){
+				displayCreateButton();
+			 } else {
+				 errorMssg = "Vous devez choisir une image!";
+				 displayErrorMssg();
+			 }
     }
 
 		//crée le gameObject
 		public GameObject createDiagramObject(){
 			//création du gameObject
-			GameObject diagramGO = (GameObject)PrefabUtility.InstantiatePrefab(AssetDatabase.LoadAssetAtPath("Assets/M4/Prefabs/Enigmas/diagram.prefab", typeof(GameObject)));
+			GameObject diagramGO = (GameObject)PrefabUtility.InstantiatePrefab(AssetDatabase.LoadAssetAtPath(pathToPrefabs + "Enigmas/General/Diagram.prefab", typeof(GameObject)));
 			//remplissage du game Object
 			diagramGO.name = name;
 			//crée un sprite d'apres l'image selectionnée par l'utilisateur

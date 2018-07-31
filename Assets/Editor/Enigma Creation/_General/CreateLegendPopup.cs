@@ -55,7 +55,7 @@ public class CreateLegendPopup : CreateElementPopup
 		//Crée un GameObject à partir du prefab InteractiveValue et le place dans le groupe Légendes de la scène actuellement ouverte
 		public GameObject createLegendGameObject(){
 			//création du gameObject
-			GameObject legendGO = (GameObject)PrefabUtility.InstantiatePrefab(AssetDatabase.LoadAssetAtPath("Assets/M4/Prefabs/Enigmas/interactive value.prefab", typeof(GameObject)));
+			GameObject legendGO = (GameObject)PrefabUtility.InstantiatePrefab(AssetDatabase.LoadAssetAtPath(pathToPrefabs + "Enigmas/General/InteractiveValue.prefab", typeof(GameObject)));
 			legendGO.name = name;
 
 			//remplissage du component InteractiveValue

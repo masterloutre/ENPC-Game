@@ -41,7 +41,7 @@ public class CreateVideoPopup : CreateElementPopup
 		//Si plusieurs scènes d'énigmes sont ouvertes ils seront placé dans le premier groupe Schéma trouvé
 		public  GameObject createObject(){
 			//création du gameObject
-			GameObject objectGO = (GameObject)PrefabUtility.InstantiatePrefab(AssetDatabase.LoadAssetAtPath("Assets/M4/Prefabs/Enigmas/Video Block.prefab", typeof(GameObject)));
+			GameObject objectGO = (GameObject)PrefabUtility.InstantiatePrefab(AssetDatabase.LoadAssetAtPath(pathToPrefabs + "Enigmas/General/VideoBlock.prefab", typeof(GameObject)));
 
 			//remplissage du game Object
 			objectGO.name = name;

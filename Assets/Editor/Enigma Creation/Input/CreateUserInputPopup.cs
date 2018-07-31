@@ -43,7 +43,7 @@ public class CreateUserInputPopup : CreateElementPopup
 		//Crée un GameObject à partir du prefab UserInput et le place dans le groupe Iteractive Elements de la scène actuellement ouverte
 		public GameObject createUserInputObject(){
 			//création du gameObject
-			GameObject inputGO = (GameObject)PrefabUtility.InstantiatePrefab(AssetDatabase.LoadAssetAtPath("Assets/M4/Prefabs/Enigmas/Input/UserInput.prefab", typeof(GameObject)));
+			GameObject inputGO = (GameObject)PrefabUtility.InstantiatePrefab(AssetDatabase.LoadAssetAtPath(pathToPrefabs + "Enigmas/Input/UserInput.prefab", typeof(GameObject)));
 			//remplissage du game Object
 			inputGO.name = name;
 			//add icon here

@@ -34,17 +34,6 @@ public class SetMethodQuestionsPopup : PopupWindowContent
 				CreateQuestion();
 			}
 			scrollPos = EditorGUILayout.BeginScrollView(scrollPos, GUILayout.Width(500), GUILayout.Height(300));
-			//test.text = EditorGUILayout.TextField("test ",test.text);
-			/*
-			foreach(ChoiceQuestionEditor questionEditor in questionEditorList){
-				EditorGUILayout.BeginVertical();
-				questionEditor.OnInspectorGUI();
-				if (GUILayout.Button("Supprimer", GUILayout.Width(100))) {
-					DeleteTargetQuestion(questionEditor);
-				}
-				EditorGUILayout.EndVertical();
-			}
-			*/
 			for(int i = 0; i < questionEditorList.Count; i++){
 				EditorGUILayout.BeginVertical();
 				questionEditorList[i].OnInspectorGUI();
@@ -97,7 +86,7 @@ public class SetMethodQuestionsPopup : PopupWindowContent
 				Debug.Log("Pas de Méthode popup trouvé");
 				return;
 			}
-			GameObject questionGO = (GameObject)PrefabUtility.InstantiatePrefab(AssetDatabase.LoadAssetAtPath("Assets/M4/Prefabs/Enigmas/EndQuestionsPanel/elements/MethodQuestion.prefab", typeof(GameObject)));
+			GameObject questionGO = (GameObject)PrefabUtility.InstantiatePrefab(AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Enigmas/Popup/_Elements/MethodQuestion.prefab", typeof(GameObject)));
 			questionGO.transform.SetParent(parent, false);
 			questionEditorList.Add(Editor.CreateEditor(questionGO.GetComponent<ChoiceQuestion>(), typeof(ChoiceQuestionEditor)));
 		}

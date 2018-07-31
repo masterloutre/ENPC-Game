@@ -14,6 +14,7 @@ using UnityEngine.UI;
  */
 public class CreateElementPopup : PopupWindowContent
 {
+  public string pathToPrefabs = "Assets/Prefabs/";
   public float defaultButtonWidth = 200;
 	public string name = "";
   public string errorMssg = "no message";

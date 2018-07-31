@@ -47,4 +47,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Enigmes/Enigma9.unity
     guid: 063afccaa8d2045ad9eebdb87328869f
+  - enabled: 1
+    path: Assets/__DELETED_GUID_Trash/4d5864e04438345f19f89bbb861f1fdd
+    guid: 4d5864e04438345f19f89bbb861f1fdd
+  - enabled: 1
+    path: Assets/__DELETED_GUID_Trash/82b23397853af4945b3f16079a29a1d4
+    guid: 82b23397853af4945b3f16079a29a1d4
+  - enabled: 1
+    path: Assets/Scenes/Enigmes/Enigma6.unity
+    guid: 196ac74deabf94a85a014f4f37e31a72
   m_configObjects: {}
