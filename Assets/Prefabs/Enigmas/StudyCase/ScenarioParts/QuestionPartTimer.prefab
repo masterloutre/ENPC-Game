@@ -286,17 +286,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7668686d8e5c24bea87917662876e68e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  text: Question n2 avec Timer
+  text: "\xC0 votre avis, de quelle couleur est la puce, et oui c'\xE9tait une puce!"
   img: {fileID: 0}
   answerList:
-  - text: Guili
+  - text: Vert
+    percent: 20
+  - text: 'Rouge '
     percent: 0
-  - text: Plouf
+  - text: Jaune
     percent: 100
-  professionalSituationId: 0
+  professionalSituationId: 1
   normalColor: {r: 0, g: 0, b: 0, a: 0}
   selectedColor: {r: 0, g: 0, b: 0, a: 0}
-  time: 10
+  time: 20
   timer: {fileID: 0}
 --- !u!114 &114106336815084264
 MonoBehaviour:

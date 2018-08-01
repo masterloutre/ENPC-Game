@@ -38,6 +38,7 @@ public class EnigmaUIManager : MonoBehaviour
 		EnigmaDifficulty difficulty = (EnigmaDifficulty)enigma.difficulty;
 		GameObject.Find ("Enigma Data/Enigma Difficulty").GetComponent<Text>().text = "Difficulté : " + difficulty;
 		GameObject.Find ("Enigma Data/Enigma Skill").GetComponent<Text>().text = enigma.skill.name;
+		GameObject.Find("Enigma UI/Timer/champ temps estime").GetComponent<Text>().text = "Temps estimé : " + enigma.maxTime.ToString() + " min";
 
 	}
 

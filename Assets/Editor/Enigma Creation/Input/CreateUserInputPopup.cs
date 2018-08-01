@@ -32,12 +32,14 @@ public class CreateUserInputPopup : CreateElementPopup
     public override void OnGUI(Rect rect){
         GUILayout.Label("Ajouter une entrée utilisateur", EditorStyles.boldLabel);
 				name = EditorGUILayout.TextField("Nom du GameObject", name);
-				iconAsset = (Texture2D)EditorGUILayout.ObjectField("selectionez une image d'icon", iconAsset, typeof(Texture2D), true);
+				//iconAsset = (Texture2D)EditorGUILayout.ObjectField("selectionez une image d'icon", iconAsset, typeof(Texture2D), true);
 				//bouton OK
 				displayCreateButton();
+				/*
 				if(iconAsset == null){
 					GUILayout.Label("En phase de test vous n'avez pas besoin de choisir une image d'icon", EditorStyles.boldLabel);
 				}
+				*/
     }
 
 		//Crée un GameObject à partir du prefab UserInput et le place dans le groupe Iteractive Elements de la scène actuellement ouverte
@@ -47,10 +49,12 @@ public class CreateUserInputPopup : CreateElementPopup
 			//remplissage du game Object
 			inputGO.name = name;
 			//add icon here
+			/*
 			if(iconAsset != null){
 				Sprite sp = Sprite.Create(iconAsset,new Rect(0,0,iconAsset.width,iconAsset.height),new Vector2(0.5f,0.5f));
 				inputGO.GetComponent<Image>().sprite = sp;
 			}
+			*/
 			return inputGO;
 		}
 

@@ -57,7 +57,7 @@ public class CaseScenarioPartIcon {
 	public void glow(){
 		Outline outline = iconGO.transform.GetChild(1).gameObject.AddComponent<Outline>();
 		outline.effectColor = new Color(0F, 1F, 1F, 1F);
-		outline.effectDistance = new Vector2(3F, 3F);
+		outline.effectDistance = new Vector2(2F, 2F);
 
 	}
 

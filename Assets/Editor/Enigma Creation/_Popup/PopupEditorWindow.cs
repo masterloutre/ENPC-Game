@@ -32,7 +32,7 @@ public class PopupEditorWindow : CreateEnigmaEditor
 
 
   public void OnGUI(){
-    EditorGUIUtility.labelWidth = 200;
+    EditorGUIUtility.labelWidth = 100;
     EditorGUILayout.LabelField("Popup",  EditorStyles.boldLabel);
     if(popupEditor != null){
       popupEditor.OnInspectorGUI();
