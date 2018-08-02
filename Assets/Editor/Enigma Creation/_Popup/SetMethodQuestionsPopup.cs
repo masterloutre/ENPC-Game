@@ -36,6 +36,7 @@ public class SetMethodQuestionsPopup : PopupWindowContent
 			scrollPos = EditorGUILayout.BeginScrollView(scrollPos, GUILayout.Width(500), GUILayout.Height(300));
 			for(int i = 0; i < questionEditorList.Count; i++){
 				EditorGUILayout.BeginVertical();
+				Debug.Log("question editor : " + questionEditorList[i]);
 				questionEditorList[i].OnInspectorGUI();
 				if (GUILayout.Button("Supprimer", GUILayout.Width(100))) {
 					DeleteTargetQuestion(questionEditorList[i]);
@@ -87,8 +88,13 @@ public class SetMethodQuestionsPopup : PopupWindowContent
 				return;
 			}
 			GameObject questionGO = (GameObject)PrefabUtility.InstantiatePrefab(AssetDatabase.LoadAssetAtPath("Assets/Prefabs/Enigmas/Popup/_Elements/MethodQuestion.prefab", typeof(GameObject)));
+			Debug.Log("question intanciated");
 			questionGO.transform.SetParent(parent, false);
+			Debug.Log("set parent");
+
 			questionEditorList.Add(Editor.CreateEditor(questionGO.GetComponent<ChoiceQuestion>(), typeof(ChoiceQuestionEditor)));
+			Debug.Log("editor added");
+
 		}
 
 /*

@@ -132,7 +132,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 12800000, guid: c5cecd61dc69a004cb14595341df0dfe, type: 3}
+    m_Font: {fileID: 12800000, guid: 32df75141caa2634b86a3c8d54b2bae9, type: 3}
     m_FontSize: 16
     m_FontStyle: 0
     m_BestFit: 0
@@ -224,7 +224,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b38e01a08c34a446fa11e7c37c4c69fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  url: http://localhost:8888/unityBuild/MOV_1182.mp4
+  url: "http://millenaire4.enpc.fr/vid\xE9os/name.mov"
 --- !u!222 &222112427228929040
 CanvasRenderer:
   m_ObjectHideFlags: 1

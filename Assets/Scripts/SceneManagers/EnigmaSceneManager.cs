@@ -9,7 +9,6 @@ public class EnigmaSceneManager : MonoBehaviour
     public ValidationMethod validator;
     private PopupManager popm;
     public Score score {get; private set;}
-    bool hasAPopup = true;
     public bool methodQuestions = true;
 
 
@@ -18,7 +17,7 @@ public class EnigmaSceneManager : MonoBehaviour
         // RÉFÉRENCES des managers stockés
         validator = gameObject.GetComponent<ValidationMethod>();
         popm = GameObject.Find("Responsive Canvas").GetComponentInChildren<PopupManager>(true);
-        activatePopup(hasAPopup);
+        popm.gameObject.SetActive(false);
         // LISTENERS
         EventManager.instance.AddListener<GOButtonPressedEvent> (submitEnigmaResult); // En réponse à la question || EnigmaUIManager.GOButtonPressed()
         //EventManager.instance.AddListener<QueryEnigmaScoreEvent> (sendScore); // ?
@@ -69,16 +68,14 @@ public class EnigmaSceneManager : MonoBehaviour
       score = validator.fillScore(score);
       score.time = getTime();
       score.help = false;
-        if (hasAPopup && popm != null)
-        {
-            popm.setScoreFeedback(validator.getScoreFeedback());
-            popm.beginPopUpQuestionsSequence(score);
-        }
-        else
-        {
-          score.certaintyLevel = 100;
-          enigmaSubmitted();
-        }
+      if(popm == null){
+        score.certaintyLevel = 100;
+        enigmaSubmitted();
+      } else {
+        popm.setScoreFeedback(validator.getScoreFeedback());
+        popm.beginPopUpQuestionsSequence(score);
+      }
+
     }
 
     //event lancé par EnigmaSequenceManager.getEnigmaScore
@@ -90,19 +87,6 @@ public class EnigmaSceneManager : MonoBehaviour
       score = popm.getScore();
       enigmaSubmitted();
     }
-
-    public void activatePopup(bool yes){
-      if(popm == null){
-        popm = GameObject.Find("Responsive Canvas").GetComponentInChildren<PopupManager>(true);
-      }
-      if(yes){
-        popm.updateState(PopupState.ACTIVATED);
-      } else {
-        popm.updateState(PopupState.DEACTIVATED);
-      }
-      hasAPopup = yes;
-    }
-
 
 
 }

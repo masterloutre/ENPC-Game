@@ -13,8 +13,9 @@ public class PopupManagerEditor : Editor
 
     void OnEnable()
     {
-        onlyFeedBack = serializedObject.FindProperty("onlyFeedBack");
-        popup = ((PopupManager)target).gameObject;
+      onlyFeedBack = serializedObject.FindProperty("onlyFeedBack");
+      popup = ((PopupManager)target).gameObject;
+      hidden = popup.activeInHierarchy;
     }
     public override void OnInspectorGUI()
     {
@@ -24,11 +25,16 @@ public class PopupManagerEditor : Editor
         label.text = "Que le feedback";
         EditorGUILayout.PropertyField(onlyFeedBack, label);
 
-        hidden = !(popup.activeInHierarchy);
-        hidden = EditorGUILayout.Toggle("Cacher Le Popup", hidden);
-        popup.SetActive(!hidden);
 
-        
+
+        if(Application.isEditor){
+          hidden = !(popup.activeInHierarchy);
+          hidden = EditorGUILayout.Toggle("Cacher Le Popup", hidden);
+          popup.SetActive(!hidden);
+        }
+
+
+
 
 
         serializedObject.ApplyModifiedProperties();

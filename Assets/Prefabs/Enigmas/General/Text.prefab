@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 224053176382273590}
   - component: {fileID: 222065874245069820}
   - component: {fileID: 114460048191762170}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -48,7 +48,7 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 12800000, guid: a6055e74c3970f9448b93051244bedf2, type: 3}
+    m_Font: {fileID: 12800000, guid: c5cecd61dc69a004cb14595341df0dfe, type: 3}
     m_FontSize: 18
     m_FontStyle: 0
     m_BestFit: 0
@@ -60,7 +60,12 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Ennonc\xE9"
+  m_Text: 'Object, which can be checked using GameObject.activeSelf. This state will
+    then be used once all parents are active.
+
+    Making a GameObject inactive will disable every component, turning off any attached
+    renderers, colliders, rigidbodies, scripts, etc... Any scripts that you have attached
+    to the GameObject will no longer have Update() called, for example.'
 --- !u!222 &222065874245069820
 CanvasRenderer:
   m_ObjectHideFlags: 1
@@ -82,6 +87,6 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 90.5, y: 42.5}
-  m_SizeDelta: {x: 341, y: 114.9}
+  m_AnchoredPosition: {x: 206, y: 162}
+  m_SizeDelta: {x: 341, y: 207.1}
   m_Pivot: {x: 0.5, y: 0.5}

@@ -15,7 +15,7 @@ public enum PopupState { ACTIVATED, CERTAINTY, FEEDBACK, METHOD, DEACTIVATED};
 */
 public class PopupManager : MonoBehaviour
 {
-    PopupState state = PopupState.ACTIVATED;
+    PopupState state = PopupState.DEACTIVATED;
     public bool onlyFeedBack = false;
     private GameObject sure, victory, defeat, method, validationButton; // Écrans des étapes
     private List<ChoiceQuestion> questionList;
@@ -28,6 +28,7 @@ public class PopupManager : MonoBehaviour
 
     public void Awake()
     {
+      print("POPUP AWAKE");
         // INSTANCIATION des modèles, masqués par défaut
         /*
         Transform[] tranformList = gameObject.GetComponentsInChildren<Transform>();
@@ -58,7 +59,6 @@ public class PopupManager : MonoBehaviour
         defeat.SetActive(false);
         method.SetActive(false);
         validationButton.SetActive(false);
-
         validator = gameObject.GetComponent<PopupValidation>();
 
     }
@@ -66,6 +66,13 @@ public class PopupManager : MonoBehaviour
     {
         setValidationButton();
     }
+
+    void OnEnable()
+    {
+        Debug.Log("PrintOEnable: script PopupManager was enabled");
+
+    }
+
     void OnDisable()
     {
         Debug.Log("PrintOnDisable: script PopupManager was disabled");
@@ -171,16 +178,6 @@ public class PopupManager : MonoBehaviour
                     defeat.SetActive(false);
                     method.SetActive(true);
                 }
-                break;
-            case PopupState.DEACTIVATED:
-              {
-                gameObject.SetActive(false);
-              }
-              break;
-            case PopupState.ACTIVATED:
-              {
-                gameObject.SetActive(true);
-              }
               break;
             default:
                 {
@@ -190,6 +187,8 @@ public class PopupManager : MonoBehaviour
     }
 
     public void beginPopUpQuestionsSequence(Score score){
+      print("POPUP START");
+      gameObject.SetActive(true);
       enigmaScore = score;
       if(onlyFeedBack){
         updateState(PopupState.FEEDBACK);
@@ -199,6 +198,7 @@ public class PopupManager : MonoBehaviour
     }
 
     public void endPopUpQuestionsSequence(){
+      print("POPUP STOPS");
       gameObject.SetActive(false);
       EventManager.instance.Raise(new PopUpQuestionsOverEvent());
     }

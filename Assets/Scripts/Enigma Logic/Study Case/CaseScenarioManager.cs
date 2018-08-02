@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class CaseScenarioManager : MonoBehaviour
 {
@@ -29,7 +30,12 @@ public class CaseScenarioManager : MonoBehaviour
         }
       writeQuestionNumbers();
       setActiveUntilConditionalFrom(0);
-      partList[activePartIndex].show();
+      try{
+        partList[activePartIndex].show();
+      } catch (IndexOutOfRangeException) {
+        Debug.Log("Caught IndexOutOfRangeException : Il n'y a pas de scenarioPart");
+      }
+
     }
 
     void unsealParts(RequestUnlockNextPartsEvent e)

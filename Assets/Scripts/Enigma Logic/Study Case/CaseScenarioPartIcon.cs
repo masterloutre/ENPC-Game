@@ -55,15 +55,26 @@ public class CaseScenarioPartIcon {
 	}
 
 	public void glow(){
-		Outline outline = iconGO.transform.GetChild(1).gameObject.AddComponent<Outline>();
-		outline.effectColor = new Color(0F, 1F, 1F, 1F);
-		outline.effectDistance = new Vector2(2F, 2F);
+		if(scenarioPart.gameObject.GetComponentInChildren<ChoiceQuestion>() != null){
+			Image image = iconGO.transform.GetChild(1).gameObject.GetComponent<Image>();
+			image.color = new Color(0F, 1F, 1F, 1F);
+		} else {
+			Outline outline = iconGO.transform.GetChild(1).gameObject.AddComponent<Outline>();
+			outline.effectColor = new Color(0F, 1F, 1F, 1F);
+			outline.effectDistance = new Vector2(2F, 2F);
+		}
+
 
 	}
 
 	public void unglow(){
-		Outline outline = iconGO.GetComponentInChildren<Outline>(true);
-		if(outline != null) { Component.Destroy(outline);}
+		if(scenarioPart.gameObject.GetComponentInChildren<ChoiceQuestion>() != null){
+			Image image = iconGO.transform.GetChild(1).gameObject.GetComponent<Image>();
+			image.color = new Color(1F, 1F, 1F, 1F);
+		} else {
+			Outline outline = iconGO.GetComponentInChildren<Outline>(true);
+			if(outline != null) { Component.Destroy(outline);}
+		}
 	}
 
 }
