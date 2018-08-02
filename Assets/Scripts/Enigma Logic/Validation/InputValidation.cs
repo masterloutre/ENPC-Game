@@ -50,8 +50,9 @@ public class InputValidation : MonoBehaviour, ValidationMethod
 				Debug.Log ("Mauvaise réponse : "+studentAnswer+" " + expCorrect.Value);
 				success = false;
 			}
+		} else {
+			success = false;
 		}
-		success = false;
 		return success;
 	}
 

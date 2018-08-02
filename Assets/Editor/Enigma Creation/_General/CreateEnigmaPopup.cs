@@ -57,5 +57,6 @@ public class CreateEnigmaPopup : PopupWindowContent
       EditorBuildSettings.scenes = buildList.ToArray();
       //Ouverture de la nouvelle scène dans l'éditeur
       Scene newEnigmaScene = EditorSceneManager.OpenScene(newPath,  OpenSceneMode.Single);
+      EditorWindow.FocusWindowIfItsOpen(typeof(SceneView));
     }
 }

@@ -66,6 +66,7 @@ public class EnigmaSceneManager : MonoBehaviour
     {
       Debug.Log("----> GO -> submitEnigmaResult, EnigmaSceneManager");
       score = validator.fillScore(score);
+      print(score.ToString());
       score.time = getTime();
       score.help = false;
       if(popm == null){
