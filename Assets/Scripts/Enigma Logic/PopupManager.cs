@@ -209,8 +209,8 @@ public class PopupManager : MonoBehaviour
 
     public void setScoreFeedback(string feedback){
       scoreFeedback = feedback;
-      gameObject.transform.Find("Victoire").Find("Feedback").gameObject.GetComponent<Text>().text += scoreFeedback;
-      gameObject.transform.Find("Défaite").Find("Feedback").gameObject.GetComponent<Text>().text += scoreFeedback;
+      gameObject.transform.Find("Victoire").Find("Feedback").gameObject.GetComponent<Text>().text += "<color=#ffffffff>"+scoreFeedback+"</color>";
+      gameObject.transform.Find("Défaite").Find("Feedback").gameObject.GetComponent<Text>().text += "<color=#ffffffff>"+scoreFeedback+"</color>";
     }
 
 
