@@ -28,17 +28,6 @@ public class PopupManager : MonoBehaviour
 
     public void Awake()
     {
-      print("POPUP AWAKE");
-        // INSTANCIATION des modèles, masqués par défaut
-        /*
-        Transform[] tranformList = gameObject.GetComponentsInChildren<Transform>();
-        foreach (Transform child in tranformList )
-        {
-          if (child != transformList[0]){
-            child.gameObject.SetActive(true);
-          }
-        }
-        */
         sure = gameObject.transform.Find("Certitude").gameObject;
         victory = gameObject.transform.Find("Victoire").gameObject;
         defeat = gameObject.transform.Find("Défaite").gameObject;
@@ -65,18 +54,6 @@ public class PopupManager : MonoBehaviour
     public void Start()
     {
         setValidationButton();
-    }
-
-    void OnEnable()
-    {
-        Debug.Log("PrintOEnable: script PopupManager was enabled");
-
-    }
-
-    void OnDisable()
-    {
-        Debug.Log("PrintOnDisable: script PopupManager was disabled");
-
     }
 
     // Pour scripter les boutons de validations
@@ -187,7 +164,6 @@ public class PopupManager : MonoBehaviour
     }
 
     public void beginPopUpQuestionsSequence(Score score){
-      print("POPUP START");
       gameObject.SetActive(true);
       enigmaScore = score;
       if(onlyFeedBack){
@@ -198,7 +174,6 @@ public class PopupManager : MonoBehaviour
     }
 
     public void endPopUpQuestionsSequence(){
-      print("POPUP STOPS");
       gameObject.SetActive(false);
       EventManager.instance.Raise(new PopUpQuestionsOverEvent());
     }
