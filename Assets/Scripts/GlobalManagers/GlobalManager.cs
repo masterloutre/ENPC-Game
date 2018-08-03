@@ -106,7 +106,7 @@ public class GlobalManager : MonoBehaviour
 		else {
 			if (!Int32.TryParse(getRequest.downloadHandler.text, out this.gameSessionId))
 			{
-        print("Game Session ID Parsing failed: "+ getRequest.downloadHandler.text);
+        print("Game Session ID Parsing failed:"+ getRequest.downloadHandler.text);
 				this.gameSessionId = 0;
 			}
 		}

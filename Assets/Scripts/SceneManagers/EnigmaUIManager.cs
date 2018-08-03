@@ -34,11 +34,12 @@ public class EnigmaUIManager : MonoBehaviour
     void fillEnigmaData(){
 		GameObject.Find ("Enigma Data/Enigma Title").GetComponent<Text>().text = enigma.name;
 		EnigmaType type = (EnigmaType)enigma.type;
-		GameObject.Find ("Enigma Data/Enigma Type").GetComponent<Text>().text = "Type : " + type;
+		string text = (type == EnigmaType.INPUT)?"Valeur à entrer" : (type == EnigmaType.STUDY_CASE)? "Cas mécanique" : type.ToString();
+		GameObject.Find ("Enigma Data/Enigma Type").GetComponent<Text>().text = "Type : " + text;
 		EnigmaDifficulty difficulty = (EnigmaDifficulty)enigma.difficulty;
 		GameObject.Find ("Enigma Data/Enigma Difficulty").GetComponent<Text>().text = "Difficulté : " + difficulty;
 		GameObject.Find ("Enigma Data/Enigma Skill").GetComponent<Text>().text = enigma.skill.name;
-		GameObject.Find("Enigma UI/Timer/champ temps estime").GetComponent<Text>().text = "Temps estimé : " + enigma.maxTime.ToString() + " min";
+		GameObject.Find("Enigma UI/Timer/cadre").GetComponentInChildren<Text>().text = "Temps estimé : " + enigma.maxTime.ToString() + " min";
 
 	}
 

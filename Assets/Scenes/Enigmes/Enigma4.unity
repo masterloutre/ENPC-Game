@@ -4554,7 +4554,7 @@ Prefab:
     - target: {fileID: 114929151421596034, guid: cc64127e08d4b43d29fb9f97878a84c7,
         type: 2}
       propertyPath: url
-      value: http://millenaire4.enpc.fr/Assets/Videos/video_puce_sauteuse.mp4
+      value: http://localhost:8888/Assets/Videos/video_puce_sauteuse.mp4
       objectReference: {fileID: 0}
     - target: {fileID: 114711864349947866, guid: cc64127e08d4b43d29fb9f97878a84c7,
         type: 2}

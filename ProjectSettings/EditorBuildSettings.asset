@@ -23,13 +23,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Enigmes/Enigma2.unity
     guid: 9ea1a099427474b01bdd72144d6688f3
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Old/Enigma3.unity
     guid: 994772eabcb7948efbe9876d6d104ca4
-  - enabled: 1
-    path: Assets/__DELETED_GUID_Trash/26270a661cc2c48afa3bc9bfb5697b6a
-    guid: 26270a661cc2c48afa3bc9bfb5697b6a
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Old/EnigmaAlgo.unity
     guid: 35354fffc38e446cdaab3d407930b1b5
   - enabled: 1
@@ -38,9 +35,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/PopUps/SessionNotAllowedPopUp.unity
     guid: 134ab1a53ad5549398fc71e88753feb0
-  - enabled: 1
-    path: Assets/__DELETED_GUID_Trash/38f690aadd2b44114a22971eabe1de22
-    guid: 38f690aadd2b44114a22971eabe1de22
   - enabled: 1
     path: Assets/Scenes/Enigmes/Enigma4.unity
     guid: ef6ef6f815b894f6b98b9c2935f1d9d5
