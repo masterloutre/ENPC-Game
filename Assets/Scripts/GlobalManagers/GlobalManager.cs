@@ -29,7 +29,7 @@ public class GlobalManager : MonoBehaviour
 		//get { return "http://localhost/enpc-web-interface"; }
 		//VERSION LOU
 		get { return "http://localhost:8888"; }
-    //get { return "http://millenaire4.enpc.fr";}
+		//get { return "http://millenaire4.enpc.fr";}
 	}
 
 	//récupère les références au PlayerManager, au SceneLoader, à l'EnigmaManager
