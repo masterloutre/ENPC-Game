@@ -125,7 +125,6 @@
     <Compile Include="Assets\Scripts\Enigma Logic\Validation\PopupValidation.cs" />
     <Compile Include="Assets\Scripts\Enigma Logic\Validation\QCMValidation.cs" />
     <Compile Include="Assets\Scripts\Enigma Logic\Validation\ValidationMethod.cs" />
-    <Compile Include="Assets\Scripts\Enigma Logic\VideoBlock.cs" />
     <Compile Include="Assets\Scripts\Enigma.cs" />
     <Compile Include="Assets\Scripts\EnigmaSequence.cs" />
     <Compile Include="Assets\Scripts\EnigmaStatus.cs" />
@@ -161,7 +160,6 @@
     <Compile Include="Assets\Scripts\Objects\ScoreData.cs" />
     <Compile Include="Assets\Scripts\Objects\Skill.cs" />
     <Compile Include="Assets\Scripts\Panel.cs" />
-    <Compile Include="Assets\Scripts\PopupAnimation.cs" />
     <Compile Include="Assets\Scripts\QCMAnswer.cs" />
     <Compile Include="Assets\Scripts\Save.cs" />
     <Compile Include="Assets\Scripts\SceneLoadEvents.cs" />
@@ -175,10 +173,12 @@
     <Compile Include="Assets\Scripts\UI\Border.cs" />
     <Compile Include="Assets\Scripts\UI\InteractiveValue.cs" />
     <Compile Include="Assets\Scripts\UI\PlayerInfoText.cs" />
+    <Compile Include="Assets\Scripts\UI\PopupAnimation.cs" />
     <Compile Include="Assets\Scripts\UI\RectBorder.cs" />
     <Compile Include="Assets\Scripts\UI\ReturnButton.cs" />
     <Compile Include="Assets\Scripts\UI\SliderText.cs" />
     <Compile Include="Assets\Scripts\UI\Timer.cs" />
+    <Compile Include="Assets\Scripts\UI\VideoBlock.cs" />
     <None Include="Assets\GraghicAssets\Typo\charteTypo.txt" />
     <None Include="Assets\MaterialUI\Fonts\NOTICE.txt" />
     <Reference Include="UnityEditor.StandardEvents">
