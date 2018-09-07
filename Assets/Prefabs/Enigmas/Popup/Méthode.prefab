@@ -55,7 +55,7 @@ GameObject:
   m_Component:
   - component: {fileID: 224755375737028348}
   m_Layer: 5
-  m_Name: "Me\u0301thode"
+  m_Name: "M\xE9thode"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -719,6 +719,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   text: Question de Justification
+  img: {fileID: 0}
   answerList:
   - text: Answer 1
     percent: 50

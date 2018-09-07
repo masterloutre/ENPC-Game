@@ -34,9 +34,20 @@ public class EnigmaManager : MonoBehaviour
 
 		}
 		else {
-			string json = "{\"Items\":" + getRequest.downloadHandler.text + "}";
+            // apparemment des caractères invisibles apparaissent dans le json récupéré. Il s'agit du "zero-width no-break space", de valeur 65279
+            int antiespace = 0;
+            while (getRequest.downloadHandler.text[antiespace] == 65279)
+            {
+                antiespace++;
+            }
+            string result = getRequest.downloadHandler.text.Substring(antiespace, getRequest.downloadHandler.text.Length - (antiespace));
+            Debug.LogError(antiespace);
+            Debug.LogError("Parsing Enigma data ...");
+            Debug.LogError(result);
+            string json = "{\"Items\":" + result + "}";
 			this.enigmas = JsonHelperList.FromJson<EnigmaData>(json);
-		}
+            Debug.LogError("Parsing Complete");
+        }
 	}
 
     // REMPLISSAGE des valeurs obtenues

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -28,10 +29,24 @@ public class PlayerManager : MonoBehaviour {
 
 		}
 		else {
-			Debug.Log(getRequest.downloadHandler.text);
-			JsonUtility.FromJsonOverwrite(getRequest.downloadHandler.text, this.player);
+            // apparemment des caractères invisibles apparaissent dans le json récupéré. Il s'agit du "zero-width no-break space", de valeur 65279
+            int antiespace = 0;
+            while(getRequest.downloadHandler.text[antiespace]== 65279)
+            {
+                Debug.LogError("-"+(int)getRequest.downloadHandler.text[0]);
+                antiespace++;
+                
+            }
+            string result = getRequest.downloadHandler.text.Substring(antiespace, getRequest.downloadHandler.text.Length - (antiespace));
+            Debug.LogError(antiespace);
+            Debug.LogError(result);
+            
+            Debug.LogError("Parsing Player data ...");
+            Debug.LogError(result);
+            JsonUtility.FromJsonOverwrite(result, this.player);
+            Debug.LogError("Parsing Complete");
 
-		}
+        }
 	}
 
 	//renvoie le nom complet du joueur

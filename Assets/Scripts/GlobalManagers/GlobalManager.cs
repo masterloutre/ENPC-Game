@@ -10,6 +10,7 @@ using System;
 using UnityEngine.SceneManagement;
 using System.Runtime.Remoting;
 using UnityEngine.UI;
+using System.Text.RegularExpressions;
 
 public class GlobalManager : MonoBehaviour
 {
@@ -26,9 +27,9 @@ public class GlobalManager : MonoBehaviour
 	// Variable statique : url root de l'interface web
 	public static string webInterfaceRootURL {
 		//VERSION KEN
-		//get { return "http://localhost/enpc-web-interface"; }
+		get { return "http://localhost/enpc-web-interface"; }
 		//VERSION LOU
-		get { return "http://localhost:8888"; }
+		//get { return "http://localhost:8888"; }
     //get { return "http://millenaire4.enpc.fr";}
 	}
 
@@ -104,11 +105,19 @@ public class GlobalManager : MonoBehaviour
 			Debug.Log(getRequest.downloadHandler.text);
 		}
 		else {
-			if (!Int32.TryParse(getRequest.downloadHandler.text, out this.gameSessionId))
+            int id=0;
+            string resultString = Regex.Match(getRequest.downloadHandler.text, @"\d+").Value; ;
+            if (int.TryParse(resultString, out id)==false)
 			{
-        print("Game Session ID Parsing failed:"+ getRequest.downloadHandler.text);
-				this.gameSessionId = 0;
-			}
+                Debug.LogError("Game Session ID Parsing failed:"+ getRequest.downloadHandler.text+".....");
+                Debug.LogError(getRequest.downloadHandler.data);
+                
+                this.gameSessionId = 0;
+            }
+            else
+            {
+                this.gameSessionId = id;
+            }
 		}
 	}
 
